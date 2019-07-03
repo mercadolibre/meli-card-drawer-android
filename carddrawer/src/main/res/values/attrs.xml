@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CardHeaderView">
+        <attr name="card_header_internal_padding" format="dimension"/>
+        <attr name="card_header_behaviour" format="enum">
+            <enum name="regular" value="0"/>
+            <enum name="responsive" value="1"/>
+        </attr>
+    </declare-styleable>
+</resources>

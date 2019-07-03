@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingTop="@dimen/card_drawer_layout_padding"
+    android:paddingBottom="@dimen/card_drawer_layout_padding"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/card_header_front"
+    tools:ignore="SpUsage">
+
+    <android.support.constraint.Guideline
+        android:id="@+id/card_header_front_guideline_center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/card_header_front_guideline_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.101" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/card_header_front_guideline_bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.848" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/card_header_front_guideline_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.062" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/card_header_front_guideline_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.937" />
+
+    <include
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintDimensionRatio="H,256:158"
+        layout="@layout/card_drawer_front_background"/>
+
+    <ImageSwitcher
+        android:id="@+id/cho_card_logo"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="@id/card_header_front_guideline_left"
+        app:layout_constraintTop_toTopOf="@id/card_header_front_guideline_top"
+        app:layout_constraintDimensionRatio="W,77:44"
+        app:layout_constraintHeight_percent="0.278" >
+
+        <include layout="@layout/card_drawer_card_logo" />
+        <include layout="@layout/card_drawer_card_logo" />
+
+    </ImageSwitcher>
+
+    <ImageSwitcher
+        android:id="@+id/cho_card_issuer"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintHeight_percent="0.278"
+        app:layout_constraintDimensionRatio="W,77:44"
+        app:layout_constraintEnd_toEndOf="@id/card_header_front_guideline_right"
+        app:layout_constraintTop_toTopOf="@id/card_header_front_guideline_top" >
+
+        <include layout="@layout/card_drawer_card_issuer" />
+        <include layout="@layout/card_drawer_card_issuer" />
+
+    </ImageSwitcher>
+
+    <com.meli.android.carddrawer.model.GradientTextView
+        android:id="@+id/cho_card_name"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        tools:text="Nombre y apellido"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textAllCaps="true"
+        app:autoSizeTextType="uniform"
+        app:autoSizeMinTextSize="8dp"
+        app:autoSizeMaxTextSize="100dp"
+        app:layout_constraintBottom_toBottomOf="@id/card_header_front_guideline_bottom"
+        app:layout_constraintHorizontal_weight="8"
+        app:layout_constraintEnd_toStartOf="@+id/cho_card_date"
+        app:layout_constraintHeight_percent="0.1"
+        app:layout_constraintStart_toStartOf="@id/card_header_front_guideline_left" />
+
+    <com.meli.android.carddrawer.model.GradientTextView
+        android:id="@+id/cho_card_date"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        tools:text="MM/AA"
+        android:gravity="end"
+        app:autoSizeMinTextSize="8dp"
+        app:autoSizeMaxTextSize="100dp"
+        app:autoSizeTextType="uniform"
+        app:layout_constraintBottom_toBottomOf="@id/card_header_front_guideline_bottom"
+        app:layout_constraintEnd_toEndOf="@id/card_header_front_guideline_right"
+        app:layout_constraintStart_toEndOf="@id/cho_card_name"
+        app:layout_constraintHorizontal_weight="2"
+        app:layout_constraintHeight_percent="0.1"
+        tools:background="@android:color/holo_blue_light" />
+
+    <com.meli.android.carddrawer.model.GradientTextView
+        android:id="@+id/cho_card_number"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:maxLines="1"
+        android:gravity="center"
+        app:autoSizeTextType="uniform"
+        app:autoSizeMinTextSize="12dp"
+        app:autoSizeMaxTextSize="100dp"
+        app:layout_constraintEnd_toEndOf="@id/card_header_front_guideline_right"
+        app:layout_constraintStart_toStartOf="@id/card_header_front_guideline_left"
+        app:layout_constraintTop_toBottomOf="@+id/card_header_front_guideline_center"
+        app:layout_constraintHeight_percent="0.26"
+        tools:text="6666 6666 6666 6666" />
+
+    <ImageView
+        android:id="@+id/cho_card_code_front_red_circle"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@drawable/card_drawer_red_circle"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.45"
+        app:layout_constraintHorizontal_bias="0.99"
+        app:layout_constraintWidth_percent="0.211"
+        app:layout_constraintDimensionRatio="H,1:1"/>
+
+    <com.meli.android.carddrawer.model.GradientTextView
+        android:id="@+id/cho_card_code_front"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        app:autoSizeTextType="uniform"
+        app:autoSizeMinTextSize="8dp"
+        app:autoSizeMaxTextSize="100dp"
+        tools:text="****"
+        tools:visibility="visible"
+        app:layout_constraintTop_toTopOf="@id/cho_card_code_front_red_circle"
+        app:layout_constraintStart_toStartOf="@id/cho_card_code_front_red_circle"
+        app:layout_constraintEnd_toEndOf="@id/cho_card_code_front_red_circle"
+        app:layout_constraintBottom_toBottomOf="@id/cho_card_code_front_red_circle"
+        app:layout_constraintHeight_percent="0.121"/>
+
+</android.support.constraint.ConstraintLayout>

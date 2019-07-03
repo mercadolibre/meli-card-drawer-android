@@ -1,0 +1,2326 @@
+
+> Task :carddrawer:dependencies
+
+------------------------------------------------------------
+Project :carddrawer
+------------------------------------------------------------
+
+androidApis - Configuration providing various types of Android JAR file
+No dependencies
+
+androidTestAnnotationProcessor - Classpath for the annotation processor for 'androidTest'. (n)
+No dependencies
+
+androidTestApi - API dependencies for 'androidTest' sources. (n)
+No dependencies
+
+androidTestCompile - Compile dependencies for 'androidTest' sources (deprecated: use 'androidTestImplementation' instead). (n)
+No dependencies
+
+androidTestCompileOnly - Compile only dependencies for 'androidTest' sources. (n)
+No dependencies
+
+androidTestDebugAnnotationProcessor - Classpath for the annotation processor for 'androidTestDebug'. (n)
+No dependencies
+
+androidTestDebugApi - API dependencies for 'androidTestDebug' sources. (n)
+No dependencies
+
+androidTestDebugCompile - Compile dependencies for 'androidTestDebug' sources (deprecated: use 'androidTestDebugImplementation' instead). (n)
+No dependencies
+
+androidTestDebugCompileOnly - Compile only dependencies for 'androidTestDebug' sources. (n)
+No dependencies
+
+androidTestDebugImplementation - Implementation only dependencies for 'androidTestDebug' sources. (n)
+No dependencies
+
+androidTestDebugProvided - Provided dependencies for 'androidTestDebug' sources (deprecated: use 'androidTestDebugCompileOnly' instead). (n)
+No dependencies
+
+androidTestDebugPublish - Publish dependencies for 'androidTestDebug' sources (deprecated: use 'androidTestDebugRuntimeOnly' instead). (n)
+No dependencies
+
+androidTestDebugRuntimeOnly - Runtime only dependencies for 'androidTestDebug' sources. (n)
+No dependencies
+
+androidTestDebugWearApp - Link to a wear app to embed for object 'androidTestDebug'. (n)
+No dependencies
+
+androidTestImplementation - Implementation only dependencies for 'androidTest' sources. (n)
++--- com.android.support.test:runner:1.0.2 (n)
+\--- com.android.support.test.espresso:espresso-core:3.0.2 (n)
+
+androidTestProvided - Provided dependencies for 'androidTest' sources (deprecated: use 'androidTestCompileOnly' instead). (n)
+No dependencies
+
+androidTestPublish - Publish dependencies for 'androidTest' sources (deprecated: use 'androidTestRuntimeOnly' instead). (n)
+No dependencies
+
+androidTestRuntimeOnly - Runtime only dependencies for 'androidTest' sources. (n)
+No dependencies
+
+androidTestUtil - Additional APKs used during instrumentation testing.
+No dependencies
+
+androidTestWearApp - Link to a wear app to embed for object 'androidTest'. (n)
+No dependencies
+
+annotationProcessor - Classpath for the annotation processor for 'main'. (n)
+No dependencies
+
+api - API dependencies for 'main' sources. (n)
+No dependencies
+
+archives - Configuration for archive artifacts.
+\--- com.android.support:appcompat-v7:28.0.0
+     +--- com.android.support:support-annotations:28.0.0
+     +--- com.android.support:support-compat:28.0.0
+     |    +--- com.android.support:support-annotations:28.0.0
+     |    +--- com.android.support:collections:28.0.0
+     |    |    \--- com.android.support:support-annotations:28.0.0
+     |    +--- android.arch.lifecycle:runtime:1.1.1
+     |    |    +--- android.arch.lifecycle:common:1.1.1
+     |    |    |    \--- com.android.support:support-annotations:26.1.0 -> 28.0.0
+     |    |    +--- android.arch.core:common:1.1.1
+     |    |    |    \--- com.android.support:support-annotations:26.1.0 -> 28.0.0
+     |    |    \--- com.android.support:support-annotations:26.1.0 -> 28.0.0
+     |    \--- com.android.support:versionedparcelable:28.0.0
+     |         +--- com.android.support:support-annotations:28.0.0
+     |         \--- com.android.support:collections:28.0.0 (*)
+     +--- com.android.support:collections:28.0.0 (*)
+     +--- com.android.support:cursoradapter:28.0.0
+     |    \--- com.android.support:support-annotations:28.0.0
+     +--- com.android.support:support-core-utils:28.0.0
+     |    +--- com.android.support:support-annotations:28.0.0
+     |    +--- com.android.support:support-compat:28.0.0 (*)
+     |    +--- com.android.support:documentfile:28.0.0
+     |    |    \--- com.android.support:support-annotations:28.0.0
+     |    +--- com.android.support:loader:28.0.0
+     |    |    +--- com.android.support:support-annotations:28.0.0
+     |    |    +--- com.android.support:support-compat:28.0.0 (*)
+     |    |    +--- android.arch.lifecycle:livedata:1.1.1
+     |    |    |    +--- android.arch.core:runtime:1.1.1
+     |    |    |    |    +--- com.android.support:support-annotations:26.1.0 -> 28.0.0
+     |    |    |    |    \--- android.arch.core:common:1.1.1 (*)
+     |    |    |    +--- android.arch.lifecycle:livedata-core:1.1.1
+     |    |    |    |    +--- android.arch.lifecycle:common:1.1.1 (*)
+     |    |    |    |    +--- android.arch.core:common:1.1.1 (*)
+     |    |    |    |    \--- android.arch.core:runtime:1.1.1 (*)
+     |    |    |    \--- android.arch.core:common:1.1.1 (*)
+     |    |    \--- android.arch.lifecycle:viewmodel:1.1.1
+     |    |         \--- com.android.support:support-annotations:26.1.0 -> 28.0.0
+     |    +--- com.android.support:localbroadcastmanager:28.0.0
+     |    |    \--- com.android.support:support-annotations:28.0.0
+     |    \--- com.android.support:print:28.0.0
+     |         \--- com.android.support:support-annotations:28.0.0
+     +--- com.android.support:support-fragment:28.0.0
+     |    +--- com.android.support:support-compat:28.0.0 (*)
+     |    +--- com.android.support:support-core-ui:28.0.0
+     |    |    +--- com.android.support:support-annotations:28.0.0
+     |    |    +--- com.android.support:support-compat:28.0.0 (*)
+     |    |    +--- com.android.support:support-core-utils:28.0.0 (*)
+     |    |    +--- com.android.support:customview:28.0.0
+     |    |    |    +--- com.android.support:support-annotations:28.0.0
+     |    |    |    \--- com.android.support:support-compat:28.0.0 (*)
+     |    |    +--- com.android.support:viewpager:28.0.0
+     |    |    |    +--- com.android.support:support-annotations:28.0.0
+     |    |    |    +--- com.android.support:support-compat:28.0.0 (*)
+     |    |    |    \--- com.android.support:customview:28.0.0 (*)
+     |    |    +--- com.android.support:coordinatorlayout:28.0.0
+     |    |    |    +--- com.android.support:support-annotations:28.0.0
+     |    |    |    +--- com.android.support:support-compat:28.0.0 (*)
+     |    |    |    \--- com.android.support:customview:28.0.0 (*)
+     |    |    +--- com.android.support:drawerlayout:28.0.0
+     |    |    |    +--- com.android.support:support-annotations:28.0.0
+     |    |    |    +--- com.android.support:support-compat:28.0.0 (*)
+     |    |    |    \--- com.android.support:customview:28.0.0 (*)
+     |    |    +--- com.android.support:slidingpanelayout:28.0.0
+     |    |    |    +--- com.android.support:support-annotations:28.0.0
+     |    |    |    +--- com.android.support:support-compat:28.0.0 (*)
+     |    |    |    \--- com.android.support:customview:28.0.0 (*)
+     |    |    +--- com.android.support:interpolator:28.0.0
+     |    |    |    \--- com.android.support:support-annotations:28.0.0
+     |    |    +--- com.android.support:swiperefreshlayout:28.0.0
+     |    |    |    +--- com.android.support:support-annotations:28.0.0
+     |    |    |    +--- com.android.support:support-compat:28.0.0 (*)
+     |    |    |    \--- com.android.support:interpolator:28.0.0 (*)
+     |    |    +--- com.android.support:asynclayoutinflater:28.0.0
+     |    |    |    +--- com.android.support:support-annotations:28.0.0
+     |    |    |    \--- com.android.support:support-compat:28.0.0 (*)
+     |    |    \--- com.android.support:cursoradapter:28.0.0 (*)
+     |    +--- com.android.support:support-core-utils:28.0.0 (*)
+     |    +--- com.android.support:support-annotations:28.0.0
+     |    +--- com.android.support:loader:28.0.0 (*)
+     |    \--- android.arch.lifecycle:viewmodel:1.1.1 (*)
+     +--- com.android.support:support-vector-drawable:28.0.0
+     |    +--- com.android.support:support-annotations:28.0.0
+     |    \--- com.android.support:support-compat:28.0.0 (*)
+     \--- com.android.support:animated-vector-drawable:28.0.0
+          +--- com.android.support:support-vector-drawable:28.0.0 (*)
+          \--- com.android.support:support-core-ui:28.0.0 (*)
+
+compile - Compile dependencies for 'main' sources (deprecated: use 'implementation' instead).
+No dependencies
+
+compileOnly - Compile only dependencies for 'main' sources. (n)
+No dependencies
+
+debugAndroidTestAnnotationProcessorClasspath - Resolved configuration for annotation-processor for variant: debugAndroidTest
+No dependencies
+
+debugAndroidTestCompileClasspath - Resolved configuration for compilation for variant: debugAndroidTest
++--- com.android.support.test:runner:1.0.2
+|    +--- com.android.support:support-annotations:27.1.1 -> 28.0.0
+|    +--- com.android.support.test:monitor:1.0.2
+|    |    \--- com.android.support:support-annotations:27.1.1 -> 28.0.0
+|    +--- junit:junit:4.12
+|    |    \--- org.hamcrest:hamcrest-core:1.3
+|    \--- net.sf.kxml:kxml2:2.3.0
++--- com.android.support.test.espresso:espresso-core:3.0.2
+|    +--- com.android.support.test:runner:1.0.2 (*)
+|    +--- com.android.support.test.espresso:espresso-idling-resource:3.0.2
+|    +--- com.squareup:javawriter:2.1.1
+|    +--- javax.inject:javax.inject:1
+|    +--- org.hamcrest:hamcrest-library:1.3
+|    |    \--- org.hamcrest:hamcrest-core:1.3
+|    +--- org.hamcrest:hamcrest-integration:1.3
+|    |    \--- org.hamcrest:hamcrest-library:1.3 (*)
+|    \--- com.google.code.findbugs:jsr305:2.0.1
++--- com.android.support.test:runner:{strictly 1.0.2} -> 1.0.2 (c)
++--- com.android.support:support-annotations:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support.test:monitor:{strictly 1.0.2} -> 1.0.2 (c)
++--- junit:junit:{strictly 4.12} -> 4.12 (c)
++--- org.hamcrest:hamcrest-core:{strictly 1.3} -> 1.3 (c)
++--- net.sf.kxml:kxml2:{strictly 2.3.0} -> 2.3.0 (c)
++--- com.android.support.test.espresso:espresso-core:{strictly 3.0.2} -> 3.0.2 (c)
++--- com.android.support.test.espresso:espresso-idling-resource:{strictly 3.0.2} -> 3.0.2 (c)
++--- com.squareup:javawriter:{strictly 2.1.1} -> 2.1.1 (c)
++--- javax.inject:javax.inject:{strictly 1} -> 1 (c)
++--- org.hamcrest:hamcrest-library:{strictly 1.3} -> 1.3 (c)
++--- org.hamcrest:hamcrest-integration:{strictly 1.3} -> 1.3 (c)
++--- com.google.code.findbugs:jsr305:{strictly 2.0.1} -> 2.0.1 (c)
++--- com.android.support:appcompat-v7:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:support-compat:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:collections:{strictly 28.0.0} -> 28.0.0 (c)
++--- android.arch.lifecycle:runtime:{strictly 1.1.1} -> 1.1.1 (c)
++--- android.arch.lifecycle:common:{strictly 1.1.1} -> 1.1.1 (c)
++--- android.arch.core:common:{strictly 1.1.1} -> 1.1.1 (c)
++--- com.android.support:versionedparcelable:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:cursoradapter:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:support-core-utils:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:documentfile:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:loader:{strictly 28.0.0} -> 28.0.0 (c)
++--- android.arch.lifecycle:livedata:{strictly 1.1.1} -> 1.1.1 (c)
++--- android.arch.core:runtime:{strictly 1.1.1} -> 1.1.1 (c)
++--- android.arch.lifecycle:livedata-core:{strictly 1.1.1} -> 1.1.1 (c)
++--- android.arch.lifecycle:viewmodel:{strictly 1.1.1} -> 1.1.1 (c)
++--- com.android.support:localbroadcastmanager:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:print:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:support-fragment:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:support-core-ui:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:customview:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:viewpager:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:coordinatorlayout:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:drawerlayout:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:slidingpanelayout:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:interpolator:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:swiperefreshlayout:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:asynclayoutinflater:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:support-vector-drawable:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:animated-vector-drawable:{strictly 28.0.0} -> 28.0.0 (c)
+\--- com.android.support:appcompat-v7:28.0.0
+     +--- com.android.support:support-annotations:28.0.0
+     +--- com.android.support:support-compat:28.0.0
+     |    +--- com.android.support:support-annotations:28.0.0
+     |    +--- com.android.support:collections:28.0.0
+     |    |    \--- com.android.support:support-annotations:28.0.0
+     |    +--- android.arch.lifecycle:runtime:1.1.1
+     |    |    +--- android.arch.lifecycle:common:1.1.1
+     |    |    |    \--- com.android.support:support-annotations:26.1.0 -> 28.0.0
+     |    |    +--- android.arch.core:common:1.1.1
+     |    |    |    \--- com.android.support:support-annotations:26.1.0 -> 28.0.0
+     |    |    \--- com.android.support:support-annotations:26.1.0 -> 28.0.0
+     |    \--- com.android.support:versionedparcelable:28.0.0
+     |         +--- com.android.support:support-annotations:28.0.0
+     |         \--- com.android.support:collections:28.0.0 (*)
+     +--- com.android.support:collections:28.0.0 (*)
+     +--- com.android.support:cursoradapter:28.0.0
+     |    \--- com.android.support:support-annotations:28.0.0
+     +--- com.android.support:support-core-utils:28.0.0
+     |    +--- com.android.support:support-annotations:28.0.0
+     |    +--- com.android.support:support-compat:28.0.0 (*)
+     |    +--- com.android.support:documentfile:28.0.0
+     |    |    \--- com.android.support:support-annotations:28.0.0
+     |    +--- com.android.support:loader:28.0.0
+     |    |    +--- com.android.support:support-annotations:28.0.0
+     |    |    +--- com.android.support:support-compat:28.0.0 (*)
+     |    |    +--- android.arch.lifecycle:livedata:1.1.1
+     |    |    |    +--- android.arch.core:runtime:1.1.1
+     |    |    |    |    +--- com.android.support:support-annotations:26.1.0 -> 28.0.0
+     |    |    |    |    \--- android.arch.core:common:1.1.1 (*)
+     |    |    |    +--- android.arch.lifecycle:livedata-core:1.1.1
+     |    |    |    |    +--- android.arch.lifecycle:common:1.1.1 (*)
+     |    |    |    |    +--- android.arch.core:common:1.1.1 (*)
+     |    |    |    |    \--- android.arch.core:runtime:1.1.1 (*)
+     |    |    |    \--- android.arch.core:common:1.1.1 (*)
+     |    |    \--- android.arch.lifecycle:viewmodel:1.1.1
+     |    |         \--- com.android.support:support-annotations:26.1.0 -> 28.0.0
+     |    +--- com.android.support:localbroadcastmanager:28.0.0
+     |    |    \--- com.android.support:support-annotations:28.0.0
+     |    \--- com.android.support:print:28.0.0
+     |         \--- com.android.support:support-annotations:28.0.0
+     +--- com.android.support:support-fragment:28.0.0
+     |    +--- com.android.support:support-compat:28.0.0 (*)
+     |    +--- com.android.support:support-core-ui:28.0.0
+     |    |    +--- com.android.support:support-annotations:28.0.0
+     |    |    +--- com.android.support:support-compat:28.0.0 (*)
+     |    |    +--- com.android.support:support-core-utils:28.0.0 (*)
+     |    |    +--- com.android.support:customview:28.0.0
+     |    |    |    +--- com.android.support:support-annotations:28.0.0
+     |    |    |    \--- com.android.support:support-compat:28.0.0 (*)
+     |    |    +--- com.android.support:viewpager:28.0.0
+     |    |    |    +--- com.android.support:support-annotations:28.0.0
+     |    |    |    +--- com.android.support:support-compat:28.0.0 (*)
+     |    |    |    \--- com.android.support:customview:28.0.0 (*)
+     |    |    +--- com.android.support:coordinatorlayout:28.0.0
+     |    |    |    +--- com.android.support:support-annotations:28.0.0
+     |    |    |    +--- com.android.support:support-compat:28.0.0 (*)
+     |    |    |    \--- com.android.support:customview:28.0.0 (*)
+     |    |    +--- com.android.support:drawerlayout:28.0.0
+     |    |    |    +--- com.android.support:support-annotations:28.0.0
+     |    |    |    +--- com.android.support:support-compat:28.0.0 (*)
+     |    |    |    \--- com.android.support:customview:28.0.0 (*)
+     |    |    +--- com.android.support:slidingpanelayout:28.0.0
+     |    |    |    +--- com.android.support:support-annotations:28.0.0
+     |    |    |    +--- com.android.support:support-compat:28.0.0 (*)
+     |    |    |    \--- com.android.support:customview:28.0.0 (*)
+     |    |    +--- com.android.support:interpolator:28.0.0
+     |    |    |    \--- com.android.support:support-annotations:28.0.0
+     |    |    +--- com.android.support:swiperefreshlayout:28.0.0
+     |    |    |    +--- com.android.support:support-annotations:28.0.0
+     |    |    |    +--- com.android.support:support-compat:28.0.0 (*)
+     |    |    |    \--- com.android.support:interpolator:28.0.0 (*)
+     |    |    +--- com.android.support:asynclayoutinflater:28.0.0
+     |    |    |    +--- com.android.support:support-annotations:28.0.0
+     |    |    |    \--- com.android.support:support-compat:28.0.0 (*)
+     |    |    \--- com.android.support:cursoradapter:28.0.0 (*)
+     |    +--- com.android.support:support-core-utils:28.0.0 (*)
+     |    +--- com.android.support:support-annotations:28.0.0
+     |    +--- com.android.support:loader:28.0.0 (*)
+     |    \--- android.arch.lifecycle:viewmodel:1.1.1 (*)
+     +--- com.android.support:support-vector-drawable:28.0.0
+     |    +--- com.android.support:support-annotations:28.0.0
+     |    \--- com.android.support:support-compat:28.0.0 (*)
+     \--- com.android.support:animated-vector-drawable:28.0.0
+          +--- com.android.support:support-vector-drawable:28.0.0 (*)
+          \--- com.android.support:support-core-ui:28.0.0 (*)
+
+debugAndroidTestRuntimeClasspath - Resolved configuration for runtime for variant: debugAndroidTest
++--- com.android.support.test:runner:1.0.2
+|    +--- com.android.support:support-annotations:27.1.1 -> 28.0.0
+|    +--- com.android.support.test:monitor:1.0.2
+|    |    \--- com.android.support:support-annotations:27.1.1 -> 28.0.0
+|    +--- junit:junit:4.12
+|    |    \--- org.hamcrest:hamcrest-core:1.3
+|    \--- net.sf.kxml:kxml2:2.3.0
++--- com.android.support.test.espresso:espresso-core:3.0.2
+|    +--- com.android.support.test:runner:1.0.2 (*)
+|    +--- com.android.support.test.espresso:espresso-idling-resource:3.0.2
+|    +--- com.squareup:javawriter:2.1.1
+|    +--- javax.inject:javax.inject:1
+|    +--- org.hamcrest:hamcrest-library:1.3
+|    |    \--- org.hamcrest:hamcrest-core:1.3
+|    +--- org.hamcrest:hamcrest-integration:1.3
+|    |    \--- org.hamcrest:hamcrest-library:1.3 (*)
+|    \--- com.google.code.findbugs:jsr305:2.0.1
++--- com.android.support:appcompat-v7:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:support-annotations:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:support-compat:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:collections:{strictly 28.0.0} -> 28.0.0 (c)
++--- android.arch.lifecycle:runtime:{strictly 1.1.1} -> 1.1.1 (c)
++--- android.arch.lifecycle:common:{strictly 1.1.1} -> 1.1.1 (c)
++--- android.arch.core:common:{strictly 1.1.1} -> 1.1.1 (c)
++--- com.android.support:versionedparcelable:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:cursoradapter:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:support-core-utils:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:documentfile:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:loader:{strictly 28.0.0} -> 28.0.0 (c)
++--- android.arch.lifecycle:livedata:{strictly 1.1.1} -> 1.1.1 (c)
++--- android.arch.core:runtime:{strictly 1.1.1} -> 1.1.1 (c)
++--- android.arch.lifecycle:livedata-core:{strictly 1.1.1} -> 1.1.1 (c)
++--- android.arch.lifecycle:viewmodel:{strictly 1.1.1} -> 1.1.1 (c)
++--- com.android.support:localbroadcastmanager:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:print:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:support-fragment:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:support-core-ui:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:customview:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:viewpager:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:coordinatorlayout:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:drawerlayout:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:slidingpanelayout:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:interpolator:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:swiperefreshlayout:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:asynclayoutinflater:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:support-vector-drawable:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:animated-vector-drawable:{strictly 28.0.0} -> 28.0.0 (c)
+\--- com.android.support:appcompat-v7:28.0.0
+     +--- com.android.support:support-annotations:28.0.0
+     +--- com.android.support:support-compat:28.0.0
+     |    +--- com.android.support:support-annotations:28.0.0
+     |    +--- com.android.support:collections:28.0.0
+     |    |    \--- com.android.support:support-annotations:28.0.0
+     |    +--- android.arch.lifecycle:runtime:1.1.1
+     |    |    +--- android.arch.lifecycle:common:1.1.1
+     |    |    |    \--- com.android.support:support-annotations:26.1.0 -> 28.0.0
+     |    |    +--- android.arch.core:common:1.1.1
+     |    |    |    \--- com.android.support:support-annotations:26.1.0 -> 28.0.0
+     |    |    \--- com.android.support:support-annotations:26.1.0 -> 28.0.0
+     |    \--- com.android.support:versionedparcelable:28.0.0
+     |         +--- com.android.support:support-annotations:28.0.0
+     |         \--- com.android.support:collections:28.0.0 (*)
+     +--- com.android.support:collections:28.0.0 (*)
+     +--- com.android.support:cursoradapter:28.0.0
+     |    \--- com.android.support:support-annotations:28.0.0
+     +--- com.android.support:support-core-utils:28.0.0
+     |    +--- com.android.support:support-annotations:28.0.0
+     |    +--- com.android.support:support-compat:28.0.0 (*)
+     |    +--- com.android.support:documentfile:28.0.0
+     |    |    \--- com.android.support:support-annotations:28.0.0
+     |    +--- com.android.support:loader:28.0.0
+     |    |    +--- com.android.support:support-annotations:28.0.0
+     |    |    +--- com.android.support:support-compat:28.0.0 (*)
+     |    |    +--- android.arch.lifecycle:livedata:1.1.1
+     |    |    |    +--- android.arch.core:runtime:1.1.1
+     |    |    |    |    +--- com.android.support:support-annotations:26.1.0 -> 28.0.0
+     |    |    |    |    \--- android.arch.core:common:1.1.1 (*)
+     |    |    |    +--- android.arch.lifecycle:livedata-core:1.1.1
+     |    |    |    |    +--- android.arch.lifecycle:common:1.1.1 (*)
+     |    |    |    |    +--- android.arch.core:common:1.1.1 (*)
+     |    |    |    |    \--- android.arch.core:runtime:1.1.1 (*)
+     |    |    |    \--- android.arch.core:common:1.1.1 (*)
+     |    |    \--- android.arch.lifecycle:viewmodel:1.1.1
+     |    |         \--- com.android.support:support-annotations:26.1.0 -> 28.0.0
+     |    +--- com.android.support:localbroadcastmanager:28.0.0
+     |    |    \--- com.android.support:support-annotations:28.0.0
+     |    \--- com.android.support:print:28.0.0
+     |         \--- com.android.support:support-annotations:28.0.0
+     +--- com.android.support:support-fragment:28.0.0
+     |    +--- com.android.support:support-compat:28.0.0 (*)
+     |    +--- com.android.support:support-core-ui:28.0.0
+     |    |    +--- com.android.support:support-annotations:28.0.0
+     |    |    +--- com.android.support:support-compat:28.0.0 (*)
+     |    |    +--- com.android.support:support-core-utils:28.0.0 (*)
+     |    |    +--- com.android.support:customview:28.0.0
+     |    |    |    +--- com.android.support:support-annotations:28.0.0
+     |    |    |    \--- com.android.support:support-compat:28.0.0 (*)
+     |    |    +--- com.android.support:viewpager:28.0.0
+     |    |    |    +--- com.android.support:support-annotations:28.0.0
+     |    |    |    +--- com.android.support:support-compat:28.0.0 (*)
+     |    |    |    \--- com.android.support:customview:28.0.0 (*)
+     |    |    +--- com.android.support:coordinatorlayout:28.0.0
+     |    |    |    +--- com.android.support:support-annotations:28.0.0
+     |    |    |    +--- com.android.support:support-compat:28.0.0 (*)
+     |    |    |    \--- com.android.support:customview:28.0.0 (*)
+     |    |    +--- com.android.support:drawerlayout:28.0.0
+     |    |    |    +--- com.android.support:support-annotations:28.0.0
+     |    |    |    +--- com.android.support:support-compat:28.0.0 (*)
+     |    |    |    \--- com.android.support:customview:28.0.0 (*)
+     |    |    +--- com.android.support:slidingpanelayout:28.0.0
+     |    |    |    +--- com.android.support:support-annotations:28.0.0
+     |    |    |    +--- com.android.support:support-compat:28.0.0 (*)
+     |    |    |    \--- com.android.support:customview:28.0.0 (*)
+     |    |    +--- com.android.support:interpolator:28.0.0
+     |    |    |    \--- com.android.support:support-annotations:28.0.0
+     |    |    +--- com.android.support:swiperefreshlayout:28.0.0
+     |    |    |    +--- com.android.support:support-annotations:28.0.0
+     |    |    |    +--- com.android.support:support-compat:28.0.0 (*)
+     |    |    |    \--- com.android.support:interpolator:28.0.0 (*)
+     |    |    +--- com.android.support:asynclayoutinflater:28.0.0
+     |    |    |    +--- com.android.support:support-annotations:28.0.0
+     |    |    |    \--- com.android.support:support-compat:28.0.0 (*)
+     |    |    \--- com.android.support:cursoradapter:28.0.0 (*)
+     |    +--- com.android.support:support-core-utils:28.0.0 (*)
+     |    +--- com.android.support:support-annotations:28.0.0
+     |    +--- com.android.support:loader:28.0.0 (*)
+     |    \--- android.arch.lifecycle:viewmodel:1.1.1 (*)
+     +--- com.android.support:support-vector-drawable:28.0.0
+     |    +--- com.android.support:support-annotations:28.0.0
+     |    \--- com.android.support:support-compat:28.0.0 (*)
+     \--- com.android.support:animated-vector-drawable:28.0.0
+          +--- com.android.support:support-vector-drawable:28.0.0 (*)
+          \--- com.android.support:support-core-ui:28.0.0 (*)
+
+debugAnnotationProcessor - Classpath for the annotation processor for 'debug'. (n)
+No dependencies
+
+debugAnnotationProcessorClasspath - Resolved configuration for annotation-processor for variant: debug
+No dependencies
+
+debugApi - API dependencies for 'debug' sources. (n)
+No dependencies
+
+debugApiElements - API elements for debug (n)
+No dependencies
+
+debugCompile - Compile dependencies for 'debug' sources (deprecated: use 'debugImplementation' instead). (n)
+No dependencies
+
+debugCompileClasspath - Resolved configuration for compilation for variant: debug
++--- com.android.support:appcompat-v7:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:support-annotations:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:support-compat:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:collections:{strictly 28.0.0} -> 28.0.0 (c)
++--- android.arch.lifecycle:runtime:{strictly 1.1.1} -> 1.1.1 (c)
++--- android.arch.lifecycle:common:{strictly 1.1.1} -> 1.1.1 (c)
++--- android.arch.core:common:{strictly 1.1.1} -> 1.1.1 (c)
++--- com.android.support:versionedparcelable:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:cursoradapter:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:support-core-utils:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:documentfile:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:loader:{strictly 28.0.0} -> 28.0.0 (c)
++--- android.arch.lifecycle:livedata:{strictly 1.1.1} -> 1.1.1 (c)
++--- android.arch.core:runtime:{strictly 1.1.1} -> 1.1.1 (c)
++--- android.arch.lifecycle:livedata-core:{strictly 1.1.1} -> 1.1.1 (c)
++--- android.arch.lifecycle:viewmodel:{strictly 1.1.1} -> 1.1.1 (c)
++--- com.android.support:localbroadcastmanager:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:print:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:support-fragment:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:support-core-ui:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:customview:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:viewpager:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:coordinatorlayout:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:drawerlayout:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:slidingpanelayout:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:interpolator:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:swiperefreshlayout:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:asynclayoutinflater:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:support-vector-drawable:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:animated-vector-drawable:{strictly 28.0.0} -> 28.0.0 (c)
+\--- com.android.support:appcompat-v7:28.0.0
+     +--- com.android.support:support-annotations:28.0.0
+     +--- com.android.support:support-compat:28.0.0
+     |    +--- com.android.support:support-annotations:28.0.0
+     |    +--- com.android.support:collections:28.0.0
+     |    |    \--- com.android.support:support-annotations:28.0.0
+     |    +--- android.arch.lifecycle:runtime:1.1.1
+     |    |    +--- android.arch.lifecycle:common:1.1.1
+     |    |    |    \--- com.android.support:support-annotations:26.1.0 -> 28.0.0
+     |    |    +--- android.arch.core:common:1.1.1
+     |    |    |    \--- com.android.support:support-annotations:26.1.0 -> 28.0.0
+     |    |    \--- com.android.support:support-annotations:26.1.0 -> 28.0.0
+     |    \--- com.android.support:versionedparcelable:28.0.0
+     |         +--- com.android.support:support-annotations:28.0.0
+     |         \--- com.android.support:collections:28.0.0 (*)
+     +--- com.android.support:collections:28.0.0 (*)
+     +--- com.android.support:cursoradapter:28.0.0
+     |    \--- com.android.support:support-annotations:28.0.0
+     +--- com.android.support:support-core-utils:28.0.0
+     |    +--- com.android.support:support-annotations:28.0.0
+     |    +--- com.android.support:support-compat:28.0.0 (*)
+     |    +--- com.android.support:documentfile:28.0.0
+     |    |    \--- com.android.support:support-annotations:28.0.0
+     |    +--- com.android.support:loader:28.0.0
+     |    |    +--- com.android.support:support-annotations:28.0.0
+     |    |    +--- com.android.support:support-compat:28.0.0 (*)
+     |    |    +--- android.arch.lifecycle:livedata:1.1.1
+     |    |    |    +--- android.arch.core:runtime:1.1.1
+     |    |    |    |    +--- com.android.support:support-annotations:26.1.0 -> 28.0.0
+     |    |    |    |    \--- android.arch.core:common:1.1.1 (*)
+     |    |    |    +--- android.arch.lifecycle:livedata-core:1.1.1
+     |    |    |    |    +--- android.arch.lifecycle:common:1.1.1 (*)
+     |    |    |    |    +--- android.arch.core:common:1.1.1 (*)
+     |    |    |    |    \--- android.arch.core:runtime:1.1.1 (*)
+     |    |    |    \--- android.arch.core:common:1.1.1 (*)
+     |    |    \--- android.arch.lifecycle:viewmodel:1.1.1
+     |    |         \--- com.android.support:support-annotations:26.1.0 -> 28.0.0
+     |    +--- com.android.support:localbroadcastmanager:28.0.0
+     |    |    \--- com.android.support:support-annotations:28.0.0
+     |    \--- com.android.support:print:28.0.0
+     |         \--- com.android.support:support-annotations:28.0.0
+     +--- com.android.support:support-fragment:28.0.0
+     |    +--- com.android.support:support-compat:28.0.0 (*)
+     |    +--- com.android.support:support-core-ui:28.0.0
+     |    |    +--- com.android.support:support-annotations:28.0.0
+     |    |    +--- com.android.support:support-compat:28.0.0 (*)
+     |    |    +--- com.android.support:support-core-utils:28.0.0 (*)
+     |    |    +--- com.android.support:customview:28.0.0
+     |    |    |    +--- com.android.support:support-annotations:28.0.0
+     |    |    |    \--- com.android.support:support-compat:28.0.0 (*)
+     |    |    +--- com.android.support:viewpager:28.0.0
+     |    |    |    +--- com.android.support:support-annotations:28.0.0
+     |    |    |    +--- com.android.support:support-compat:28.0.0 (*)
+     |    |    |    \--- com.android.support:customview:28.0.0 (*)
+     |    |    +--- com.android.support:coordinatorlayout:28.0.0
+     |    |    |    +--- com.android.support:support-annotations:28.0.0
+     |    |    |    +--- com.android.support:support-compat:28.0.0 (*)
+     |    |    |    \--- com.android.support:customview:28.0.0 (*)
+     |    |    +--- com.android.support:drawerlayout:28.0.0
+     |    |    |    +--- com.android.support:support-annotations:28.0.0
+     |    |    |    +--- com.android.support:support-compat:28.0.0 (*)
+     |    |    |    \--- com.android.support:customview:28.0.0 (*)
+     |    |    +--- com.android.support:slidingpanelayout:28.0.0
+     |    |    |    +--- com.android.support:support-annotations:28.0.0
+     |    |    |    +--- com.android.support:support-compat:28.0.0 (*)
+     |    |    |    \--- com.android.support:customview:28.0.0 (*)
+     |    |    +--- com.android.support:interpolator:28.0.0
+     |    |    |    \--- com.android.support:support-annotations:28.0.0
+     |    |    +--- com.android.support:swiperefreshlayout:28.0.0
+     |    |    |    +--- com.android.support:support-annotations:28.0.0
+     |    |    |    +--- com.android.support:support-compat:28.0.0 (*)
+     |    |    |    \--- com.android.support:interpolator:28.0.0 (*)
+     |    |    +--- com.android.support:asynclayoutinflater:28.0.0
+     |    |    |    +--- com.android.support:support-annotations:28.0.0
+     |    |    |    \--- com.android.support:support-compat:28.0.0 (*)
+     |    |    \--- com.android.support:cursoradapter:28.0.0 (*)
+     |    +--- com.android.support:support-core-utils:28.0.0 (*)
+     |    +--- com.android.support:support-annotations:28.0.0
+     |    +--- com.android.support:loader:28.0.0 (*)
+     |    \--- android.arch.lifecycle:viewmodel:1.1.1 (*)
+     +--- com.android.support:support-vector-drawable:28.0.0
+     |    +--- com.android.support:support-annotations:28.0.0
+     |    \--- com.android.support:support-compat:28.0.0 (*)
+     \--- com.android.support:animated-vector-drawable:28.0.0
+          +--- com.android.support:support-vector-drawable:28.0.0 (*)
+          \--- com.android.support:support-core-ui:28.0.0 (*)
+
+debugCompileOnly - Compile only dependencies for 'debug' sources. (n)
+No dependencies
+
+debugImplementation - Implementation only dependencies for 'debug' sources. (n)
+No dependencies
+
+debugProvided - Provided dependencies for 'debug' sources (deprecated: use 'debugCompileOnly' instead). (n)
+No dependencies
+
+debugPublish - Publish dependencies for 'debug' sources (deprecated: use 'debugRuntimeOnly' instead). (n)
+No dependencies
+
+debugRuntimeClasspath - Resolved configuration for runtime for variant: debug
+\--- com.android.support:appcompat-v7:28.0.0
+     +--- com.android.support:support-annotations:28.0.0
+     +--- com.android.support:support-compat:28.0.0
+     |    +--- com.android.support:support-annotations:28.0.0
+     |    +--- com.android.support:collections:28.0.0
+     |    |    \--- com.android.support:support-annotations:28.0.0
+     |    +--- android.arch.lifecycle:runtime:1.1.1
+     |    |    +--- android.arch.lifecycle:common:1.1.1
+     |    |    |    \--- com.android.support:support-annotations:26.1.0 -> 28.0.0
+     |    |    +--- android.arch.core:common:1.1.1
+     |    |    |    \--- com.android.support:support-annotations:26.1.0 -> 28.0.0
+     |    |    \--- com.android.support:support-annotations:26.1.0 -> 28.0.0
+     |    \--- com.android.support:versionedparcelable:28.0.0
+     |         +--- com.android.support:support-annotations:28.0.0
+     |         \--- com.android.support:collections:28.0.0 (*)
+     +--- com.android.support:collections:28.0.0 (*)
+     +--- com.android.support:cursoradapter:28.0.0
+     |    \--- com.android.support:support-annotations:28.0.0
+     +--- com.android.support:support-core-utils:28.0.0
+     |    +--- com.android.support:support-annotations:28.0.0
+     |    +--- com.android.support:support-compat:28.0.0 (*)
+     |    +--- com.android.support:documentfile:28.0.0
+     |    |    \--- com.android.support:support-annotations:28.0.0
+     |    +--- com.android.support:loader:28.0.0
+     |    |    +--- com.android.support:support-annotations:28.0.0
+     |    |    +--- com.android.support:support-compat:28.0.0 (*)
+     |    |    +--- android.arch.lifecycle:livedata:1.1.1
+     |    |    |    +--- android.arch.core:runtime:1.1.1
+     |    |    |    |    +--- com.android.support:support-annotations:26.1.0 -> 28.0.0
+     |    |    |    |    \--- android.arch.core:common:1.1.1 (*)
+     |    |    |    +--- android.arch.lifecycle:livedata-core:1.1.1
+     |    |    |    |    +--- android.arch.lifecycle:common:1.1.1 (*)
+     |    |    |    |    +--- android.arch.core:common:1.1.1 (*)
+     |    |    |    |    \--- android.arch.core:runtime:1.1.1 (*)
+     |    |    |    \--- android.arch.core:common:1.1.1 (*)
+     |    |    \--- android.arch.lifecycle:viewmodel:1.1.1
+     |    |         \--- com.android.support:support-annotations:26.1.0 -> 28.0.0
+     |    +--- com.android.support:localbroadcastmanager:28.0.0
+     |    |    \--- com.android.support:support-annotations:28.0.0
+     |    \--- com.android.support:print:28.0.0
+     |         \--- com.android.support:support-annotations:28.0.0
+     +--- com.android.support:support-fragment:28.0.0
+     |    +--- com.android.support:support-compat:28.0.0 (*)
+     |    +--- com.android.support:support-core-ui:28.0.0
+     |    |    +--- com.android.support:support-annotations:28.0.0
+     |    |    +--- com.android.support:support-compat:28.0.0 (*)
+     |    |    +--- com.android.support:support-core-utils:28.0.0 (*)
+     |    |    +--- com.android.support:customview:28.0.0
+     |    |    |    +--- com.android.support:support-annotations:28.0.0
+     |    |    |    \--- com.android.support:support-compat:28.0.0 (*)
+     |    |    +--- com.android.support:viewpager:28.0.0
+     |    |    |    +--- com.android.support:support-annotations:28.0.0
+     |    |    |    +--- com.android.support:support-compat:28.0.0 (*)
+     |    |    |    \--- com.android.support:customview:28.0.0 (*)
+     |    |    +--- com.android.support:coordinatorlayout:28.0.0
+     |    |    |    +--- com.android.support:support-annotations:28.0.0
+     |    |    |    +--- com.android.support:support-compat:28.0.0 (*)
+     |    |    |    \--- com.android.support:customview:28.0.0 (*)
+     |    |    +--- com.android.support:drawerlayout:28.0.0
+     |    |    |    +--- com.android.support:support-annotations:28.0.0
+     |    |    |    +--- com.android.support:support-compat:28.0.0 (*)
+     |    |    |    \--- com.android.support:customview:28.0.0 (*)
+     |    |    +--- com.android.support:slidingpanelayout:28.0.0
+     |    |    |    +--- com.android.support:support-annotations:28.0.0
+     |    |    |    +--- com.android.support:support-compat:28.0.0 (*)
+     |    |    |    \--- com.android.support:customview:28.0.0 (*)
+     |    |    +--- com.android.support:interpolator:28.0.0
+     |    |    |    \--- com.android.support:support-annotations:28.0.0
+     |    |    +--- com.android.support:swiperefreshlayout:28.0.0
+     |    |    |    +--- com.android.support:support-annotations:28.0.0
+     |    |    |    +--- com.android.support:support-compat:28.0.0 (*)
+     |    |    |    \--- com.android.support:interpolator:28.0.0 (*)
+     |    |    +--- com.android.support:asynclayoutinflater:28.0.0
+     |    |    |    +--- com.android.support:support-annotations:28.0.0
+     |    |    |    \--- com.android.support:support-compat:28.0.0 (*)
+     |    |    \--- com.android.support:cursoradapter:28.0.0 (*)
+     |    +--- com.android.support:support-core-utils:28.0.0 (*)
+     |    +--- com.android.support:support-annotations:28.0.0
+     |    +--- com.android.support:loader:28.0.0 (*)
+     |    \--- android.arch.lifecycle:viewmodel:1.1.1 (*)
+     +--- com.android.support:support-vector-drawable:28.0.0
+     |    +--- com.android.support:support-annotations:28.0.0
+     |    \--- com.android.support:support-compat:28.0.0 (*)
+     \--- com.android.support:animated-vector-drawable:28.0.0
+          +--- com.android.support:support-vector-drawable:28.0.0 (*)
+          \--- com.android.support:support-core-ui:28.0.0 (*)
+
+debugRuntimeElements - Runtime elements for debug (n)
+No dependencies
+
+debugRuntimeOnly - Runtime only dependencies for 'debug' sources. (n)
+No dependencies
+
+debugUnitTestAnnotationProcessorClasspath - Resolved configuration for annotation-processor for variant: debugUnitTest
+No dependencies
+
+debugUnitTestCompileClasspath - Resolved configuration for compilation for variant: debugUnitTest
++--- com.android.support:appcompat-v7:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:support-annotations:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:support-compat:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:collections:{strictly 28.0.0} -> 28.0.0 (c)
++--- android.arch.lifecycle:runtime:{strictly 1.1.1} -> 1.1.1 (c)
++--- android.arch.lifecycle:common:{strictly 1.1.1} -> 1.1.1 (c)
++--- android.arch.core:common:{strictly 1.1.1} -> 1.1.1 (c)
++--- com.android.support:versionedparcelable:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:cursoradapter:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:support-core-utils:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:documentfile:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:loader:{strictly 28.0.0} -> 28.0.0 (c)
++--- android.arch.lifecycle:livedata:{strictly 1.1.1} -> 1.1.1 (c)
++--- android.arch.core:runtime:{strictly 1.1.1} -> 1.1.1 (c)
++--- android.arch.lifecycle:livedata-core:{strictly 1.1.1} -> 1.1.1 (c)
++--- android.arch.lifecycle:viewmodel:{strictly 1.1.1} -> 1.1.1 (c)
++--- com.android.support:localbroadcastmanager:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:print:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:support-fragment:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:support-core-ui:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:customview:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:viewpager:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:coordinatorlayout:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:drawerlayout:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:slidingpanelayout:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:interpolator:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:swiperefreshlayout:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:asynclayoutinflater:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:support-vector-drawable:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:animated-vector-drawable:{strictly 28.0.0} -> 28.0.0 (c)
++--- junit:junit:{strictly 4.12} -> 4.12 (c)
++--- org.hamcrest:hamcrest-core:{strictly 1.3} -> 1.3 (c)
++--- org.robolectric:robolectric:{strictly 4.3} -> 4.3 (c)
++--- org.robolectric:annotations:{strictly 4.3} -> 4.3 (c)
++--- org.robolectric:junit:{strictly 4.3} -> 4.3 (c)
++--- org.robolectric:sandbox:{strictly 4.3} -> 4.3 (c)
++--- org.robolectric:utils:{strictly 4.3} -> 4.3 (c)
++--- org.robolectric:pluginapi:{strictly 4.3} -> 4.3 (c)
++--- org.apache.ant:ant:{strictly 1.8.0} -> 1.8.0 (c)
++--- org.apache.ant:ant-launcher:{strictly 1.8.0} -> 1.8.0 (c)
++--- org.apache.maven:maven-ant-tasks:{strictly 2.1.3} -> 2.1.3 (c)
++--- classworlds:classworlds:{strictly 1.1-alpha-2} -> 1.1-alpha-2 (c)
++--- org.codehaus.plexus:plexus-container-default:{strictly 1.0-alpha-9-stable-1} -> 1.0-alpha-9-stable-1 (c)
++--- org.codehaus.plexus:plexus-utils:{strictly 1.5.15} -> 1.5.15 (c)
++--- org.codehaus.plexus:plexus-interpolation:{strictly 1.11} -> 1.11 (c)
++--- org.apache.maven:maven-artifact:{strictly 2.2.1} -> 2.2.1 (c)
++--- org.apache.maven:maven-artifact-manager:{strictly 2.2.1} -> 2.2.1 (c)
++--- org.apache.maven:maven-repository-metadata:{strictly 2.2.1} -> 2.2.1 (c)
++--- org.apache.maven.wagon:wagon-provider-api:{strictly 1.0-beta-6} -> 1.0-beta-6 (c)
++--- backport-util-concurrent:backport-util-concurrent:{strictly 3.1} -> 3.1 (c)
++--- org.apache.maven:maven-model:{strictly 2.2.1} -> 2.2.1 (c)
++--- org.apache.maven:maven-project:{strictly 2.2.1} -> 2.2.1 (c)
++--- org.apache.maven:maven-settings:{strictly 2.2.1} -> 2.2.1 (c)
++--- org.apache.maven:maven-profile:{strictly 2.2.1} -> 2.2.1 (c)
++--- org.apache.maven:maven-plugin-registry:{strictly 2.2.1} -> 2.2.1 (c)
++--- org.apache.maven:maven-error-diagnostics:{strictly 2.2.1} -> 2.2.1 (c)
++--- org.apache.maven.wagon:wagon-file:{strictly 1.0-beta-6} -> 1.0-beta-6 (c)
++--- org.apache.maven.wagon:wagon-http-lightweight:{strictly 1.0-beta-6} -> 1.0-beta-6 (c)
++--- org.apache.maven.wagon:wagon-http-shared:{strictly 1.0-beta-6} -> 1.0-beta-6 (c)
++--- nekohtml:xercesMinimal:{strictly 1.9.6.2} -> 1.9.6.2 (c)
++--- nekohtml:nekohtml:{strictly 1.9.6.2} -> 1.9.6.2 (c)
++--- org.robolectric:utils-reflector:{strictly 4.3} -> 4.3 (c)
++--- org.ow2.asm:asm:{strictly 7.0} -> 7.0 (c)
++--- org.ow2.asm:asm-commons:{strictly 7.0} -> 7.0 (c)
++--- org.ow2.asm:asm-tree:{strictly 7.0} -> 7.0 (c)
++--- org.ow2.asm:asm-analysis:{strictly 7.0} -> 7.0 (c)
++--- org.ow2.asm:asm-util:{strictly 7.0} -> 7.0 (c)
++--- com.google.auto.service:auto-service:{strictly 1.0-rc4} -> 1.0-rc4 (c)
++--- com.google.auto:auto-common:{strictly 0.8} -> 0.8 (c)
++--- com.google.guava:guava:{strictly 27.0.1-jre} -> 27.0.1-jre (c)
++--- com.google.guava:failureaccess:{strictly 1.0.1} -> 1.0.1 (c)
++--- com.google.guava:listenablefuture:{strictly 9999.0-empty-to-avoid-conflict-with-guava} -> 9999.0-empty-to-avoid-conflict-with-guava (c)
++--- com.google.code.findbugs:jsr305:{strictly 3.0.2} -> 3.0.2 (c)
++--- org.checkerframework:checker-qual:{strictly 2.5.2} -> 2.5.2 (c)
++--- com.google.errorprone:error_prone_annotations:{strictly 2.2.0} -> 2.2.0 (c)
++--- com.google.j2objc:j2objc-annotations:{strictly 1.1} -> 1.1 (c)
++--- org.codehaus.mojo:animal-sniffer-annotations:{strictly 1.17} -> 1.17 (c)
++--- javax.inject:javax.inject:{strictly 1} -> 1 (c)
++--- javax.annotation:javax.annotation-api:{strictly 1.3.2} -> 1.3.2 (c)
++--- org.robolectric:shadowapi:{strictly 4.3} -> 4.3 (c)
++--- org.robolectric:resources:{strictly 4.3} -> 4.3 (c)
++--- org.robolectric:plugins-maven-dependency-resolver:{strictly 4.3} -> 4.3 (c)
++--- org.robolectric:shadows-framework:{strictly 4.3} -> 4.3 (c)
++--- androidx.test:monitor:{strictly 1.2.0} -> 1.2.0 (c)
++--- androidx.annotation:annotation:{strictly 1.0.0} -> 1.0.0 (c)
++--- com.almworks.sqlite4java:sqlite4java:{strictly 0.282} -> 0.282 (c)
++--- com.ibm.icu:icu4j:{strictly 53.1} -> 53.1 (c)
++--- com.google.android.apps.common.testing.accessibility.framework:accessibility-test-framework:{strictly 2.1} -> 2.1 (c)
++--- org.hamcrest:hamcrest-library:{strictly 1.3} -> 1.3 (c)
++--- com.google.protobuf:protobuf-java:{strictly 2.6.1} -> 2.6.1 (c)
++--- org.bouncycastle:bcprov-jdk15on:{strictly 1.52} -> 1.52 (c)
++--- org.mockito:mockito-core:{strictly 1.9.5} -> 1.9.5 (c)
++--- org.objenesis:objenesis:{strictly 1.0} -> 1.0 (c)
++--- com.android.support:appcompat-v7:28.0.0
+|    +--- com.android.support:support-annotations:28.0.0
+|    +--- com.android.support:support-compat:28.0.0
+|    |    +--- com.android.support:support-annotations:28.0.0
+|    |    +--- com.android.support:collections:28.0.0
+|    |    |    \--- com.android.support:support-annotations:28.0.0
+|    |    +--- android.arch.lifecycle:runtime:1.1.1
+|    |    |    +--- android.arch.lifecycle:common:1.1.1
+|    |    |    |    \--- com.android.support:support-annotations:26.1.0 -> 28.0.0
+|    |    |    +--- android.arch.core:common:1.1.1
+|    |    |    |    \--- com.android.support:support-annotations:26.1.0 -> 28.0.0
+|    |    |    \--- com.android.support:support-annotations:26.1.0 -> 28.0.0
+|    |    \--- com.android.support:versionedparcelable:28.0.0
+|    |         +--- com.android.support:support-annotations:28.0.0
+|    |         \--- com.android.support:collections:28.0.0 (*)
+|    +--- com.android.support:collections:28.0.0 (*)
+|    +--- com.android.support:cursoradapter:28.0.0
+|    |    \--- com.android.support:support-annotations:28.0.0
+|    +--- com.android.support:support-core-utils:28.0.0
+|    |    +--- com.android.support:support-annotations:28.0.0
+|    |    +--- com.android.support:support-compat:28.0.0 (*)
+|    |    +--- com.android.support:documentfile:28.0.0
+|    |    |    \--- com.android.support:support-annotations:28.0.0
+|    |    +--- com.android.support:loader:28.0.0
+|    |    |    +--- com.android.support:support-annotations:28.0.0
+|    |    |    +--- com.android.support:support-compat:28.0.0 (*)
+|    |    |    +--- android.arch.lifecycle:livedata:1.1.1
+|    |    |    |    +--- android.arch.core:runtime:1.1.1
+|    |    |    |    |    +--- com.android.support:support-annotations:26.1.0 -> 28.0.0
+|    |    |    |    |    \--- android.arch.core:common:1.1.1 (*)
+|    |    |    |    +--- android.arch.lifecycle:livedata-core:1.1.1
+|    |    |    |    |    +--- android.arch.lifecycle:common:1.1.1 (*)
+|    |    |    |    |    +--- android.arch.core:common:1.1.1 (*)
+|    |    |    |    |    \--- android.arch.core:runtime:1.1.1 (*)
+|    |    |    |    \--- android.arch.core:common:1.1.1 (*)
+|    |    |    \--- android.arch.lifecycle:viewmodel:1.1.1
+|    |    |         \--- com.android.support:support-annotations:26.1.0 -> 28.0.0
+|    |    +--- com.android.support:localbroadcastmanager:28.0.0
+|    |    |    \--- com.android.support:support-annotations:28.0.0
+|    |    \--- com.android.support:print:28.0.0
+|    |         \--- com.android.support:support-annotations:28.0.0
+|    +--- com.android.support:support-fragment:28.0.0
+|    |    +--- com.android.support:support-compat:28.0.0 (*)
+|    |    +--- com.android.support:support-core-ui:28.0.0
+|    |    |    +--- com.android.support:support-annotations:28.0.0
+|    |    |    +--- com.android.support:support-compat:28.0.0 (*)
+|    |    |    +--- com.android.support:support-core-utils:28.0.0 (*)
+|    |    |    +--- com.android.support:customview:28.0.0
+|    |    |    |    +--- com.android.support:support-annotations:28.0.0
+|    |    |    |    \--- com.android.support:support-compat:28.0.0 (*)
+|    |    |    +--- com.android.support:viewpager:28.0.0
+|    |    |    |    +--- com.android.support:support-annotations:28.0.0
+|    |    |    |    +--- com.android.support:support-compat:28.0.0 (*)
+|    |    |    |    \--- com.android.support:customview:28.0.0 (*)
+|    |    |    +--- com.android.support:coordinatorlayout:28.0.0
+|    |    |    |    +--- com.android.support:support-annotations:28.0.0
+|    |    |    |    +--- com.android.support:support-compat:28.0.0 (*)
+|    |    |    |    \--- com.android.support:customview:28.0.0 (*)
+|    |    |    +--- com.android.support:drawerlayout:28.0.0
+|    |    |    |    +--- com.android.support:support-annotations:28.0.0
+|    |    |    |    +--- com.android.support:support-compat:28.0.0 (*)
+|    |    |    |    \--- com.android.support:customview:28.0.0 (*)
+|    |    |    +--- com.android.support:slidingpanelayout:28.0.0
+|    |    |    |    +--- com.android.support:support-annotations:28.0.0
+|    |    |    |    +--- com.android.support:support-compat:28.0.0 (*)
+|    |    |    |    \--- com.android.support:customview:28.0.0 (*)
+|    |    |    +--- com.android.support:interpolator:28.0.0
+|    |    |    |    \--- com.android.support:support-annotations:28.0.0
+|    |    |    +--- com.android.support:swiperefreshlayout:28.0.0
+|    |    |    |    +--- com.android.support:support-annotations:28.0.0
+|    |    |    |    +--- com.android.support:support-compat:28.0.0 (*)
+|    |    |    |    \--- com.android.support:interpolator:28.0.0 (*)
+|    |    |    +--- com.android.support:asynclayoutinflater:28.0.0
+|    |    |    |    +--- com.android.support:support-annotations:28.0.0
+|    |    |    |    \--- com.android.support:support-compat:28.0.0 (*)
+|    |    |    \--- com.android.support:cursoradapter:28.0.0 (*)
+|    |    +--- com.android.support:support-core-utils:28.0.0 (*)
+|    |    +--- com.android.support:support-annotations:28.0.0
+|    |    +--- com.android.support:loader:28.0.0 (*)
+|    |    \--- android.arch.lifecycle:viewmodel:1.1.1 (*)
+|    +--- com.android.support:support-vector-drawable:28.0.0
+|    |    +--- com.android.support:support-annotations:28.0.0
+|    |    \--- com.android.support:support-compat:28.0.0 (*)
+|    \--- com.android.support:animated-vector-drawable:28.0.0
+|         +--- com.android.support:support-vector-drawable:28.0.0 (*)
+|         \--- com.android.support:support-core-ui:28.0.0 (*)
++--- junit:junit:4.12
+|    \--- org.hamcrest:hamcrest-core:1.3
++--- org.robolectric:robolectric:4.3
+|    +--- org.robolectric:annotations:4.3
+|    +--- org.robolectric:junit:4.3
+|    |    +--- org.robolectric:annotations:4.3
+|    |    +--- org.robolectric:sandbox:4.3
+|    |    |    +--- org.robolectric:annotations:4.3
+|    |    |    +--- org.robolectric:utils:4.3
+|    |    |    |    +--- org.robolectric:annotations:4.3
+|    |    |    |    +--- org.robolectric:pluginapi:4.3
+|    |    |    |    |    +--- org.robolectric:annotations:4.3
+|    |    |    |    |    +--- org.apache.ant:ant:1.8.0
+|    |    |    |    |    |    \--- org.apache.ant:ant-launcher:1.8.0
+|    |    |    |    |    \--- org.apache.maven:maven-ant-tasks:2.1.3
+|    |    |    |    |         +--- org.apache.ant:ant:1.8.0 (*)
+|    |    |    |    |         +--- classworlds:classworlds:1.1-alpha-2
+|    |    |    |    |         +--- org.codehaus.plexus:plexus-container-default:1.0-alpha-9-stable-1
+|    |    |    |    |         |    +--- org.codehaus.plexus:plexus-utils:1.0.4 -> 1.5.15
+|    |    |    |    |         |    \--- classworlds:classworlds:1.1-alpha-2
+|    |    |    |    |         +--- org.codehaus.plexus:plexus-utils:1.5.15
+|    |    |    |    |         +--- org.codehaus.plexus:plexus-interpolation:1.11
+|    |    |    |    |         +--- org.apache.maven:maven-artifact:2.2.1
+|    |    |    |    |         |    \--- org.codehaus.plexus:plexus-utils:1.5.15
+|    |    |    |    |         +--- org.apache.maven:maven-artifact-manager:2.2.1
+|    |    |    |    |         |    +--- org.apache.maven:maven-repository-metadata:2.2.1
+|    |    |    |    |         |    |    \--- org.codehaus.plexus:plexus-utils:1.5.15
+|    |    |    |    |         |    +--- org.codehaus.plexus:plexus-utils:1.5.15
+|    |    |    |    |         |    +--- org.apache.maven:maven-artifact:2.2.1 (*)
+|    |    |    |    |         |    +--- org.codehaus.plexus:plexus-container-default:1.0-alpha-9-stable-1 (*)
+|    |    |    |    |         |    +--- org.apache.maven.wagon:wagon-provider-api:1.0-beta-6
+|    |    |    |    |         |    |    \--- org.codehaus.plexus:plexus-utils:1.4.2 -> 1.5.15
+|    |    |    |    |         |    \--- backport-util-concurrent:backport-util-concurrent:3.1
+|    |    |    |    |         +--- org.apache.maven:maven-model:2.2.1
+|    |    |    |    |         |    \--- org.codehaus.plexus:plexus-utils:1.5.15
+|    |    |    |    |         +--- org.apache.maven:maven-project:2.2.1
+|    |    |    |    |         |    +--- org.apache.maven:maven-settings:2.2.1
+|    |    |    |    |         |    |    +--- org.apache.maven:maven-model:2.2.1 (*)
+|    |    |    |    |         |    |    +--- org.codehaus.plexus:plexus-interpolation:1.11
+|    |    |    |    |         |    |    +--- org.codehaus.plexus:plexus-utils:1.5.15
+|    |    |    |    |         |    |    \--- org.codehaus.plexus:plexus-container-default:1.0-alpha-9-stable-1 (*)
+|    |    |    |    |         |    +--- org.apache.maven:maven-profile:2.2.1
+|    |    |    |    |         |    |    +--- org.apache.maven:maven-model:2.2.1 (*)
+|    |    |    |    |         |    |    +--- org.codehaus.plexus:plexus-utils:1.5.15
+|    |    |    |    |         |    |    +--- org.codehaus.plexus:plexus-interpolation:1.11
+|    |    |    |    |         |    |    \--- org.codehaus.plexus:plexus-container-default:1.0-alpha-9-stable-1 (*)
+|    |    |    |    |         |    +--- org.apache.maven:maven-model:2.2.1 (*)
+|    |    |    |    |         |    +--- org.apache.maven:maven-artifact-manager:2.2.1 (*)
+|    |    |    |    |         |    +--- org.apache.maven:maven-plugin-registry:2.2.1
+|    |    |    |    |         |    |    +--- org.codehaus.plexus:plexus-utils:1.5.15
+|    |    |    |    |         |    |    \--- org.codehaus.plexus:plexus-container-default:1.0-alpha-9-stable-1 (*)
+|    |    |    |    |         |    +--- org.codehaus.plexus:plexus-interpolation:1.11
+|    |    |    |    |         |    +--- org.codehaus.plexus:plexus-utils:1.5.15
+|    |    |    |    |         |    +--- org.apache.maven:maven-artifact:2.2.1 (*)
+|    |    |    |    |         |    \--- org.codehaus.plexus:plexus-container-default:1.0-alpha-9-stable-1 (*)
+|    |    |    |    |         +--- org.apache.maven:maven-error-diagnostics:2.2.1
+|    |    |    |    |         |    \--- org.codehaus.plexus:plexus-container-default:1.0-alpha-9-stable-1 (*)
+|    |    |    |    |         +--- org.apache.maven:maven-settings:2.2.1 (*)
+|    |    |    |    |         +--- org.apache.maven.wagon:wagon-file:1.0-beta-6
+|    |    |    |    |         |    \--- org.apache.maven.wagon:wagon-provider-api:1.0-beta-6 (*)
+|    |    |    |    |         +--- org.apache.maven.wagon:wagon-http-lightweight:1.0-beta-6
+|    |    |    |    |         |    +--- org.apache.maven.wagon:wagon-http-shared:1.0-beta-6
+|    |    |    |    |         |    |    +--- nekohtml:xercesMinimal:1.9.6.2
+|    |    |    |    |         |    |    +--- nekohtml:nekohtml:1.9.6.2
+|    |    |    |    |         |    |    \--- org.apache.maven.wagon:wagon-provider-api:1.0-beta-6 (*)
+|    |    |    |    |         |    \--- org.apache.maven.wagon:wagon-provider-api:1.0-beta-6 (*)
+|    |    |    |    |         \--- org.apache.maven.wagon:wagon-provider-api:1.0-beta-6 (*)
+|    |    |    |    +--- org.robolectric:utils-reflector:4.3
+|    |    |    |    |    +--- org.ow2.asm:asm:7.0
+|    |    |    |    |    +--- org.ow2.asm:asm-commons:7.0
+|    |    |    |    |    |    +--- org.ow2.asm:asm:7.0
+|    |    |    |    |    |    +--- org.ow2.asm:asm-tree:7.0
+|    |    |    |    |    |    |    \--- org.ow2.asm:asm:7.0
+|    |    |    |    |    |    \--- org.ow2.asm:asm-analysis:7.0
+|    |    |    |    |    |         \--- org.ow2.asm:asm-tree:7.0 (*)
+|    |    |    |    |    \--- org.ow2.asm:asm-util:7.0
+|    |    |    |    |         +--- org.ow2.asm:asm:7.0
+|    |    |    |    |         +--- org.ow2.asm:asm-tree:7.0 (*)
+|    |    |    |    |         \--- org.ow2.asm:asm-analysis:7.0 (*)
+|    |    |    |    +--- com.google.auto.service:auto-service:1.0-rc4
+|    |    |    |    |    +--- com.google.auto:auto-common:0.8
+|    |    |    |    |    |    \--- com.google.guava:guava:19.0 -> 27.0.1-jre
+|    |    |    |    |    |         +--- com.google.guava:failureaccess:1.0.1
+|    |    |    |    |    |         +--- com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava
+|    |    |    |    |    |         +--- com.google.code.findbugs:jsr305:3.0.2
+|    |    |    |    |    |         +--- org.checkerframework:checker-qual:2.5.2
+|    |    |    |    |    |         +--- com.google.errorprone:error_prone_annotations:2.2.0
+|    |    |    |    |    |         +--- com.google.j2objc:j2objc-annotations:1.1
+|    |    |    |    |    |         \--- org.codehaus.mojo:animal-sniffer-annotations:1.17
+|    |    |    |    |    \--- com.google.guava:guava:23.5-jre -> 27.0.1-jre (*)
+|    |    |    |    +--- javax.inject:javax.inject:1
+|    |    |    |    \--- javax.annotation:javax.annotation-api:1.3.2
+|    |    |    +--- org.robolectric:shadowapi:4.3
+|    |    |    |    \--- org.robolectric:annotations:4.3
+|    |    |    +--- org.robolectric:utils-reflector:4.3 (*)
+|    |    |    +--- javax.annotation:javax.annotation-api:1.3.2
+|    |    |    +--- javax.inject:javax.inject:1
+|    |    |    +--- org.ow2.asm:asm:7.0
+|    |    |    +--- org.ow2.asm:asm-commons:7.0 (*)
+|    |    |    \--- com.google.guava:guava:27.0.1-jre (*)
+|    |    +--- org.robolectric:pluginapi:4.3 (*)
+|    |    +--- org.robolectric:shadowapi:4.3 (*)
+|    |    \--- org.robolectric:utils-reflector:4.3 (*)
+|    +--- org.robolectric:pluginapi:4.3 (*)
+|    +--- org.robolectric:resources:4.3
+|    |    +--- org.robolectric:utils:4.3 (*)
+|    |    +--- org.robolectric:annotations:4.3
+|    |    +--- org.robolectric:pluginapi:4.3 (*)
+|    |    \--- com.google.guava:guava:27.0.1-jre (*)
+|    +--- org.robolectric:sandbox:4.3 (*)
+|    +--- org.robolectric:utils:4.3 (*)
+|    +--- org.robolectric:utils-reflector:4.3 (*)
+|    +--- org.robolectric:plugins-maven-dependency-resolver:4.3
+|    |    +--- org.robolectric:pluginapi:4.3 (*)
+|    |    +--- org.robolectric:utils:4.3 (*)
+|    |    +--- org.apache.ant:ant:1.8.0 (*)
+|    |    \--- org.apache.maven:maven-ant-tasks:2.1.3 (*)
+|    +--- javax.inject:javax.inject:1
+|    +--- javax.annotation:javax.annotation-api:1.3.2
+|    +--- org.robolectric:shadows-framework:4.3
+|    |    +--- org.robolectric:annotations:4.3
+|    |    +--- org.robolectric:resources:4.3 (*)
+|    |    +--- org.robolectric:pluginapi:4.3 (*)
+|    |    +--- org.robolectric:shadowapi:4.3 (*)
+|    |    +--- org.robolectric:utils:4.3 (*)
+|    |    +--- org.robolectric:utils-reflector:4.3 (*)
+|    |    +--- androidx.test:monitor:1.2.0
+|    |    |    \--- androidx.annotation:annotation:1.0.0
+|    |    +--- com.almworks.sqlite4java:sqlite4java:0.282
+|    |    +--- com.ibm.icu:icu4j:53.1
+|    |    +--- com.google.android.apps.common.testing.accessibility.framework:accessibility-test-framework:2.1
+|    |    |    +--- org.hamcrest:hamcrest-core:1.3
+|    |    |    +--- org.hamcrest:hamcrest-library:1.3
+|    |    |    |    \--- org.hamcrest:hamcrest-core:1.3
+|    |    |    \--- com.google.protobuf:protobuf-java:2.6.1
+|    |    \--- com.android.support:support-annotations:28.0.0
+|    +--- org.bouncycastle:bcprov-jdk15on:1.52
+|    \--- androidx.test:monitor:1.2.0 (*)
+\--- org.mockito:mockito-core:1.9.5
+     +--- org.hamcrest:hamcrest-core:1.1 -> 1.3
+     \--- org.objenesis:objenesis:1.0
+
+debugUnitTestRuntimeClasspath - Resolved configuration for runtime for variant: debugUnitTest
++--- com.android.support:appcompat-v7:28.0.0
+|    +--- com.android.support:support-annotations:28.0.0
+|    +--- com.android.support:support-compat:28.0.0
+|    |    +--- com.android.support:support-annotations:28.0.0
+|    |    +--- com.android.support:collections:28.0.0
+|    |    |    \--- com.android.support:support-annotations:28.0.0
+|    |    +--- android.arch.lifecycle:runtime:1.1.1
+|    |    |    +--- android.arch.lifecycle:common:1.1.1
+|    |    |    |    \--- com.android.support:support-annotations:26.1.0 -> 28.0.0
+|    |    |    +--- android.arch.core:common:1.1.1
+|    |    |    |    \--- com.android.support:support-annotations:26.1.0 -> 28.0.0
+|    |    |    \--- com.android.support:support-annotations:26.1.0 -> 28.0.0
+|    |    \--- com.android.support:versionedparcelable:28.0.0
+|    |         +--- com.android.support:support-annotations:28.0.0
+|    |         \--- com.android.support:collections:28.0.0 (*)
+|    +--- com.android.support:collections:28.0.0 (*)
+|    +--- com.android.support:cursoradapter:28.0.0
+|    |    \--- com.android.support:support-annotations:28.0.0
+|    +--- com.android.support:support-core-utils:28.0.0
+|    |    +--- com.android.support:support-annotations:28.0.0
+|    |    +--- com.android.support:support-compat:28.0.0 (*)
+|    |    +--- com.android.support:documentfile:28.0.0
+|    |    |    \--- com.android.support:support-annotations:28.0.0
+|    |    +--- com.android.support:loader:28.0.0
+|    |    |    +--- com.android.support:support-annotations:28.0.0
+|    |    |    +--- com.android.support:support-compat:28.0.0 (*)
+|    |    |    +--- android.arch.lifecycle:livedata:1.1.1
+|    |    |    |    +--- android.arch.core:runtime:1.1.1
+|    |    |    |    |    +--- com.android.support:support-annotations:26.1.0 -> 28.0.0
+|    |    |    |    |    \--- android.arch.core:common:1.1.1 (*)
+|    |    |    |    +--- android.arch.lifecycle:livedata-core:1.1.1
+|    |    |    |    |    +--- android.arch.lifecycle:common:1.1.1 (*)
+|    |    |    |    |    +--- android.arch.core:common:1.1.1 (*)
+|    |    |    |    |    \--- android.arch.core:runtime:1.1.1 (*)
+|    |    |    |    \--- android.arch.core:common:1.1.1 (*)
+|    |    |    \--- android.arch.lifecycle:viewmodel:1.1.1
+|    |    |         \--- com.android.support:support-annotations:26.1.0 -> 28.0.0
+|    |    +--- com.android.support:localbroadcastmanager:28.0.0
+|    |    |    \--- com.android.support:support-annotations:28.0.0
+|    |    \--- com.android.support:print:28.0.0
+|    |         \--- com.android.support:support-annotations:28.0.0
+|    +--- com.android.support:support-fragment:28.0.0
+|    |    +--- com.android.support:support-compat:28.0.0 (*)
+|    |    +--- com.android.support:support-core-ui:28.0.0
+|    |    |    +--- com.android.support:support-annotations:28.0.0
+|    |    |    +--- com.android.support:support-compat:28.0.0 (*)
+|    |    |    +--- com.android.support:support-core-utils:28.0.0 (*)
+|    |    |    +--- com.android.support:customview:28.0.0
+|    |    |    |    +--- com.android.support:support-annotations:28.0.0
+|    |    |    |    \--- com.android.support:support-compat:28.0.0 (*)
+|    |    |    +--- com.android.support:viewpager:28.0.0
+|    |    |    |    +--- com.android.support:support-annotations:28.0.0
+|    |    |    |    +--- com.android.support:support-compat:28.0.0 (*)
+|    |    |    |    \--- com.android.support:customview:28.0.0 (*)
+|    |    |    +--- com.android.support:coordinatorlayout:28.0.0
+|    |    |    |    +--- com.android.support:support-annotations:28.0.0
+|    |    |    |    +--- com.android.support:support-compat:28.0.0 (*)
+|    |    |    |    \--- com.android.support:customview:28.0.0 (*)
+|    |    |    +--- com.android.support:drawerlayout:28.0.0
+|    |    |    |    +--- com.android.support:support-annotations:28.0.0
+|    |    |    |    +--- com.android.support:support-compat:28.0.0 (*)
+|    |    |    |    \--- com.android.support:customview:28.0.0 (*)
+|    |    |    +--- com.android.support:slidingpanelayout:28.0.0
+|    |    |    |    +--- com.android.support:support-annotations:28.0.0
+|    |    |    |    +--- com.android.support:support-compat:28.0.0 (*)
+|    |    |    |    \--- com.android.support:customview:28.0.0 (*)
+|    |    |    +--- com.android.support:interpolator:28.0.0
+|    |    |    |    \--- com.android.support:support-annotations:28.0.0
+|    |    |    +--- com.android.support:swiperefreshlayout:28.0.0
+|    |    |    |    +--- com.android.support:support-annotations:28.0.0
+|    |    |    |    +--- com.android.support:support-compat:28.0.0 (*)
+|    |    |    |    \--- com.android.support:interpolator:28.0.0 (*)
+|    |    |    +--- com.android.support:asynclayoutinflater:28.0.0
+|    |    |    |    +--- com.android.support:support-annotations:28.0.0
+|    |    |    |    \--- com.android.support:support-compat:28.0.0 (*)
+|    |    |    \--- com.android.support:cursoradapter:28.0.0 (*)
+|    |    +--- com.android.support:support-core-utils:28.0.0 (*)
+|    |    +--- com.android.support:support-annotations:28.0.0
+|    |    +--- com.android.support:loader:28.0.0 (*)
+|    |    \--- android.arch.lifecycle:viewmodel:1.1.1 (*)
+|    +--- com.android.support:support-vector-drawable:28.0.0
+|    |    +--- com.android.support:support-annotations:28.0.0
+|    |    \--- com.android.support:support-compat:28.0.0 (*)
+|    \--- com.android.support:animated-vector-drawable:28.0.0
+|         +--- com.android.support:support-vector-drawable:28.0.0 (*)
+|         \--- com.android.support:support-core-ui:28.0.0 (*)
++--- junit:junit:4.12
+|    \--- org.hamcrest:hamcrest-core:1.3
++--- org.robolectric:robolectric:4.3
+|    +--- org.robolectric:annotations:4.3
+|    +--- org.robolectric:junit:4.3
+|    |    +--- org.robolectric:annotations:4.3
+|    |    +--- org.robolectric:sandbox:4.3
+|    |    |    +--- org.robolectric:annotations:4.3
+|    |    |    +--- org.robolectric:utils:4.3
+|    |    |    |    +--- org.robolectric:annotations:4.3
+|    |    |    |    +--- org.robolectric:pluginapi:4.3
+|    |    |    |    |    +--- org.robolectric:annotations:4.3
+|    |    |    |    |    +--- org.apache.ant:ant:1.8.0
+|    |    |    |    |    |    \--- org.apache.ant:ant-launcher:1.8.0
+|    |    |    |    |    \--- org.apache.maven:maven-ant-tasks:2.1.3
+|    |    |    |    |         +--- org.apache.ant:ant:1.8.0 (*)
+|    |    |    |    |         +--- classworlds:classworlds:1.1-alpha-2
+|    |    |    |    |         +--- org.codehaus.plexus:plexus-container-default:1.0-alpha-9-stable-1
+|    |    |    |    |         |    +--- org.codehaus.plexus:plexus-utils:1.0.4 -> 1.5.15
+|    |    |    |    |         |    \--- classworlds:classworlds:1.1-alpha-2
+|    |    |    |    |         +--- org.codehaus.plexus:plexus-utils:1.5.15
+|    |    |    |    |         +--- org.codehaus.plexus:plexus-interpolation:1.11
+|    |    |    |    |         +--- org.apache.maven:maven-artifact:2.2.1
+|    |    |    |    |         |    \--- org.codehaus.plexus:plexus-utils:1.5.15
+|    |    |    |    |         +--- org.apache.maven:maven-artifact-manager:2.2.1
+|    |    |    |    |         |    +--- org.apache.maven:maven-repository-metadata:2.2.1
+|    |    |    |    |         |    |    \--- org.codehaus.plexus:plexus-utils:1.5.15
+|    |    |    |    |         |    +--- org.codehaus.plexus:plexus-utils:1.5.15
+|    |    |    |    |         |    +--- org.apache.maven:maven-artifact:2.2.1 (*)
+|    |    |    |    |         |    +--- org.codehaus.plexus:plexus-container-default:1.0-alpha-9-stable-1 (*)
+|    |    |    |    |         |    +--- org.apache.maven.wagon:wagon-provider-api:1.0-beta-6
+|    |    |    |    |         |    |    \--- org.codehaus.plexus:plexus-utils:1.4.2 -> 1.5.15
+|    |    |    |    |         |    \--- backport-util-concurrent:backport-util-concurrent:3.1
+|    |    |    |    |         +--- org.apache.maven:maven-model:2.2.1
+|    |    |    |    |         |    \--- org.codehaus.plexus:plexus-utils:1.5.15
+|    |    |    |    |         +--- org.apache.maven:maven-project:2.2.1
+|    |    |    |    |         |    +--- org.apache.maven:maven-settings:2.2.1
+|    |    |    |    |         |    |    +--- org.apache.maven:maven-model:2.2.1 (*)
+|    |    |    |    |         |    |    +--- org.codehaus.plexus:plexus-interpolation:1.11
+|    |    |    |    |         |    |    +--- org.codehaus.plexus:plexus-utils:1.5.15
+|    |    |    |    |         |    |    \--- org.codehaus.plexus:plexus-container-default:1.0-alpha-9-stable-1 (*)
+|    |    |    |    |         |    +--- org.apache.maven:maven-profile:2.2.1
+|    |    |    |    |         |    |    +--- org.apache.maven:maven-model:2.2.1 (*)
+|    |    |    |    |         |    |    +--- org.codehaus.plexus:plexus-utils:1.5.15
+|    |    |    |    |         |    |    +--- org.codehaus.plexus:plexus-interpolation:1.11
+|    |    |    |    |         |    |    \--- org.codehaus.plexus:plexus-container-default:1.0-alpha-9-stable-1 (*)
+|    |    |    |    |         |    +--- org.apache.maven:maven-model:2.2.1 (*)
+|    |    |    |    |         |    +--- org.apache.maven:maven-artifact-manager:2.2.1 (*)
+|    |    |    |    |         |    +--- org.apache.maven:maven-plugin-registry:2.2.1
+|    |    |    |    |         |    |    +--- org.codehaus.plexus:plexus-utils:1.5.15
+|    |    |    |    |         |    |    \--- org.codehaus.plexus:plexus-container-default:1.0-alpha-9-stable-1 (*)
+|    |    |    |    |         |    +--- org.codehaus.plexus:plexus-interpolation:1.11
+|    |    |    |    |         |    +--- org.codehaus.plexus:plexus-utils:1.5.15
+|    |    |    |    |         |    +--- org.apache.maven:maven-artifact:2.2.1 (*)
+|    |    |    |    |         |    \--- org.codehaus.plexus:plexus-container-default:1.0-alpha-9-stable-1 (*)
+|    |    |    |    |         +--- org.apache.maven:maven-error-diagnostics:2.2.1
+|    |    |    |    |         |    \--- org.codehaus.plexus:plexus-container-default:1.0-alpha-9-stable-1 (*)
+|    |    |    |    |         +--- org.apache.maven:maven-settings:2.2.1 (*)
+|    |    |    |    |         +--- org.apache.maven.wagon:wagon-file:1.0-beta-6
+|    |    |    |    |         |    \--- org.apache.maven.wagon:wagon-provider-api:1.0-beta-6 (*)
+|    |    |    |    |         +--- org.apache.maven.wagon:wagon-http-lightweight:1.0-beta-6
+|    |    |    |    |         |    +--- org.apache.maven.wagon:wagon-http-shared:1.0-beta-6
+|    |    |    |    |         |    |    +--- nekohtml:xercesMinimal:1.9.6.2
+|    |    |    |    |         |    |    +--- nekohtml:nekohtml:1.9.6.2
+|    |    |    |    |         |    |    \--- org.apache.maven.wagon:wagon-provider-api:1.0-beta-6 (*)
+|    |    |    |    |         |    \--- org.apache.maven.wagon:wagon-provider-api:1.0-beta-6 (*)
+|    |    |    |    |         \--- org.apache.maven.wagon:wagon-provider-api:1.0-beta-6 (*)
+|    |    |    |    +--- org.robolectric:utils-reflector:4.3
+|    |    |    |    |    +--- org.ow2.asm:asm:7.0
+|    |    |    |    |    +--- org.ow2.asm:asm-commons:7.0
+|    |    |    |    |    |    +--- org.ow2.asm:asm:7.0
+|    |    |    |    |    |    +--- org.ow2.asm:asm-tree:7.0
+|    |    |    |    |    |    |    \--- org.ow2.asm:asm:7.0
+|    |    |    |    |    |    \--- org.ow2.asm:asm-analysis:7.0
+|    |    |    |    |    |         \--- org.ow2.asm:asm-tree:7.0 (*)
+|    |    |    |    |    \--- org.ow2.asm:asm-util:7.0
+|    |    |    |    |         +--- org.ow2.asm:asm:7.0
+|    |    |    |    |         +--- org.ow2.asm:asm-tree:7.0 (*)
+|    |    |    |    |         \--- org.ow2.asm:asm-analysis:7.0 (*)
+|    |    |    |    +--- com.google.auto.service:auto-service:1.0-rc4
+|    |    |    |    |    +--- com.google.auto:auto-common:0.8
+|    |    |    |    |    |    \--- com.google.guava:guava:19.0 -> 27.0.1-jre
+|    |    |    |    |    |         +--- com.google.guava:failureaccess:1.0.1
+|    |    |    |    |    |         +--- com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava
+|    |    |    |    |    |         +--- com.google.code.findbugs:jsr305:3.0.2
+|    |    |    |    |    |         +--- org.checkerframework:checker-qual:2.5.2
+|    |    |    |    |    |         +--- com.google.errorprone:error_prone_annotations:2.2.0
+|    |    |    |    |    |         +--- com.google.j2objc:j2objc-annotations:1.1
+|    |    |    |    |    |         \--- org.codehaus.mojo:animal-sniffer-annotations:1.17
+|    |    |    |    |    \--- com.google.guava:guava:23.5-jre -> 27.0.1-jre (*)
+|    |    |    |    +--- javax.inject:javax.inject:1
+|    |    |    |    \--- javax.annotation:javax.annotation-api:1.3.2
+|    |    |    +--- org.robolectric:shadowapi:4.3
+|    |    |    |    \--- org.robolectric:annotations:4.3
+|    |    |    +--- org.robolectric:utils-reflector:4.3 (*)
+|    |    |    +--- javax.annotation:javax.annotation-api:1.3.2
+|    |    |    +--- javax.inject:javax.inject:1
+|    |    |    +--- org.ow2.asm:asm:7.0
+|    |    |    +--- org.ow2.asm:asm-commons:7.0 (*)
+|    |    |    \--- com.google.guava:guava:27.0.1-jre (*)
+|    |    +--- org.robolectric:pluginapi:4.3 (*)
+|    |    +--- org.robolectric:shadowapi:4.3 (*)
+|    |    \--- org.robolectric:utils-reflector:4.3 (*)
+|    +--- org.robolectric:pluginapi:4.3 (*)
+|    +--- org.robolectric:resources:4.3
+|    |    +--- org.robolectric:utils:4.3 (*)
+|    |    +--- org.robolectric:annotations:4.3
+|    |    +--- org.robolectric:pluginapi:4.3 (*)
+|    |    \--- com.google.guava:guava:27.0.1-jre (*)
+|    +--- org.robolectric:sandbox:4.3 (*)
+|    +--- org.robolectric:utils:4.3 (*)
+|    +--- org.robolectric:utils-reflector:4.3 (*)
+|    +--- org.robolectric:plugins-maven-dependency-resolver:4.3
+|    |    +--- org.robolectric:pluginapi:4.3 (*)
+|    |    +--- org.robolectric:utils:4.3 (*)
+|    |    +--- org.apache.ant:ant:1.8.0 (*)
+|    |    \--- org.apache.maven:maven-ant-tasks:2.1.3 (*)
+|    +--- javax.inject:javax.inject:1
+|    +--- javax.annotation:javax.annotation-api:1.3.2
+|    +--- org.robolectric:shadows-framework:4.3
+|    |    +--- org.robolectric:annotations:4.3
+|    |    +--- org.robolectric:resources:4.3 (*)
+|    |    +--- org.robolectric:pluginapi:4.3 (*)
+|    |    +--- org.robolectric:shadowapi:4.3 (*)
+|    |    +--- org.robolectric:utils:4.3 (*)
+|    |    +--- org.robolectric:utils-reflector:4.3 (*)
+|    |    +--- androidx.test:monitor:1.2.0
+|    |    |    \--- androidx.annotation:annotation:1.0.0
+|    |    +--- com.almworks.sqlite4java:sqlite4java:0.282
+|    |    +--- com.ibm.icu:icu4j:53.1
+|    |    +--- com.google.android.apps.common.testing.accessibility.framework:accessibility-test-framework:2.1
+|    |    |    +--- org.hamcrest:hamcrest-core:1.3
+|    |    |    +--- org.hamcrest:hamcrest-library:1.3
+|    |    |    |    \--- org.hamcrest:hamcrest-core:1.3
+|    |    |    \--- com.google.protobuf:protobuf-java:2.6.1
+|    |    \--- com.android.support:support-annotations:28.0.0
+|    +--- org.bouncycastle:bcprov-jdk15on:1.52
+|    \--- androidx.test:monitor:1.2.0 (*)
+\--- org.mockito:mockito-core:1.9.5
+     +--- org.hamcrest:hamcrest-core:1.1 -> 1.3
+     \--- org.objenesis:objenesis:1.0
+
+debugWearApp - Link to a wear app to embed for object 'debug'. (n)
+No dependencies
+
+default - Configuration for default artifacts.
+No dependencies
+
+implementation - Implementation only dependencies for 'main' sources. (n)
++--- unspecified (n)
+\--- com.android.support:appcompat-v7:28.0.0 (n)
+
+lintChecks - Configuration to apply external lint check jar
+No dependencies
+
+lintClassPath - The lint embedded classpath
+\--- com.android.tools.lint:lint-gradle:26.4.1
+     +--- com.android.tools:sdk-common:26.4.1
+     |    +--- com.android.tools:sdklib:26.4.1
+     |    |    +--- com.android.tools.layoutlib:layoutlib-api:26.4.1
+     |    |    |    +--- com.android.tools:common:26.4.1
+     |    |    |    |    +--- com.android.tools:annotations:26.4.1
+     |    |    |    |    +--- com.google.guava:guava:26.0-jre
+     |    |    |    |    |    +--- com.google.code.findbugs:jsr305:3.0.2
+     |    |    |    |    |    +--- org.checkerframework:checker-qual:2.5.2
+     |    |    |    |    |    +--- com.google.errorprone:error_prone_annotations:2.1.3
+     |    |    |    |    |    +--- com.google.j2objc:j2objc-annotations:1.1
+     |    |    |    |    |    \--- org.codehaus.mojo:animal-sniffer-annotations:1.14
+     |    |    |    |    \--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.3.31
+     |    |    |    |         +--- org.jetbrains.kotlin:kotlin-stdlib:1.3.31
+     |    |    |    |         |    +--- org.jetbrains.kotlin:kotlin-stdlib-common:1.3.31
+     |    |    |    |         |    \--- org.jetbrains:annotations:13.0
+     |    |    |    |         \--- org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.31
+     |    |    |    |              \--- org.jetbrains.kotlin:kotlin-stdlib:1.3.31 (*)
+     |    |    |    +--- net.sf.kxml:kxml2:2.3.0
+     |    |    |    +--- com.android.tools:annotations:26.4.1
+     |    |    |    \--- org.jetbrains:annotations:13.0
+     |    |    +--- com.android.tools:dvlib:26.4.1
+     |    |    |    \--- com.android.tools:common:26.4.1 (*)
+     |    |    +--- com.android.tools:repository:26.4.1
+     |    |    |    +--- com.android.tools:common:26.4.1 (*)
+     |    |    |    +--- com.sun.activation:javax.activation:1.2.0
+     |    |    |    +--- org.apache.commons:commons-compress:1.12
+     |    |    |    +--- org.glassfish.jaxb:jaxb-runtime:2.2.11
+     |    |    |    |    +--- org.glassfish.jaxb:jaxb-core:2.2.11
+     |    |    |    |    |    +--- javax.xml.bind:jaxb-api:2.2.12-b140109.1041
+     |    |    |    |    |    +--- org.glassfish.jaxb:txw2:2.2.11
+     |    |    |    |    |    \--- com.sun.istack:istack-commons-runtime:2.21
+     |    |    |    |    +--- org.jvnet.staxex:stax-ex:1.7.7
+     |    |    |    |    \--- com.sun.xml.fastinfoset:FastInfoset:1.2.13
+     |    |    |    +--- com.google.jimfs:jimfs:1.1
+     |    |    |    |    \--- com.google.guava:guava:18.0 -> 26.0-jre (*)
+     |    |    |    \--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.3.31 (*)
+     |    |    +--- com.google.code.gson:gson:2.8.0
+     |    |    +--- org.apache.commons:commons-compress:1.12
+     |    |    +--- org.apache.httpcomponents:httpmime:4.5.6
+     |    |    |    \--- org.apache.httpcomponents:httpclient:4.5.6
+     |    |    |         +--- org.apache.httpcomponents:httpcore:4.4.10
+     |    |    |         +--- commons-logging:commons-logging:1.2
+     |    |    |         \--- commons-codec:commons-codec:1.10
+     |    |    \--- org.apache.httpcomponents:httpcore:4.4.10
+     |    +--- com.android.tools.build:builder-test-api:3.4.1
+     |    |    \--- com.android.tools.ddms:ddmlib:26.4.1
+     |    |         +--- com.android.tools:common:26.4.1 (*)
+     |    |         \--- net.sf.kxml:kxml2:2.3.0
+     |    +--- com.android.tools.build:builder-model:3.4.1
+     |    |    \--- com.android.tools:annotations:26.4.1
+     |    +--- com.android.tools.ddms:ddmlib:26.4.1 (*)
+     |    +--- org.bouncycastle:bcpkix-jdk15on:1.56
+     |    |    \--- org.bouncycastle:bcprov-jdk15on:1.56
+     |    +--- org.bouncycastle:bcprov-jdk15on:1.56
+     |    +--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.3.31 (*)
+     |    +--- org.jetbrains.kotlin:kotlin-reflect:1.3.31
+     |    |    \--- org.jetbrains.kotlin:kotlin-stdlib:1.3.31 (*)
+     |    +--- com.google.protobuf:protobuf-java:3.4.0
+     |    \--- javax.inject:javax.inject:1
+     +--- com.android.tools.build:builder:3.4.1
+     |    +--- com.android.tools.build:builder-model:3.4.1 (*)
+     |    +--- com.android.tools.build:builder-test-api:3.4.1 (*)
+     |    +--- com.android.tools:sdklib:26.4.1 (*)
+     |    +--- com.android.tools:sdk-common:26.4.1 (*)
+     |    +--- com.android.tools:common:26.4.1 (*)
+     |    +--- com.android.tools.build:manifest-merger:26.4.1
+     |    |    +--- com.android.tools:common:26.4.1 (*)
+     |    |    +--- com.android.tools:sdklib:26.4.1 (*)
+     |    |    +--- com.android.tools:sdk-common:26.4.1 (*)
+     |    |    +--- com.google.code.gson:gson:2.8.0
+     |    |    +--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.3.31 (*)
+     |    |    \--- net.sf.kxml:kxml2:2.3.0
+     |    +--- com.android.tools.ddms:ddmlib:26.4.1 (*)
+     |    +--- com.android.tools.analytics-library:protos:26.4.1
+     |    |    \--- com.google.protobuf:protobuf-java:3.4.0
+     |    +--- com.android.tools.analytics-library:shared:26.4.1
+     |    |    +--- com.android.tools.analytics-library:protos:26.4.1 (*)
+     |    |    +--- com.android.tools:annotations:26.4.1
+     |    |    +--- com.android.tools:common:26.4.1 (*)
+     |    |    +--- com.google.guava:guava:26.0-jre (*)
+     |    |    +--- com.google.code.gson:gson:2.8.0
+     |    |    \--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.3.31 (*)
+     |    +--- com.android.tools.analytics-library:tracker:26.4.1
+     |    |    +--- com.android.tools:annotations:26.4.1
+     |    |    +--- com.android.tools:common:26.4.1 (*)
+     |    |    +--- com.android.tools.analytics-library:protos:26.4.1 (*)
+     |    |    +--- com.android.tools.analytics-library:shared:26.4.1 (*)
+     |    |    +--- com.google.protobuf:protobuf-java:3.4.0
+     |    |    +--- com.google.guava:guava:26.0-jre (*)
+     |    |    \--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.3.31 (*)
+     |    +--- com.android.tools.build:apksig:3.4.1
+     |    +--- com.android.tools.build:apkzlib:3.4.1
+     |    |    +--- com.google.code.findbugs:jsr305:1.3.9 -> 3.0.2
+     |    |    +--- com.google.guava:guava:23.0 -> 26.0-jre (*)
+     |    |    +--- org.bouncycastle:bcpkix-jdk15on:1.56 (*)
+     |    |    +--- org.bouncycastle:bcprov-jdk15on:1.56
+     |    |    \--- com.android.tools.build:apksig:3.4.1
+     |    +--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.3.31 (*)
+     |    +--- com.squareup:javawriter:2.5.0
+     |    +--- org.bouncycastle:bcpkix-jdk15on:1.56 (*)
+     |    +--- org.bouncycastle:bcprov-jdk15on:1.56
+     |    +--- org.ow2.asm:asm:6.0
+     |    +--- org.ow2.asm:asm-tree:6.0
+     |    |    \--- org.ow2.asm:asm:6.0
+     |    +--- javax.inject:javax.inject:1
+     |    +--- org.ow2.asm:asm-commons:6.0
+     |    |    \--- org.ow2.asm:asm-tree:6.0 (*)
+     |    +--- org.ow2.asm:asm-util:6.0
+     |    |    \--- org.ow2.asm:asm-tree:6.0 (*)
+     |    +--- it.unimi.dsi:fastutil:7.2.0
+     |    +--- net.sf.jopt-simple:jopt-simple:4.9
+     |    \--- com.googlecode.json-simple:json-simple:1.1
+     +--- com.android.tools.build:builder-model:3.4.1 (*)
+     +--- com.android.tools.external.com-intellij:intellij-core:26.4.1
+     |    \--- org.jetbrains.trove4j:trove4j:20160824
+     +--- com.android.tools.external.com-intellij:kotlin-compiler:26.4.1
+     +--- com.android.tools.external.org-jetbrains:uast:26.4.1
+     +--- com.android.tools.build:manifest-merger:26.4.1 (*)
+     +--- com.android.tools.lint:lint:26.4.1
+     |    +--- com.android.tools.lint:lint-checks:26.4.1
+     |    |    +--- com.android.tools.lint:lint-api:26.4.1
+     |    |    |    +--- com.android.tools:sdk-common:26.4.1 (*)
+     |    |    |    +--- com.android.tools.build:builder-model:3.4.1 (*)
+     |    |    |    +--- com.google.guava:guava:26.0-jre (*)
+     |    |    |    +--- com.android.tools.external.com-intellij:intellij-core:26.4.1 (*)
+     |    |    |    +--- com.android.tools.external.com-intellij:kotlin-compiler:26.4.1
+     |    |    |    +--- com.android.tools.external.org-jetbrains:uast:26.4.1
+     |    |    |    +--- com.android.tools.build:manifest-merger:26.4.1 (*)
+     |    |    |    +--- org.ow2.asm:asm:6.0
+     |    |    |    +--- org.ow2.asm:asm-tree:6.0 (*)
+     |    |    |    +--- org.jetbrains.kotlin:kotlin-reflect:1.3.31 (*)
+     |    |    |    \--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.3.31 (*)
+     |    |    +--- com.google.guava:guava:26.0-jre (*)
+     |    |    +--- com.android.tools.external.com-intellij:intellij-core:26.4.1 (*)
+     |    |    +--- com.android.tools.external.com-intellij:kotlin-compiler:26.4.1
+     |    |    +--- com.android.tools.external.org-jetbrains:uast:26.4.1
+     |    |    \--- org.ow2.asm:asm-analysis:6.0
+     |    |         \--- org.ow2.asm:asm-tree:6.0 (*)
+     |    +--- com.google.guava:guava:26.0-jre (*)
+     |    +--- com.android.tools.external.org-jetbrains:uast:26.4.1
+     |    +--- com.android.tools.external.com-intellij:kotlin-compiler:26.4.1
+     |    +--- com.android.tools.build:manifest-merger:26.4.1 (*)
+     |    +--- com.android.tools.analytics-library:shared:26.4.1 (*)
+     |    +--- com.android.tools.analytics-library:protos:26.4.1 (*)
+     |    +--- com.android.tools.analytics-library:tracker:26.4.1 (*)
+     |    +--- org.jetbrains.kotlin:kotlin-reflect:1.3.31 (*)
+     |    \--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.3.31 (*)
+     +--- com.android.tools.lint:lint-gradle-api:26.4.1
+     |    +--- com.android.tools:sdklib:26.4.1 (*)
+     |    +--- com.android.tools.build:builder-model:3.4.1 (*)
+     |    +--- com.android.tools.build:gradle-api:3.4.1
+     |    |    +--- com.android.tools.build:builder-model:3.4.1 (*)
+     |    |    +--- com.android.tools.build:builder-test-api:3.4.1 (*)
+     |    |    +--- com.google.guava:guava:26.0-jre (*)
+     |    |    \--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.3.31 (*)
+     |    +--- org.jetbrains.kotlin:kotlin-reflect:1.3.31 (*)
+     |    +--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.3.31 (*)
+     |    \--- com.google.guava:guava:26.0-jre (*)
+     +--- org.codehaus.groovy:groovy-all:2.4.15
+     +--- org.jetbrains.kotlin:kotlin-reflect:1.3.31 (*)
+     \--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.3.31 (*)
+
+lintPublish - Configuration to publish external lint check jar
+No dependencies
+
+provided - Provided dependencies for 'main' sources (deprecated: use 'compileOnly' instead). (n)
+No dependencies
+
+publish - Publish dependencies for 'main' sources (deprecated: use 'runtimeOnly' instead). (n)
+No dependencies
+
+releaseAnnotationProcessor - Classpath for the annotation processor for 'release'. (n)
+No dependencies
+
+releaseAnnotationProcessorClasspath - Resolved configuration for annotation-processor for variant: release
+No dependencies
+
+releaseApi - API dependencies for 'release' sources. (n)
+No dependencies
+
+releaseApiElements - API elements for release (n)
+No dependencies
+
+releaseCompile - Compile dependencies for 'release' sources (deprecated: use 'releaseImplementation' instead). (n)
+No dependencies
+
+releaseCompileClasspath - Resolved configuration for compilation for variant: release
++--- com.android.support:appcompat-v7:28.0.0
+|    +--- com.android.support:support-annotations:28.0.0
+|    +--- com.android.support:support-compat:28.0.0
+|    |    +--- com.android.support:support-annotations:28.0.0
+|    |    +--- com.android.support:collections:28.0.0
+|    |    |    \--- com.android.support:support-annotations:28.0.0
+|    |    +--- android.arch.lifecycle:runtime:1.1.1
+|    |    |    +--- android.arch.lifecycle:common:1.1.1
+|    |    |    |    \--- com.android.support:support-annotations:26.1.0 -> 28.0.0
+|    |    |    +--- android.arch.core:common:1.1.1
+|    |    |    |    \--- com.android.support:support-annotations:26.1.0 -> 28.0.0
+|    |    |    \--- com.android.support:support-annotations:26.1.0 -> 28.0.0
+|    |    \--- com.android.support:versionedparcelable:28.0.0
+|    |         +--- com.android.support:support-annotations:28.0.0
+|    |         \--- com.android.support:collections:28.0.0 (*)
+|    +--- com.android.support:collections:28.0.0 (*)
+|    +--- com.android.support:cursoradapter:28.0.0
+|    |    \--- com.android.support:support-annotations:28.0.0
+|    +--- com.android.support:support-core-utils:28.0.0
+|    |    +--- com.android.support:support-annotations:28.0.0
+|    |    +--- com.android.support:support-compat:28.0.0 (*)
+|    |    +--- com.android.support:documentfile:28.0.0
+|    |    |    \--- com.android.support:support-annotations:28.0.0
+|    |    +--- com.android.support:loader:28.0.0
+|    |    |    +--- com.android.support:support-annotations:28.0.0
+|    |    |    +--- com.android.support:support-compat:28.0.0 (*)
+|    |    |    +--- android.arch.lifecycle:livedata:1.1.1
+|    |    |    |    +--- android.arch.core:runtime:1.1.1
+|    |    |    |    |    +--- com.android.support:support-annotations:26.1.0 -> 28.0.0
+|    |    |    |    |    \--- android.arch.core:common:1.1.1 (*)
+|    |    |    |    +--- android.arch.lifecycle:livedata-core:1.1.1
+|    |    |    |    |    +--- android.arch.lifecycle:common:1.1.1 (*)
+|    |    |    |    |    +--- android.arch.core:common:1.1.1 (*)
+|    |    |    |    |    \--- android.arch.core:runtime:1.1.1 (*)
+|    |    |    |    \--- android.arch.core:common:1.1.1 (*)
+|    |    |    \--- android.arch.lifecycle:viewmodel:1.1.1
+|    |    |         \--- com.android.support:support-annotations:26.1.0 -> 28.0.0
+|    |    +--- com.android.support:localbroadcastmanager:28.0.0
+|    |    |    \--- com.android.support:support-annotations:28.0.0
+|    |    \--- com.android.support:print:28.0.0
+|    |         \--- com.android.support:support-annotations:28.0.0
+|    +--- com.android.support:support-fragment:28.0.0
+|    |    +--- com.android.support:support-compat:28.0.0 (*)
+|    |    +--- com.android.support:support-core-ui:28.0.0
+|    |    |    +--- com.android.support:support-annotations:28.0.0
+|    |    |    +--- com.android.support:support-compat:28.0.0 (*)
+|    |    |    +--- com.android.support:support-core-utils:28.0.0 (*)
+|    |    |    +--- com.android.support:customview:28.0.0
+|    |    |    |    +--- com.android.support:support-annotations:28.0.0
+|    |    |    |    \--- com.android.support:support-compat:28.0.0 (*)
+|    |    |    +--- com.android.support:viewpager:28.0.0
+|    |    |    |    +--- com.android.support:support-annotations:28.0.0
+|    |    |    |    +--- com.android.support:support-compat:28.0.0 (*)
+|    |    |    |    \--- com.android.support:customview:28.0.0 (*)
+|    |    |    +--- com.android.support:coordinatorlayout:28.0.0
+|    |    |    |    +--- com.android.support:support-annotations:28.0.0
+|    |    |    |    +--- com.android.support:support-compat:28.0.0 (*)
+|    |    |    |    \--- com.android.support:customview:28.0.0 (*)
+|    |    |    +--- com.android.support:drawerlayout:28.0.0
+|    |    |    |    +--- com.android.support:support-annotations:28.0.0
+|    |    |    |    +--- com.android.support:support-compat:28.0.0 (*)
+|    |    |    |    \--- com.android.support:customview:28.0.0 (*)
+|    |    |    +--- com.android.support:slidingpanelayout:28.0.0
+|    |    |    |    +--- com.android.support:support-annotations:28.0.0
+|    |    |    |    +--- com.android.support:support-compat:28.0.0 (*)
+|    |    |    |    \--- com.android.support:customview:28.0.0 (*)
+|    |    |    +--- com.android.support:interpolator:28.0.0
+|    |    |    |    \--- com.android.support:support-annotations:28.0.0
+|    |    |    +--- com.android.support:swiperefreshlayout:28.0.0
+|    |    |    |    +--- com.android.support:support-annotations:28.0.0
+|    |    |    |    +--- com.android.support:support-compat:28.0.0 (*)
+|    |    |    |    \--- com.android.support:interpolator:28.0.0 (*)
+|    |    |    +--- com.android.support:asynclayoutinflater:28.0.0
+|    |    |    |    +--- com.android.support:support-annotations:28.0.0
+|    |    |    |    \--- com.android.support:support-compat:28.0.0 (*)
+|    |    |    \--- com.android.support:cursoradapter:28.0.0 (*)
+|    |    +--- com.android.support:support-core-utils:28.0.0 (*)
+|    |    +--- com.android.support:support-annotations:28.0.0
+|    |    +--- com.android.support:loader:28.0.0 (*)
+|    |    \--- android.arch.lifecycle:viewmodel:1.1.1 (*)
+|    +--- com.android.support:support-vector-drawable:28.0.0
+|    |    +--- com.android.support:support-annotations:28.0.0
+|    |    \--- com.android.support:support-compat:28.0.0 (*)
+|    \--- com.android.support:animated-vector-drawable:28.0.0
+|         +--- com.android.support:support-vector-drawable:28.0.0 (*)
+|         \--- com.android.support:support-core-ui:28.0.0 (*)
++--- com.android.support:appcompat-v7:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:support-annotations:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:support-compat:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:collections:{strictly 28.0.0} -> 28.0.0 (c)
++--- android.arch.lifecycle:runtime:{strictly 1.1.1} -> 1.1.1 (c)
++--- android.arch.lifecycle:common:{strictly 1.1.1} -> 1.1.1 (c)
++--- android.arch.core:common:{strictly 1.1.1} -> 1.1.1 (c)
++--- com.android.support:versionedparcelable:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:cursoradapter:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:support-core-utils:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:documentfile:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:loader:{strictly 28.0.0} -> 28.0.0 (c)
++--- android.arch.lifecycle:livedata:{strictly 1.1.1} -> 1.1.1 (c)
++--- android.arch.core:runtime:{strictly 1.1.1} -> 1.1.1 (c)
++--- android.arch.lifecycle:livedata-core:{strictly 1.1.1} -> 1.1.1 (c)
++--- android.arch.lifecycle:viewmodel:{strictly 1.1.1} -> 1.1.1 (c)
++--- com.android.support:localbroadcastmanager:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:print:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:support-fragment:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:support-core-ui:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:customview:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:viewpager:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:coordinatorlayout:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:drawerlayout:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:slidingpanelayout:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:interpolator:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:swiperefreshlayout:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:asynclayoutinflater:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:support-vector-drawable:{strictly 28.0.0} -> 28.0.0 (c)
+\--- com.android.support:animated-vector-drawable:{strictly 28.0.0} -> 28.0.0 (c)
+
+releaseCompileOnly - Compile only dependencies for 'release' sources. (n)
+No dependencies
+
+releaseImplementation - Implementation only dependencies for 'release' sources. (n)
+No dependencies
+
+releaseProvided - Provided dependencies for 'release' sources (deprecated: use 'releaseCompileOnly' instead). (n)
+No dependencies
+
+releasePublish - Publish dependencies for 'release' sources (deprecated: use 'releaseRuntimeOnly' instead). (n)
+No dependencies
+
+releaseRuntimeClasspath - Resolved configuration for runtime for variant: release
+\--- com.android.support:appcompat-v7:28.0.0
+     +--- com.android.support:support-annotations:28.0.0
+     +--- com.android.support:support-compat:28.0.0
+     |    +--- com.android.support:support-annotations:28.0.0
+     |    +--- com.android.support:collections:28.0.0
+     |    |    \--- com.android.support:support-annotations:28.0.0
+     |    +--- android.arch.lifecycle:runtime:1.1.1
+     |    |    +--- android.arch.lifecycle:common:1.1.1
+     |    |    |    \--- com.android.support:support-annotations:26.1.0 -> 28.0.0
+     |    |    +--- android.arch.core:common:1.1.1
+     |    |    |    \--- com.android.support:support-annotations:26.1.0 -> 28.0.0
+     |    |    \--- com.android.support:support-annotations:26.1.0 -> 28.0.0
+     |    \--- com.android.support:versionedparcelable:28.0.0
+     |         +--- com.android.support:support-annotations:28.0.0
+     |         \--- com.android.support:collections:28.0.0 (*)
+     +--- com.android.support:collections:28.0.0 (*)
+     +--- com.android.support:cursoradapter:28.0.0
+     |    \--- com.android.support:support-annotations:28.0.0
+     +--- com.android.support:support-core-utils:28.0.0
+     |    +--- com.android.support:support-annotations:28.0.0
+     |    +--- com.android.support:support-compat:28.0.0 (*)
+     |    +--- com.android.support:documentfile:28.0.0
+     |    |    \--- com.android.support:support-annotations:28.0.0
+     |    +--- com.android.support:loader:28.0.0
+     |    |    +--- com.android.support:support-annotations:28.0.0
+     |    |    +--- com.android.support:support-compat:28.0.0 (*)
+     |    |    +--- android.arch.lifecycle:livedata:1.1.1
+     |    |    |    +--- android.arch.core:runtime:1.1.1
+     |    |    |    |    +--- com.android.support:support-annotations:26.1.0 -> 28.0.0
+     |    |    |    |    \--- android.arch.core:common:1.1.1 (*)
+     |    |    |    +--- android.arch.lifecycle:livedata-core:1.1.1
+     |    |    |    |    +--- android.arch.lifecycle:common:1.1.1 (*)
+     |    |    |    |    +--- android.arch.core:common:1.1.1 (*)
+     |    |    |    |    \--- android.arch.core:runtime:1.1.1 (*)
+     |    |    |    \--- android.arch.core:common:1.1.1 (*)
+     |    |    \--- android.arch.lifecycle:viewmodel:1.1.1
+     |    |         \--- com.android.support:support-annotations:26.1.0 -> 28.0.0
+     |    +--- com.android.support:localbroadcastmanager:28.0.0
+     |    |    \--- com.android.support:support-annotations:28.0.0
+     |    \--- com.android.support:print:28.0.0
+     |         \--- com.android.support:support-annotations:28.0.0
+     +--- com.android.support:support-fragment:28.0.0
+     |    +--- com.android.support:support-compat:28.0.0 (*)
+     |    +--- com.android.support:support-core-ui:28.0.0
+     |    |    +--- com.android.support:support-annotations:28.0.0
+     |    |    +--- com.android.support:support-compat:28.0.0 (*)
+     |    |    +--- com.android.support:support-core-utils:28.0.0 (*)
+     |    |    +--- com.android.support:customview:28.0.0
+     |    |    |    +--- com.android.support:support-annotations:28.0.0
+     |    |    |    \--- com.android.support:support-compat:28.0.0 (*)
+     |    |    +--- com.android.support:viewpager:28.0.0
+     |    |    |    +--- com.android.support:support-annotations:28.0.0
+     |    |    |    +--- com.android.support:support-compat:28.0.0 (*)
+     |    |    |    \--- com.android.support:customview:28.0.0 (*)
+     |    |    +--- com.android.support:coordinatorlayout:28.0.0
+     |    |    |    +--- com.android.support:support-annotations:28.0.0
+     |    |    |    +--- com.android.support:support-compat:28.0.0 (*)
+     |    |    |    \--- com.android.support:customview:28.0.0 (*)
+     |    |    +--- com.android.support:drawerlayout:28.0.0
+     |    |    |    +--- com.android.support:support-annotations:28.0.0
+     |    |    |    +--- com.android.support:support-compat:28.0.0 (*)
+     |    |    |    \--- com.android.support:customview:28.0.0 (*)
+     |    |    +--- com.android.support:slidingpanelayout:28.0.0
+     |    |    |    +--- com.android.support:support-annotations:28.0.0
+     |    |    |    +--- com.android.support:support-compat:28.0.0 (*)
+     |    |    |    \--- com.android.support:customview:28.0.0 (*)
+     |    |    +--- com.android.support:interpolator:28.0.0
+     |    |    |    \--- com.android.support:support-annotations:28.0.0
+     |    |    +--- com.android.support:swiperefreshlayout:28.0.0
+     |    |    |    +--- com.android.support:support-annotations:28.0.0
+     |    |    |    +--- com.android.support:support-compat:28.0.0 (*)
+     |    |    |    \--- com.android.support:interpolator:28.0.0 (*)
+     |    |    +--- com.android.support:asynclayoutinflater:28.0.0
+     |    |    |    +--- com.android.support:support-annotations:28.0.0
+     |    |    |    \--- com.android.support:support-compat:28.0.0 (*)
+     |    |    \--- com.android.support:cursoradapter:28.0.0 (*)
+     |    +--- com.android.support:support-core-utils:28.0.0 (*)
+     |    +--- com.android.support:support-annotations:28.0.0
+     |    +--- com.android.support:loader:28.0.0 (*)
+     |    \--- android.arch.lifecycle:viewmodel:1.1.1 (*)
+     +--- com.android.support:support-vector-drawable:28.0.0
+     |    +--- com.android.support:support-annotations:28.0.0
+     |    \--- com.android.support:support-compat:28.0.0 (*)
+     \--- com.android.support:animated-vector-drawable:28.0.0
+          +--- com.android.support:support-vector-drawable:28.0.0 (*)
+          \--- com.android.support:support-core-ui:28.0.0 (*)
+
+releaseRuntimeElements - Runtime elements for release (n)
+No dependencies
+
+releaseRuntimeOnly - Runtime only dependencies for 'release' sources. (n)
+No dependencies
+
+releaseUnitTestAnnotationProcessorClasspath - Resolved configuration for annotation-processor for variant: releaseUnitTest
+No dependencies
+
+releaseUnitTestCompileClasspath - Resolved configuration for compilation for variant: releaseUnitTest
++--- com.android.support:appcompat-v7:28.0.0
+|    +--- com.android.support:support-annotations:28.0.0
+|    +--- com.android.support:support-compat:28.0.0
+|    |    +--- com.android.support:support-annotations:28.0.0
+|    |    +--- com.android.support:collections:28.0.0
+|    |    |    \--- com.android.support:support-annotations:28.0.0
+|    |    +--- android.arch.lifecycle:runtime:1.1.1
+|    |    |    +--- android.arch.lifecycle:common:1.1.1
+|    |    |    |    \--- com.android.support:support-annotations:26.1.0 -> 28.0.0
+|    |    |    +--- android.arch.core:common:1.1.1
+|    |    |    |    \--- com.android.support:support-annotations:26.1.0 -> 28.0.0
+|    |    |    \--- com.android.support:support-annotations:26.1.0 -> 28.0.0
+|    |    \--- com.android.support:versionedparcelable:28.0.0
+|    |         +--- com.android.support:support-annotations:28.0.0
+|    |         \--- com.android.support:collections:28.0.0 (*)
+|    +--- com.android.support:collections:28.0.0 (*)
+|    +--- com.android.support:cursoradapter:28.0.0
+|    |    \--- com.android.support:support-annotations:28.0.0
+|    +--- com.android.support:support-core-utils:28.0.0
+|    |    +--- com.android.support:support-annotations:28.0.0
+|    |    +--- com.android.support:support-compat:28.0.0 (*)
+|    |    +--- com.android.support:documentfile:28.0.0
+|    |    |    \--- com.android.support:support-annotations:28.0.0
+|    |    +--- com.android.support:loader:28.0.0
+|    |    |    +--- com.android.support:support-annotations:28.0.0
+|    |    |    +--- com.android.support:support-compat:28.0.0 (*)
+|    |    |    +--- android.arch.lifecycle:livedata:1.1.1
+|    |    |    |    +--- android.arch.core:runtime:1.1.1
+|    |    |    |    |    +--- com.android.support:support-annotations:26.1.0 -> 28.0.0
+|    |    |    |    |    \--- android.arch.core:common:1.1.1 (*)
+|    |    |    |    +--- android.arch.lifecycle:livedata-core:1.1.1
+|    |    |    |    |    +--- android.arch.lifecycle:common:1.1.1 (*)
+|    |    |    |    |    +--- android.arch.core:common:1.1.1 (*)
+|    |    |    |    |    \--- android.arch.core:runtime:1.1.1 (*)
+|    |    |    |    \--- android.arch.core:common:1.1.1 (*)
+|    |    |    \--- android.arch.lifecycle:viewmodel:1.1.1
+|    |    |         \--- com.android.support:support-annotations:26.1.0 -> 28.0.0
+|    |    +--- com.android.support:localbroadcastmanager:28.0.0
+|    |    |    \--- com.android.support:support-annotations:28.0.0
+|    |    \--- com.android.support:print:28.0.0
+|    |         \--- com.android.support:support-annotations:28.0.0
+|    +--- com.android.support:support-fragment:28.0.0
+|    |    +--- com.android.support:support-compat:28.0.0 (*)
+|    |    +--- com.android.support:support-core-ui:28.0.0
+|    |    |    +--- com.android.support:support-annotations:28.0.0
+|    |    |    +--- com.android.support:support-compat:28.0.0 (*)
+|    |    |    +--- com.android.support:support-core-utils:28.0.0 (*)
+|    |    |    +--- com.android.support:customview:28.0.0
+|    |    |    |    +--- com.android.support:support-annotations:28.0.0
+|    |    |    |    \--- com.android.support:support-compat:28.0.0 (*)
+|    |    |    +--- com.android.support:viewpager:28.0.0
+|    |    |    |    +--- com.android.support:support-annotations:28.0.0
+|    |    |    |    +--- com.android.support:support-compat:28.0.0 (*)
+|    |    |    |    \--- com.android.support:customview:28.0.0 (*)
+|    |    |    +--- com.android.support:coordinatorlayout:28.0.0
+|    |    |    |    +--- com.android.support:support-annotations:28.0.0
+|    |    |    |    +--- com.android.support:support-compat:28.0.0 (*)
+|    |    |    |    \--- com.android.support:customview:28.0.0 (*)
+|    |    |    +--- com.android.support:drawerlayout:28.0.0
+|    |    |    |    +--- com.android.support:support-annotations:28.0.0
+|    |    |    |    +--- com.android.support:support-compat:28.0.0 (*)
+|    |    |    |    \--- com.android.support:customview:28.0.0 (*)
+|    |    |    +--- com.android.support:slidingpanelayout:28.0.0
+|    |    |    |    +--- com.android.support:support-annotations:28.0.0
+|    |    |    |    +--- com.android.support:support-compat:28.0.0 (*)
+|    |    |    |    \--- com.android.support:customview:28.0.0 (*)
+|    |    |    +--- com.android.support:interpolator:28.0.0
+|    |    |    |    \--- com.android.support:support-annotations:28.0.0
+|    |    |    +--- com.android.support:swiperefreshlayout:28.0.0
+|    |    |    |    +--- com.android.support:support-annotations:28.0.0
+|    |    |    |    +--- com.android.support:support-compat:28.0.0 (*)
+|    |    |    |    \--- com.android.support:interpolator:28.0.0 (*)
+|    |    |    +--- com.android.support:asynclayoutinflater:28.0.0
+|    |    |    |    +--- com.android.support:support-annotations:28.0.0
+|    |    |    |    \--- com.android.support:support-compat:28.0.0 (*)
+|    |    |    \--- com.android.support:cursoradapter:28.0.0 (*)
+|    |    +--- com.android.support:support-core-utils:28.0.0 (*)
+|    |    +--- com.android.support:support-annotations:28.0.0
+|    |    +--- com.android.support:loader:28.0.0 (*)
+|    |    \--- android.arch.lifecycle:viewmodel:1.1.1 (*)
+|    +--- com.android.support:support-vector-drawable:28.0.0
+|    |    +--- com.android.support:support-annotations:28.0.0
+|    |    \--- com.android.support:support-compat:28.0.0 (*)
+|    \--- com.android.support:animated-vector-drawable:28.0.0
+|         +--- com.android.support:support-vector-drawable:28.0.0 (*)
+|         \--- com.android.support:support-core-ui:28.0.0 (*)
++--- com.android.support:appcompat-v7:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:support-annotations:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:support-compat:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:collections:{strictly 28.0.0} -> 28.0.0 (c)
++--- android.arch.lifecycle:runtime:{strictly 1.1.1} -> 1.1.1 (c)
++--- android.arch.lifecycle:common:{strictly 1.1.1} -> 1.1.1 (c)
++--- android.arch.core:common:{strictly 1.1.1} -> 1.1.1 (c)
++--- com.android.support:versionedparcelable:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:cursoradapter:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:support-core-utils:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:documentfile:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:loader:{strictly 28.0.0} -> 28.0.0 (c)
++--- android.arch.lifecycle:livedata:{strictly 1.1.1} -> 1.1.1 (c)
++--- android.arch.core:runtime:{strictly 1.1.1} -> 1.1.1 (c)
++--- android.arch.lifecycle:livedata-core:{strictly 1.1.1} -> 1.1.1 (c)
++--- android.arch.lifecycle:viewmodel:{strictly 1.1.1} -> 1.1.1 (c)
++--- com.android.support:localbroadcastmanager:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:print:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:support-fragment:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:support-core-ui:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:customview:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:viewpager:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:coordinatorlayout:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:drawerlayout:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:slidingpanelayout:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:interpolator:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:swiperefreshlayout:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:asynclayoutinflater:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:support-vector-drawable:{strictly 28.0.0} -> 28.0.0 (c)
++--- com.android.support:animated-vector-drawable:{strictly 28.0.0} -> 28.0.0 (c)
++--- junit:junit:{strictly 4.12} -> 4.12 (c)
++--- org.hamcrest:hamcrest-core:{strictly 1.3} -> 1.3 (c)
++--- org.robolectric:robolectric:{strictly 4.3} -> 4.3 (c)
++--- org.robolectric:annotations:{strictly 4.3} -> 4.3 (c)
++--- org.robolectric:junit:{strictly 4.3} -> 4.3 (c)
++--- org.robolectric:sandbox:{strictly 4.3} -> 4.3 (c)
++--- org.robolectric:utils:{strictly 4.3} -> 4.3 (c)
++--- org.robolectric:pluginapi:{strictly 4.3} -> 4.3 (c)
++--- org.apache.ant:ant:{strictly 1.8.0} -> 1.8.0 (c)
++--- org.apache.ant:ant-launcher:{strictly 1.8.0} -> 1.8.0 (c)
++--- org.apache.maven:maven-ant-tasks:{strictly 2.1.3} -> 2.1.3 (c)
++--- classworlds:classworlds:{strictly 1.1-alpha-2} -> 1.1-alpha-2 (c)
++--- org.codehaus.plexus:plexus-container-default:{strictly 1.0-alpha-9-stable-1} -> 1.0-alpha-9-stable-1 (c)
++--- org.codehaus.plexus:plexus-utils:{strictly 1.5.15} -> 1.5.15 (c)
++--- org.codehaus.plexus:plexus-interpolation:{strictly 1.11} -> 1.11 (c)
++--- org.apache.maven:maven-artifact:{strictly 2.2.1} -> 2.2.1 (c)
++--- org.apache.maven:maven-artifact-manager:{strictly 2.2.1} -> 2.2.1 (c)
++--- org.apache.maven:maven-repository-metadata:{strictly 2.2.1} -> 2.2.1 (c)
++--- org.apache.maven.wagon:wagon-provider-api:{strictly 1.0-beta-6} -> 1.0-beta-6 (c)
++--- backport-util-concurrent:backport-util-concurrent:{strictly 3.1} -> 3.1 (c)
++--- org.apache.maven:maven-model:{strictly 2.2.1} -> 2.2.1 (c)
++--- org.apache.maven:maven-project:{strictly 2.2.1} -> 2.2.1 (c)
++--- org.apache.maven:maven-settings:{strictly 2.2.1} -> 2.2.1 (c)
++--- org.apache.maven:maven-profile:{strictly 2.2.1} -> 2.2.1 (c)
++--- org.apache.maven:maven-plugin-registry:{strictly 2.2.1} -> 2.2.1 (c)
++--- org.apache.maven:maven-error-diagnostics:{strictly 2.2.1} -> 2.2.1 (c)
++--- org.apache.maven.wagon:wagon-file:{strictly 1.0-beta-6} -> 1.0-beta-6 (c)
++--- org.apache.maven.wagon:wagon-http-lightweight:{strictly 1.0-beta-6} -> 1.0-beta-6 (c)
++--- org.apache.maven.wagon:wagon-http-shared:{strictly 1.0-beta-6} -> 1.0-beta-6 (c)
++--- nekohtml:xercesMinimal:{strictly 1.9.6.2} -> 1.9.6.2 (c)
++--- nekohtml:nekohtml:{strictly 1.9.6.2} -> 1.9.6.2 (c)
++--- org.robolectric:utils-reflector:{strictly 4.3} -> 4.3 (c)
++--- org.ow2.asm:asm:{strictly 7.0} -> 7.0 (c)
++--- org.ow2.asm:asm-commons:{strictly 7.0} -> 7.0 (c)
++--- org.ow2.asm:asm-tree:{strictly 7.0} -> 7.0 (c)
++--- org.ow2.asm:asm-analysis:{strictly 7.0} -> 7.0 (c)
++--- org.ow2.asm:asm-util:{strictly 7.0} -> 7.0 (c)
++--- com.google.auto.service:auto-service:{strictly 1.0-rc4} -> 1.0-rc4 (c)
++--- com.google.auto:auto-common:{strictly 0.8} -> 0.8 (c)
++--- com.google.guava:guava:{strictly 27.0.1-jre} -> 27.0.1-jre (c)
++--- com.google.guava:failureaccess:{strictly 1.0.1} -> 1.0.1 (c)
++--- com.google.guava:listenablefuture:{strictly 9999.0-empty-to-avoid-conflict-with-guava} -> 9999.0-empty-to-avoid-conflict-with-guava (c)
++--- com.google.code.findbugs:jsr305:{strictly 3.0.2} -> 3.0.2 (c)
++--- org.checkerframework:checker-qual:{strictly 2.5.2} -> 2.5.2 (c)
++--- com.google.errorprone:error_prone_annotations:{strictly 2.2.0} -> 2.2.0 (c)
++--- com.google.j2objc:j2objc-annotations:{strictly 1.1} -> 1.1 (c)
++--- org.codehaus.mojo:animal-sniffer-annotations:{strictly 1.17} -> 1.17 (c)
++--- javax.inject:javax.inject:{strictly 1} -> 1 (c)
++--- javax.annotation:javax.annotation-api:{strictly 1.3.2} -> 1.3.2 (c)
++--- org.robolectric:shadowapi:{strictly 4.3} -> 4.3 (c)
++--- org.robolectric:resources:{strictly 4.3} -> 4.3 (c)
++--- org.robolectric:plugins-maven-dependency-resolver:{strictly 4.3} -> 4.3 (c)
++--- org.robolectric:shadows-framework:{strictly 4.3} -> 4.3 (c)
++--- androidx.test:monitor:{strictly 1.2.0} -> 1.2.0 (c)
++--- androidx.annotation:annotation:{strictly 1.0.0} -> 1.0.0 (c)
++--- com.almworks.sqlite4java:sqlite4java:{strictly 0.282} -> 0.282 (c)
++--- com.ibm.icu:icu4j:{strictly 53.1} -> 53.1 (c)
++--- com.google.android.apps.common.testing.accessibility.framework:accessibility-test-framework:{strictly 2.1} -> 2.1 (c)
++--- org.hamcrest:hamcrest-library:{strictly 1.3} -> 1.3 (c)
++--- com.google.protobuf:protobuf-java:{strictly 2.6.1} -> 2.6.1 (c)
++--- org.bouncycastle:bcprov-jdk15on:{strictly 1.52} -> 1.52 (c)
++--- org.mockito:mockito-core:{strictly 1.9.5} -> 1.9.5 (c)
++--- org.objenesis:objenesis:{strictly 1.0} -> 1.0 (c)
++--- junit:junit:4.12
+|    \--- org.hamcrest:hamcrest-core:1.3
++--- org.robolectric:robolectric:4.3
+|    +--- org.robolectric:annotations:4.3
+|    +--- org.robolectric:junit:4.3
+|    |    +--- org.robolectric:annotations:4.3
+|    |    +--- org.robolectric:sandbox:4.3
+|    |    |    +--- org.robolectric:annotations:4.3
+|    |    |    +--- org.robolectric:utils:4.3
+|    |    |    |    +--- org.robolectric:annotations:4.3
+|    |    |    |    +--- org.robolectric:pluginapi:4.3
+|    |    |    |    |    +--- org.robolectric:annotations:4.3
+|    |    |    |    |    +--- org.apache.ant:ant:1.8.0
+|    |    |    |    |    |    \--- org.apache.ant:ant-launcher:1.8.0
+|    |    |    |    |    \--- org.apache.maven:maven-ant-tasks:2.1.3
+|    |    |    |    |         +--- org.apache.ant:ant:1.8.0 (*)
+|    |    |    |    |         +--- classworlds:classworlds:1.1-alpha-2
+|    |    |    |    |         +--- org.codehaus.plexus:plexus-container-default:1.0-alpha-9-stable-1
+|    |    |    |    |         |    +--- org.codehaus.plexus:plexus-utils:1.0.4 -> 1.5.15
+|    |    |    |    |         |    \--- classworlds:classworlds:1.1-alpha-2
+|    |    |    |    |         +--- org.codehaus.plexus:plexus-utils:1.5.15
+|    |    |    |    |         +--- org.codehaus.plexus:plexus-interpolation:1.11
+|    |    |    |    |         +--- org.apache.maven:maven-artifact:2.2.1
+|    |    |    |    |         |    \--- org.codehaus.plexus:plexus-utils:1.5.15
+|    |    |    |    |         +--- org.apache.maven:maven-artifact-manager:2.2.1
+|    |    |    |    |         |    +--- org.apache.maven:maven-repository-metadata:2.2.1
+|    |    |    |    |         |    |    \--- org.codehaus.plexus:plexus-utils:1.5.15
+|    |    |    |    |         |    +--- org.codehaus.plexus:plexus-utils:1.5.15
+|    |    |    |    |         |    +--- org.apache.maven:maven-artifact:2.2.1 (*)
+|    |    |    |    |         |    +--- org.codehaus.plexus:plexus-container-default:1.0-alpha-9-stable-1 (*)
+|    |    |    |    |         |    +--- org.apache.maven.wagon:wagon-provider-api:1.0-beta-6
+|    |    |    |    |         |    |    \--- org.codehaus.plexus:plexus-utils:1.4.2 -> 1.5.15
+|    |    |    |    |         |    \--- backport-util-concurrent:backport-util-concurrent:3.1
+|    |    |    |    |         +--- org.apache.maven:maven-model:2.2.1
+|    |    |    |    |         |    \--- org.codehaus.plexus:plexus-utils:1.5.15
+|    |    |    |    |         +--- org.apache.maven:maven-project:2.2.1
+|    |    |    |    |         |    +--- org.apache.maven:maven-settings:2.2.1
+|    |    |    |    |         |    |    +--- org.apache.maven:maven-model:2.2.1 (*)
+|    |    |    |    |         |    |    +--- org.codehaus.plexus:plexus-interpolation:1.11
+|    |    |    |    |         |    |    +--- org.codehaus.plexus:plexus-utils:1.5.15
+|    |    |    |    |         |    |    \--- org.codehaus.plexus:plexus-container-default:1.0-alpha-9-stable-1 (*)
+|    |    |    |    |         |    +--- org.apache.maven:maven-profile:2.2.1
+|    |    |    |    |         |    |    +--- org.apache.maven:maven-model:2.2.1 (*)
+|    |    |    |    |         |    |    +--- org.codehaus.plexus:plexus-utils:1.5.15
+|    |    |    |    |         |    |    +--- org.codehaus.plexus:plexus-interpolation:1.11
+|    |    |    |    |         |    |    \--- org.codehaus.plexus:plexus-container-default:1.0-alpha-9-stable-1 (*)
+|    |    |    |    |         |    +--- org.apache.maven:maven-model:2.2.1 (*)
+|    |    |    |    |         |    +--- org.apache.maven:maven-artifact-manager:2.2.1 (*)
+|    |    |    |    |         |    +--- org.apache.maven:maven-plugin-registry:2.2.1
+|    |    |    |    |         |    |    +--- org.codehaus.plexus:plexus-utils:1.5.15
+|    |    |    |    |         |    |    \--- org.codehaus.plexus:plexus-container-default:1.0-alpha-9-stable-1 (*)
+|    |    |    |    |         |    +--- org.codehaus.plexus:plexus-interpolation:1.11
+|    |    |    |    |         |    +--- org.codehaus.plexus:plexus-utils:1.5.15
+|    |    |    |    |         |    +--- org.apache.maven:maven-artifact:2.2.1 (*)
+|    |    |    |    |         |    \--- org.codehaus.plexus:plexus-container-default:1.0-alpha-9-stable-1 (*)
+|    |    |    |    |         +--- org.apache.maven:maven-error-diagnostics:2.2.1
+|    |    |    |    |         |    \--- org.codehaus.plexus:plexus-container-default:1.0-alpha-9-stable-1 (*)
+|    |    |    |    |         +--- org.apache.maven:maven-settings:2.2.1 (*)
+|    |    |    |    |         +--- org.apache.maven.wagon:wagon-file:1.0-beta-6
+|    |    |    |    |         |    \--- org.apache.maven.wagon:wagon-provider-api:1.0-beta-6 (*)
+|    |    |    |    |         +--- org.apache.maven.wagon:wagon-http-lightweight:1.0-beta-6
+|    |    |    |    |         |    +--- org.apache.maven.wagon:wagon-http-shared:1.0-beta-6
+|    |    |    |    |         |    |    +--- nekohtml:xercesMinimal:1.9.6.2
+|    |    |    |    |         |    |    +--- nekohtml:nekohtml:1.9.6.2
+|    |    |    |    |         |    |    \--- org.apache.maven.wagon:wagon-provider-api:1.0-beta-6 (*)
+|    |    |    |    |         |    \--- org.apache.maven.wagon:wagon-provider-api:1.0-beta-6 (*)
+|    |    |    |    |         \--- org.apache.maven.wagon:wagon-provider-api:1.0-beta-6 (*)
+|    |    |    |    +--- org.robolectric:utils-reflector:4.3
+|    |    |    |    |    +--- org.ow2.asm:asm:7.0
+|    |    |    |    |    +--- org.ow2.asm:asm-commons:7.0
+|    |    |    |    |    |    +--- org.ow2.asm:asm:7.0
+|    |    |    |    |    |    +--- org.ow2.asm:asm-tree:7.0
+|    |    |    |    |    |    |    \--- org.ow2.asm:asm:7.0
+|    |    |    |    |    |    \--- org.ow2.asm:asm-analysis:7.0
+|    |    |    |    |    |         \--- org.ow2.asm:asm-tree:7.0 (*)
+|    |    |    |    |    \--- org.ow2.asm:asm-util:7.0
+|    |    |    |    |         +--- org.ow2.asm:asm:7.0
+|    |    |    |    |         +--- org.ow2.asm:asm-tree:7.0 (*)
+|    |    |    |    |         \--- org.ow2.asm:asm-analysis:7.0 (*)
+|    |    |    |    +--- com.google.auto.service:auto-service:1.0-rc4
+|    |    |    |    |    +--- com.google.auto:auto-common:0.8
+|    |    |    |    |    |    \--- com.google.guava:guava:19.0 -> 27.0.1-jre
+|    |    |    |    |    |         +--- com.google.guava:failureaccess:1.0.1
+|    |    |    |    |    |         +--- com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava
+|    |    |    |    |    |         +--- com.google.code.findbugs:jsr305:3.0.2
+|    |    |    |    |    |         +--- org.checkerframework:checker-qual:2.5.2
+|    |    |    |    |    |         +--- com.google.errorprone:error_prone_annotations:2.2.0
+|    |    |    |    |    |         +--- com.google.j2objc:j2objc-annotations:1.1
+|    |    |    |    |    |         \--- org.codehaus.mojo:animal-sniffer-annotations:1.17
+|    |    |    |    |    \--- com.google.guava:guava:23.5-jre -> 27.0.1-jre (*)
+|    |    |    |    +--- javax.inject:javax.inject:1
+|    |    |    |    \--- javax.annotation:javax.annotation-api:1.3.2
+|    |    |    +--- org.robolectric:shadowapi:4.3
+|    |    |    |    \--- org.robolectric:annotations:4.3
+|    |    |    +--- org.robolectric:utils-reflector:4.3 (*)
+|    |    |    +--- javax.annotation:javax.annotation-api:1.3.2
+|    |    |    +--- javax.inject:javax.inject:1
+|    |    |    +--- org.ow2.asm:asm:7.0
+|    |    |    +--- org.ow2.asm:asm-commons:7.0 (*)
+|    |    |    \--- com.google.guava:guava:27.0.1-jre (*)
+|    |    +--- org.robolectric:pluginapi:4.3 (*)
+|    |    +--- org.robolectric:shadowapi:4.3 (*)
+|    |    \--- org.robolectric:utils-reflector:4.3 (*)
+|    +--- org.robolectric:pluginapi:4.3 (*)
+|    +--- org.robolectric:resources:4.3
+|    |    +--- org.robolectric:utils:4.3 (*)
+|    |    +--- org.robolectric:annotations:4.3
+|    |    +--- org.robolectric:pluginapi:4.3 (*)
+|    |    \--- com.google.guava:guava:27.0.1-jre (*)
+|    +--- org.robolectric:sandbox:4.3 (*)
+|    +--- org.robolectric:utils:4.3 (*)
+|    +--- org.robolectric:utils-reflector:4.3 (*)
+|    +--- org.robolectric:plugins-maven-dependency-resolver:4.3
+|    |    +--- org.robolectric:pluginapi:4.3 (*)
+|    |    +--- org.robolectric:utils:4.3 (*)
+|    |    +--- org.apache.ant:ant:1.8.0 (*)
+|    |    \--- org.apache.maven:maven-ant-tasks:2.1.3 (*)
+|    +--- javax.inject:javax.inject:1
+|    +--- javax.annotation:javax.annotation-api:1.3.2
+|    +--- org.robolectric:shadows-framework:4.3
+|    |    +--- org.robolectric:annotations:4.3
+|    |    +--- org.robolectric:resources:4.3 (*)
+|    |    +--- org.robolectric:pluginapi:4.3 (*)
+|    |    +--- org.robolectric:shadowapi:4.3 (*)
+|    |    +--- org.robolectric:utils:4.3 (*)
+|    |    +--- org.robolectric:utils-reflector:4.3 (*)
+|    |    +--- androidx.test:monitor:1.2.0
+|    |    |    \--- androidx.annotation:annotation:1.0.0
+|    |    +--- com.almworks.sqlite4java:sqlite4java:0.282
+|    |    +--- com.ibm.icu:icu4j:53.1
+|    |    +--- com.google.android.apps.common.testing.accessibility.framework:accessibility-test-framework:2.1
+|    |    |    +--- org.hamcrest:hamcrest-core:1.3
+|    |    |    +--- org.hamcrest:hamcrest-library:1.3
+|    |    |    |    \--- org.hamcrest:hamcrest-core:1.3
+|    |    |    \--- com.google.protobuf:protobuf-java:2.6.1
+|    |    \--- com.android.support:support-annotations:28.0.0
+|    +--- org.bouncycastle:bcprov-jdk15on:1.52
+|    \--- androidx.test:monitor:1.2.0 (*)
+\--- org.mockito:mockito-core:1.9.5
+     +--- org.hamcrest:hamcrest-core:1.1 -> 1.3
+     \--- org.objenesis:objenesis:1.0
+
+releaseUnitTestRuntimeClasspath - Resolved configuration for runtime for variant: releaseUnitTest
++--- com.android.support:appcompat-v7:28.0.0
+|    +--- com.android.support:support-annotations:28.0.0
+|    +--- com.android.support:support-compat:28.0.0
+|    |    +--- com.android.support:support-annotations:28.0.0
+|    |    +--- com.android.support:collections:28.0.0
+|    |    |    \--- com.android.support:support-annotations:28.0.0
+|    |    +--- android.arch.lifecycle:runtime:1.1.1
+|    |    |    +--- android.arch.lifecycle:common:1.1.1
+|    |    |    |    \--- com.android.support:support-annotations:26.1.0 -> 28.0.0
+|    |    |    +--- android.arch.core:common:1.1.1
+|    |    |    |    \--- com.android.support:support-annotations:26.1.0 -> 28.0.0
+|    |    |    \--- com.android.support:support-annotations:26.1.0 -> 28.0.0
+|    |    \--- com.android.support:versionedparcelable:28.0.0
+|    |         +--- com.android.support:support-annotations:28.0.0
+|    |         \--- com.android.support:collections:28.0.0 (*)
+|    +--- com.android.support:collections:28.0.0 (*)
+|    +--- com.android.support:cursoradapter:28.0.0
+|    |    \--- com.android.support:support-annotations:28.0.0
+|    +--- com.android.support:support-core-utils:28.0.0
+|    |    +--- com.android.support:support-annotations:28.0.0
+|    |    +--- com.android.support:support-compat:28.0.0 (*)
+|    |    +--- com.android.support:documentfile:28.0.0
+|    |    |    \--- com.android.support:support-annotations:28.0.0
+|    |    +--- com.android.support:loader:28.0.0
+|    |    |    +--- com.android.support:support-annotations:28.0.0
+|    |    |    +--- com.android.support:support-compat:28.0.0 (*)
+|    |    |    +--- android.arch.lifecycle:livedata:1.1.1
+|    |    |    |    +--- android.arch.core:runtime:1.1.1
+|    |    |    |    |    +--- com.android.support:support-annotations:26.1.0 -> 28.0.0
+|    |    |    |    |    \--- android.arch.core:common:1.1.1 (*)
+|    |    |    |    +--- android.arch.lifecycle:livedata-core:1.1.1
+|    |    |    |    |    +--- android.arch.lifecycle:common:1.1.1 (*)
+|    |    |    |    |    +--- android.arch.core:common:1.1.1 (*)
+|    |    |    |    |    \--- android.arch.core:runtime:1.1.1 (*)
+|    |    |    |    \--- android.arch.core:common:1.1.1 (*)
+|    |    |    \--- android.arch.lifecycle:viewmodel:1.1.1
+|    |    |         \--- com.android.support:support-annotations:26.1.0 -> 28.0.0
+|    |    +--- com.android.support:localbroadcastmanager:28.0.0
+|    |    |    \--- com.android.support:support-annotations:28.0.0
+|    |    \--- com.android.support:print:28.0.0
+|    |         \--- com.android.support:support-annotations:28.0.0
+|    +--- com.android.support:support-fragment:28.0.0
+|    |    +--- com.android.support:support-compat:28.0.0 (*)
+|    |    +--- com.android.support:support-core-ui:28.0.0
+|    |    |    +--- com.android.support:support-annotations:28.0.0
+|    |    |    +--- com.android.support:support-compat:28.0.0 (*)
+|    |    |    +--- com.android.support:support-core-utils:28.0.0 (*)
+|    |    |    +--- com.android.support:customview:28.0.0
+|    |    |    |    +--- com.android.support:support-annotations:28.0.0
+|    |    |    |    \--- com.android.support:support-compat:28.0.0 (*)
+|    |    |    +--- com.android.support:viewpager:28.0.0
+|    |    |    |    +--- com.android.support:support-annotations:28.0.0
+|    |    |    |    +--- com.android.support:support-compat:28.0.0 (*)
+|    |    |    |    \--- com.android.support:customview:28.0.0 (*)
+|    |    |    +--- com.android.support:coordinatorlayout:28.0.0
+|    |    |    |    +--- com.android.support:support-annotations:28.0.0
+|    |    |    |    +--- com.android.support:support-compat:28.0.0 (*)
+|    |    |    |    \--- com.android.support:customview:28.0.0 (*)
+|    |    |    +--- com.android.support:drawerlayout:28.0.0
+|    |    |    |    +--- com.android.support:support-annotations:28.0.0
+|    |    |    |    +--- com.android.support:support-compat:28.0.0 (*)
+|    |    |    |    \--- com.android.support:customview:28.0.0 (*)
+|    |    |    +--- com.android.support:slidingpanelayout:28.0.0
+|    |    |    |    +--- com.android.support:support-annotations:28.0.0
+|    |    |    |    +--- com.android.support:support-compat:28.0.0 (*)
+|    |    |    |    \--- com.android.support:customview:28.0.0 (*)
+|    |    |    +--- com.android.support:interpolator:28.0.0
+|    |    |    |    \--- com.android.support:support-annotations:28.0.0
+|    |    |    +--- com.android.support:swiperefreshlayout:28.0.0
+|    |    |    |    +--- com.android.support:support-annotations:28.0.0
+|    |    |    |    +--- com.android.support:support-compat:28.0.0 (*)
+|    |    |    |    \--- com.android.support:interpolator:28.0.0 (*)
+|    |    |    +--- com.android.support:asynclayoutinflater:28.0.0
+|    |    |    |    +--- com.android.support:support-annotations:28.0.0
+|    |    |    |    \--- com.android.support:support-compat:28.0.0 (*)
+|    |    |    \--- com.android.support:cursoradapter:28.0.0 (*)
+|    |    +--- com.android.support:support-core-utils:28.0.0 (*)
+|    |    +--- com.android.support:support-annotations:28.0.0
+|    |    +--- com.android.support:loader:28.0.0 (*)
+|    |    \--- android.arch.lifecycle:viewmodel:1.1.1 (*)
+|    +--- com.android.support:support-vector-drawable:28.0.0
+|    |    +--- com.android.support:support-annotations:28.0.0
+|    |    \--- com.android.support:support-compat:28.0.0 (*)
+|    \--- com.android.support:animated-vector-drawable:28.0.0
+|         +--- com.android.support:support-vector-drawable:28.0.0 (*)
+|         \--- com.android.support:support-core-ui:28.0.0 (*)
++--- junit:junit:4.12
+|    \--- org.hamcrest:hamcrest-core:1.3
++--- org.robolectric:robolectric:4.3
+|    +--- org.robolectric:annotations:4.3
+|    +--- org.robolectric:junit:4.3
+|    |    +--- org.robolectric:annotations:4.3
+|    |    +--- org.robolectric:sandbox:4.3
+|    |    |    +--- org.robolectric:annotations:4.3
+|    |    |    +--- org.robolectric:utils:4.3
+|    |    |    |    +--- org.robolectric:annotations:4.3
+|    |    |    |    +--- org.robolectric:pluginapi:4.3
+|    |    |    |    |    +--- org.robolectric:annotations:4.3
+|    |    |    |    |    +--- org.apache.ant:ant:1.8.0
+|    |    |    |    |    |    \--- org.apache.ant:ant-launcher:1.8.0
+|    |    |    |    |    \--- org.apache.maven:maven-ant-tasks:2.1.3
+|    |    |    |    |         +--- org.apache.ant:ant:1.8.0 (*)
+|    |    |    |    |         +--- classworlds:classworlds:1.1-alpha-2
+|    |    |    |    |         +--- org.codehaus.plexus:plexus-container-default:1.0-alpha-9-stable-1
+|    |    |    |    |         |    +--- org.codehaus.plexus:plexus-utils:1.0.4 -> 1.5.15
+|    |    |    |    |         |    \--- classworlds:classworlds:1.1-alpha-2
+|    |    |    |    |         +--- org.codehaus.plexus:plexus-utils:1.5.15
+|    |    |    |    |         +--- org.codehaus.plexus:plexus-interpolation:1.11
+|    |    |    |    |         +--- org.apache.maven:maven-artifact:2.2.1
+|    |    |    |    |         |    \--- org.codehaus.plexus:plexus-utils:1.5.15
+|    |    |    |    |         +--- org.apache.maven:maven-artifact-manager:2.2.1
+|    |    |    |    |         |    +--- org.apache.maven:maven-repository-metadata:2.2.1
+|    |    |    |    |         |    |    \--- org.codehaus.plexus:plexus-utils:1.5.15
+|    |    |    |    |         |    +--- org.codehaus.plexus:plexus-utils:1.5.15
+|    |    |    |    |         |    +--- org.apache.maven:maven-artifact:2.2.1 (*)
+|    |    |    |    |         |    +--- org.codehaus.plexus:plexus-container-default:1.0-alpha-9-stable-1 (*)
+|    |    |    |    |         |    +--- org.apache.maven.wagon:wagon-provider-api:1.0-beta-6
+|    |    |    |    |         |    |    \--- org.codehaus.plexus:plexus-utils:1.4.2 -> 1.5.15
+|    |    |    |    |         |    \--- backport-util-concurrent:backport-util-concurrent:3.1
+|    |    |    |    |         +--- org.apache.maven:maven-model:2.2.1
+|    |    |    |    |         |    \--- org.codehaus.plexus:plexus-utils:1.5.15
+|    |    |    |    |         +--- org.apache.maven:maven-project:2.2.1
+|    |    |    |    |         |    +--- org.apache.maven:maven-settings:2.2.1
+|    |    |    |    |         |    |    +--- org.apache.maven:maven-model:2.2.1 (*)
+|    |    |    |    |         |    |    +--- org.codehaus.plexus:plexus-interpolation:1.11
+|    |    |    |    |         |    |    +--- org.codehaus.plexus:plexus-utils:1.5.15
+|    |    |    |    |         |    |    \--- org.codehaus.plexus:plexus-container-default:1.0-alpha-9-stable-1 (*)
+|    |    |    |    |         |    +--- org.apache.maven:maven-profile:2.2.1
+|    |    |    |    |         |    |    +--- org.apache.maven:maven-model:2.2.1 (*)
+|    |    |    |    |         |    |    +--- org.codehaus.plexus:plexus-utils:1.5.15
+|    |    |    |    |         |    |    +--- org.codehaus.plexus:plexus-interpolation:1.11
+|    |    |    |    |         |    |    \--- org.codehaus.plexus:plexus-container-default:1.0-alpha-9-stable-1 (*)
+|    |    |    |    |         |    +--- org.apache.maven:maven-model:2.2.1 (*)
+|    |    |    |    |         |    +--- org.apache.maven:maven-artifact-manager:2.2.1 (*)
+|    |    |    |    |         |    +--- org.apache.maven:maven-plugin-registry:2.2.1
+|    |    |    |    |         |    |    +--- org.codehaus.plexus:plexus-utils:1.5.15
+|    |    |    |    |         |    |    \--- org.codehaus.plexus:plexus-container-default:1.0-alpha-9-stable-1 (*)
+|    |    |    |    |         |    +--- org.codehaus.plexus:plexus-interpolation:1.11
+|    |    |    |    |         |    +--- org.codehaus.plexus:plexus-utils:1.5.15
+|    |    |    |    |         |    +--- org.apache.maven:maven-artifact:2.2.1 (*)
+|    |    |    |    |         |    \--- org.codehaus.plexus:plexus-container-default:1.0-alpha-9-stable-1 (*)
+|    |    |    |    |         +--- org.apache.maven:maven-error-diagnostics:2.2.1
+|    |    |    |    |         |    \--- org.codehaus.plexus:plexus-container-default:1.0-alpha-9-stable-1 (*)
+|    |    |    |    |         +--- org.apache.maven:maven-settings:2.2.1 (*)
+|    |    |    |    |         +--- org.apache.maven.wagon:wagon-file:1.0-beta-6
+|    |    |    |    |         |    \--- org.apache.maven.wagon:wagon-provider-api:1.0-beta-6 (*)
+|    |    |    |    |         +--- org.apache.maven.wagon:wagon-http-lightweight:1.0-beta-6
+|    |    |    |    |         |    +--- org.apache.maven.wagon:wagon-http-shared:1.0-beta-6
+|    |    |    |    |         |    |    +--- nekohtml:xercesMinimal:1.9.6.2
+|    |    |    |    |         |    |    +--- nekohtml:nekohtml:1.9.6.2
+|    |    |    |    |         |    |    \--- org.apache.maven.wagon:wagon-provider-api:1.0-beta-6 (*)
+|    |    |    |    |         |    \--- org.apache.maven.wagon:wagon-provider-api:1.0-beta-6 (*)
+|    |    |    |    |         \--- org.apache.maven.wagon:wagon-provider-api:1.0-beta-6 (*)
+|    |    |    |    +--- org.robolectric:utils-reflector:4.3
+|    |    |    |    |    +--- org.ow2.asm:asm:7.0
+|    |    |    |    |    +--- org.ow2.asm:asm-commons:7.0
+|    |    |    |    |    |    +--- org.ow2.asm:asm:7.0
+|    |    |    |    |    |    +--- org.ow2.asm:asm-tree:7.0
+|    |    |    |    |    |    |    \--- org.ow2.asm:asm:7.0
+|    |    |    |    |    |    \--- org.ow2.asm:asm-analysis:7.0
+|    |    |    |    |    |         \--- org.ow2.asm:asm-tree:7.0 (*)
+|    |    |    |    |    \--- org.ow2.asm:asm-util:7.0
+|    |    |    |    |         +--- org.ow2.asm:asm:7.0
+|    |    |    |    |         +--- org.ow2.asm:asm-tree:7.0 (*)
+|    |    |    |    |         \--- org.ow2.asm:asm-analysis:7.0 (*)
+|    |    |    |    +--- com.google.auto.service:auto-service:1.0-rc4
+|    |    |    |    |    +--- com.google.auto:auto-common:0.8
+|    |    |    |    |    |    \--- com.google.guava:guava:19.0 -> 27.0.1-jre
+|    |    |    |    |    |         +--- com.google.guava:failureaccess:1.0.1
+|    |    |    |    |    |         +--- com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava
+|    |    |    |    |    |         +--- com.google.code.findbugs:jsr305:3.0.2
+|    |    |    |    |    |         +--- org.checkerframework:checker-qual:2.5.2
+|    |    |    |    |    |         +--- com.google.errorprone:error_prone_annotations:2.2.0
+|    |    |    |    |    |         +--- com.google.j2objc:j2objc-annotations:1.1
+|    |    |    |    |    |         \--- org.codehaus.mojo:animal-sniffer-annotations:1.17
+|    |    |    |    |    \--- com.google.guava:guava:23.5-jre -> 27.0.1-jre (*)
+|    |    |    |    +--- javax.inject:javax.inject:1
+|    |    |    |    \--- javax.annotation:javax.annotation-api:1.3.2
+|    |    |    +--- org.robolectric:shadowapi:4.3
+|    |    |    |    \--- org.robolectric:annotations:4.3
+|    |    |    +--- org.robolectric:utils-reflector:4.3 (*)
+|    |    |    +--- javax.annotation:javax.annotation-api:1.3.2
+|    |    |    +--- javax.inject:javax.inject:1
+|    |    |    +--- org.ow2.asm:asm:7.0
+|    |    |    +--- org.ow2.asm:asm-commons:7.0 (*)
+|    |    |    \--- com.google.guava:guava:27.0.1-jre (*)
+|    |    +--- org.robolectric:pluginapi:4.3 (*)
+|    |    +--- org.robolectric:shadowapi:4.3 (*)
+|    |    \--- org.robolectric:utils-reflector:4.3 (*)
+|    +--- org.robolectric:pluginapi:4.3 (*)
+|    +--- org.robolectric:resources:4.3
+|    |    +--- org.robolectric:utils:4.3 (*)
+|    |    +--- org.robolectric:annotations:4.3
+|    |    +--- org.robolectric:pluginapi:4.3 (*)
+|    |    \--- com.google.guava:guava:27.0.1-jre (*)
+|    +--- org.robolectric:sandbox:4.3 (*)
+|    +--- org.robolectric:utils:4.3 (*)
+|    +--- org.robolectric:utils-reflector:4.3 (*)
+|    +--- org.robolectric:plugins-maven-dependency-resolver:4.3
+|    |    +--- org.robolectric:pluginapi:4.3 (*)
+|    |    +--- org.robolectric:utils:4.3 (*)
+|    |    +--- org.apache.ant:ant:1.8.0 (*)
+|    |    \--- org.apache.maven:maven-ant-tasks:2.1.3 (*)
+|    +--- javax.inject:javax.inject:1
+|    +--- javax.annotation:javax.annotation-api:1.3.2
+|    +--- org.robolectric:shadows-framework:4.3
+|    |    +--- org.robolectric:annotations:4.3
+|    |    +--- org.robolectric:resources:4.3 (*)
+|    |    +--- org.robolectric:pluginapi:4.3 (*)
+|    |    +--- org.robolectric:shadowapi:4.3 (*)
+|    |    +--- org.robolectric:utils:4.3 (*)
+|    |    +--- org.robolectric:utils-reflector:4.3 (*)
+|    |    +--- androidx.test:monitor:1.2.0
+|    |    |    \--- androidx.annotation:annotation:1.0.0
+|    |    +--- com.almworks.sqlite4java:sqlite4java:0.282
+|    |    +--- com.ibm.icu:icu4j:53.1
+|    |    +--- com.google.android.apps.common.testing.accessibility.framework:accessibility-test-framework:2.1
+|    |    |    +--- org.hamcrest:hamcrest-core:1.3
+|    |    |    +--- org.hamcrest:hamcrest-library:1.3
+|    |    |    |    \--- org.hamcrest:hamcrest-core:1.3
+|    |    |    \--- com.google.protobuf:protobuf-java:2.6.1
+|    |    \--- com.android.support:support-annotations:28.0.0
+|    +--- org.bouncycastle:bcprov-jdk15on:1.52
+|    \--- androidx.test:monitor:1.2.0 (*)
+\--- org.mockito:mockito-core:1.9.5
+     +--- org.hamcrest:hamcrest-core:1.1 -> 1.3
+     \--- org.objenesis:objenesis:1.0
+
+releaseWearApp - Link to a wear app to embed for object 'release'. (n)
+No dependencies
+
+runtimeOnly - Runtime only dependencies for 'main' sources. (n)
+No dependencies
+
+testAnnotationProcessor - Classpath for the annotation processor for 'test'. (n)
+No dependencies
+
+testApi - API dependencies for 'test' sources. (n)
+No dependencies
+
+testCompile - Compile dependencies for 'test' sources (deprecated: use 'testImplementation' instead).
+No dependencies
+
+testCompileOnly - Compile only dependencies for 'test' sources. (n)
+No dependencies
+
+testDebugAnnotationProcessor - Classpath for the annotation processor for 'testDebug'. (n)
+No dependencies
+
+testDebugApi - API dependencies for 'testDebug' sources. (n)
+No dependencies
+
+testDebugCompile - Compile dependencies for 'testDebug' sources (deprecated: use 'testDebugImplementation' instead). (n)
+No dependencies
+
+testDebugCompileOnly - Compile only dependencies for 'testDebug' sources. (n)
+No dependencies
+
+testDebugImplementation - Implementation only dependencies for 'testDebug' sources. (n)
+No dependencies
+
+testDebugProvided - Provided dependencies for 'testDebug' sources (deprecated: use 'testDebugCompileOnly' instead). (n)
+No dependencies
+
+testDebugPublish - Publish dependencies for 'testDebug' sources (deprecated: use 'testDebugRuntimeOnly' instead). (n)
+No dependencies
+
+testDebugRuntimeOnly - Runtime only dependencies for 'testDebug' sources. (n)
+No dependencies
+
+testDebugWearApp - Link to a wear app to embed for object 'testDebug'. (n)
+No dependencies
+
+testImplementation - Implementation only dependencies for 'test' sources. (n)
++--- junit:junit:4.12 (n)
++--- org.robolectric:robolectric:4.3 (n)
+\--- org.mockito:mockito-core:1.9.5 (n)
+
+testProvided - Provided dependencies for 'test' sources (deprecated: use 'testCompileOnly' instead). (n)
+No dependencies
+
+testPublish - Publish dependencies for 'test' sources (deprecated: use 'testRuntimeOnly' instead). (n)
+No dependencies
+
+testReleaseAnnotationProcessor - Classpath for the annotation processor for 'testRelease'. (n)
+No dependencies
+
+testReleaseApi - API dependencies for 'testRelease' sources. (n)
+No dependencies
+
+testReleaseCompile - Compile dependencies for 'testRelease' sources (deprecated: use 'testReleaseImplementation' instead). (n)
+No dependencies
+
+testReleaseCompileOnly - Compile only dependencies for 'testRelease' sources. (n)
+No dependencies
+
+testReleaseImplementation - Implementation only dependencies for 'testRelease' sources. (n)
+No dependencies
+
+testReleaseProvided - Provided dependencies for 'testRelease' sources (deprecated: use 'testReleaseCompileOnly' instead). (n)
+No dependencies
+
+testReleasePublish - Publish dependencies for 'testRelease' sources (deprecated: use 'testReleaseRuntimeOnly' instead). (n)
+No dependencies
+
+testReleaseRuntimeOnly - Runtime only dependencies for 'testRelease' sources. (n)
+No dependencies
+
+testReleaseWearApp - Link to a wear app to embed for object 'testRelease'. (n)
+No dependencies
+
+testRuntimeOnly - Runtime only dependencies for 'test' sources. (n)
+No dependencies
+
+testWearApp - Link to a wear app to embed for object 'test'. (n)
+No dependencies
+
+wearApp - Link to a wear app to embed for object 'main'. (n)
+No dependencies
+
+(c) - dependency constraint
+(*) - dependencies omitted (listed previously)
+
+(n) - Not resolved (configuration is not meant to be resolved)
+
+A web-based, searchable dependency report is available by adding the --scan option.
+
+BUILD SUCCESSFUL in 0s
+1 actionable task: 1 executed

@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">CardDrawer</string>
+    <string name="card_drawer_card_hint_name">Nombre y Apellido</string>
+    <string name="card_drawer_card_hint_date">MM/AA</string>ç
+</resources>

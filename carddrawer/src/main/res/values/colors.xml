@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Card Colors -->
+    <color name="card_drawer_card_default_color">#d5d5d5</color>
+    <color name="card_drawer_card_default_font_color">#666666</color>
+    <color name="card_drawer_gray">#73000000</color>
+    <color name="card_drawer_gray_light">#999999</color>
+
+    <!-- Gradient Colors -->
+    <color name="card_drawer_dark_font_color_bottom">#000000</color>
+    <color name="card_drawer_dark_font_color_center">#2b2b2b</color>
+    <color name="card_drawer_dark_font_color_top">#555555</color>
+    <color name="card_drawer_dark_font_empty_color">#73000000</color>
+
+    <color name="card_drawer_light_font_color_bottom">#FFFFFF</color>
+    <color name="card_drawer_light_font_color_top">#cccccc</color>
+    <color name="card_drawer_light_font_empty_color">#ccffffff</color>
+
+    <color name="card_drawer_number_shadow_color">#FF000000</color>
+
+</resources>

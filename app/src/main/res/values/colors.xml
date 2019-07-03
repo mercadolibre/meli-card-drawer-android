@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="card_drawer_app_colorPrimary">#3F51B5</color>
+    <color name="card_drawer_app_colorPrimaryDark">#303F9F</color>
+    <color name="card_drawer_app_colorAccent">#FF4081</color>
+    <color name="card_drawer_app_white_font_color">#ffffff</color>
+    <color name="card_drawer_app_black_font_color">#000000</color>
+
+    <!-- Visa Colors -->
+
+    <color name="card_drawer_app_blue_color">#2561c0</color>
+    <color name="card_drawer_app_light_green_color">#87ab9e</color>
+    <color name="card_drawer_app_red_color">#d53838</color>
+    <color name="card_drawer_app_yellow_color">#ffdf0a</color>
+    <color name="card_drawer_app_gray_color">#d5d5d5</color>
+    <color name="card_drawer_app_green_color">#569736</color>
+</resources>

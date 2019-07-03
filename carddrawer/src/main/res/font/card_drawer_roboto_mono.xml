@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<font-family xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    app:fontProviderAuthority="@string/card_drawer_gms_font_provider_authority"
+    app:fontProviderPackage="@string/card_drawer_gms_font_provider_package"
+    app:fontProviderQuery="@string/card_drawer_roboto_mono_query"
+    app:fontProviderCerts="@array/card_drawer_com_google_android_gms_fonts_certs"
+
+    android:fontProviderAuthority="@string/card_drawer_gms_font_provider_authority"
+    android:fontProviderPackage="@string/card_drawer_gms_font_provider_package"
+    android:fontProviderQuery="@string/card_drawer_roboto_mono_query"
+    android:fontProviderCerts="@array/card_drawer_com_google_android_gms_fonts_certs"
+
+    tools:ignore="FontValidationError" />

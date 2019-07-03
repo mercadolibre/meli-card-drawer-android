@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Card form -->
+    <dimen name="card_drawer_card_width">256dp</dimen>
+    <dimen name="card_drawer_camera_distance">2560dp</dimen>
+    <dimen name="card_drawer_layout_padding">20dp</dimen>
+
+    <dimen name="card_drawer_shadow_radius">2dp</dimen>
+
+</resources>
