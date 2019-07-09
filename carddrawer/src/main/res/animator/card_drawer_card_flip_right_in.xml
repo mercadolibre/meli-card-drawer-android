@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <set xmlns:android="http://schemas.android.com/apk/res/android">
-
+    <!-- Before rotating, immediately set the alpha to 0. -->
     <objectAnimator
         android:duration="0"
         android:propertyName="alpha"
