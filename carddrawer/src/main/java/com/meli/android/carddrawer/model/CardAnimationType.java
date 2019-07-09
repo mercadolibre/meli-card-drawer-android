@@ -7,7 +7,6 @@ import java.lang.annotation.RetentionPolicy;
 
 /**
  * Indicates the start position for animation
- * Created by rcortazzo on 18/10/2018.
  */
 @Retention(RetentionPolicy.SOURCE)
 @StringDef({CardAnimationType.RIGHT_BOTTOM, CardAnimationType.LEFT_TOP, CardAnimationType.NONE})

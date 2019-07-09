@@ -8,7 +8,6 @@ import android.widget.ImageView;
 
 /**
  * When the animation finishes.. tint the background for future changes
- * Created by lgarbarini on 9/1/16.
  */
 public class EndAnimationListener implements Animator.AnimatorListener, Animation.AnimationListener {
 
