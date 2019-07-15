@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply from: rootProject.file('jacoco.gradle')
 
 android {
     compileSdkVersion androidTarget as int
