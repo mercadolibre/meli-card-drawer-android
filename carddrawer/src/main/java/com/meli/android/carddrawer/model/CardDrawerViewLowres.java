@@ -15,20 +15,20 @@ import android.widget.ImageView;
 import com.meli.android.carddrawer.R;
 
 
-public class CardHeaderViewLowres extends CardHeaderView {
+public class CardDrawerViewLowres extends CardDrawerView {
 
     private static final float LOGO_ASPECT_RATIO = 0.73f;
 
-    public CardHeaderViewLowres(@NonNull final Context context) {
+    public CardDrawerViewLowres(@NonNull final Context context) {
         this(context, null);
     }
 
-    public CardHeaderViewLowres(@NonNull final Context context,
+    public CardDrawerViewLowres(@NonNull final Context context,
                                 @Nullable final AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public CardHeaderViewLowres(@NonNull final Context context,
+    public CardDrawerViewLowres(@NonNull final Context context,
                                 @Nullable final AttributeSet attrs, final int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }

@@ -19,7 +19,7 @@ import com.meli.android.carddrawer.app.model.VisaCardYellowConfiguration;
 import com.meli.android.carddrawer.app.util.ScaleUtil;
 import com.meli.android.carddrawer.configuration.DefaultCardConfiguration;
 import com.meli.android.carddrawer.model.Card;
-import com.meli.android.carddrawer.model.CardHeaderView;
+import com.meli.android.carddrawer.model.CardDrawerView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +27,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private Card card;
-    private CardHeaderView cardHeaderView;
+    private CardDrawerView cardDrawerView;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -37,8 +37,8 @@ public class MainActivity extends AppCompatActivity {
         } else {
             setContentView(R.layout.card_drawer_app_activity_main);
         }
-        cardHeaderView = findViewById(R.id.card_header_container);
-        card = cardHeaderView.getCard();
+        cardDrawerView = findViewById(R.id.card_header_container);
+        card = cardDrawerView.getCard();
         initCardConfigurationOptions();
         initCardNumber();
         initCardName();
@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         securityCode.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                cardHeaderView.showSecurityCode();
+                cardDrawerView.showSecurityCode();
             }
 
             @Override
@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable editable) {
                 if (editable.toString().isEmpty()) {
-                    cardHeaderView.show();
+                    cardDrawerView.show();
                 }
             }
         });
@@ -113,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
         cardName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                cardHeaderView.show();
+                cardDrawerView.show();
             }
         });
     }
@@ -141,7 +141,7 @@ public class MainActivity extends AppCompatActivity {
         cardNumber.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                cardHeaderView.show();
+                cardDrawerView.show();
             }
         });
     }
@@ -179,7 +179,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 CardConfigurationOption selection = cardOptions.get(position);
-                cardHeaderView.show(selection.getCardConfiguration());
+                cardDrawerView.show(selection.getCardConfiguration());
             }
 
             @Override

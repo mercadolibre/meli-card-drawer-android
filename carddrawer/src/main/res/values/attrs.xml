@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <declare-styleable name="CardHeaderView">
+    <declare-styleable name="CardDrawerView">
         <attr name="card_header_internal_padding" format="dimension"/>
         <attr name="card_header_behaviour" format="enum">
             <enum name="regular" value="0"/>

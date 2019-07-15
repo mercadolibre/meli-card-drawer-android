@@ -15,11 +15,11 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 @RunWith(RobolectricTestRunner.class)
-public class CardHeaderViewLowresTest extends CardHeaderViewTest {
+public class CardDrawerViewLowresTest extends CardDrawerViewTest {
 
     @Override
     public void doBefore() {
-        header = new CardHeaderViewLowres(getContext());
+        header = new CardDrawerViewLowres(getContext());
     }
 
     @Override
@@ -28,7 +28,7 @@ public class CardHeaderViewLowresTest extends CardHeaderViewTest {
         final AttributeSet attr = Robolectric.buildAttributeSet()
             .addAttribute(R.attr.card_header_internal_padding, "23dp")
             .build();
-        header = new CardHeaderViewLowres(getContext(), attr);
+        header = new CardDrawerViewLowres(getContext(), attr);
         final View front = header.findViewById(R.id.card_header_front);
         final View back = header.findViewById(R.id.card_header_back);
 

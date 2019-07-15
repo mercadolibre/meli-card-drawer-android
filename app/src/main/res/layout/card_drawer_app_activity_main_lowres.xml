@@ -10,7 +10,7 @@
     android:paddingTop="40dp"
     tools:context="com.meli.android.carddrawer.app.MainActivity">
 
-    <com.meli.android.carddrawer.model.CardHeaderViewLowres
+    <com.meli.android.carddrawer.model.CardDrawerViewLowres
         android:id="@+id/card_header_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>

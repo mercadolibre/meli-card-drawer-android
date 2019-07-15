@@ -38,12 +38,12 @@ import static org.mockito.Mockito.when;
  * Test for the card header.. many visual and animations changes can't be tested with just junit :(
  */
 @RunWith(RobolectricTestRunner.class)
-public class CardHeaderViewTest extends BasicRobolectricTest {
-    protected CardHeaderView header;
+public class CardDrawerViewTest extends BasicRobolectricTest {
+    protected CardDrawerView header;
 
     @Before
     public void doBefore() {
-        header = new CardHeaderView(getContext());
+        header = new CardDrawerView(getContext());
     }
 
     @Test
@@ -52,7 +52,7 @@ public class CardHeaderViewTest extends BasicRobolectricTest {
         final AttributeSet attr = Robolectric.buildAttributeSet()
             .addAttribute(R.attr.card_header_internal_padding, "23dp")
             .build();
-        header = new CardHeaderView(getContext(), attr);
+        header = new CardDrawerView(getContext(), attr);
         final View front = header.findViewById(R.id.card_header_front);
         final View back = header.findViewById(R.id.card_header_back);
 
@@ -122,7 +122,7 @@ public class CardHeaderViewTest extends BasicRobolectricTest {
 
     @Test
     public void show_updatesInformationAndSetsColorsAndCallsAnimator() {
-        CardHeaderView spyHeader = spy(header);
+        CardDrawerView spyHeader = spy(header);
         CardUI cardUI = new DefaultCardConfiguration(getContext());
         CardAnimator cardAnimatorMock = mock(CardAnimator.class);
         doNothing().when(spyHeader).updateCardInformation();
@@ -134,7 +134,7 @@ public class CardHeaderViewTest extends BasicRobolectricTest {
 
     @Test
     public void show_callsAnimator() {
-        CardHeaderView spyHeader = spy(header);
+        CardDrawerView spyHeader = spy(header);
         CardUI cardUI = new DefaultCardConfiguration(getContext());
         CardAnimator cardAnimatorMock = mock(CardAnimator.class);
         ReflectionHelpers.setField(spyHeader, "cardAnimator", cardAnimatorMock);
@@ -181,7 +181,7 @@ public class CardHeaderViewTest extends BasicRobolectricTest {
 
     @Test
     public void showSecCode_withFrontPosition_callsSwitchViewWithFrontPosition() {
-        CardHeaderView spyHeader = spy(header);
+        CardDrawerView spyHeader = spy(header);
         GradientTextView codeFront = new GradientTextView(getContext());
         codeFront.setVisibility(View.INVISIBLE);
         TextView codeBack = new TextView((getContext()));
@@ -207,7 +207,7 @@ public class CardHeaderViewTest extends BasicRobolectricTest {
 
     @Test
     public void showSecCode_withBackPosition_callsSwitchViewWithBackPosition() {
-        final CardHeaderView spyHeader = spy(header);
+        final CardDrawerView spyHeader = spy(header);
         final CardUI source = mock(CardUI.class);
         when(source.getSecurityCodeLocation()).thenReturn(SecurityCodeLocation.BACK);
         when(source.getAnimationType()).thenReturn(CardAnimationType.NONE);
@@ -239,7 +239,7 @@ public class CardHeaderViewTest extends BasicRobolectricTest {
 
     @Test
     public void hideSecCircle_withBackPosition_hidesSecCode() {
-        CardHeaderView spyHeader = spy(header);
+        CardDrawerView spyHeader = spy(header);
         CardAnimator cardAnimatorMock = mock(CardAnimator.class);
         GradientTextView codeFront = new GradientTextView(getContext());
         codeFront.setVisibility(View.VISIBLE);
@@ -257,7 +257,7 @@ public class CardHeaderViewTest extends BasicRobolectricTest {
 
     @Test
     public void setCardTextColor_initViews() {
-        CardHeaderView spyHeader = spy(header);
+        CardDrawerView spyHeader = spy(header);
 
         GradientTextView cardNumber = mock(GradientTextView.class);
         GradientTextView cardName = mock(GradientTextView.class);
@@ -292,7 +292,7 @@ public class CardHeaderViewTest extends BasicRobolectricTest {
         CardUI source = mock(CardUI.class);
         when(source.getBankImageRes()).thenReturn(3);
         when(issuerLogoView.getNextView()).thenReturn(bankImageView);
-        CardHeaderView spyHeader = spy(header);
+        CardDrawerView spyHeader = spy(header);
 
         spyHeader.updateIssuerLogo(issuerLogoView, source, false);
 
@@ -307,7 +307,7 @@ public class CardHeaderViewTest extends BasicRobolectricTest {
         CardUI source = mock(CardUI.class);
         when(source.getCardLogoImageRes()).thenReturn(3);
         when(cardImageSwitcher.getNextView()).thenReturn(cardImageView);
-        CardHeaderView spyHeader = spy(header);
+        CardDrawerView spyHeader = spy(header);
 
         spyHeader.updateCardLogo(cardImageSwitcher, source, false);
 
