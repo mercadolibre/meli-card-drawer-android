@@ -8,7 +8,7 @@ buildscript {
     }
     dependencies {
         classpath "com.android.tools.build:gradle:$gradleBuildToolsVersion"
-        
+        classpath "com.novoda:bintray-release:$bintrayReleasePluginVersion"
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
@@ -20,6 +20,15 @@ allprojects {
         jcenter()
         
     }
+
+    tasks.withType(JavaCompile) {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
+    // It's our convention to keep all modules in the same GitHub repository with the same group and version.
+    group = libraryGroupId
+    version = libraryVersion
 }
 
 task clean(type: Delete) {

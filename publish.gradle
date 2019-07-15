@@ -1,0 +1,18 @@
+publish {
+    userOrg = 'mercadolibre'
+    repoName = 'android-public'
+
+    groupId = project.group
+    artifactId = 'carddrawer'
+    publishVersion = project.version
+
+    uploadName = "$groupId.$artifactId"
+
+    dryRun = false
+
+    desc = 'Android library for shared credit card UI component'
+    website = 'https://github.com/mercadolibre/meli-card-drawer-android'
+
+    bintrayUser = System.getenv('BINTRAY_USER')
+    bintrayKey = System.getenv('BINTRAY_KEY')
+}
