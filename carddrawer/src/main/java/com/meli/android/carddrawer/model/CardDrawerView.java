@@ -39,7 +39,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 @SuppressWarnings({"PMD.ConstructorCallsOverridableMethod", "PMD.TooManyFields", "PMD.GodClass"})
-public class CardHeaderView extends FrameLayout implements Observer {
+public class CardDrawerView extends FrameLayout implements Observer {
 
     private static final int DELAY_MILLIS = 1000;
     private static final int CORNER_RATIO = 32;
@@ -65,15 +65,15 @@ public class CardHeaderView extends FrameLayout implements Observer {
     private GradientDrawable cardFrontGradient;
     private GradientDrawable cardBackGradient;
 
-    public CardHeaderView(@NonNull final Context context) {
+    public CardDrawerView(@NonNull final Context context) {
         this(context, null);
     }
 
-    public CardHeaderView(@NonNull final Context context, @Nullable final AttributeSet attrs) {
+    public CardDrawerView(@NonNull final Context context, @Nullable final AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public CardHeaderView(@NonNull final Context context, @Nullable final AttributeSet attrs, final int defStyleAttr) {
+    public CardDrawerView(@NonNull final Context context, @Nullable final AttributeSet attrs, final int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(context, attrs);
     }
@@ -92,12 +92,12 @@ public class CardHeaderView extends FrameLayout implements Observer {
 
         bindViews();
 
-        final TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.CardHeaderView);
+        final TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.CardDrawerView);
         final int internalPadding = typedArray.getDimensionPixelSize(
-                R.styleable.CardHeaderView_card_header_internal_padding,
+                R.styleable.CardDrawerView_card_header_internal_padding,
                 getResources().getDimensionPixelSize(R.dimen.card_drawer_layout_padding));
         @Behaviour final int behaviour = typedArray.getInt(
-                R.styleable.CardHeaderView_card_header_behaviour, Behaviour.REGULAR);
+                R.styleable.CardDrawerView_card_header_behaviour, Behaviour.REGULAR);
         typedArray.recycle();
 
         setInternalPadding(internalPadding);
