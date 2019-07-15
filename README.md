@@ -24,11 +24,11 @@ Add this line to your app's `build.gradle` inside the `dependencies` section:
 ```java
 // You can highlight the security code location. 
 // If the security code is behind, the card will transition with flip animation.
-cardHeaderView.showSecurityCode();
+cardDrawerView.showSecurityCode();
 ```
 ### Show front card view
 ```java
-cardHeaderView.show();
+cardDrawerView.show();
 ```
 ## 💳 Card data structure and style customization
 You can customize the data structure and style of your card.
