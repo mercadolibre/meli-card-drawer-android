@@ -17,31 +17,119 @@ Add this line to your app's `build.gradle` inside the `dependencies` section:
 - [x] Live card view updated while CardData protocol is edited
 - [x] Support for custom overlay background image
 
-## 🐒 How to use
-
-### 1 - Import into project
-
-### 2 - Define CardHeaderController reference & your own container view.
-
-### 3 - Init cardDrawer sending CardUI and CardData protocol as parameters.
-
-### 4 - Call to setup and show method.
-
 ## 💡 Advanced features
 ### Show security code
 
-
+![Gif](https://i.imgur.com/H2psku8.gif)
+```java
+// You can highlight the security code location. 
+// If the security code is behind, the card will transition with flip animation.
+cardHeaderView.showSecurityCode();
+```
 ### Show front card view
-
+```java
+cardHeaderView.show();
+```
 ## 💳 Card data structure and style customization
 You can customize the data structure and style of your card.
 
-### 🔠 CardData protocol
+### 🔠 Card
+Using `Card` to update the card display values.
+```java
+public class Card extends Observable implements Parcelable {
+    private String number;
+    private String name;
+    private String expiration;
+    private String secCode;
+...
 
-### 🎨 CardUI protocol
+```
 
-### 🔮 Project Example
+### 🎨 CardUI 
+Using `CardUI` to customize: position of security code, card background, font color, place holders, etc.
+```java
+public interface CardUI {
+    /**
+     * @return the bank logo to show
+     */
+    @DrawableRes
+    int getBankImageRes();
 
+    /**
+     * @return the card logo to show
+     */
+    @DrawableRes
+    int getCardLogoImageRes();
+
+    /**
+     * Sets the card logo image to the Imageview
+     * @param cardLogo
+     */
+    void setCardLogoImage(@NonNull ImageView cardLogo);
+
+    /**
+     * Sets bank image to the Imageview
+     * @param bankImage
+     */
+    void setBankImage(@NonNull ImageView bankImage);
+
+    /**
+     * @return the security code position
+     */
+    @SecurityCodeLocation
+    String getSecurityCodeLocation();
+
+    /**
+     * @return color for text
+     */
+    @ColorInt
+    int getCardFontColor();
+
+    /**
+     * @return color for paint de card
+     */
+    @ColorInt
+    int getCardBackgroundColor();
+
+    /**
+     * @return number long
+     */
+    int getSecurityCodePattern();
+
+    /**
+     * Ej: **** **** **** ****
+     *
+     * @return the group of numbers
+     */
+    int[] getCardNumberPattern();
+
+    /**
+     * Ej: NOMBRE Y APELLIDO
+     *
+     * @return the name place holder to show
+     */
+    String getNamePlaceHolder();
+
+    /**
+     * Ej: MM/AA
+     *
+     * @return the expiration date place holder to show
+     */
+    String getExpirationPlaceHolder();
+
+    /**
+     * @return the font type
+     */
+    @FontType
+    String getFontType();
+
+    /**
+     * @return the animation type
+     */
+    @CardAnimationType
+    String getAnimationType();
+}
+```
 ## 👨🏻‍💻 Author
 Mercado Libre
 
