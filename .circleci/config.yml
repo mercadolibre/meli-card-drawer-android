@@ -23,7 +23,7 @@ build-job: &buildJob
       - add_ssh_keys
       - restore_cache:
           key: buildscript-{{ checksum "build.gradle" }}
-      - restore_cache:E
+      - restore_cache:
           key: gradlew-{{ checksum "./gradle/wrapper/gradle-wrapper.properties" }}
       - restore_cache:
           key: dependencies-{{ checksum "app/build.gradle" }}-{{ checksum "carddrawer/build.gradle" }}
