@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal"
+    android:id="@+id/card_header_back">
+
+    <android.support.constraint.Guideline
+        android:id="@+id/card_header_back_guideline_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="26dp"/>
+
+    <android.support.constraint.Guideline
+        android:id="@+id/card_header_back_guideline_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.937"/>
+
+    <android.support.constraint.Guideline
+        android:id="@+id/card_header_back_guideline_cvv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.732"/>
+
+    <include
+        android:id="@+id/include"
+        layout="@layout/card_drawer_back_background"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintDimensionRatio="H,256:47"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <ImageView
+        android:id="@+id/cho_card_code_back_container"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:adjustViewBounds="true"
+        android:src="@drawable/card_drawer_sec_code_band"
+        app:layout_constraintBottom_toBottomOf="@+id/include"
+        app:layout_constraintEnd_toEndOf="@id/card_header_back_guideline_right"
+        app:layout_constraintStart_toStartOf="@id/card_header_back_guideline_left"
+        app:layout_constraintTop_toTopOf="@+id/include"/>
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/cho_card_code_back"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:autoSizeTextType="uniform"
+        app:autoSizeMinTextSize="8dp"
+        app:autoSizeMaxTextSize="100dp"
+        android:gravity="center"
+        android:textColor="@color/card_drawer_gray"
+        tools:text="213"
+        tools:fontFamily="@font/card_drawer_roboto_mono"
+        app:layout_constraintStart_toStartOf="@id/card_header_back_guideline_cvv"
+        app:layout_constraintEnd_toEndOf="@id/cho_card_code_back_container"
+        app:layout_constraintTop_toTopOf="@id/cho_card_code_back_container"
+        app:layout_constraintBottom_toBottomOf="@id/cho_card_code_back_container"
+        app:layout_constraintHeight_percent="0.2"/>
+
+</android.support.constraint.ConstraintLayout>

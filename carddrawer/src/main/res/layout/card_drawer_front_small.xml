@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/card_header_front">
+
+    <android.support.constraint.Guideline
+        android:id="@+id/card_header_front_guideline_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.062" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/card_header_front_guideline_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.937" />
+
+    <include
+        android:id="@+id/include2"
+        layout="@layout/card_drawer_front_background"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintDimensionRatio="H,256:47"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageSwitcher
+        android:id="@+id/cho_card_logo"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/include2"
+        app:layout_constraintDimensionRatio="W,77:44"
+        app:layout_constraintHeight_percent="0.278"
+        app:layout_constraintStart_toStartOf="@id/card_header_front_guideline_left"
+        app:layout_constraintTop_toTopOf="@+id/include2">
+
+        <include layout="@layout/card_drawer_card_logo" />
+
+        <include layout="@layout/card_drawer_card_logo" />
+
+    </ImageSwitcher>
+
+    <com.meli.android.carddrawer.model.GradientTextView
+        android:id="@+id/cho_card_number"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:gravity="center_vertical|end"
+        android:maxLines="1"
+        app:autoSizeMaxTextSize="100dp"
+        app:autoSizeMinTextSize="8dp"
+        app:autoSizeTextType="uniform"
+        app:layout_constraintBottom_toBottomOf="@+id/include2"
+        app:layout_constraintEnd_toEndOf="@id/card_header_front_guideline_right"
+        app:layout_constraintStart_toEndOf="@+id/cho_card_logo"
+        app:layout_constraintTop_toTopOf="@+id/include2"
+        tools:text="6666 6666 6666 6666" />
+
+</android.support.constraint.ConstraintLayout>
