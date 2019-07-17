@@ -7,6 +7,7 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -29,6 +30,10 @@ public class MainActivity extends AppCompatActivity {
     private Card card;
     private CardDrawerView cardDrawerView;
 
+    private Button buttonLarge;
+    private Button buttonMedium;
+    private Button buttonSmall;
+
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,12 +43,46 @@ public class MainActivity extends AppCompatActivity {
             setContentView(R.layout.card_drawer_app_activity_main);
         }
         cardDrawerView = findViewById(R.id.card_header_container);
+        buttonLarge = findViewById(R.id.button_large);
+        buttonMedium = findViewById(R.id.button_medium);
+        buttonSmall = findViewById(R.id.button_small);
         card = cardDrawerView.getCard();
+        initButtonsEvents();
         initCardConfigurationOptions();
         initCardNumber();
         initCardName();
         initExpirationDate();
         initSecurityCode();
+    }
+
+    private void initButtonsEvents() {
+        buttonLarge.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hideAndShowCard(R.id.card_header_container);
+            }
+        });
+
+        buttonMedium.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hideAndShowCard(R.id.card_header_container_medium);
+            }
+        });
+
+        buttonSmall.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hideAndShowCard(R.id.card_header_container_small);
+            }
+        });
+    }
+
+    private void hideAndShowCard(int resource) {
+        cardDrawerView.setVisibility(View.GONE);
+        cardDrawerView = findViewById(resource);
+        cardDrawerView.setVisibility(View.VISIBLE);
+        card = cardDrawerView.getCard();
     }
 
     private void initSecurityCode() {

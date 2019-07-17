@@ -15,6 +15,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
+    <com.meli.android.carddrawer.model.CardDrawerViewMedium
+        android:id="@+id/card_header_container_medium"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <com.meli.android.carddrawer.model.CardDrawerViewSmall
+        android:id="@+id/card_header_container_small"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
     <EditText
         android:id="@+id/card_number"
         android:layout_width="match_parent"
@@ -54,5 +66,39 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/button_large"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"
+            android:background="@color/colorPrimary"
+            android:layout_margin="5dp"
+            android:text="Large"/>
+        <Button
+            android:id="@+id/button_medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"
+            android:layout_margin="5dp"
+            android:background="@color/colorPrimary"
+            android:text="Medium"/>
+        <Button
+            android:id="@+id/button_small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"
+            android:layout_margin="5dp"
+            android:background="@color/colorPrimary"
+            android:text="Small"/>
+    </LinearLayout>
 
 </LinearLayout>
