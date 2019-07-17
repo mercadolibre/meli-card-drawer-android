@@ -3,6 +3,8 @@ apply from: rootProject.file('jacoco.gradle')
 
 android {
     compileSdkVersion androidTarget as int
+    buildToolsVersion androidBuildToolsVersion
+
     defaultConfig {
         applicationId "com.meli.android.carddrawer"
         minSdkVersion androidMinSdk as int
