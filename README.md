@@ -5,7 +5,7 @@
 Add this line to your app's `build.gradle` inside the `dependencies` section:
 
    ```android
-   implementation 'com.meli.android.carddrawer:xxx:x.+'
+   implementation 'com.mercadolibre.android:carddrawer:1.+'
    ```
    
 ## 🌟 Features
