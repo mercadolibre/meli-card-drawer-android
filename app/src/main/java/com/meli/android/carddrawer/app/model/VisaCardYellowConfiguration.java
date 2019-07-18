@@ -57,7 +57,7 @@ public class VisaCardYellowConfiguration implements CardUI {
 
     @Override
     public String getSecurityCodeLocation() {
-        return SecurityCodeLocation.FRONT;
+        return SecurityCodeLocation.BACK;
     }
 
     @Override

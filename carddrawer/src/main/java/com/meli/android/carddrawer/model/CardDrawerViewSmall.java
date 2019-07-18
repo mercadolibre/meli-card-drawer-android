@@ -11,7 +11,9 @@ import android.view.ViewGroup;
 import android.widget.ImageSwitcher;
 
 import com.meli.android.carddrawer.R;
+import com.meli.android.carddrawer.configuration.FieldPosition;
 import com.meli.android.carddrawer.configuration.FontType;
+import com.meli.android.carddrawer.configuration.SecurityCodeLocation;
 import com.meli.android.carddrawer.format.NumberFormatter;
 
 import java.util.Observable;
@@ -97,12 +99,32 @@ public class CardDrawerViewSmall extends CardDrawerView {
     }
 
     @Override
-    public void hideSecCircle() {
-        //nothing to do here
+    public void setCardTextColor(@NonNull @FontType final String fontType, @ColorInt final int fontColor) {
+        cardNumber.init(fontType, getCardNumberPlaceHolder(), fontColor);
     }
 
     @Override
-    public void setCardTextColor(@NonNull @FontType final String fontType, @ColorInt final int fontColor) {
-        cardNumber.init(fontType, getCardNumberPlaceHolder(), fontColor);
+    public void showSecurityCode() {
+        if (source.getSecurityCodeLocation().equals(SecurityCodeLocation.BACK)) {
+            final int securityCodeFieldPosition = FieldPosition.POSITION_BACK;
+            cardAnimator.switchView(securityCodeFieldPosition);
+            showSecCircle();
+        }
+    }
+
+    @Override
+    public void showSecurityCode(@NonNull final CardUI cardUI) {
+        source = cardUI;
+        if (source.getSecurityCodeLocation().equals(SecurityCodeLocation.BACK)) {
+            final int securityCodeFieldPosition = FieldPosition.POSITION_BACK;
+            cardAnimator.switchViewWithoutAnimation(securityCodeFieldPosition);
+            update(source);
+            showSecCircle();
+        }
+    }
+
+    @Override
+    public void hideSecCircle() {
+        //nothing to do here
     }
 }

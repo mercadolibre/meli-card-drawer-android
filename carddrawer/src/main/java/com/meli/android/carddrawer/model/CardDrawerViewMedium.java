@@ -8,10 +8,13 @@ import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
 
 import android.util.AttributeSet;
+import android.view.View;
 import android.view.ViewGroup;
 
 import com.meli.android.carddrawer.R;
+import com.meli.android.carddrawer.configuration.FieldPosition;
 import com.meli.android.carddrawer.configuration.FontType;
+import com.meli.android.carddrawer.configuration.SecurityCodeLocation;
 import com.meli.android.carddrawer.format.NumberFormatter;
 
 public class CardDrawerViewMedium extends CardDrawerView {
@@ -86,6 +89,26 @@ public class CardDrawerViewMedium extends CardDrawerView {
         updateIssuerLogo(issuerLogoView, source, animate);
         updateCardLogo(cardLogoView, source, animate);
         cardNumber.startAnimation(getFadeInAnimation(getContext()));
+    }
+
+    @Override
+    public void showSecurityCode() {
+        if (source.getSecurityCodeLocation().equals(SecurityCodeLocation.BACK)) {
+            final int securityCodeFieldPosition = FieldPosition.POSITION_BACK;
+            cardAnimator.switchView(securityCodeFieldPosition);
+            showSecCircle();
+        }
+    }
+
+    @Override
+    public void showSecurityCode(@NonNull final CardUI cardUI) {
+        source = cardUI;
+        if (source.getSecurityCodeLocation().equals(SecurityCodeLocation.BACK)) {
+            final int securityCodeFieldPosition = FieldPosition.POSITION_BACK;
+            cardAnimator.switchViewWithoutAnimation(securityCodeFieldPosition);
+            update(source);
+            showSecCircle();
+        }
     }
 
     @Override
