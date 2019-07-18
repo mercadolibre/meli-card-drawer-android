@@ -6,8 +6,7 @@ import android.support.annotation.NonNull;
 
 /**
  * Transforms the input text, grouping characters according to a pattern.
- * <p/>
- * The processed text is always the max size, filling remaining space
+ * The processed text is always the max size, filling remaining space.
  */
 public class NumberFormatter implements Parcelable {
 

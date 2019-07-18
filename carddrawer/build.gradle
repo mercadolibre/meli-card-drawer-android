@@ -5,7 +5,8 @@ apply from: rootProject.file('publish.gradle')
 
 android {
     compileSdkVersion androidTarget as int
-
+    buildToolsVersion androidBuildToolsVersion
+    
     defaultConfig {
         minSdkVersion androidMinSdk as int
         targetSdkVersion androidTarget as int
