@@ -7,7 +7,7 @@ Add this line to your app's `build.gradle` inside the `dependencies` section:
    ```android
    implementation 'com.mercadolibre.android:carddrawer:1.+'
    ```
-Add this lines to your project's `build.gradle` inside the `repositories` section:   
+Add this line to your project's `build.gradle` inside the `repositories` section:   
    
    ```android
     maven {
@@ -137,6 +137,13 @@ public interface CardUI {
     String getAnimationType();
 }
 ```
+
+## How to make a local publish
+```
+./gradlew build publishToMavenLocal
+```
+Pro tip: first change the version name in ```gradle.properties``` to ```X.XX.X-LOCAL```
+
 ## 👨🏻‍💻 Author
 Mercado Libre
 
