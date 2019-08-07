@@ -2,57 +2,136 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.meli.android.carddrawer.app.MainActivity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:paddingLeft="20dp"
-    android:paddingRight="20dp"
-    android:paddingTop="40dp"
-    tools:context="com.meli.android.carddrawer.app.MainActivity">
+    android:orientation="vertical">
 
-    <com.meli.android.carddrawer.model.CardDrawerView
-        android:id="@+id/card_header_container"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
-    <EditText
-        android:id="@+id/card_number"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:hint="@string/card_drawer_app_card_number_hint"
-        android:inputType="numberSigned"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:paddingTop="20dp">
 
-    <EditText
-        android:id="@+id/card_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:hint="@string/card_drawer_app_card_name_hint"/>
+            <com.meli.android.carddrawer.model.CardDrawerView
+                android:id="@+id/card_header_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
 
-    <EditText
-        android:id="@+id/expiration_date"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:hint="@string/card_drawer_app_card_expiration_hint"
-        android:inputType="datetime"/>
+            <com.meli.android.carddrawer.model.CardDrawerViewLowres
+                android:id="@+id/card_header_lowres_container"
+                android:layout_width="match_parent"
+                android:visibility="gone"
+                android:layout_height="wrap_content"/>
 
-    <EditText
-        android:id="@+id/security_code"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:hint="@string/card_drawer_app_card_sec_code_hint"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+                <EditText
+                    android:id="@+id/card_number"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:hint="@string/card_drawer_app_card_number_hint"
+                    android:maxLines="1"
+                    android:layout_marginRight="8dp"
+                    android:inputType="numberSigned"/>
+
+                <EditText
+                    android:id="@+id/security_code"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:maxLines="1"
+                    android:layout_marginRight="8dp"
+                    android:hint="@string/card_drawer_app_card_sec_code_hint"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp">
+
+                <EditText
+                    android:id="@+id/card_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:maxLines="1"
+                    android:layout_marginRight="8dp"
+                    android:hint="@string/card_drawer_app_card_name_hint"/>
+
+                <EditText
+                    android:id="@+id/expiration_date"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:maxLines="1"
+                    android:layout_marginRight="8dp"
+                    android:inputType="date"
+                    android:maxLength="5"
+                    android:hint="@string/card_drawer_app_card_expiration_hint"/>
+
+            </LinearLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:textSize="16dp"
+                    android:text="@string/card_drawer_app_responsive"/>
+
+                <Switch
+                    android:id="@+id/card_header_switch_responsive"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|end"/>
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:textSize="16dp"
+                    android:text="@string/card_drawer_app_low_res"/>
+
+                <Switch
+                    android:id="@+id/card_header_lowres_switch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|end"/>
+
+            </FrameLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
 
     <Spinner
         android:id="@+id/spinner_cards"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"/>
+        android:layout_margin="20dp"/>
 
 </LinearLayout>

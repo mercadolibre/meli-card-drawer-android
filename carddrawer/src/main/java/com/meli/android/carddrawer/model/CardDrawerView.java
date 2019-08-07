@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
-import android.os.Handler;
 import android.os.Parcelable;
 import android.support.annotation.ColorInt;
 import android.support.annotation.IdRes;
@@ -17,14 +16,12 @@ import android.support.v4.widget.TextViewCompat;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
 import android.widget.ImageSwitcher;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.meli.android.carddrawer.R;
 import com.meli.android.carddrawer.configuration.DefaultCardConfiguration;
 import com.meli.android.carddrawer.configuration.FieldPosition;
@@ -32,7 +29,6 @@ import com.meli.android.carddrawer.configuration.FontType;
 import com.meli.android.carddrawer.configuration.SecurityCodeLocation;
 import com.meli.android.carddrawer.format.MonospaceTypefaceSetter;
 import com.meli.android.carddrawer.format.NumberFormatter;
-
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Observable;
@@ -41,7 +37,6 @@ import java.util.Observer;
 @SuppressWarnings({"PMD.ConstructorCallsOverridableMethod", "PMD.TooManyFields", "PMD.GodClass"})
 public class CardDrawerView extends FrameLayout implements Observer {
 
-    private static final int DELAY_MILLIS = 1000;
     private static final int CORNER_RATIO = 32;
 
     private CardAnimator cardAnimator;
@@ -61,7 +56,6 @@ public class CardDrawerView extends FrameLayout implements Observer {
     private Card card;
     private View cardFrontLayout;
     private View cardBackLayout;
-    private int previousCardWidth;
     private GradientDrawable cardFrontGradient;
     private GradientDrawable cardBackGradient;
 
@@ -120,13 +114,6 @@ public class CardDrawerView extends FrameLayout implements Observer {
         card = new Card();
         card.addObserver(this);
         updateCardInformation();
-
-        getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            @Override
-            public void onGlobalLayout() {
-                calculateCornerRadius();
-            }
-        });
     }
 
     private void bindViews() {
@@ -214,18 +201,11 @@ public class CardDrawerView extends FrameLayout implements Observer {
     }
 
     private void setMonospaceFont() {
-        setMonospaceFont(R.id.cho_card_name);
-        setMonospaceFont(R.id.cho_card_date);
-        setMonospaceFont(R.id.cho_card_code_front);
-        setMonospaceFont(R.id.cho_card_code_back);
-        setMonospaceFont(R.id.cho_card_number);
-    }
-
-    private void setMonospaceFont(@IdRes final int viewId) {
-        final TextView view = findViewById(viewId);
-        if (view != null) {
-            MonospaceTypefaceSetter.setRobotoMono(getContext(), view);
-        }
+        MonospaceTypefaceSetter.setRobotoMono(getContext(), cardNumber);
+        MonospaceTypefaceSetter.setRobotoMono(getContext(), cardName);
+        MonospaceTypefaceSetter.setRobotoMono(getContext(), cardDate);
+        MonospaceTypefaceSetter.setRobotoMono(getContext(), codeFront);
+        MonospaceTypefaceSetter.setRobotoMono(getContext(), codeBack);
     }
 
     /**
@@ -239,11 +219,13 @@ public class CardDrawerView extends FrameLayout implements Observer {
         updateIssuerLogo(issuerLogoView, source, animate);
         updateCardLogo(cardLogoView, source, animate);
         setCardTextColor(source.getFontType(), source.getCardFontColor());
-        cardNumber.startAnimation(getFadeInAnimation(getContext()));
-        cardName.startAnimation(getFadeInAnimation(getContext()));
-        cardDate.startAnimation(getFadeInAnimation(getContext()));
-        if (source.getSecurityCodeLocation().equals(SecurityCodeLocation.FRONT)) {
-            codeFront.startAnimation(getFadeInAnimation(getContext()));
+        if (animate) {
+            cardNumber.startAnimation(getFadeInAnimation(getContext()));
+            cardName.startAnimation(getFadeInAnimation(getContext()));
+            cardDate.startAnimation(getFadeInAnimation(getContext()));
+            if (source.getSecurityCodeLocation().equals(SecurityCodeLocation.FRONT)) {
+                codeFront.startAnimation(getFadeInAnimation(getContext()));
+            }
         }
     }
 
@@ -375,17 +357,33 @@ public class CardDrawerView extends FrameLayout implements Observer {
             backParams.width = width;
         }
 
-        //Recalculate card name text size
-        TextViewCompat.setAutoSizeTextTypeWithDefaults(cardName, TextViewCompat.AUTO_SIZE_TEXT_TYPE_UNIFORM);
-        new Handler().postDelayed(new Runnable() {
+        recalculateTextViewSize(cardName);
+        recalculateTextViewSize(cardDate);
+
+        cardFrontLayout.addOnLayoutChangeListener(new OnLayoutChangeListener() {
             @Override
-            public void run() {
-                TextViewCompat.setAutoSizeTextTypeWithDefaults(cardName, TextViewCompat.AUTO_SIZE_TEXT_TYPE_NONE);
+            public void onLayoutChange(final View view, final int i, final int i1, final int i2, final int i3,
+                final int i4, final int i5, final int i6, final int i7) {
+                view.removeOnLayoutChangeListener(this);
+                calculateCornerRadius(view);
             }
-        }, DELAY_MILLIS);
+        });
 
         cardFrontLayout.setLayoutParams(frontParams);
         cardBackLayout.setLayoutParams(backParams);
+    }
+
+    private void recalculateTextViewSize(@NonNull final TextView view) {
+        view.addOnLayoutChangeListener(new OnLayoutChangeListener() {
+            @Override
+            public void onLayoutChange(final View v, final int left, final int top, final int right, final int bottom,
+                final int oldLeft, final int oldTop,
+                final int oldRight, final int oldBottom) {
+                view.removeOnLayoutChangeListener(this);
+                TextViewCompat.setAutoSizeTextTypeWithDefaults(view, TextViewCompat.AUTO_SIZE_TEXT_TYPE_NONE);
+            }
+        });
+        TextViewCompat.setAutoSizeTextTypeWithDefaults(view, TextViewCompat.AUTO_SIZE_TEXT_TYPE_UNIFORM);
     }
 
     @Override
@@ -425,13 +423,9 @@ public class CardDrawerView extends FrameLayout implements Observer {
         int RESPONSIVE = 1;
     }
 
-    private void calculateCornerRadius() {
-        if (cardFrontLayout.getWidth() != previousCardWidth) {
-            previousCardWidth = cardFrontLayout.getWidth();
-            final float cornerRadius = (float) previousCardWidth / CORNER_RATIO;
-            cardFrontGradient.setCornerRadius(cornerRadius);
-            cardBackGradient.setCornerRadius(cornerRadius);
-        }
+    /* default */ void calculateCornerRadius(@NonNull final View view) {
+        final float cornerRadius = (float) view.getWidth() / CORNER_RATIO;
+        cardFrontGradient.setCornerRadius(cornerRadius);
+        cardBackGradient.setCornerRadius(cornerRadius);
     }
 }
-

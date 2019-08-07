@@ -5,31 +5,24 @@ import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
-import android.view.Gravity;
-import android.view.View;
-import android.view.ViewTreeObserver;
 import android.view.animation.Animation;
 import android.widget.ImageSwitcher;
 import android.widget.ImageView;
-
 import com.meli.android.carddrawer.R;
 
 
 public class CardDrawerViewLowres extends CardDrawerView {
 
-    private static final float LOGO_ASPECT_RATIO = 0.73f;
-
     public CardDrawerViewLowres(@NonNull final Context context) {
         this(context, null);
     }
 
-    public CardDrawerViewLowres(@NonNull final Context context,
-                                @Nullable final AttributeSet attrs) {
+    public CardDrawerViewLowres(@NonNull final Context context, @Nullable final AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public CardDrawerViewLowres(@NonNull final Context context,
-                                @Nullable final AttributeSet attrs, final int defStyleAttr) {
+    public CardDrawerViewLowres(@NonNull final Context context, @Nullable final AttributeSet attrs,
+        final int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 
@@ -41,7 +34,7 @@ public class CardDrawerViewLowres extends CardDrawerView {
 
     @Override
     protected void updateCardLogo(final ImageSwitcher cardLogoView, @NonNull final CardUI source,
-                                  final boolean animate) {
+        final boolean animate) {
         cardLogoView.setAnimateFirstView(animate);
         final ImageView cardImageView = (ImageView) cardLogoView.getNextView();
         //CardUI implementation can define the card logo in getCardLogoRes or setCardLogo method
@@ -55,13 +48,14 @@ public class CardDrawerViewLowres extends CardDrawerView {
 
     @Override
     protected void updateIssuerLogo(final ImageSwitcher issuerLogoView, @NonNull final CardUI source,
-                                    final boolean animate) {
+        final boolean animate) {
         //No issuer logo on low res.
     }
 
     @Override
     protected void setupImageSwitcher(@Nullable final ImageSwitcher imageSwitcher, @NonNull final Animation fadeIn,
-                                      @NonNull final Animation fadeOut) {
+        @NonNull final Animation fadeOut) {
+        //The issuer image switcher is null on low res
         if (imageSwitcher == null) {
             return;
         }
@@ -84,23 +78,5 @@ public class CardDrawerViewLowres extends CardDrawerView {
                 //Nothing to do here
             }
         });
-        //Here we set the image switcher childs width dynamically after their height is measured.
-        for (int i = 0; i < imageSwitcher.getChildCount(); i++) {
-            final View view = imageSwitcher.getChildAt(i);
-            view.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-                @Override
-                public void onGlobalLayout() {
-                    if (view.getMeasuredHeight() == 0) {
-                        return;
-                    }
-                    final LayoutParams layoutParams = (LayoutParams) view.getLayoutParams();
-                    layoutParams.gravity = Gravity.CENTER;
-                    layoutParams.width = Math.round(view.getMeasuredHeight() / LOGO_ASPECT_RATIO);
-                    view.setLayoutParams(layoutParams);
-                    view.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                }
-            });
-        }
     }
 }
-

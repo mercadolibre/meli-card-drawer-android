@@ -4,5 +4,7 @@
     <string name="card_drawer_app_card_number_hint">Número</string>
     <string name="card_drawer_app_card_name_hint">Nombre</string>
     <string name="card_drawer_app_card_expiration_hint">MM/AA</string>
-    <string name="card_drawer_app_card_sec_code_hint">Código de seguridad</string>
+    <string name="card_drawer_app_card_sec_code_hint">CVV</string>
+    <string name="card_drawer_app_responsive">Responsive</string>
+    <string name="card_drawer_app_low_res">Low Res</string>
 </resources>
