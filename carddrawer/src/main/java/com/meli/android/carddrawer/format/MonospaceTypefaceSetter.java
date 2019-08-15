@@ -57,5 +57,4 @@ public final class MonospaceTypefaceSetter {
                 };
         FontsContractCompat.requestFont(context, request, callback, HANDLER);
     }
-
 }

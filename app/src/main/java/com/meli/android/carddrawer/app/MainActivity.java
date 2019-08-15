@@ -7,38 +7,56 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CompoundButton;
 import android.widget.Spinner;
+import android.widget.Switch;
 import android.widget.TextView;
-
+import com.meli.android.carddrawer.app.model.CardComposite;
 import com.meli.android.carddrawer.app.model.MasterCardConfiguration;
 import com.meli.android.carddrawer.app.model.VisaCardBlueConfiguration;
 import com.meli.android.carddrawer.app.model.VisaCardGrayConfiguration;
 import com.meli.android.carddrawer.app.model.VisaCardGreenConfiguration;
 import com.meli.android.carddrawer.app.model.VisaCardRedConfiguration;
 import com.meli.android.carddrawer.app.model.VisaCardYellowConfiguration;
-import com.meli.android.carddrawer.app.util.ScaleUtil;
 import com.meli.android.carddrawer.configuration.DefaultCardConfiguration;
-import com.meli.android.carddrawer.model.Card;
 import com.meli.android.carddrawer.model.CardDrawerView;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Card card;
+    private CardComposite card;
     private CardDrawerView cardDrawerView;
+    private CardDrawerView cardDrawerViewLowRes;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (ScaleUtil.isLowRes(this)) {
-            setContentView(R.layout.card_drawer_app_activity_main_lowres);
-        } else {
-            setContentView(R.layout.card_drawer_app_activity_main);
-        }
+        setContentView(R.layout.card_drawer_app_activity_main);
+
         cardDrawerView = findViewById(R.id.card_header_container);
-        card = cardDrawerView.getCard();
+        cardDrawerViewLowRes = findViewById(R.id.card_header_lowres_container);
+        card = new CardComposite();
+        card.addCard(cardDrawerView.getCard());
+        card.addCard(cardDrawerViewLowRes.getCard());
+        ((Switch) findViewById(R.id.card_header_switch_responsive)).setOnCheckedChangeListener(
+            new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(final CompoundButton buttonView, final boolean isChecked) {
+                    final int behaviour = isChecked ?
+                        CardDrawerView.Behaviour.RESPONSIVE : CardDrawerView.Behaviour.REGULAR;
+                    cardDrawerView.setBehaviour(behaviour);
+                    cardDrawerViewLowRes.setBehaviour(behaviour);
+                }
+            });
+        ((Switch) findViewById(R.id.card_header_lowres_switch)).setOnCheckedChangeListener(
+            new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(final CompoundButton buttonView, final boolean isChecked) {
+                    cardDrawerViewLowRes.setVisibility(isChecked ? View.VISIBLE : View.GONE);
+                    cardDrawerView.setVisibility(isChecked ? View.GONE : View.VISIBLE);
+                }
+            });
         initCardConfigurationOptions();
         initCardNumber();
         initCardName();
@@ -53,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 cardDrawerView.showSecurityCode();
+                cardDrawerViewLowRes.showSecurityCode();
             }
 
             @Override
@@ -64,6 +83,7 @@ public class MainActivity extends AppCompatActivity {
             public void afterTextChanged(Editable editable) {
                 if (editable.toString().isEmpty()) {
                     cardDrawerView.show();
+                    cardDrawerViewLowRes.show();
                 }
             }
         });
@@ -114,6 +134,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 cardDrawerView.show();
+                cardDrawerViewLowRes.show();
             }
         });
     }
@@ -142,6 +163,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 cardDrawerView.show();
+                cardDrawerViewLowRes.show();
             }
         });
     }
@@ -180,6 +202,7 @@ public class MainActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 CardConfigurationOption selection = cardOptions.get(position);
                 cardDrawerView.show(selection.getCardConfiguration());
+                cardDrawerViewLowRes.show(selection.getCardConfiguration());
             }
 
             @Override
