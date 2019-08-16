@@ -54,10 +54,9 @@
 
     <ImageSwitcher
         android:id="@+id/cho_card_logo"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:visibility="gone"
-        app:layout_constraintDimensionRatio="W,77:55"
         app:layout_constraintBottom_toTopOf="@id/card_header_front_guideline_middle"
         app:layout_constraintStart_toStartOf="@id/card_header_front_guideline_left"
         app:layout_constraintTop_toTopOf="@id/card_header_front_guideline_top" >
