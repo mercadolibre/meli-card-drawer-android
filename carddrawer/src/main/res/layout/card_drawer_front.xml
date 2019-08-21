@@ -55,12 +55,10 @@
 
     <ImageSwitcher
         android:id="@+id/cho_card_logo"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/card_drawer_logo_height"
         app:layout_constraintStart_toStartOf="@id/card_header_front_guideline_left"
-        app:layout_constraintTop_toTopOf="@id/card_header_front_guideline_top"
-        app:layout_constraintDimensionRatio="W,77:44"
-        app:layout_constraintHeight_percent="0.278" >
+        app:layout_constraintTop_toTopOf="@id/card_header_front_guideline_top" >
 
         <include layout="@layout/card_drawer_card_logo" />
         <include layout="@layout/card_drawer_card_logo" />
@@ -69,10 +67,8 @@
 
     <ImageSwitcher
         android:id="@+id/cho_card_issuer"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintHeight_percent="0.278"
-        app:layout_constraintDimensionRatio="W,77:44"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/card_drawer_logo_height"
         app:layout_constraintEnd_toEndOf="@id/card_header_front_guideline_right"
         app:layout_constraintTop_toTopOf="@id/card_header_front_guideline_top" >
 
