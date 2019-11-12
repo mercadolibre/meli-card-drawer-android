@@ -29,7 +29,7 @@ public class VisaCardBlueConfiguration implements CardUI {
 
     @Override
     public int[] getCardNumberPattern() {
-        return new int[]{0, 0, NUMBER_CARD, NUMBER_CARD};
+        return new int[]{NUMBER_CARD, NUMBER_CARD, NUMBER_CARD, NUMBER_CARD};
     }
 
     @Override

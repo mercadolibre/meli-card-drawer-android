@@ -87,12 +87,12 @@
         android:id="@+id/cho_card_arrow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="16dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
         android:src="@drawable/card_drawer_arrow"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:ignore="ContentDescription"
-        android:layout_marginEnd="16dp" />
+        tools:ignore="ContentDescription" />
 
 </android.support.constraint.ConstraintLayout>
