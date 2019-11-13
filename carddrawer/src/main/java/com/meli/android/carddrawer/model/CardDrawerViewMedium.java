@@ -117,17 +117,6 @@ public class CardDrawerViewMedium extends CardDrawerView {
         debitIcon.setColorFilter(fontColor);
     }
 
-    @SuppressLint("VisibleForTests")
-    @Override
-    public void update(@NonNull final CardUI source) {
-        final boolean animate = !CardAnimationType.NONE.equals(source.getAnimationType());
-        cardAnimator.colorCard(source.getCardBackgroundColor(), source.getAnimationType());
-        updateIssuerLogo(issuerLogoView, source, animate);
-        updateCardLogo(cardLogoView, source, animate);
-        setCardTextColor(source.getFontType(), source.getCardFontColor());
-        cardNumber.startAnimation(getFadeInAnimation(getContext()));
-    }
-
     @Override
     public void showSecurityCode() {
         if (source.getSecurityCodeLocation().equals(SecurityCodeLocation.BACK)) {

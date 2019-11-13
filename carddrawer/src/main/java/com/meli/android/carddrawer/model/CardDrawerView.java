@@ -236,8 +236,10 @@ public class CardDrawerView extends FrameLayout implements Observer {
         if (animate) {
             cardNumber.startAnimation(getFadeInAnimation(getContext()));
             cardName.startAnimation(getFadeInAnimation(getContext()));
-            cardDate.startAnimation(getFadeInAnimation(getContext()));
-            if (source.getSecurityCodeLocation().equals(SecurityCodeLocation.FRONT)) {
+            if (cardDate != null) {
+                cardDate.startAnimation(getFadeInAnimation(getContext()));
+            }
+            if (source.getSecurityCodeLocation().equals(SecurityCodeLocation.FRONT) && codeFront != null) {
                 codeFront.startAnimation(getFadeInAnimation(getContext()));
             }
         }
