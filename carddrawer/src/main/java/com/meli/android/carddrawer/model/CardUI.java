@@ -3,6 +3,7 @@ package com.meli.android.carddrawer.model;
 import android.support.annotation.ColorInt;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.widget.ImageView;
 
 import com.meli.android.carddrawer.configuration.FontType;
@@ -24,13 +25,25 @@ import com.meli.android.carddrawer.configuration.SecurityCodeLocation;
  */
 public interface CardUI {
     /**
-     * @return the bank logo to show
+     * @return the bank logo url to show
+     */
+    @Nullable
+    default String getBankImageUrl() { return null; }
+
+    /**
+     * @return the card logo url to show
+     */
+    @Nullable
+    default String getCardLogoImageUrl() { return null; }
+
+    /**
+     * @return the bank logo to show if url is null
      */
     @DrawableRes
     int getBankImageRes();
 
     /**
-     * @return the card logo to show
+     * @return the card logo to show if url is null
      */
     @DrawableRes
     int getCardLogoImageRes();
@@ -39,13 +52,13 @@ public interface CardUI {
      * Sets the card logo image to the Imageview
      * @param cardLogo
      */
-    void setCardLogoImage(@NonNull ImageView cardLogo);
+    default void setCardLogoImage(@NonNull final ImageView cardLogo) {}
 
     /**
      * Sets bank image to the Imageview
      * @param bankImage
      */
-    void setBankImage(@NonNull ImageView bankImage);
+    default void setBankImage(@NonNull final ImageView bankImage) {}
 
     /**
      * @return the security code position

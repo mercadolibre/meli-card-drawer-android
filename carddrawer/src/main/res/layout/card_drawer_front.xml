@@ -22,7 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.101" />
+        app:layout_constraintGuide_percent="0.152" />
 
     <android.support.constraint.Guideline
         android:id="@+id/card_header_front_guideline_bottom"

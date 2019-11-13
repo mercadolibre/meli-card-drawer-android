@@ -1,17 +1,14 @@
 package com.meli.android.carddrawer.app.model;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
-import android.widget.ImageView;
-
 import com.meli.android.carddrawer.app.R;
 import com.meli.android.carddrawer.configuration.FontType;
 import com.meli.android.carddrawer.configuration.SecurityCodeLocation;
 import com.meli.android.carddrawer.model.CardAnimationType;
 import com.meli.android.carddrawer.model.CardUI;
-
 
 /**
  * It is an example of configuration.
@@ -54,7 +51,7 @@ public class VisaCardBlueConfiguration implements CardUI {
 
     @Override
     public int getBankImageRes() {
-        return 0;
+        return R.drawable.card_drawer_app_bank_logo_galicia;
     }
 
     @Override
@@ -82,15 +79,15 @@ public class VisaCardBlueConfiguration implements CardUI {
         return NUMBER_SEC_CODE;
     }
 
+    @Nullable
     @Override
-    public void setCardLogoImage(@NonNull ImageView cardLogo) {
-        Drawable cardDrawable = context.getResources().getDrawable(R.drawable.card_drawer_app_card_logo_visa);
-        cardLogo.setImageDrawable(cardDrawable);
+    public String getCardLogoImageUrl() {
+        return "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSng3TX7LsgvyGRmXEzSCJBlibVhNbTmo3BIP1hjLFXKboYysm-";
     }
 
+    @Nullable
     @Override
-    public void setBankImage(@NonNull ImageView bankImage) {
-        Drawable bankDrawable = context.getResources().getDrawable(R.drawable.card_drawer_app_bank_logo_galicia);
-        bankImage.setImageDrawable(bankDrawable);
+    public String getBankImageUrl() {
+        return "https://www.eoi.es/blogs/tatianacasquero/files/2012/02/liga-bbva.jpg";
     }
 }
