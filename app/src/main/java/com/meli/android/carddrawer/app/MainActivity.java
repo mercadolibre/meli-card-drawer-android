@@ -220,6 +220,7 @@ public class MainActivity extends AppCompatActivity {
                 CardConfigurationOption selection = cardOptions.get(position);
                 cardDrawerView.show(selection.getCardConfiguration());
                 cardDrawerViewLowRes.show(selection.getCardConfiguration());
+                cardDrawerViewMedium.setOverlayImage(null);
                 cardDrawerViewMedium.show(selection.getCardConfiguration());
             }
 

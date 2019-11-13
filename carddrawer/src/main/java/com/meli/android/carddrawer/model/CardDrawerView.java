@@ -6,6 +6,8 @@ import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.ColorInt;
+import android.support.annotation.DrawableRes;
+import android.support.annotation.IdRes;
 import android.support.annotation.IntDef;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
@@ -57,6 +59,7 @@ public class CardDrawerView extends FrameLayout implements Observer {
     protected View cardBackLayout;
     private GradientDrawable cardFrontGradient;
     private GradientDrawable cardBackGradient;
+    private ImageView overlayImage;
 
     public CardDrawerView(@NonNull final Context context) {
         this(context, null);
@@ -117,6 +120,7 @@ public class CardDrawerView extends FrameLayout implements Observer {
     }
 
     private void bindViews() {
+        overlayImage = findViewById(R.id.cho_card_overlay);
         issuerLogoView = findViewById(R.id.cho_card_issuer);
         cardLogoView = findViewById(R.id.cho_card_logo);
         codeFront = findViewById(R.id.cho_card_code_front);
@@ -329,6 +333,14 @@ public class CardDrawerView extends FrameLayout implements Observer {
         codeFrontRedCircle.setVisibility(INVISIBLE);
         if (source.getSecurityCodeLocation().equals(SecurityCodeLocation.BACK)) {
             codeFront.setVisibility(View.GONE);
+        }
+    }
+
+    public void setOverlayImage(@Nullable @DrawableRes Integer image) {
+        if (image != null) {
+            overlayImage.setImageResource(image);
+        } else {
+            overlayImage.setVisibility(View.GONE);
         }
     }
 
