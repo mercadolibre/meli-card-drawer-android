@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.ColorInt;
 import android.support.annotation.DrawableRes;
-import android.support.annotation.IdRes;
 import android.support.annotation.IntDef;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
@@ -57,8 +56,8 @@ public class CardDrawerView extends FrameLayout implements Observer {
     protected Card card;
     protected View cardFrontLayout;
     protected View cardBackLayout;
-    private GradientDrawable cardFrontGradient;
-    private GradientDrawable cardBackGradient;
+    protected GradientDrawable cardFrontGradient;
+    protected GradientDrawable cardBackGradient;
     private ImageView overlayImage;
 
     public CardDrawerView(@NonNull final Context context) {
@@ -289,34 +288,52 @@ public class CardDrawerView extends FrameLayout implements Observer {
 
     @VisibleForTesting
     protected void updateCardInformation() {
+        updateNumber();
+        updateName();
+        updateDate();
+        updateSecCode();
+    }
+
+    protected void updateNumber() {
         NumberFormatter cardNumberTextProcessor = new NumberFormatter(source.getCardNumberPattern());
         String number = cardNumberTextProcessor.formatEmptyText();
         if (card.getNumber() != null && !card.getNumber().isEmpty()) {
             cardNumberTextProcessor = new NumberFormatter(source.getCardNumberPattern());
             number = cardNumberTextProcessor.formatTextForVisualFeedback(card.getNumber());
         }
+        cardNumber.setText(number);
+    }
 
+    protected void updateName() {
         String name = source.getNamePlaceHolder();
         if (card.getName() != null && !card.getName().isEmpty()) {
             name = card.getName();
         }
+        cardName.setText(name);
+    }
 
+    protected void updateDate() {
         String date = source.getExpirationPlaceHolder();
         if (card.getExpiration() != null && !card.getExpiration().isEmpty()) {
             date = card.getExpiration();
         }
+        cardDate.setText(date);
+    }
 
+    protected void updateSecCode() {
         final NumberFormatter secCodeFormatter = new NumberFormatter(source.getSecurityCodePattern());
         String secCode = secCodeFormatter.formatEmptyText();
         if (card.getSecCode() != null && !card.getSecCode().isEmpty()) {
             secCode = secCodeFormatter.formatTextForVisualFeedback(card.getSecCode());
         }
 
-        cardNumber.setText(number);
-        cardName.setText(name);
-        cardDate.setText(date);
-        codeFront.setText(secCode);
-        codeBack.setText(secCode);
+        if (codeFront != null) {
+            codeFront.setText(secCode);
+        }
+
+        if (codeBack != null) {
+            codeBack.setText(secCode);
+        }
     }
 
     /**

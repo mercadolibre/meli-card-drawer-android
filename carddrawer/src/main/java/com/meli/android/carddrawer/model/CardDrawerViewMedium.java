@@ -1,6 +1,5 @@
 package com.meli.android.carddrawer.model;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.support.annotation.ColorInt;
 import android.support.annotation.DrawableRes;
@@ -18,7 +17,6 @@ import com.meli.android.carddrawer.R;
 import com.meli.android.carddrawer.configuration.FieldPosition;
 import com.meli.android.carddrawer.configuration.FontType;
 import com.meli.android.carddrawer.configuration.SecurityCodeLocation;
-import com.meli.android.carddrawer.format.NumberFormatter;
 
 public class CardDrawerViewMedium extends CardDrawerView {
 
@@ -86,27 +84,9 @@ public class CardDrawerViewMedium extends CardDrawerView {
     @VisibleForTesting
     @Override
     protected void updateCardInformation() {
-        NumberFormatter cardNumberTextProcessor = new NumberFormatter(source.getCardNumberPattern());
-        String number = cardNumberTextProcessor.formatEmptyText();
-        String name = source.getNamePlaceHolder();
-        if (card.getName() != null && !card.getName().isEmpty()) {
-            name = card.getName();
-        }
-
-        if (card.getNumber() != null && !card.getNumber().isEmpty()) {
-            cardNumberTextProcessor = new NumberFormatter(source.getCardNumberPattern());
-            number = cardNumberTextProcessor.formatTextForVisualFeedback(card.getNumber());
-        }
-
-        final NumberFormatter secCodeFormatter = new NumberFormatter(source.getSecurityCodePattern());
-        String secCode = secCodeFormatter.formatEmptyText();
-        if (card.getSecCode() != null && !card.getSecCode().isEmpty()) {
-            secCode = secCodeFormatter.formatTextForVisualFeedback(card.getSecCode());
-        }
-
-        cardName.setText(name);
-        cardNumber.setText(number);
-        codeBack.setText(secCode);
+        updateNumber();
+        updateName();
+        updateSecCode();
     }
 
     @Override
