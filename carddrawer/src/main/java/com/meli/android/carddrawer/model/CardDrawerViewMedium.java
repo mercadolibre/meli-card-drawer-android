@@ -41,7 +41,7 @@ public class CardDrawerViewMedium extends CardDrawerView {
     protected void init(@NonNull final Context context, @Nullable final AttributeSet attrs) {
         super.init(context, attrs);
         arrow = findViewById(R.id.cho_card_arrow);
-        debitIcon = findViewById(R.id.cho_card_debit_icon);
+        debitIcon = findViewById(R.id.cho_card_complementary_card_logo);
     }
 
     @Override
@@ -68,7 +68,7 @@ public class CardDrawerViewMedium extends CardDrawerView {
         cardBackLayout.setLayoutParams(backParams);
     }
 
-    public void setDebitImage(@DrawableRes final int image) {
+    public void setComplementaryCardLogo(@DrawableRes final int image) {
         debitIcon.setBackgroundResource(image);
         debitIcon.setVisibility(View.VISIBLE);
     }
