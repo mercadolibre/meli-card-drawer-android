@@ -31,6 +31,12 @@
                 android:visibility="gone"
                 android:layout_height="wrap_content"/>
 
+            <com.meli.android.carddrawer.model.CardDrawerViewMedium
+                android:id="@+id/card_header_medium_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"/>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -118,6 +124,26 @@
 
                 <Switch
                     android:id="@+id/card_header_lowres_switch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|end"/>
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:textSize="16dp"
+                    android:text="@string/card_drawer_app_medium_res"/>
+
+                <Switch
+                    android:id="@+id/card_header_medium_switch"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical|end"/>

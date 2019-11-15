@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     private CardComposite card;
     private CardDrawerView cardDrawerView;
     private CardDrawerView cardDrawerViewLowRes;
+    private CardDrawerView cardDrawerViewMedium;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -36,9 +37,11 @@ public class MainActivity extends AppCompatActivity {
 
         cardDrawerView = findViewById(R.id.card_header_container);
         cardDrawerViewLowRes = findViewById(R.id.card_header_lowres_container);
+        cardDrawerViewMedium = findViewById(R.id.card_header_medium_container);
         card = new CardComposite();
         card.addCard(cardDrawerView.getCard());
         card.addCard(cardDrawerViewLowRes.getCard());
+        card.addCard(cardDrawerViewMedium.getCard());
         ((Switch) findViewById(R.id.card_header_switch_responsive)).setOnCheckedChangeListener(
             new CompoundButton.OnCheckedChangeListener() {
                 @Override
@@ -47,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
                         CardDrawerView.Behaviour.RESPONSIVE : CardDrawerView.Behaviour.REGULAR;
                     cardDrawerView.setBehaviour(behaviour);
                     cardDrawerViewLowRes.setBehaviour(behaviour);
+                    cardDrawerViewMedium.setBehaviour(behaviour);
                 }
             });
         ((Switch) findViewById(R.id.card_header_lowres_switch)).setOnCheckedChangeListener(
@@ -57,6 +61,15 @@ public class MainActivity extends AppCompatActivity {
                     cardDrawerView.setVisibility(isChecked ? View.GONE : View.VISIBLE);
                 }
             });
+        ((Switch) findViewById(R.id.card_header_medium_switch)).setOnCheckedChangeListener(
+                new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(final CompoundButton buttonView, final boolean isChecked) {
+                        cardDrawerViewMedium.setVisibility(isChecked ? View.VISIBLE : View.GONE);
+                        cardDrawerView.setVisibility(isChecked ? View.GONE : View.VISIBLE);
+                    }
+                });
+
         initCardConfigurationOptions();
         initCardNumber();
         initCardName();
@@ -72,6 +85,7 @@ public class MainActivity extends AppCompatActivity {
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 cardDrawerView.showSecurityCode();
                 cardDrawerViewLowRes.showSecurityCode();
+                cardDrawerViewMedium.showSecurityCode();
             }
 
             @Override
@@ -84,6 +98,7 @@ public class MainActivity extends AppCompatActivity {
                 if (editable.toString().isEmpty()) {
                     cardDrawerView.show();
                     cardDrawerViewLowRes.show();
+                    cardDrawerViewMedium.show();
                 }
             }
         });
@@ -135,6 +150,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 cardDrawerView.show();
                 cardDrawerViewLowRes.show();
+                cardDrawerViewMedium.show();
             }
         });
     }
@@ -164,6 +180,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 cardDrawerView.show();
                 cardDrawerViewLowRes.show();
+                cardDrawerViewMedium.show();
             }
         });
     }
@@ -203,6 +220,7 @@ public class MainActivity extends AppCompatActivity {
                 CardConfigurationOption selection = cardOptions.get(position);
                 cardDrawerView.show(selection.getCardConfiguration());
                 cardDrawerViewLowRes.show(selection.getCardConfiguration());
+                cardDrawerViewMedium.show(selection.getCardConfiguration());
             }
 
             @Override
