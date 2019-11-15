@@ -21,7 +21,7 @@ import com.meli.android.carddrawer.configuration.SecurityCodeLocation;
 public class CardDrawerViewMedium extends CardDrawerView {
 
     private ImageView arrow;
-    private ImageView debitIcon;
+    private ImageView complementaryCardLogo;
 
     public CardDrawerViewMedium(@NonNull final Context context) {
         this(context, null);
@@ -41,7 +41,7 @@ public class CardDrawerViewMedium extends CardDrawerView {
     protected void init(@NonNull final Context context, @Nullable final AttributeSet attrs) {
         super.init(context, attrs);
         arrow = findViewById(R.id.cho_card_arrow);
-        debitIcon = findViewById(R.id.cho_card_complementary_card_logo);
+        complementaryCardLogo = findViewById(R.id.cho_card_complementary_card_logo);
     }
 
     @Override
@@ -69,8 +69,8 @@ public class CardDrawerViewMedium extends CardDrawerView {
     }
 
     public void setComplementaryCardLogo(@DrawableRes final int image) {
-        debitIcon.setBackgroundResource(image);
-        debitIcon.setVisibility(View.VISIBLE);
+        complementaryCardLogo.setBackgroundResource(image);
+        complementaryCardLogo.setVisibility(View.VISIBLE);
     }
 
     public void setArrowEnabled(final boolean enabled) {
@@ -94,7 +94,7 @@ public class CardDrawerViewMedium extends CardDrawerView {
         cardNumber.init(fontType, getCardNumberPlaceHolder(), fontColor);
         cardName.init(fontType, source.getNamePlaceHolder(), fontColor);
         arrow.setColorFilter(fontColor);
-        debitIcon.setColorFilter(fontColor);
+        complementaryCardLogo.setColorFilter(fontColor);
     }
 
     @Override
