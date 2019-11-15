@@ -279,6 +279,9 @@ public class CardDrawerView extends FrameLayout implements Observer {
 
     /**
      * Paints all card fields with this color
+     *
+     * @param fontType    the font type
+     * @param fontColor   the font color
      **/
     public void setCardTextColor(@NonNull @FontType final String fontType, @ColorInt final int fontColor) {
         cardNumber.init(fontType, getCardNumberPlaceHolder(), fontColor);
@@ -385,6 +388,8 @@ public class CardDrawerView extends FrameLayout implements Observer {
 
     /**
      * Sets the top and bottom internal padding
+     *
+     * @param padding    padding to set
      */
     public void setInternalPadding(final int padding) {
         cardFrontLayout.setPadding(cardFrontLayout.getPaddingLeft(), padding,
@@ -395,6 +400,8 @@ public class CardDrawerView extends FrameLayout implements Observer {
 
     /**
      * Sets card resize behaviour
+     *
+     * @param behaviour   behaviour to set
      */
     public void setBehaviour(@Behaviour final int behaviour) {
         final LayoutParams frontParams = (LayoutParams) cardFrontLayout.getLayoutParams();

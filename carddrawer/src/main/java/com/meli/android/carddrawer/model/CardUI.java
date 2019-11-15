@@ -50,13 +50,13 @@ public interface CardUI {
 
     /**
      * Sets the card logo image to the Imageview
-     * @param cardLogo
+     * @param cardLogo the card logo imageview
      */
     default void setCardLogoImage(@NonNull final ImageView cardLogo) {}
 
     /**
      * Sets bank image to the Imageview
-     * @param bankImage
+     * @param bankImage the card logo imageview
      */
     default void setBankImage(@NonNull final ImageView bankImage) {}
 

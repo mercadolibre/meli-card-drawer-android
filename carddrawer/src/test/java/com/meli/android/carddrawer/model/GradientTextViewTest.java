@@ -76,7 +76,7 @@ public class GradientTextViewTest extends BasicRobolectricTest {
 
         assertEquals(FontType.LIGHT_TYPE, ReflectionHelpers.getField(gradientTextView, "fontType"));
         assertEquals("MM/YY", ReflectionHelpers.getField(gradientTextView, "placeHolder"));
-        assertEquals(2, ReflectionHelpers.getField(gradientTextView, "fontColor"));
+        assertEquals(2, (int) ReflectionHelpers.getField(gradientTextView, "fontColor"));
     }
 
     @Test
