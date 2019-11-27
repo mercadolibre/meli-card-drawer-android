@@ -1,3 +1,6 @@
+### Release 1.2.1
+Fix Heigh Images Card Medium
+
 ### Release 1.2.0
 Add Medium Card View
 Add method to customize overlay
