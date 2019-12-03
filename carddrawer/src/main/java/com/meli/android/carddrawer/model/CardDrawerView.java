@@ -13,6 +13,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
 import android.support.v4.widget.TextViewCompat;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +30,7 @@ import com.meli.android.carddrawer.configuration.FontType;
 import com.meli.android.carddrawer.configuration.SecurityCodeLocation;
 import com.meli.android.carddrawer.format.MonospaceTypefaceSetter;
 import com.meli.android.carddrawer.format.NumberFormatter;
+import com.mercadolibre.android.picassodiskcache.PicassoDiskLoader;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Observable;
@@ -250,7 +252,11 @@ public class CardDrawerView extends FrameLayout implements Observer {
         issuerLogoView.setAnimateFirstView(animate);
         final ImageView bankImageView = (ImageView) issuerLogoView.getNextView();
         //CardUI implementation can define the bank image in getBankImageRes or setBankImage method
-        bankImageView.setImageResource(source.getBankImageRes());
+        if (!TextUtils.isEmpty(source.getBankImageUrl())) {
+            PicassoDiskLoader.get(getContext()).load(source.getBankImageUrl()).into(bankImageView);
+        } else {
+            bankImageView.setImageResource(source.getBankImageRes());
+        }
         source.setBankImage(bankImageView);
         issuerLogoView.showNext();
     }
@@ -261,13 +267,20 @@ public class CardDrawerView extends FrameLayout implements Observer {
         cardLogoView.setAnimateFirstView(animate);
         final ImageView cardImageView = (ImageView) cardLogoView.getNextView();
         //CardUI implementation can define the card logo in getCardLogoRes or setCardLogo method
-        cardImageView.setImageResource(source.getCardLogoImageRes());
+        if (!TextUtils.isEmpty(source.getCardLogoImageUrl())) {
+            PicassoDiskLoader.get(getContext()).load(source.getCardLogoImageUrl()).into(cardImageView);
+        } else {
+            cardImageView.setImageResource(source.getCardLogoImageRes());
+        }
         source.setCardLogoImage(cardImageView);
         cardLogoView.showNext();
     }
 
     /**
      * Paints all card fields with this color
+     *
+     * @param fontType    the font type
+     * @param fontColor   the font color
      **/
     public void setCardTextColor(@NonNull @FontType final String fontType, @ColorInt final int fontColor) {
         cardNumber.init(fontType, getCardNumberPlaceHolder(), fontColor);
@@ -374,6 +387,8 @@ public class CardDrawerView extends FrameLayout implements Observer {
 
     /**
      * Sets the top and bottom internal padding
+     *
+     * @param padding    padding to set
      */
     public void setInternalPadding(final int padding) {
         cardFrontLayout.setPadding(cardFrontLayout.getPaddingLeft(), padding,
@@ -384,6 +399,8 @@ public class CardDrawerView extends FrameLayout implements Observer {
 
     /**
      * Sets card resize behaviour
+     *
+     * @param behaviour   behaviour to set
      */
     public void setBehaviour(@Behaviour final int behaviour) {
         final LayoutParams frontParams = (LayoutParams) cardFrontLayout.getLayoutParams();

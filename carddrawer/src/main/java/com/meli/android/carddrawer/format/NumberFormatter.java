@@ -25,7 +25,7 @@ public class NumberFormatter implements Parcelable {
     }
 
     /**
-     * @param parcel
+     * @param parcel the parcel data
      */
     protected NumberFormatter(Parcel parcel) {
         pattern = parcel.createIntArray();

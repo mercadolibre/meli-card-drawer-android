@@ -13,6 +13,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 import com.meli.android.carddrawer.app.model.CardComposite;
 import com.meli.android.carddrawer.app.model.MasterCardConfiguration;
+import com.meli.android.carddrawer.app.model.UrlTestConfiguration;
 import com.meli.android.carddrawer.app.model.VisaCardBlueConfiguration;
 import com.meli.android.carddrawer.app.model.VisaCardGrayConfiguration;
 import com.meli.android.carddrawer.app.model.VisaCardGreenConfiguration;
@@ -210,6 +211,9 @@ public class MainActivity extends AppCompatActivity {
 
         MasterCardConfiguration masterCardConfiguration = new MasterCardConfiguration(this);
         cardOptions.add(new CardConfigurationOption(masterCardConfiguration, "Master"));
+
+        final UrlTestConfiguration urlTestConfiguration = new UrlTestConfiguration(this);
+        cardOptions.add(new CardConfigurationOption(urlTestConfiguration, "Url Test"));
 
         ArrayAdapter<CardConfigurationOption> cardAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, cardOptions);
         cardAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

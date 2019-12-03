@@ -4,7 +4,6 @@ buildscript {
     repositories {
         google()
         jcenter()
-        
     }
     dependencies {
         classpath "com.android.tools.build:gradle:$gradleBuildToolsVersion"
@@ -23,7 +22,6 @@ allprojects {
     repositories {
         google()
         jcenter()
-        
     }
 
     tasks.withType(JavaCompile) {

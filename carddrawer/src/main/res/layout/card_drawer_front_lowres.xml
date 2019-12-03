@@ -56,13 +56,12 @@
         android:id="@+id/cho_card_logo"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@id/card_header_front_guideline_middle"
         app:layout_constraintStart_toStartOf="@id/card_header_front_guideline_left"
         app:layout_constraintTop_toTopOf="@id/card_header_front_guideline_top" >
 
-        <include layout="@layout/card_drawer_card_logo" />
-        <include layout="@layout/card_drawer_card_logo" />
+        <include layout="@layout/card_drawer_card_logo_lowres" />
+        <include layout="@layout/card_drawer_card_logo_lowres" />
 
     </ImageSwitcher>
 
