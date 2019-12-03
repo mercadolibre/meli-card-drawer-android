@@ -2,6 +2,7 @@ package com.meli.android.carddrawer.model;
 
 import android.content.Context;
 import android.graphics.Matrix;
+import android.graphics.drawable.Drawable;
 import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
 import org.jetbrains.annotations.Nullable;
@@ -24,14 +25,16 @@ public final class RightTopImageView extends AppCompatImageView {
     @Override
     protected boolean setFrame(final int l, final int t, final int width, final int height) {
         final boolean changed = super.setFrame(l, t, width, height);
-        if (changed && getDrawable() != null) {
-            final int sourceHeight = getDrawable().getIntrinsicHeight();
+        final Drawable drawable = getDrawable();
+        if (drawable != null) {
+            final int sourceHeight = drawable.getIntrinsicHeight();
             float scaleRatio = 1.0f;
             if (sourceHeight > height) {
                 scaleRatio = (float) height / sourceHeight;
             }
             final Matrix scaleMatrix = new Matrix();
-            scaleMatrix.setScale(scaleRatio, scaleRatio, width, 0);
+            scaleMatrix.postScale(scaleRatio, scaleRatio);
+            scaleMatrix.postTranslate(width-drawable.getIntrinsicWidth()*scaleRatio, 0);
             setImageMatrix(scaleMatrix);
         }
         return changed;

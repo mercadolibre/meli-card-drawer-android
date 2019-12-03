@@ -252,7 +252,6 @@ public class CardDrawerView extends FrameLayout implements Observer {
         issuerLogoView.setAnimateFirstView(animate);
         final ImageView bankImageView = (ImageView) issuerLogoView.getNextView();
         //CardUI implementation can define the bank image in getBankImageRes or setBankImage method
-        //PicassoHelper.setTopRightScale(bankImageView);
         if (!TextUtils.isEmpty(source.getBankImageUrl())) {
             PicassoDiskLoader.get(getContext()).load(source.getBankImageUrl()).into(bankImageView);
         } else {

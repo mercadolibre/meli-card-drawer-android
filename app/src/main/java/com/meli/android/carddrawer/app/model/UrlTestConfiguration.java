@@ -1,29 +1,27 @@
 package com.meli.android.carddrawer.app.model;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
-import android.widget.ImageView;
-
 import com.meli.android.carddrawer.app.R;
 import com.meli.android.carddrawer.configuration.FontType;
 import com.meli.android.carddrawer.configuration.SecurityCodeLocation;
 import com.meli.android.carddrawer.model.CardAnimationType;
 import com.meli.android.carddrawer.model.CardUI;
 
-
 /**
  * It is an example of configuration.
  * Defines the images in the set methods. Returns 0 for image resources.
  */
 
-public class VisaCardBlueConfiguration implements CardUI {
+public class UrlTestConfiguration implements CardUI {
     private static final int NUMBER_CARD = 4;
     private static final int NUMBER_SEC_CODE = 3;
     private final Context context;
 
-    public VisaCardBlueConfiguration(@NonNull Context context) {
+    public UrlTestConfiguration(@NonNull Context context) {
         this.context = context;
     }
 
@@ -74,7 +72,7 @@ public class VisaCardBlueConfiguration implements CardUI {
 
     @Override
     public int getCardBackgroundColor() {
-        return ContextCompat.getColor(context, R.color.card_drawer_app_blue_color);
+        return Color.parseColor("#d18cce");
     }
 
     @Override
@@ -82,15 +80,15 @@ public class VisaCardBlueConfiguration implements CardUI {
         return NUMBER_SEC_CODE;
     }
 
+    @Nullable
     @Override
-    public void setCardLogoImage(@NonNull ImageView cardLogo) {
-        Drawable cardDrawable = context.getResources().getDrawable(R.drawable.card_drawer_app_card_logo_visa);
-        cardLogo.setImageDrawable(cardDrawable);
+    public String getCardLogoImageUrl() {
+        return "https://i.imgur.com/GaTELY9.png";
     }
 
+    @Nullable
     @Override
-    public void setBankImage(@NonNull ImageView bankImage) {
-        Drawable bankDrawable = context.getResources().getDrawable(R.drawable.card_drawer_app_bank_logo_galicia);
-        bankImage.setImageDrawable(bankDrawable);
+    public String getBankImageUrl() {
+        return "https://i.imgur.com/df3Bc7K.png";
     }
 }
