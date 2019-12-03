@@ -1,3 +1,7 @@
+### Release 2.0.0
+Migration to api 19
+Add logos from url support
+
 ### Release 1.2.0
 Add Medium Card View
 Add method to customize overlay
