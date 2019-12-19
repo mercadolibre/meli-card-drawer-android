@@ -1,3 +1,6 @@
+### Release 2.0.1
+Fixed arrow color for medium card
+
 ### Release 2.0.0
 Migration to api 19
 Add logos from url support
