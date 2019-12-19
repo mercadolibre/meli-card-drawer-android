@@ -8,6 +8,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
 
+import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
@@ -93,8 +94,19 @@ public class CardDrawerViewMedium extends CardDrawerView {
     public void setCardTextColor(@NonNull @FontType final String fontType, @ColorInt final int fontColor) {
         cardNumber.init(fontType, getCardNumberPlaceHolder(), fontColor);
         cardName.init(fontType, source.getNamePlaceHolder(), fontColor);
-        arrow.setColorFilter(fontColor);
+        arrow.setColorFilter(getArrowColor(fontType, fontColor));
         complementaryCardLogo.setColorFilter(fontColor);
+    }
+
+    private int getArrowColor(@NonNull @FontType final String fontType, @ColorInt final int fontColor) {
+        switch (fontType) {
+            case FontType.DARK_TYPE:
+                return ContextCompat.getColor(getContext(), R.color.card_drawer_dark_font_empty_color);
+            case FontType.LIGHT_TYPE:
+                return ContextCompat.getColor(getContext(), R.color.card_drawer_light_font_empty_color);
+            default:
+                return fontColor;
+        }
     }
 
     @Override
