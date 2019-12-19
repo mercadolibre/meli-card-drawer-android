@@ -5,6 +5,9 @@ Fixed arrow color for medium card
 Migration to api 19
 Add logos from url support
 
+### Release 1.2.1
+Fix Height Images Card Medium
+
 ### Release 1.2.0
 Add Medium Card View
 Add method to customize overlay
@@ -15,4 +18,4 @@ Update lowres
 
 ## [First Release (1.0.0)]
 ### 🚀 First Release 🚀
-Stable 1.0.0 version Android MLCardDrawer.
+Stable 1.0.0 version Android MLCardDrawer
