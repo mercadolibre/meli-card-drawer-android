@@ -200,6 +200,14 @@ public class CardDrawerView extends FrameLayout implements Observer {
         showSecCircle();
     }
 
+    /**
+     * Shows the back card without animation.
+     * Uses the saved card style or default
+     */
+    public void showBack() {
+        cardAnimator.switchViewWithoutAnimation(FieldPosition.POSITION_BACK);
+    }
+
     protected void setupImageSwitcher(final ImageSwitcher imageSwitcher, final Animation fadeIn, final Animation fadeOut) {
         imageSwitcher.setInAnimation(fadeIn);
         imageSwitcher.setOutAnimation(fadeOut);
