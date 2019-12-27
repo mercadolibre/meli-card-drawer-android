@@ -55,6 +55,7 @@ public class CardAnimator {
 
     /**
      * If not showing the specified side, flip the card with an animation
+     * @param fieldPosition switch to this card side
      */
     public void switchView(@FieldPosition final int fieldPosition) {
         if (fieldPosition != showingLayout) {
@@ -197,6 +198,7 @@ public class CardAnimator {
      * Change the color of the card
      *
      * @param color   color to change to
+     * @param animationType the animation type
      */
     public void colorCard(@ColorInt final int color, @NonNull @CardAnimationType final String animationType) {
         if (color != showingColor) {
@@ -255,6 +257,7 @@ public class CardAnimator {
      * @param imageReveal     the top image that will create the reveal effect
      * @param imageBackground the background image that will hold the original color
      * @param color           color of the new image
+     * @param animationType   the animation type
      */
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @VisibleForTesting

@@ -14,7 +14,7 @@ public interface CardFontConfiguration {
 
     /**
      * Sets the gradient for configuration
-     * @param textPaint
+     * @param textPaint textpaint for the gradient
      * @param width of the textview that contains the font
      * @param height of the textview that contains the font
      */
@@ -22,7 +22,7 @@ public interface CardFontConfiguration {
 
     /**
      * Sets the shadow for configuration
-     * @param textPaint
+     * @param textPaint textpaint for the shadow
      */
     void setShadow(@NonNull TextPaint textPaint);
 }

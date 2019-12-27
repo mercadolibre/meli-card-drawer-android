@@ -39,8 +39,8 @@ public class DefaultCardConfigurationTest extends BasicRobolectricTest {
     }
 
     @Test
-    public void getSecurityCodeLocation_returnsFront() {
-        assertEquals(SecurityCodeLocation.FRONT, configuration.getSecurityCodeLocation());
+    public void getSecurityCodeLocation_returnsBack() {
+        assertEquals(SecurityCodeLocation.BACK, configuration.getSecurityCodeLocation());
     }
 
     @Test

@@ -6,12 +6,14 @@ import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.ColorInt;
+import android.support.annotation.DrawableRes;
 import android.support.annotation.IntDef;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
 import android.support.v4.widget.TextViewCompat;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +30,7 @@ import com.meli.android.carddrawer.configuration.FontType;
 import com.meli.android.carddrawer.configuration.SecurityCodeLocation;
 import com.meli.android.carddrawer.format.MonospaceTypefaceSetter;
 import com.meli.android.carddrawer.format.NumberFormatter;
+import com.mercadolibre.android.picassodiskcache.PicassoDiskLoader;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Observable;
@@ -38,25 +41,26 @@ public class CardDrawerView extends FrameLayout implements Observer {
 
     private static final int CORNER_RATIO = 32;
 
-    private CardAnimator cardAnimator;
+    protected CardAnimator cardAnimator;
 
-    private ImageSwitcher issuerLogoView;
-    private ImageSwitcher cardLogoView;
+    protected ImageSwitcher issuerLogoView;
+    protected ImageSwitcher cardLogoView;
 
     protected GradientTextView codeFront;
-    private TextView codeBack;
+    protected TextView codeBack;
     private View codeFrontRedCircle;
 
-    private GradientTextView cardName;
-    private GradientTextView cardNumber;
+    protected GradientTextView cardName;
+    protected GradientTextView cardNumber;
     private GradientTextView cardDate;
 
     protected CardUI source;
-    private Card card;
-    private View cardFrontLayout;
-    private View cardBackLayout;
-    private GradientDrawable cardFrontGradient;
-    private GradientDrawable cardBackGradient;
+    protected Card card;
+    protected View cardFrontLayout;
+    protected View cardBackLayout;
+    protected GradientDrawable cardFrontGradient;
+    protected GradientDrawable cardBackGradient;
+    private ImageView overlayImage;
 
     public CardDrawerView(@NonNull final Context context) {
         this(context, null);
@@ -79,7 +83,7 @@ public class CardDrawerView extends FrameLayout implements Observer {
     /**
      * Initialize this header
      */
-    private void init(@NonNull final Context context, @Nullable final AttributeSet attrs) {
+    protected void init(@NonNull final Context context, @Nullable final AttributeSet attrs) {
         // Init references
         inflate(context, getLayout(), this);
 
@@ -107,8 +111,9 @@ public class CardDrawerView extends FrameLayout implements Observer {
         fadeOut.setDuration(context.getResources().getInteger(R.integer.card_drawer_paint_animation_time));
 
         setupImageSwitcher(cardLogoView, fadeIn, fadeOut);
-        setupImageSwitcher(issuerLogoView, fadeIn, fadeOut);
-
+        if (issuerLogoView != null) {
+            setupImageSwitcher(issuerLogoView, fadeIn, fadeOut);
+        }
         setMonospaceFont();
         card = new Card();
         card.addObserver(this);
@@ -116,6 +121,7 @@ public class CardDrawerView extends FrameLayout implements Observer {
     }
 
     private void bindViews() {
+        overlayImage = findViewById(R.id.cho_card_overlay);
         issuerLogoView = findViewById(R.id.cho_card_issuer);
         cardLogoView = findViewById(R.id.cho_card_logo);
         codeFront = findViewById(R.id.cho_card_code_front);
@@ -133,7 +139,7 @@ public class CardDrawerView extends FrameLayout implements Observer {
     }
 
     @NonNull
-    private Animation getFadeInAnimation(@NonNull final Context context) {
+    protected Animation getFadeInAnimation(@NonNull final Context context) {
         // the logo image will have a fade effect when changing
         final Animation fadeIn = AnimationUtils.loadAnimation(context, android.R.anim.fade_in);
         fadeIn.setDuration(context.getResources().getInteger(R.integer.card_drawer_paint_animation_time));
@@ -150,7 +156,7 @@ public class CardDrawerView extends FrameLayout implements Observer {
         source = cardUI;
         hideSecCircle();
         updateCardInformation();
-        if (cardUI.getSecurityCodeLocation().equals(SecurityCodeLocation.FRONT)) {
+        if (cardUI.getSecurityCodeLocation().equals(SecurityCodeLocation.FRONT) && codeFront != null) {
             codeFront.setVisibility(View.VISIBLE);
         }
         update(source);
@@ -194,17 +200,35 @@ public class CardDrawerView extends FrameLayout implements Observer {
         showSecCircle();
     }
 
+    /**
+     * Shows the back card without animation.
+     * Uses the saved card style or default
+     */
+    public void showBack() {
+        cardAnimator.switchViewWithoutAnimation(FieldPosition.POSITION_BACK);
+    }
+
     protected void setupImageSwitcher(final ImageSwitcher imageSwitcher, final Animation fadeIn, final Animation fadeOut) {
         imageSwitcher.setInAnimation(fadeIn);
         imageSwitcher.setOutAnimation(fadeOut);
     }
 
     private void setMonospaceFont() {
-        MonospaceTypefaceSetter.setRobotoMono(getContext(), cardNumber);
-        MonospaceTypefaceSetter.setRobotoMono(getContext(), cardName);
-        MonospaceTypefaceSetter.setRobotoMono(getContext(), cardDate);
-        MonospaceTypefaceSetter.setRobotoMono(getContext(), codeFront);
-        MonospaceTypefaceSetter.setRobotoMono(getContext(), codeBack);
+        if (cardNumber != null) {
+            MonospaceTypefaceSetter.setRobotoMono(getContext(), cardNumber);
+        }
+        if (cardName != null) {
+            MonospaceTypefaceSetter.setRobotoMono(getContext(), cardName);
+        }
+        if (cardDate != null) {
+            MonospaceTypefaceSetter.setRobotoMono(getContext(), cardDate);
+        }
+        if (codeFront != null) {
+            MonospaceTypefaceSetter.setRobotoMono(getContext(), codeFront);
+        }
+        if (codeBack != null) {
+            MonospaceTypefaceSetter.setRobotoMono(getContext(), codeBack);
+        }
     }
 
     /**
@@ -221,8 +245,10 @@ public class CardDrawerView extends FrameLayout implements Observer {
         if (animate) {
             cardNumber.startAnimation(getFadeInAnimation(getContext()));
             cardName.startAnimation(getFadeInAnimation(getContext()));
-            cardDate.startAnimation(getFadeInAnimation(getContext()));
-            if (source.getSecurityCodeLocation().equals(SecurityCodeLocation.FRONT)) {
+            if (cardDate != null) {
+                cardDate.startAnimation(getFadeInAnimation(getContext()));
+            }
+            if (source.getSecurityCodeLocation().equals(SecurityCodeLocation.FRONT) && codeFront != null) {
                 codeFront.startAnimation(getFadeInAnimation(getContext()));
             }
         }
@@ -234,7 +260,11 @@ public class CardDrawerView extends FrameLayout implements Observer {
         issuerLogoView.setAnimateFirstView(animate);
         final ImageView bankImageView = (ImageView) issuerLogoView.getNextView();
         //CardUI implementation can define the bank image in getBankImageRes or setBankImage method
-        bankImageView.setImageResource(source.getBankImageRes());
+        if (!TextUtils.isEmpty(source.getBankImageUrl())) {
+            PicassoDiskLoader.get(getContext()).load(source.getBankImageUrl()).into(bankImageView);
+        } else {
+            bankImageView.setImageResource(source.getBankImageRes());
+        }
         source.setBankImage(bankImageView);
         issuerLogoView.showNext();
     }
@@ -245,13 +275,20 @@ public class CardDrawerView extends FrameLayout implements Observer {
         cardLogoView.setAnimateFirstView(animate);
         final ImageView cardImageView = (ImageView) cardLogoView.getNextView();
         //CardUI implementation can define the card logo in getCardLogoRes or setCardLogo method
-        cardImageView.setImageResource(source.getCardLogoImageRes());
+        if (!TextUtils.isEmpty(source.getCardLogoImageUrl())) {
+            PicassoDiskLoader.get(getContext()).load(source.getCardLogoImageUrl()).into(cardImageView);
+        } else {
+            cardImageView.setImageResource(source.getCardLogoImageRes());
+        }
         source.setCardLogoImage(cardImageView);
         cardLogoView.showNext();
     }
 
     /**
      * Paints all card fields with this color
+     *
+     * @param fontType    the font type
+     * @param fontColor   the font color
      **/
     public void setCardTextColor(@NonNull @FontType final String fontType, @ColorInt final int fontColor) {
         cardNumber.init(fontType, getCardNumberPlaceHolder(), fontColor);
@@ -260,7 +297,7 @@ public class CardDrawerView extends FrameLayout implements Observer {
         codeFront.init(fontType, getSecCodePlaceHolder(), fontColor);
     }
 
-    private String getCardNumberPlaceHolder() {
+    protected String getCardNumberPlaceHolder() {
         final NumberFormatter cardNumberTextProcessor = new NumberFormatter(source.getCardNumberPattern());
         return cardNumberTextProcessor.formatEmptyText();
     }
@@ -272,34 +309,52 @@ public class CardDrawerView extends FrameLayout implements Observer {
 
     @VisibleForTesting
     protected void updateCardInformation() {
+        updateNumber();
+        updateName();
+        updateDate();
+        updateSecCode();
+    }
+
+    protected void updateNumber() {
         NumberFormatter cardNumberTextProcessor = new NumberFormatter(source.getCardNumberPattern());
         String number = cardNumberTextProcessor.formatEmptyText();
         if (card.getNumber() != null && !card.getNumber().isEmpty()) {
             cardNumberTextProcessor = new NumberFormatter(source.getCardNumberPattern());
             number = cardNumberTextProcessor.formatTextForVisualFeedback(card.getNumber());
         }
+        cardNumber.setText(number);
+    }
 
+    protected void updateName() {
         String name = source.getNamePlaceHolder();
         if (card.getName() != null && !card.getName().isEmpty()) {
             name = card.getName();
         }
+        cardName.setText(name);
+    }
 
+    protected void updateDate() {
         String date = source.getExpirationPlaceHolder();
         if (card.getExpiration() != null && !card.getExpiration().isEmpty()) {
             date = card.getExpiration();
         }
+        cardDate.setText(date);
+    }
 
+    protected void updateSecCode() {
         final NumberFormatter secCodeFormatter = new NumberFormatter(source.getSecurityCodePattern());
         String secCode = secCodeFormatter.formatEmptyText();
         if (card.getSecCode() != null && !card.getSecCode().isEmpty()) {
             secCode = secCodeFormatter.formatTextForVisualFeedback(card.getSecCode());
         }
 
-        cardNumber.setText(number);
-        cardName.setText(name);
-        cardDate.setText(date);
-        codeFront.setText(secCode);
-        codeBack.setText(secCode);
+        if (codeFront != null) {
+            codeFront.setText(secCode);
+        }
+
+        if (codeBack != null) {
+            codeBack.setText(secCode);
+        }
     }
 
     /**
@@ -321,6 +376,14 @@ public class CardDrawerView extends FrameLayout implements Observer {
         }
     }
 
+    public void setOverlayImage(@Nullable @DrawableRes Integer image) {
+        if (image != null) {
+            overlayImage.setImageResource(image);
+        } else {
+            overlayImage.setVisibility(View.GONE);
+        }
+    }
+
     @Override
     public void update(final Observable o, final Object arg) {
         updateCardInformation();
@@ -332,6 +395,8 @@ public class CardDrawerView extends FrameLayout implements Observer {
 
     /**
      * Sets the top and bottom internal padding
+     *
+     * @param padding    padding to set
      */
     public void setInternalPadding(final int padding) {
         cardFrontLayout.setPadding(cardFrontLayout.getPaddingLeft(), padding,
@@ -342,6 +407,8 @@ public class CardDrawerView extends FrameLayout implements Observer {
 
     /**
      * Sets card resize behaviour
+     *
+     * @param behaviour   behaviour to set
      */
     public void setBehaviour(@Behaviour final int behaviour) {
         final LayoutParams frontParams = (LayoutParams) cardFrontLayout.getLayoutParams();

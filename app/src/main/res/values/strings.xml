@@ -7,4 +7,5 @@
     <string name="card_drawer_app_card_sec_code_hint">CVV</string>
     <string name="card_drawer_app_responsive">Responsive</string>
     <string name="card_drawer_app_low_res">Low Res</string>
+    <string name="card_drawer_app_medium_res">Medium Res</string>
 </resources>

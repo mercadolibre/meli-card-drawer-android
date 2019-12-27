@@ -16,8 +16,10 @@ public final class TestUtils {
     /**
      * Utility method to test that a parcelable object is being properly parceled and unparceled
      *
+     * @param <T> This describes my type parameter
      * @param objectToTest the parcelable object
      * @param creator      the parcelable creator for that class
+     * @return             Clone of the param parcelable
      */
     public static <T extends Parcelable> T cloneParcelable(T objectToTest, Parcelable.Creator<T> creator) {
         // Obtain a Parcel object and write the parcelable object to it:

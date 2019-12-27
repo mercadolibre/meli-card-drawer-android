@@ -223,6 +223,24 @@ public class CardDrawerViewTest extends BasicRobolectricTest {
         assertEquals(View.VISIBLE, codeBack.getVisibility());
     }
 
+
+    @Test
+    public void showBack_callsSwitchViewWithoutAnimationUsesBackPosition() {
+        CardDrawerView spyHeader = spy(header);
+        GradientTextView codeFront = new GradientTextView(getContext());
+        codeFront.setVisibility(View.INVISIBLE);
+        TextView codeBack = new TextView((getContext()));
+        codeBack.setVisibility(View.INVISIBLE);
+        ReflectionHelpers.setField(spyHeader, "codeFront", codeFront);
+        ReflectionHelpers.setField(spyHeader, "codeBack", codeBack);
+        CardAnimator cardAnimatorMock = mock(CardAnimator.class);
+        ReflectionHelpers.setField(spyHeader, "cardAnimator", cardAnimatorMock);
+
+        spyHeader.showBack();
+
+        verify(cardAnimatorMock).switchViewWithoutAnimation(FieldPosition.POSITION_BACK);
+    }
+
     @Test
     public void hideSecCircle_withFrontPosition_hidesSecCode() {
         final CardUI source = mock(CardUI.class);
