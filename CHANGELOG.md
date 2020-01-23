@@ -1,3 +1,6 @@
+### Release 2.0.4
+Fixed corners for medium card
+
 ### Release 2.0.3
 Add showBack method
 
