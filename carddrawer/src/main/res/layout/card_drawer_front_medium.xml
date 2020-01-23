@@ -9,7 +9,7 @@
 
     <include
         android:id="@+id/include3"
-        layout="@layout/card_drawer_front_background"
+        layout="@layout/card_drawer_front_background_medium"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintDimensionRatio="H,328:88"

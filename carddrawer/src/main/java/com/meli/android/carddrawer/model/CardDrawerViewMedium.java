@@ -21,6 +21,7 @@ import com.meli.android.carddrawer.configuration.SecurityCodeLocation;
 
 public class CardDrawerViewMedium extends CardDrawerView {
 
+    private static final int CORNER_RATIO = 56;
     private ImageView arrow;
     private ImageView complementaryCardLogo;
 
@@ -64,6 +65,15 @@ public class CardDrawerViewMedium extends CardDrawerView {
             frontParams.width = width;
             backParams.width = width;
         }
+
+        cardFrontLayout.addOnLayoutChangeListener(new OnLayoutChangeListener() {
+            @Override
+            public void onLayoutChange(final View view, final int i, final int i1, final int i2, final int i3,
+                final int i4, final int i5, final int i6, final int i7) {
+                view.removeOnLayoutChangeListener(this);
+                calculateCornerRadius(view);
+            }
+        });
 
         cardFrontLayout.setLayoutParams(frontParams);
         cardBackLayout.setLayoutParams(backParams);
@@ -127,6 +137,12 @@ public class CardDrawerViewMedium extends CardDrawerView {
             update(source);
             showSecCircle();
         }
+    }
+
+    void calculateCornerRadius(@NonNull final View view) {
+        final float cornerRadius = (float) view.getWidth() / CORNER_RATIO;
+        cardFrontGradient.setCornerRadius(cornerRadius);
+        cardBackGradient.setCornerRadius(cornerRadius);
     }
 
     @Override
