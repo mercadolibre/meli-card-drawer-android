@@ -427,7 +427,7 @@ public class CardDrawerView extends FrameLayout implements Observer {
             public void onLayoutChange(final View view, final int i, final int i1, final int i2, final int i3,
                 final int i4, final int i5, final int i6, final int i7) {
                 view.removeOnLayoutChangeListener(this);
-                calculateCornerRadius(cardFrontLayout.getWidth());
+                calculateCornerRadius(view.getWidth());
             }
         });
 
