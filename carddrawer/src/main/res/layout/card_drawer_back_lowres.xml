@@ -71,7 +71,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:autoSizeTextType="uniform"
-        app:autoSizeMinTextSize="8dp"
+        app:autoSizeMinTextSize="4dp"
         app:autoSizeMaxTextSize="100dp"
         android:maxLines="1"
         android:typeface="monospace"

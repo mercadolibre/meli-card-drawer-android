@@ -15,6 +15,7 @@ import android.support.annotation.VisibleForTesting;
 import android.support.v4.widget.TextViewCompat;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -36,7 +37,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.Observable;
 import java.util.Observer;
 
-@SuppressWarnings({"PMD.ConstructorCallsOverridableMethod", "PMD.TooManyFields", "PMD.GodClass"})
+@SuppressWarnings({ "PMD.ConstructorCallsOverridableMethod", "PMD.TooManyFields", "PMD.GodClass" })
 public class CardDrawerView extends FrameLayout implements Observer {
 
     private static final int CORNER_RATIO = 32;
@@ -91,10 +92,9 @@ public class CardDrawerView extends FrameLayout implements Observer {
 
         final TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.CardDrawerView);
         final int internalPadding = typedArray.getDimensionPixelSize(
-                R.styleable.CardDrawerView_card_header_internal_padding,
-                getResources().getDimensionPixelSize(R.dimen.card_drawer_layout_padding));
-        @Behaviour final int behaviour = typedArray.getInt(
-                R.styleable.CardDrawerView_card_header_behaviour, Behaviour.REGULAR);
+            R.styleable.CardDrawerView_card_header_internal_padding,
+            getResources().getDimensionPixelSize(R.dimen.card_drawer_layout_padding));
+        @Behaviour final int behaviour = typedArray.getInt(R.styleable.CardDrawerView_card_header_behaviour, Behaviour.REGULAR);
         typedArray.recycle();
 
         setInternalPadding(internalPadding);
@@ -163,8 +163,7 @@ public class CardDrawerView extends FrameLayout implements Observer {
     }
 
     /**
-     * Shows the front card without animation.
-     * Uses the saved card style or default
+     * Shows the front card without animation. Uses the saved card style or default
      */
     public void show() {
         hideSecCircle();
@@ -176,7 +175,7 @@ public class CardDrawerView extends FrameLayout implements Observer {
      */
     public void showSecurityCode() {
         final int securityCodeFieldPosition = source.getSecurityCodeLocation().equals(SecurityCodeLocation.FRONT)
-                ? FieldPosition.POSITION_FRONT : FieldPosition.POSITION_BACK;
+            ? FieldPosition.POSITION_FRONT : FieldPosition.POSITION_BACK;
         cardAnimator.switchView(securityCodeFieldPosition);
         showSecCircle();
     }
@@ -201,14 +200,14 @@ public class CardDrawerView extends FrameLayout implements Observer {
     }
 
     /**
-     * Shows the back card without animation.
-     * Uses the saved card style or default
+     * Shows the back card without animation. Uses the saved card style or default
      */
     public void showBack() {
         cardAnimator.switchViewWithoutAnimation(FieldPosition.POSITION_BACK);
     }
 
-    protected void setupImageSwitcher(final ImageSwitcher imageSwitcher, final Animation fadeIn, final Animation fadeOut) {
+    protected void setupImageSwitcher(final ImageSwitcher imageSwitcher, final Animation fadeIn,
+        final Animation fadeOut) {
         imageSwitcher.setInAnimation(fadeIn);
         imageSwitcher.setOutAnimation(fadeOut);
     }
@@ -256,7 +255,7 @@ public class CardDrawerView extends FrameLayout implements Observer {
 
     @VisibleForTesting
     protected void updateIssuerLogo(final ImageSwitcher issuerLogoView, @NonNull final CardUI source,
-                                    final boolean animate) {
+        final boolean animate) {
         issuerLogoView.setAnimateFirstView(animate);
         final ImageView bankImageView = (ImageView) issuerLogoView.getNextView();
         //CardUI implementation can define the bank image in getBankImageRes or setBankImage method
@@ -271,7 +270,7 @@ public class CardDrawerView extends FrameLayout implements Observer {
 
     @VisibleForTesting
     protected void updateCardLogo(final ImageSwitcher cardLogoView, @NonNull final CardUI source,
-                                  final boolean animate) {
+        final boolean animate) {
         cardLogoView.setAnimateFirstView(animate);
         final ImageView cardImageView = (ImageView) cardLogoView.getNextView();
         //CardUI implementation can define the card logo in getCardLogoRes or setCardLogo method
@@ -287,8 +286,8 @@ public class CardDrawerView extends FrameLayout implements Observer {
     /**
      * Paints all card fields with this color
      *
-     * @param fontType    the font type
-     * @param fontColor   the font color
+     * @param fontType the font type
+     * @param fontColor the font color
      **/
     public void setCardTextColor(@NonNull @FontType final String fontType, @ColorInt final int fontColor) {
         cardNumber.init(fontType, getCardNumberPlaceHolder(), fontColor);
@@ -396,19 +395,19 @@ public class CardDrawerView extends FrameLayout implements Observer {
     /**
      * Sets the top and bottom internal padding
      *
-     * @param padding    padding to set
+     * @param padding padding to set
      */
     public void setInternalPadding(final int padding) {
         cardFrontLayout.setPadding(cardFrontLayout.getPaddingLeft(), padding,
-                cardFrontLayout.getPaddingRight(), padding);
+            cardFrontLayout.getPaddingRight(), padding);
         cardBackLayout.setPadding(cardBackLayout.getPaddingLeft(), padding,
-                cardBackLayout.getPaddingRight(), padding);
+            cardBackLayout.getPaddingRight(), padding);
     }
 
     /**
      * Sets card resize behaviour
      *
-     * @param behaviour   behaviour to set
+     * @param behaviour behaviour to set
      */
     public void setBehaviour(@Behaviour final int behaviour) {
         final LayoutParams frontParams = (LayoutParams) cardFrontLayout.getLayoutParams();
@@ -423,15 +422,12 @@ public class CardDrawerView extends FrameLayout implements Observer {
             backParams.width = width;
         }
 
-        recalculateTextViewSize(cardName);
-        recalculateTextViewSize(cardDate);
-
         cardFrontLayout.addOnLayoutChangeListener(new OnLayoutChangeListener() {
             @Override
             public void onLayoutChange(final View view, final int i, final int i1, final int i2, final int i3,
                 final int i4, final int i5, final int i6, final int i7) {
                 view.removeOnLayoutChangeListener(this);
-                calculateCornerRadius(view);
+                calculateCornerRadius(cardFrontLayout.getWidth());
             }
         });
 
@@ -440,16 +436,17 @@ public class CardDrawerView extends FrameLayout implements Observer {
     }
 
     private void recalculateTextViewSize(@NonNull final TextView view) {
-        view.addOnLayoutChangeListener(new OnLayoutChangeListener() {
-            @Override
-            public void onLayoutChange(final View v, final int left, final int top, final int right, final int bottom,
-                final int oldLeft, final int oldTop,
-                final int oldRight, final int oldBottom) {
-                view.removeOnLayoutChangeListener(this);
-                TextViewCompat.setAutoSizeTextTypeWithDefaults(view, TextViewCompat.AUTO_SIZE_TEXT_TYPE_NONE);
-            }
-        });
-        TextViewCompat.setAutoSizeTextTypeWithDefaults(view, TextViewCompat.AUTO_SIZE_TEXT_TYPE_UNIFORM);
+        TextViewCompat.setAutoSizeTextTypeUniformWithConfiguration(view, 4, 100, 2, TypedValue.COMPLEX_UNIT_DIP);
+        postDelayed(() -> TextViewCompat.setAutoSizeTextTypeWithDefaults(view, TextViewCompat.AUTO_SIZE_TEXT_TYPE_NONE),
+            100);
+    }
+
+    @Override
+    protected void onSizeChanged(final int w, final int h, final int oldw, final int oldh) {
+        super.onSizeChanged(w, h, oldw, oldh);
+
+        recalculateTextViewSize(cardName);
+        recalculateTextViewSize(cardDate);
     }
 
     @Override
@@ -483,14 +480,14 @@ public class CardDrawerView extends FrameLayout implements Observer {
     }
 
     @Retention(RetentionPolicy.SOURCE)
-    @IntDef({Behaviour.REGULAR, Behaviour.RESPONSIVE})
+    @IntDef({ Behaviour.REGULAR, Behaviour.RESPONSIVE })
     public @interface Behaviour {
         int REGULAR = 0;
         int RESPONSIVE = 1;
     }
 
-    /* default */ void calculateCornerRadius(@NonNull final View view) {
-        final float cornerRadius = (float) view.getWidth() / CORNER_RATIO;
+    /* default */ void calculateCornerRadius(final int width) {
+        final float cornerRadius = (float) width / CORNER_RATIO;
         cardFrontGradient.setCornerRadius(cornerRadius);
         cardBackGradient.setCornerRadius(cornerRadius);
     }
