@@ -45,13 +45,12 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.937" />
 
-    <include
+    <include layout="@layout/card_drawer_front_background"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintDimensionRatio="H,256:158"
-        layout="@layout/card_drawer_front_background"/>
+        app:layout_constraintDimensionRatio="H,256:158" />
 
     <ImageSwitcher
         android:id="@+id/cho_card_logo"
@@ -87,9 +86,7 @@
         android:typeface = "monospace"
         android:maxLines="1"
         android:textAllCaps="true"
-        app:autoSizeTextType="uniform"
-        app:autoSizeMinTextSize="8dp"
-        app:autoSizeMaxTextSize="100dp"
+        android:gravity="bottom"
         app:layout_constraintBottom_toBottomOf="@id/card_header_front_guideline_bottom"
         app:layout_constraintHorizontal_weight="8"
         app:layout_constraintEnd_toStartOf="@+id/cho_card_date"
@@ -102,11 +99,8 @@
         android:layout_height="0dp"
         android:maxLines="1"
         tools:text="MM/AA"
-        android:typeface = "monospace"
-        android:gravity="end"
-        app:autoSizeMinTextSize="8dp"
-        app:autoSizeMaxTextSize="100dp"
-        app:autoSizeTextType="uniform"
+        android:typeface="monospace"
+        android:gravity="bottom|end"
         app:layout_constraintBottom_toBottomOf="@id/card_header_front_guideline_bottom"
         app:layout_constraintEnd_toEndOf="@id/card_header_front_guideline_right"
         app:layout_constraintStart_toEndOf="@id/cho_card_name"
@@ -122,7 +116,7 @@
         android:gravity="center"
         android:typeface = "monospace"
         app:autoSizeTextType="uniform"
-        app:autoSizeMinTextSize="12dp"
+        app:autoSizeMinTextSize="4dp"
         app:autoSizeMaxTextSize="100dp"
         app:layout_constraintEnd_toEndOf="@id/card_header_front_guideline_right"
         app:layout_constraintStart_toStartOf="@id/card_header_front_guideline_left"
@@ -153,7 +147,7 @@
         android:gravity="center"
         android:typeface = "monospace"
         app:autoSizeTextType="uniform"
-        app:autoSizeMinTextSize="8dp"
+        app:autoSizeMinTextSize="4dp"
         app:autoSizeMaxTextSize="100dp"
         tools:text="****"
         tools:visibility="visible"
