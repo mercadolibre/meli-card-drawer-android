@@ -1,3 +1,6 @@
+### Release 2.0.5
+Fixed text autosize on low sizes
+
 ### Release 2.0.4
 Fixed corners for medium card
 
