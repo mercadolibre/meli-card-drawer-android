@@ -1,3 +1,6 @@
+### Release 2.0.5
+Added possibility to hide gradient in card background
+
 ### Release 2.0.4
 Fixed corners for medium card
 
