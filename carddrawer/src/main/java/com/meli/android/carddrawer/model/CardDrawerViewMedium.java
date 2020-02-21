@@ -38,6 +38,7 @@ public class CardDrawerViewMedium extends CardDrawerView {
     @Override
     protected void init(@NonNull final Context context, @Nullable final AttributeSet attrs) {
         cornerRatio = CORNER_RATIO;
+        defaultBackgroundType = BackgroundType.SOLID;
         super.init(context, attrs);
         arrow = findViewById(R.id.cho_card_arrow);
         complementaryCardLogo = findViewById(R.id.cho_card_complementary_card_logo);
@@ -116,6 +117,6 @@ public class CardDrawerViewMedium extends CardDrawerView {
 
     @Override
     protected void onSizeChanged(final int w, final int h, final int oldw, final int oldh) {
-        //nothing to do here
+        //TODO: remove this when autosize for texts is supported.
     }
 }

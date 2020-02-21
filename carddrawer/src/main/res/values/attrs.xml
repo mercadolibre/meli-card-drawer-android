@@ -6,5 +6,9 @@
             <enum name="regular" value="0"/>
             <enum name="responsive" value="1"/>
         </attr>
+        <attr name="card_header_background_type" format="enum">
+            <enum name="gradient" value="0"/>
+            <enum name="solid" value="1"/>
+        </attr>
     </declare-styleable>
 </resources>
