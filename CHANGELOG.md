@@ -1,3 +1,7 @@
+### Release 2.1.0
+Added background type attribute with solid or gradient choices
+Fixed crash on card medium
+
 ### Release 2.0.5
 Fixed text autosize on low sizes
 
