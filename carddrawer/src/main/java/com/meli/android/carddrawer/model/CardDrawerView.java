@@ -42,6 +42,8 @@ public class CardDrawerView extends FrameLayout implements Observer {
 
     private static final int CORNER_RATIO = 32;
 
+    protected int cornerRatio = CORNER_RATIO;
+
     protected CardAnimator cardAnimator;
 
     protected ImageSwitcher issuerLogoView;
@@ -487,7 +489,7 @@ public class CardDrawerView extends FrameLayout implements Observer {
     }
 
     /* default */ void calculateCornerRadius(final int width) {
-        final float cornerRadius = (float) width / CORNER_RATIO;
+        final float cornerRadius = (float) width / cornerRatio;
         cardFrontGradient.setCornerRadius(cornerRadius);
         cardBackGradient.setCornerRadius(cornerRadius);
     }
