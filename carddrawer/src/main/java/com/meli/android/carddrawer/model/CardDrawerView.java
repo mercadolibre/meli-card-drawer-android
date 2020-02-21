@@ -43,6 +43,7 @@ public class CardDrawerView extends FrameLayout implements Observer {
     private static final int CORNER_RATIO = 32;
 
     protected int cornerRatio = CORNER_RATIO;
+    @BackgroundType protected int defaultBackgroundType = BackgroundType.GRADIENT;
 
     protected CardAnimator cardAnimator;
 
@@ -61,8 +62,8 @@ public class CardDrawerView extends FrameLayout implements Observer {
     protected Card card;
     protected View cardFrontLayout;
     protected View cardBackLayout;
-    protected GradientDrawable cardFrontGradient;
-    protected GradientDrawable cardBackGradient;
+    protected ImageView cardFrontGradient;
+    protected ImageView cardBackGradient;
     private ImageView overlayImage;
 
     public CardDrawerView(@NonNull final Context context) {
@@ -97,10 +98,13 @@ public class CardDrawerView extends FrameLayout implements Observer {
             R.styleable.CardDrawerView_card_header_internal_padding,
             getResources().getDimensionPixelSize(R.dimen.card_drawer_layout_padding));
         @Behaviour final int behaviour = typedArray.getInt(R.styleable.CardDrawerView_card_header_behaviour, Behaviour.REGULAR);
+        @BackgroundType final int backgroundType =
+            typedArray.getInt(R.styleable.CardDrawerView_card_header_background_type, defaultBackgroundType);
         typedArray.recycle();
 
         setInternalPadding(internalPadding);
         setBehaviour(behaviour);
+        setBackgroundType(backgroundType);
 
         final float distance = cardFrontLayout.getResources().getDimension(R.dimen.card_drawer_camera_distance);
         cardFrontLayout.setCameraDistance(distance);
@@ -134,10 +138,8 @@ public class CardDrawerView extends FrameLayout implements Observer {
         cardDate = findViewById(R.id.cho_card_date);
         cardFrontLayout = findViewById(R.id.card_header_front);
         cardBackLayout = findViewById(R.id.card_header_back);
-        final ImageView cardFrontGradientView = findViewById(R.id.cho_card_gradient_front);
-        cardFrontGradient = (GradientDrawable) cardFrontGradientView.getDrawable();
-        final ImageView cardBackGradientView = findViewById(R.id.cho_card_gradient_back);
-        cardBackGradient = (GradientDrawable) cardBackGradientView.getDrawable();
+        cardFrontGradient = findViewById(R.id.cho_card_gradient_front);
+        cardBackGradient = findViewById(R.id.cho_card_gradient_back);
     }
 
     @NonNull
@@ -407,6 +409,18 @@ public class CardDrawerView extends FrameLayout implements Observer {
     }
 
     /**
+     * Sets card background type, solid or gradient
+     *
+     * @param backgroundType backgroundType to set
+     */
+    public void setBackgroundType(@BackgroundType final int backgroundType) {
+        final boolean isGradient = backgroundType == BackgroundType.GRADIENT;
+        cardFrontGradient.setVisibility(isGradient ? VISIBLE : GONE);
+        cardBackGradient.setVisibility(isGradient ? VISIBLE : GONE);
+        overlayImage.setVisibility(isGradient ? VISIBLE : GONE);
+    }
+
+    /**
      * Sets card resize behaviour
      *
      * @param behaviour behaviour to set
@@ -488,9 +502,16 @@ public class CardDrawerView extends FrameLayout implements Observer {
         int RESPONSIVE = 1;
     }
 
+    @Retention(RetentionPolicy.SOURCE)
+    @IntDef({ BackgroundType.GRADIENT, BackgroundType.SOLID })
+    public @interface BackgroundType {
+        int GRADIENT = 0;
+        int SOLID = 1;
+    }
+
     /* default */ void calculateCornerRadius(final int width) {
         final float cornerRadius = (float) width / cornerRatio;
-        cardFrontGradient.setCornerRadius(cornerRadius);
-        cardBackGradient.setCornerRadius(cornerRadius);
+        ((GradientDrawable) cardFrontGradient.getDrawable()).setCornerRadius(cornerRadius);
+        ((GradientDrawable) cardBackGradient.getDrawable()).setCornerRadius(cornerRadius);
     }
 }
