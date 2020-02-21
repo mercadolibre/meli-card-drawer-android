@@ -7,13 +7,10 @@ import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
-
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
-
 import com.meli.android.carddrawer.R;
 import com.meli.android.carddrawer.configuration.FieldPosition;
 import com.meli.android.carddrawer.configuration.FontType;
@@ -22,6 +19,7 @@ import com.meli.android.carddrawer.configuration.SecurityCodeLocation;
 public class CardDrawerViewMedium extends CardDrawerView {
 
     private static final int CORNER_RATIO = 56;
+
     private ImageView arrow;
     private ImageView complementaryCardLogo;
 
@@ -29,18 +27,17 @@ public class CardDrawerViewMedium extends CardDrawerView {
         this(context, null);
     }
 
-    public CardDrawerViewMedium(@NonNull final Context context,
-                                @Nullable final AttributeSet attrs) {
+    public CardDrawerViewMedium(@NonNull final Context context, @Nullable final AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public CardDrawerViewMedium(@NonNull final Context context,
-                                @Nullable final AttributeSet attrs, final int defStyleAttr) {
+    public CardDrawerViewMedium(@NonNull final Context context, @Nullable final AttributeSet attrs, final int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 
     @Override
     protected void init(@NonNull final Context context, @Nullable final AttributeSet attrs) {
+        cornerRatio = CORNER_RATIO;
         super.init(context, attrs);
         arrow = findViewById(R.id.cho_card_arrow);
         complementaryCardLogo = findViewById(R.id.cho_card_complementary_card_logo);
@@ -50,33 +47,6 @@ public class CardDrawerViewMedium extends CardDrawerView {
     @LayoutRes
     protected int getLayout() {
         return R.layout.card_drawer_layout_medium;
-    }
-
-    @Override
-    public void setBehaviour(@Behaviour final int behaviour) {
-        final LayoutParams frontParams = (LayoutParams) cardFrontLayout.getLayoutParams();
-        final LayoutParams backParams = (LayoutParams) cardBackLayout.getLayoutParams();
-
-        if (behaviour == Behaviour.RESPONSIVE) {
-            frontParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
-            backParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
-        } else {
-            final int width = cardFrontLayout.getResources().getDimensionPixelSize(R.dimen.card_drawer_card_width);
-            frontParams.width = width;
-            backParams.width = width;
-        }
-
-        cardFrontLayout.addOnLayoutChangeListener(new OnLayoutChangeListener() {
-            @Override
-            public void onLayoutChange(final View view, final int i, final int i1, final int i2, final int i3,
-                final int i4, final int i5, final int i6, final int i7) {
-                view.removeOnLayoutChangeListener(this);
-                calculateCornerRadius(view);
-            }
-        });
-
-        cardFrontLayout.setLayoutParams(frontParams);
-        cardBackLayout.setLayoutParams(backParams);
     }
 
     public void setComplementaryCardLogo(@DrawableRes final int image) {
@@ -139,14 +109,13 @@ public class CardDrawerViewMedium extends CardDrawerView {
         }
     }
 
-    void calculateCornerRadius(@NonNull final View view) {
-        final float cornerRadius = (float) view.getWidth() / CORNER_RATIO;
-        cardFrontGradient.setCornerRadius(cornerRadius);
-        cardBackGradient.setCornerRadius(cornerRadius);
+    @Override
+    public void hideSecCircle() {
+        //nothing to do here
     }
 
     @Override
-    public void hideSecCircle() {
+    protected void onSizeChanged(final int w, final int h, final int oldw, final int oldh) {
         //nothing to do here
     }
 }
