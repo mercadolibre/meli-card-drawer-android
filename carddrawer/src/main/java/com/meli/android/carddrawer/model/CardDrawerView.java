@@ -384,18 +384,13 @@ public class CardDrawerView extends FrameLayout implements Observer {
     }
 
     /**
-     * Hides Gradient view from Front Card
+     * Hides Gradient view from Front and Back Card
      */
-    public void hideFrontCardGradientView() {
+    public void hideGradientView() {
         final ImageView cardFrontGradientView = findViewById(R.id.cho_card_gradient_front);
-        cardFrontGradientView.setVisibility(View.GONE);
-    }
-
-    /**
-     * Hides Gradient view from Back Card
-     */
-    public void hideBackCardGradientView() {
         final ImageView cardBackGradientView = findViewById(R.id.cho_card_gradient_back);
+
+        cardFrontGradientView.setVisibility(View.GONE);
         cardBackGradientView.setVisibility(View.GONE);
     }
 
