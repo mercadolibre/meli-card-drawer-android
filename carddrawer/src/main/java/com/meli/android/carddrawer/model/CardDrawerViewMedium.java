@@ -18,8 +18,6 @@ import com.meli.android.carddrawer.configuration.SecurityCodeLocation;
 
 public class CardDrawerViewMedium extends CardDrawerView {
 
-    private static final int CORNER_RATIO = 56;
-
     private ImageView arrow;
     private ImageView complementaryCardLogo;
 
@@ -37,7 +35,6 @@ public class CardDrawerViewMedium extends CardDrawerView {
 
     @Override
     protected void init(@NonNull final Context context, @Nullable final AttributeSet attrs) {
-        cornerRatio = CORNER_RATIO;
         defaultBackgroundType = BackgroundType.SOLID;
         super.init(context, attrs);
         arrow = findViewById(R.id.cho_card_arrow);

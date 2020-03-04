@@ -7,7 +7,5 @@
         android:angle="45"
         android:dither="true" />
 
-    <corners android:radius="8dp"/>
-
     <size android:height="158dp" android:width="256dp" />
 </shape>
