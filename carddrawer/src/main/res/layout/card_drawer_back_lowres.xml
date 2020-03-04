@@ -3,12 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:paddingTop="@dimen/card_drawer_layout_padding"
-    android:paddingBottom="@dimen/card_drawer_layout_padding"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_gravity="center_horizontal"
-    android:id="@+id/card_header_back">
+    android:layout_height="wrap_content">
 
     <android.support.constraint.Guideline
         android:id="@+id/card_header_back_guideline_horizontal"
@@ -49,7 +45,7 @@
     <View
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@drawable/card_drawer_band"
+        android:background="@color/card_drawer_band"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintDimensionRatio="H,256:32"

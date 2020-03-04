@@ -2,20 +2,37 @@
 <merge
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:parentTag="android.widget.FrameLayout"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    tools:parentTag="android.widget.FrameLayout">
+    android:layout_height="wrap_content">
 
-    <include
-        layout="@layout/card_drawer_back_medium"
-        android:layout_width="match_parent"
+    <android.support.v7.widget.CardView
+        android:id="@+id/card_header_back"
+        android:layout_width="@dimen/card_drawer_card_width"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="2dp"
+        app:cardPreventCornerOverlap="false">
 
-    <include
-        layout="@layout/card_drawer_front_medium"
-        android:layout_width="match_parent"
+        <include
+            layout="@layout/card_drawer_back_medium" />
+
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/card_header_front"
+        android:layout_width="@dimen/card_drawer_card_width"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"/>
+        android:layout_gravity="center_horizontal"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="2dp"
+        app:cardPreventCornerOverlap="false">
+
+        <include
+            layout="@layout/card_drawer_front_medium" />
+
+    </android.support.v7.widget.CardView>
 
 </merge>

@@ -6,6 +6,14 @@
         android:valueFrom="0.0"
         android:valueTo="1.0" />
 
+    <objectAnimator
+        android:duration="@integer/card_drawer_card_flip_time_half"
+        android:interpolator="@anim/card_drawer_decelerate_interpolator"
+        android:propertyName="cardElevation"
+        android:repeatCount="1"
+        android:repeatMode="reverse"
+        android:valueTo="0" />
+
     <!-- Rotate. -->
     <objectAnimator
         android:duration="@integer/card_drawer_card_flip_time_full"
@@ -16,14 +24,14 @@
 
     <!-- Half-way through the rotation (see startOffset), set the alpha to 0. -->
     <objectAnimator
-        android:duration="1"
+        android:duration="0"
         android:propertyName="alpha"
         android:startOffset="@integer/card_drawer_card_flip_time_half"
         android:valueFrom="1.0"
         android:valueTo="0.0" />
 
     <objectAnimator
-        android:duration="1"
+        android:duration="0"
         android:propertyName="rotationY"
         android:startOffset="@integer/card_drawer_card_flip_time_full"
         android:valueFrom="-180"
