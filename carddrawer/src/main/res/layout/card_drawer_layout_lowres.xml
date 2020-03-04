@@ -12,8 +12,8 @@
         android:layout_width="@dimen/card_drawer_card_width"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        app:cardCornerRadius="12dp"
-        app:cardElevation="2dp"
+        app:cardCornerRadius="@dimen/card_drawer_corner_radius"
+        app:cardElevation="@dimen/card_drawer_elevation"
         app:cardPreventCornerOverlap="false">
 
         <include
@@ -26,8 +26,8 @@
         android:layout_width="@dimen/card_drawer_card_width"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        app:cardCornerRadius="12dp"
-        app:cardElevation="2dp"
+        app:cardCornerRadius="@dimen/card_drawer_corner_radius"
+        app:cardElevation="@dimen/card_drawer_elevation"
         app:cardPreventCornerOverlap="false">
 
         <include

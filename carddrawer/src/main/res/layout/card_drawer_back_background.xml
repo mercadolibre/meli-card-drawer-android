@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="fitXY"
-        android:src="@android:color/white"
+        android:src="@drawable/card_drawer_background"
         tools:tint="#001d77" />
 
     <ImageView
@@ -18,7 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="fitXY"
-        android:src="@android:color/white"
+        android:src="@drawable/card_drawer_background"
         tools:tint="#001d77" />
 
     <ImageView
