@@ -2,7 +2,6 @@ package com.meli.android.carddrawer.model;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.ColorInt;
@@ -40,9 +39,6 @@ import java.util.Observer;
 @SuppressWarnings({ "PMD.ConstructorCallsOverridableMethod", "PMD.TooManyFields", "PMD.GodClass" })
 public class CardDrawerView extends FrameLayout implements Observer {
 
-    private static final int CORNER_RATIO = 32;
-
-    protected int cornerRatio = CORNER_RATIO;
     @BackgroundType protected int defaultBackgroundType = BackgroundType.GRADIENT;
 
     protected CardAnimator cardAnimator;
@@ -76,6 +72,7 @@ public class CardDrawerView extends FrameLayout implements Observer {
 
     public CardDrawerView(@NonNull final Context context, @Nullable final AttributeSet attrs, final int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        setClipToPadding(false);
         init(context, attrs);
     }
 
@@ -402,10 +399,7 @@ public class CardDrawerView extends FrameLayout implements Observer {
      * @param padding padding to set
      */
     public void setInternalPadding(final int padding) {
-        cardFrontLayout.setPadding(cardFrontLayout.getPaddingLeft(), padding,
-            cardFrontLayout.getPaddingRight(), padding);
-        cardBackLayout.setPadding(cardBackLayout.getPaddingLeft(), padding,
-            cardBackLayout.getPaddingRight(), padding);
+        setPadding(getPaddingLeft(), padding, getPaddingRight(), padding);
     }
 
     /**
@@ -437,15 +431,6 @@ public class CardDrawerView extends FrameLayout implements Observer {
             frontParams.width = width;
             backParams.width = width;
         }
-
-        cardFrontLayout.addOnLayoutChangeListener(new OnLayoutChangeListener() {
-            @Override
-            public void onLayoutChange(final View view, final int i, final int i1, final int i2, final int i3,
-                final int i4, final int i5, final int i6, final int i7) {
-                view.removeOnLayoutChangeListener(this);
-                calculateCornerRadius(view.getWidth());
-            }
-        });
 
         cardFrontLayout.setLayoutParams(frontParams);
         cardBackLayout.setLayoutParams(backParams);
@@ -507,11 +492,5 @@ public class CardDrawerView extends FrameLayout implements Observer {
     public @interface BackgroundType {
         int GRADIENT = 0;
         int SOLID = 1;
-    }
-
-    /* default */ void calculateCornerRadius(final int width) {
-        final float cornerRadius = (float) width / cornerRatio;
-        ((GradientDrawable) cardFrontGradient.getDrawable()).setCornerRadius(cornerRadius);
-        ((GradientDrawable) cardBackGradient.getDrawable()).setCornerRadius(cornerRadius);
     }
 }

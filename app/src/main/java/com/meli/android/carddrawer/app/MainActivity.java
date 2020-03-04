@@ -7,7 +7,6 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.CompoundButton;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -26,10 +25,10 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private CardComposite card;
-    private CardDrawerView cardDrawerView;
-    private CardDrawerView cardDrawerViewLowRes;
-    private CardDrawerView cardDrawerViewMedium;
+    /* default */ CardComposite card;
+    /* default */ CardDrawerView cardDrawerView;
+    /* default */ CardDrawerView cardDrawerViewLowRes;
+    /* default */ CardDrawerView cardDrawerViewMedium;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -44,32 +43,47 @@ public class MainActivity extends AppCompatActivity {
         card.addCard(cardDrawerViewLowRes.getCard());
         card.addCard(cardDrawerViewMedium.getCard());
         ((Switch) findViewById(R.id.card_header_switch_responsive)).setOnCheckedChangeListener(
-            new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(final CompoundButton buttonView, final boolean isChecked) {
-                    final int behaviour = isChecked ?
-                        CardDrawerView.Behaviour.RESPONSIVE : CardDrawerView.Behaviour.REGULAR;
-                    cardDrawerView.setBehaviour(behaviour);
-                    cardDrawerViewLowRes.setBehaviour(behaviour);
-                    cardDrawerViewMedium.setBehaviour(behaviour);
-                }
+            (buttonView, isChecked) -> {
+                final int behaviour = isChecked ?
+                    CardDrawerView.Behaviour.RESPONSIVE : CardDrawerView.Behaviour.REGULAR;
+                cardDrawerView.setBehaviour(behaviour);
+                cardDrawerViewLowRes.setBehaviour(behaviour);
+                cardDrawerViewMedium.setBehaviour(behaviour);
             });
-        ((Switch) findViewById(R.id.card_header_lowres_switch)).setOnCheckedChangeListener(
-            new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(final CompoundButton buttonView, final boolean isChecked) {
-                    cardDrawerViewLowRes.setVisibility(isChecked ? View.VISIBLE : View.GONE);
-                    cardDrawerView.setVisibility(isChecked ? View.GONE : View.VISIBLE);
-                }
-            });
-        ((Switch) findViewById(R.id.card_header_medium_switch)).setOnCheckedChangeListener(
-                new CompoundButton.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(final CompoundButton buttonView, final boolean isChecked) {
-                        cardDrawerViewMedium.setVisibility(isChecked ? View.VISIBLE : View.GONE);
-                        cardDrawerView.setVisibility(isChecked ? View.GONE : View.VISIBLE);
+        final Switch switchLowres = findViewById(R.id.card_header_lowres_switch);
+        final Switch switchMedium = findViewById(R.id.card_header_medium_switch);
+        switchLowres.setOnCheckedChangeListener(
+            (buttonView, isChecked) -> {
+                if (isChecked) {
+                    switchMedium.setChecked(false);
+                    cardDrawerViewLowRes.setVisibility(View.VISIBLE);
+                    cardDrawerViewMedium.setVisibility(View.GONE);
+                    cardDrawerView.setVisibility(View.GONE);
+                } else {
+                    cardDrawerViewLowRes.setVisibility(View.GONE);
+                    if (switchMedium.isChecked()) {
+                        cardDrawerViewMedium.setVisibility(View.VISIBLE);
+                    } else {
+                        cardDrawerView.setVisibility(View.VISIBLE);
                     }
-                });
+                }
+            });
+        switchMedium.setOnCheckedChangeListener(
+            (buttonView, isChecked) -> {
+                if (isChecked) {
+                    switchLowres.setChecked(false);
+                    cardDrawerViewMedium.setVisibility(View.VISIBLE);
+                    cardDrawerView.setVisibility(View.GONE);
+                    cardDrawerViewLowRes.setVisibility(View.GONE);
+                } else {
+                    cardDrawerViewMedium.setVisibility(View.GONE);
+                    if (switchLowres.isChecked()) {
+                        cardDrawerViewLowRes.setVisibility(View.VISIBLE);
+                    } else {
+                        cardDrawerView.setVisibility(View.VISIBLE);
+                    }
+                }
+            });
 
         initCardConfigurationOptions();
         initCardNumber();
@@ -79,23 +93,23 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initSecurityCode() {
-        TextView securityCode = findViewById(R.id.security_code);
+        final TextView securityCode = findViewById(R.id.security_code);
 
         securityCode.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            public void beforeTextChanged(final CharSequence charSequence, final int i, final int i1, final int i2) {
                 cardDrawerView.showSecurityCode();
                 cardDrawerViewLowRes.showSecurityCode();
                 cardDrawerViewMedium.showSecurityCode();
             }
 
             @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            public void onTextChanged(final CharSequence charSequence, final int i, final int i1, final int i2) {
                 card.setSecCode(charSequence.toString());
             }
 
             @Override
-            public void afterTextChanged(Editable editable) {
+            public void afterTextChanged(final Editable editable) {
                 if (editable.toString().isEmpty()) {
                     cardDrawerView.show();
                     cardDrawerViewLowRes.show();
@@ -106,21 +120,21 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initExpirationDate() {
-        TextView expirationDate = findViewById(R.id.expiration_date);
+        final TextView expirationDate = findViewById(R.id.expiration_date);
 
         expirationDate.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            public void beforeTextChanged(final CharSequence charSequence, final int i, final int i1, final int i2) {
                 //Do nothing
             }
 
             @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            public void onTextChanged(final CharSequence charSequence, final int i, final int i1, final int i2) {
                 card.setExpiration(charSequence.toString());
             }
 
             @Override
-            public void afterTextChanged(Editable editable) {
+            public void afterTextChanged(final Editable editable) {
                 //Do nothing
             }
         });

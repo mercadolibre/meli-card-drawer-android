@@ -49,7 +49,7 @@ public class CardDrawerViewLowres extends CardDrawerView {
 
             @Override
             public void onAnimationEnd(final Animation animation) {
-                ImageView imageView = (ImageView) imageSwitcher.getNextView();
+                final ImageView imageView = (ImageView) imageSwitcher.getNextView();
                 imageView.setImageResource(0);
             }
 

@@ -29,13 +29,9 @@ public class CardDrawerViewLowresTest extends CardDrawerViewTest {
             .addAttribute(R.attr.card_header_internal_padding, "23dp")
             .build();
         header = new CardDrawerViewLowres(getContext(), attr);
-        final View front = header.findViewById(R.id.card_header_front);
-        final View back = header.findViewById(R.id.card_header_back);
 
-        assertEquals(expectedPadding, front.getPaddingTop());
-        assertEquals(expectedPadding, front.getPaddingBottom());
-        assertEquals(expectedPadding, back.getPaddingTop());
-        assertEquals(expectedPadding, back.getPaddingBottom());
+        assertEquals(expectedPadding, header.getPaddingTop());
+        assertEquals(expectedPadding, header.getPaddingBottom());
     }
 
     @Override

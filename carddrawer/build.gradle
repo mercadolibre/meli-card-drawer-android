@@ -41,6 +41,7 @@ dependencies {
     implementation "com.mercadolibre.android:picasso-disk-cache:$picassoDiskCache"
     implementation "com.android.support:appcompat-v7:$supportLibraryVersion"
     implementation "com.android.support.constraint:constraint-layout:$constraintLayout"
+    implementation "com.android.support:cardview-v7:$supportLibraryVersion"
     testImplementation "junit:junit:$junit"
     androidTestImplementation "com.android.support.test:runner:$testRunner"
     androidTestImplementation "com.android.support.test.espresso:espresso-core:$espresso"
