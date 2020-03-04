@@ -4,11 +4,11 @@ import android.support.annotation.ColorInt;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.Size;
 import android.widget.ImageView;
-
 import com.meli.android.carddrawer.configuration.FontType;
 import com.meli.android.carddrawer.configuration.SecurityCodeLocation;
-
+import java.util.List;
 
 /**
  * Contains all configuration data for show the card.
@@ -77,6 +77,19 @@ public interface CardUI {
      */
     @ColorInt
     int getCardBackgroundColor();
+
+    /**
+     * List of colors for the gradient that is drawn on top of the background color of the card.
+     * one color: no gradient, will fill the whole card
+     * two colors: start and end colors
+     * three colors: start, center and end colors
+     *
+     * note: if colors opacity are 100% they will override the background color
+     *
+     * @return array of colors as string, ex: #ff000000
+     */
+    @Nullable @Size(min = 1, max = 3)
+    default List<String> getCardGradientColors() { return null; }
 
     /**
      * @return number long

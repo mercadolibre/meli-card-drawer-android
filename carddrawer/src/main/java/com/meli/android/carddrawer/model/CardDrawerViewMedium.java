@@ -35,7 +35,6 @@ public class CardDrawerViewMedium extends CardDrawerView {
 
     @Override
     protected void init(@NonNull final Context context, @Nullable final AttributeSet attrs) {
-        defaultBackgroundType = BackgroundType.SOLID;
         super.init(context, attrs);
         arrow = findViewById(R.id.cho_card_arrow);
         complementaryCardLogo = findViewById(R.id.cho_card_complementary_card_logo);
