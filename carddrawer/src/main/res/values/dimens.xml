@@ -7,6 +7,6 @@
     <dimen name="card_drawer_layout_padding">20dp</dimen>
 
     <dimen name="card_drawer_shadow_radius">2dp</dimen>
-    <dimen name="card_drawer_logo_height">36dp</dimen>
+    <dimen name="card_drawer_logo_height">26dp</dimen>
 
 </resources>
