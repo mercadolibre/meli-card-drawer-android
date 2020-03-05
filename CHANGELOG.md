@@ -1,3 +1,7 @@
+### Release 2.2.0
+Added custom gradient feature (removed backgroundType for this)
+Added CardView for round corners
+
 ### Release 2.1.0
 Added background type attribute with solid or gradient choices
 Fixed crash on card medium
