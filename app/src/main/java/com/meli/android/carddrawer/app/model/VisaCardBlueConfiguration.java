@@ -3,15 +3,16 @@ package com.meli.android.carddrawer.app.model;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.widget.ImageView;
-
 import com.meli.android.carddrawer.app.R;
 import com.meli.android.carddrawer.configuration.FontType;
 import com.meli.android.carddrawer.configuration.SecurityCodeLocation;
 import com.meli.android.carddrawer.model.CardAnimationType;
 import com.meli.android.carddrawer.model.CardUI;
-
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * It is an example of configuration.
@@ -92,5 +93,11 @@ public class VisaCardBlueConfiguration implements CardUI {
     public void setBankImage(@NonNull ImageView bankImage) {
         Drawable bankDrawable = context.getResources().getDrawable(R.drawable.card_drawer_app_bank_logo_galicia);
         bankImage.setImageDrawable(bankDrawable);
+    }
+
+    @Nullable
+    @Override
+    public List<String> getCardGradientColors() {
+        return Arrays.asList("#50ffffff", "#90ff00ff", "#00ffffff");
     }
 }
