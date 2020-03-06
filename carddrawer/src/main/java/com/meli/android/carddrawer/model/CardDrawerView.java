@@ -12,7 +12,6 @@ import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
-import android.support.v4.widget.TextViewCompat;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.TypedValue;
@@ -62,6 +61,8 @@ public class CardDrawerView extends FrameLayout implements Observer {
     protected ImageView cardFrontGradient;
     protected ImageView cardBackGradient;
     private ImageView overlayImage;
+    private int smallTextSize;
+    private int defaultCardWidth;
 
     public CardDrawerView(@NonNull final Context context) {
         this(context, null);
@@ -96,6 +97,9 @@ public class CardDrawerView extends FrameLayout implements Observer {
             R.styleable.CardDrawerView_card_header_internal_padding,
             getResources().getDimensionPixelSize(R.dimen.card_drawer_layout_padding));
         @Behaviour final int behaviour = typedArray.getInt(R.styleable.CardDrawerView_card_header_behaviour, Behaviour.REGULAR);
+
+        defaultCardWidth = cardFrontLayout.getResources().getDimensionPixelSize(R.dimen.card_drawer_card_width);
+        smallTextSize = getResources().getDimensionPixelSize(R.dimen.card_drawer_name_font_size);
 
         setInternalPadding(internalPadding);
         setBehaviour(behaviour);
@@ -413,27 +417,23 @@ public class CardDrawerView extends FrameLayout implements Observer {
             frontParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
             backParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
         } else {
-            final int width = cardFrontLayout.getResources().getDimensionPixelSize(R.dimen.card_drawer_card_width);
-            frontParams.width = width;
-            backParams.width = width;
+            frontParams.width = defaultCardWidth;
+            backParams.width = defaultCardWidth;
         }
 
         cardFrontLayout.setLayoutParams(frontParams);
         cardBackLayout.setLayoutParams(backParams);
     }
 
-    private void recalculateTextViewSize(@NonNull final TextView view) {
-        TextViewCompat.setAutoSizeTextTypeUniformWithConfiguration(view, 4, 100, 2, TypedValue.COMPLEX_UNIT_DIP);
-        postDelayed(() -> TextViewCompat.setAutoSizeTextTypeWithDefaults(view, TextViewCompat.AUTO_SIZE_TEXT_TYPE_NONE),
-            100);
-    }
-
     @Override
     protected void onSizeChanged(final int w, final int h, final int oldw, final int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
 
-        recalculateTextViewSize(cardName);
-        recalculateTextViewSize(cardDate);
+        final float newTextSize = (float) cardFrontLayout.getMeasuredWidth() * smallTextSize / defaultCardWidth;
+
+        cardName.setTextSize(TypedValue.COMPLEX_UNIT_PX, newTextSize);
+        cardDate.setTextSize(TypedValue.COMPLEX_UNIT_PX, newTextSize);
+        codeFront.setTextSize(TypedValue.COMPLEX_UNIT_PX, newTextSize);
     }
 
     @Override
