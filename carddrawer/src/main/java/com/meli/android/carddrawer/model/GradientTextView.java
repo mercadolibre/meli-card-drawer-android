@@ -5,13 +5,13 @@ import android.graphics.Canvas;
 import android.support.annotation.NonNull;
 import android.support.annotation.VisibleForTesting;
 import android.support.v4.content.ContextCompat;
+import android.text.TextPaint;
 import android.util.AttributeSet;
 
 import com.meli.android.carddrawer.R;
 import com.meli.android.carddrawer.configuration.CardFontConfiguration;
 import com.meli.android.carddrawer.configuration.CardFontConfigurationFactory;
 import com.meli.android.carddrawer.configuration.FontType;
-
 
 public class GradientTextView extends android.support.v7.widget.AppCompatTextView {
     private @FontType
@@ -40,7 +40,7 @@ public class GradientTextView extends android.support.v7.widget.AppCompatTextVie
         this.fontColor = ContextCompat.getColor(getContext(), R.color.card_drawer_card_default_font_color);
     }
 
-    public void init(@FontType String fontType, String placeHolder, int fontColor) {
+    public void init(@FontType final String fontType, final String placeHolder, final int fontColor) {
         this.fontType = fontType;
         this.placeHolder = placeHolder;
         this.fontColor = fontColor;
@@ -48,23 +48,23 @@ public class GradientTextView extends android.support.v7.widget.AppCompatTextVie
 
     @Override
     protected void onDraw(Canvas canvas) {
-        getPaint().clearShadowLayer();
-        getPaint().setShader(null);
+        final TextPaint paint = getPaint();
+        paint.clearShadowLayer();
+        paint.setShader(null);
 
         CardFontConfiguration configuration = getConfiguration();
         super.setTextColor(configuration.getColor());
         if (getText() != null && !getText().equals(placeHolder)) {
             // draw the shadow
-            configuration.setShadow(getPaint());
-            getPaint().setShader(null);
+            configuration.setShadow(paint);
+            paint.setShader(null);
             super.onDraw(canvas);
 
             // draw the gradient filled text
-            getPaint().clearShadowLayer();
-            configuration.setGradient(getPaint(), getWidth(), getHeight());
+            paint.clearShadowLayer();
+            configuration.setGradient(paint, getWidth(), getHeight());
         }
         super.onDraw(canvas);
-
     }
 
     @VisibleForTesting
@@ -72,6 +72,4 @@ public class GradientTextView extends android.support.v7.widget.AppCompatTextVie
     protected CardFontConfiguration getConfiguration() {
         return CardFontConfigurationFactory.getConfiguration(fontType, fontColor, getContext());
     }
-
-
 }

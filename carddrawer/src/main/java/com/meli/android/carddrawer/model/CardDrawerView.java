@@ -291,10 +291,22 @@ public class CardDrawerView extends FrameLayout implements Observer {
      * @param fontColor the font color
      **/
     public void setCardTextColor(@NonNull @FontType final String fontType, @ColorInt final int fontColor) {
-        cardNumber.init(fontType, getCardNumberPlaceHolder(), fontColor);
-        cardName.init(fontType, source.getNamePlaceHolder(), fontColor);
-        cardDate.init(fontType, source.getExpirationPlaceHolder(), fontColor);
-        codeFront.init(fontType, getSecCodePlaceHolder(), fontColor);
+        cardNumber.init(resolveFontType(fontType, true), getCardNumberPlaceHolder(), fontColor);
+        cardName.init(resolveFontType(fontType, false), source.getNamePlaceHolder(), fontColor);
+        cardDate.init(resolveFontType(fontType, false), source.getExpirationPlaceHolder(), fontColor);
+        codeFront.init(resolveFontType(fontType, false), getSecCodePlaceHolder(), fontColor);
+    }
+
+    protected String resolveFontType(@NonNull @FontType final String type, final boolean hasToShow) {
+        if (!hasToShow) {
+            if (type.equals(FontType.DARK_TYPE)) {
+                return FontType.DARK_NO_SHADOW_TYPE;
+            }
+
+            return FontType.LIGHT_NO_SHADOW_TYPE;
+        }
+
+        return type;
     }
 
     protected String getCardNumberPlaceHolder() {
