@@ -2,6 +2,7 @@ package com.meli.android.carddrawer.model;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.ColorInt;
@@ -23,6 +24,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageSwitcher;
 import android.widget.ImageView;
 import android.widget.TextView;
+import com.meli.android.carddrawer.GradientHelper;
 import com.meli.android.carddrawer.R;
 import com.meli.android.carddrawer.configuration.DefaultCardConfiguration;
 import com.meli.android.carddrawer.configuration.FieldPosition;
@@ -33,13 +35,12 @@ import com.meli.android.carddrawer.format.NumberFormatter;
 import com.mercadolibre.android.picassodiskcache.PicassoDiskLoader;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
 @SuppressWarnings({ "PMD.ConstructorCallsOverridableMethod", "PMD.TooManyFields", "PMD.GodClass" })
 public class CardDrawerView extends FrameLayout implements Observer {
-
-    @BackgroundType protected int defaultBackgroundType = BackgroundType.GRADIENT;
 
     protected CardAnimator cardAnimator;
 
@@ -95,13 +96,9 @@ public class CardDrawerView extends FrameLayout implements Observer {
             R.styleable.CardDrawerView_card_header_internal_padding,
             getResources().getDimensionPixelSize(R.dimen.card_drawer_layout_padding));
         @Behaviour final int behaviour = typedArray.getInt(R.styleable.CardDrawerView_card_header_behaviour, Behaviour.REGULAR);
-        @BackgroundType final int backgroundType =
-            typedArray.getInt(R.styleable.CardDrawerView_card_header_background_type, defaultBackgroundType);
-        typedArray.recycle();
 
         setInternalPadding(internalPadding);
         setBehaviour(behaviour);
-        setBackgroundType(backgroundType);
 
         final float distance = cardFrontLayout.getResources().getDimension(R.dimen.card_drawer_camera_distance);
         cardFrontLayout.setCameraDistance(distance);
@@ -239,6 +236,7 @@ public class CardDrawerView extends FrameLayout implements Observer {
     public void update(@NonNull final CardUI source) {
         final boolean animate = !CardAnimationType.NONE.equals(source.getAnimationType());
         cardAnimator.colorCard(source.getCardBackgroundColor(), source.getAnimationType());
+        updateCardBackgroundGradient(source.getCardGradientColors());
         updateIssuerLogo(issuerLogoView, source, animate);
         updateCardLogo(cardLogoView, source, animate);
         setCardTextColor(source.getFontType(), source.getCardFontColor());
@@ -415,18 +413,6 @@ public class CardDrawerView extends FrameLayout implements Observer {
     }
 
     /**
-     * Sets card background type, solid or gradient
-     *
-     * @param backgroundType backgroundType to set
-     */
-    public void setBackgroundType(@BackgroundType final int backgroundType) {
-        final boolean isGradient = backgroundType == BackgroundType.GRADIENT;
-        cardFrontGradient.setVisibility(isGradient ? VISIBLE : GONE);
-        cardBackGradient.setVisibility(isGradient ? VISIBLE : GONE);
-        overlayImage.setVisibility(isGradient ? VISIBLE : GONE);
-    }
-
-    /**
      * Sets card resize behaviour
      *
      * @param behaviour behaviour to set
@@ -499,10 +485,9 @@ public class CardDrawerView extends FrameLayout implements Observer {
         int RESPONSIVE = 1;
     }
 
-    @Retention(RetentionPolicy.SOURCE)
-    @IntDef({ BackgroundType.GRADIENT, BackgroundType.SOLID })
-    public @interface BackgroundType {
-        int GRADIENT = 0;
-        int SOLID = 1;
+    private void updateCardBackgroundGradient(@Nullable final List<String> gradientColors) {
+        final GradientDrawable gradientDrawable = GradientHelper.getGradientDrawable(getResources(), gradientColors);
+        cardFrontGradient.setImageDrawable(gradientDrawable);
+        cardBackGradient.setImageDrawable(gradientDrawable);
     }
 }
