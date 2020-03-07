@@ -39,7 +39,7 @@ import static org.mockito.Mockito.when;
  */
 @RunWith(RobolectricTestRunner.class)
 public class CardDrawerViewTest extends BasicRobolectricTest {
-    protected CardDrawerView header;
+    public CardDrawerView header;
 
     @Before
     public void doBefore() {
@@ -292,10 +292,10 @@ public class CardDrawerViewTest extends BasicRobolectricTest {
 
         spyHeader.setCardTextColor(fontType, color);
 
-        verify(cardNumber).init(fontType, "****  ****  ****  ****", color);
-        verify(cardName).init(fontType, source.getNamePlaceHolder(), color);
-        verify(cardDate).init(fontType, source.getExpirationPlaceHolder(), color);
-        verify(codeFront).init(fontType, "****", color);
+        verify(cardNumber).init(spyHeader.resolveFontType(fontType, true), "****  ****  ****  ****", color);
+        verify(cardName).init(spyHeader.resolveFontType(fontType, false), source.getNamePlaceHolder(), color);
+        verify(cardDate).init(spyHeader.resolveFontType(fontType, false), source.getExpirationPlaceHolder(), color);
+        verify(codeFront).init(spyHeader.resolveFontType(fontType, false), "****", color);
     }
 
 

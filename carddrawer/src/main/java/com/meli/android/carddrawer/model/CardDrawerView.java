@@ -295,6 +295,7 @@ public class CardDrawerView extends FrameLayout implements Observer {
         codeFront.init(resolveFontType(fontType, false), getSecCodePlaceHolder(), fontColor);
     }
 
+    @VisibleForTesting
     protected String resolveFontType(@NonNull @FontType final String type, final boolean hasToShow) {
         if (!hasToShow) {
             if (type.equals(FontType.DARK_TYPE)) {

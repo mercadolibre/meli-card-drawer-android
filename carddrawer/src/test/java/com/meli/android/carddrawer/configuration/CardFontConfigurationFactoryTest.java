@@ -26,6 +26,20 @@ public class CardFontConfigurationFactoryTest extends BasicRobolectricTest {
     }
 
     @Test
+    public void getConfiguration_withDarkNoShadowType_returnsDarkNoShadowFontConfiguration() {
+        CardFontConfiguration configuration = CardFontConfigurationFactory.getConfiguration(FontType.DARK_NO_SHADOW_TYPE, 0, getContext());
+
+        assertTrue(configuration instanceof DarkNoShadowFontConfiguration);
+    }
+
+    @Test
+    public void getConfiguration_withLightNoShadowType_returnsLightNoShadowFontConfiguration() {
+        CardFontConfiguration configuration = CardFontConfigurationFactory.getConfiguration(FontType.LIGHT_NO_SHADOW_TYPE, 0, getContext());
+
+        assertTrue(configuration instanceof LightNoShadowFontConfiguration);
+    }
+
+    @Test
     public void getConfiguration_withInvalidType_returnsDefaultFontConfiguration() {
         CardFontConfiguration configuration = CardFontConfigurationFactory.getConfiguration("invalid_type", 2, getContext());
 

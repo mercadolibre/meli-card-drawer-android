@@ -7,8 +7,10 @@ import android.text.TextPaint;
 import com.meli.android.carddrawer.BasicRobolectricTest;
 import com.meli.android.carddrawer.R;
 
+import org.jetbrains.annotations.TestOnly;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.experimental.theories.suppliers.TestedOn;
 import org.junit.runner.RunWith;
 
 import org.robolectric.RobolectricTestRunner;
@@ -22,7 +24,7 @@ import static org.mockito.Mockito.verify;
 
 @RunWith(RobolectricTestRunner.class)
 public class LightFontConfigurationTest extends BasicRobolectricTest {
-    private LightFontConfiguration lightFontConfiguration;
+    LightFontConfiguration lightFontConfiguration;
 
     @Before
     public void doBefore() {

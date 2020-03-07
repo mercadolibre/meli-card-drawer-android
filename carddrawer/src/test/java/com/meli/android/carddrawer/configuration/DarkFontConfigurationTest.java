@@ -22,7 +22,7 @@ import static org.mockito.Mockito.verify;
 
 @RunWith(RobolectricTestRunner.class)
 public class DarkFontConfigurationTest extends BasicRobolectricTest {
-    private DarkFontConfiguration darkFontConfiguration;
+    DarkFontConfiguration darkFontConfiguration;
 
     @Before
     public void doBefore() {
@@ -37,12 +37,12 @@ public class DarkFontConfigurationTest extends BasicRobolectricTest {
     }
 
     @Test
-    public void setShadow_doesntCallSetShadow() {
+    public void setShadow_callSetShadow() {
         TextPaint textPaint = mock(TextPaint.class);
 
         darkFontConfiguration.setShadow(textPaint);
 
-        verify(textPaint, never()).setShadowLayer(anyFloat(), anyFloat(), anyFloat(), anyInt());
+        verify(textPaint).setShadowLayer(anyFloat(), anyFloat(), anyFloat(), anyInt());
     }
 
     @Test
