@@ -9,6 +9,8 @@ import java.lang.annotation.RetentionPolicy;
 @StringDef({FontType.LIGHT_TYPE, FontType.DARK_TYPE, FontType.NONE})
 public @interface FontType {
     String DARK_TYPE = "dark";
+    String DARK_NO_SHADOW_TYPE = "dark_no_shadow";
     String LIGHT_TYPE = "light";
+    String LIGHT_NO_SHADOW_TYPE = "light_no_shadow";
     String NONE = "none";
 }

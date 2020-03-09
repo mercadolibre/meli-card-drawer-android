@@ -69,8 +69,8 @@ public class CardDrawerViewMedium extends CardDrawerView {
 
     @Override
     public void setCardTextColor(@NonNull @FontType final String fontType, @ColorInt final int fontColor) {
-        cardNumber.init(fontType, getCardNumberPlaceHolder(), fontColor);
-        cardName.init(fontType, source.getNamePlaceHolder(), fontColor);
+        cardNumber.init(resolveFontType(fontType, true), getCardNumberPlaceHolder(), fontColor);
+        cardName.init(resolveFontType(fontType, false), source.getNamePlaceHolder(), fontColor);
         arrow.setColorFilter(getArrowColor(fontType, fontColor));
         complementaryCardLogo.setColorFilter(fontColor);
     }

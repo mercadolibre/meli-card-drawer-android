@@ -7,6 +7,8 @@ import android.text.TextPaint;
 import com.meli.android.carddrawer.BasicRobolectricTest;
 import com.meli.android.carddrawer.R;
 
+import com.meli.android.carddrawer.configuration.shadow.ShadowConfiguration;
+import com.meli.android.carddrawer.configuration.shadow.ShadowFontConfiguration;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,7 +28,8 @@ public class DarkFontConfigurationTest extends BasicRobolectricTest {
 
     @Before
     public void doBefore() {
-        darkFontConfiguration = new DarkFontConfiguration(getContext());
+        final ShadowConfiguration shadowFontConfiguration = new ShadowFontConfiguration(getContext());
+        darkFontConfiguration = new DarkFontConfiguration(getContext(), shadowFontConfiguration);
     }
 
     @Test
@@ -37,10 +40,20 @@ public class DarkFontConfigurationTest extends BasicRobolectricTest {
     }
 
     @Test
-    public void setShadow_doesntCallSetShadow() {
+    public void setShadow_callSetShadow() {
         TextPaint textPaint = mock(TextPaint.class);
 
         darkFontConfiguration.setShadow(textPaint);
+
+        verify(textPaint).setShadowLayer(anyFloat(), anyFloat(), anyFloat(), anyInt());
+    }
+
+    @Test
+    public void setShadow_DoesNotCallSetShadow() {
+        DarkFontConfiguration darkNotShadowFontConfiguration = new DarkFontConfiguration(getContext());
+        TextPaint textPaint = mock(TextPaint.class);
+
+        darkNotShadowFontConfiguration.setShadow(textPaint);
 
         verify(textPaint, never()).setShadowLayer(anyFloat(), anyFloat(), anyFloat(), anyInt());
     }
