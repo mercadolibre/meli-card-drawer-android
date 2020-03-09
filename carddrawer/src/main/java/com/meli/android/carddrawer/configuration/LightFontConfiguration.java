@@ -9,17 +9,22 @@ import android.text.TextPaint;
 
 import com.meli.android.carddrawer.R;
 
-public class LightFontConfiguration extends ShadowFontConfiguration {
+public class LightFontConfiguration implements CardFontConfiguration {
 
-    private final int fontColor;
-    private final int lightFontGradientColorBottom;
-    private final int lightFontGradientColorTop;
+    private int fontColor;
+    private int lightFontGradientColorBottom;
+    private int lightFontGradientColorTop;
+    private ShadowConfiguration shadowConfiguration;
 
-    LightFontConfiguration(@NonNull Context context) {
-        super(context);
+    LightFontConfiguration(@NonNull final Context context) {
+        this(context, null);
+    }
+
+    LightFontConfiguration(@NonNull final Context context, final ShadowConfiguration shadowConfiguration) {
         fontColor = ContextCompat.getColor(context, R.color.card_drawer_light_font_empty_color);
         lightFontGradientColorBottom = ContextCompat.getColor(context, R.color.card_drawer_light_font_color_bottom);
         lightFontGradientColorTop = ContextCompat.getColor(context, R.color.card_drawer_light_font_color_top);
+        this.shadowConfiguration = shadowConfiguration;
     }
 
     @Override
@@ -33,5 +38,12 @@ public class LightFontConfiguration extends ShadowFontConfiguration {
             lightFontGradientColorTop, Shader.TileMode.CLAMP);
 
         textPaint.setShader(gradient);
+    }
+
+    @Override
+    public void setShadow(@NonNull final TextPaint textPaint) {
+        if (shadowConfiguration != null) {
+            shadowConfiguration.drawShadow(textPaint);
+        }
     }
 }

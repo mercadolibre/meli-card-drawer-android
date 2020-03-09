@@ -9,7 +9,7 @@ import android.text.TextPaint;
 
 import com.meli.android.carddrawer.R;
 
-public class DarkFontConfiguration extends ShadowFontConfiguration {
+public class DarkFontConfiguration implements CardFontConfiguration {
 
     private static final float CENTER_COLOR_POSITION = 0.3f;
     private static final float START_COLOR_POSITION = 0;
@@ -18,13 +18,18 @@ public class DarkFontConfiguration extends ShadowFontConfiguration {
     private final int fontGradientColorBottom;
     private final int fontGradientColorTop;
     private final int fontGradientColorCenter;
+    private ShadowConfiguration shadowConfiguration;
 
-    DarkFontConfiguration(@NonNull Context context) {
-        super(context);
+    DarkFontConfiguration(@NonNull final Context context) {
+        this(context, null);
+    }
+
+    DarkFontConfiguration(@NonNull Context context, final ShadowConfiguration shadowConfiguration) {
         fontColor = ContextCompat.getColor(context, R.color.card_drawer_dark_font_empty_color);
         fontGradientColorBottom = ContextCompat.getColor(context, R.color.card_drawer_dark_font_color_bottom);
         fontGradientColorTop = ContextCompat.getColor(context, R.color.card_drawer_dark_font_color_top);
         fontGradientColorCenter = ContextCompat.getColor(context, R.color.card_drawer_dark_font_color_center);
+        this.shadowConfiguration = shadowConfiguration;
     }
 
     @Override
@@ -41,5 +46,12 @@ public class DarkFontConfiguration extends ShadowFontConfiguration {
             Shader.TileMode.CLAMP); // start, center and end position
 
         textPaint.setShader(gradient);
+    }
+
+    @Override
+    public void setShadow(@NonNull final TextPaint textPaint) {
+        if (shadowConfiguration != null) {
+            shadowConfiguration.drawShadow(textPaint);
+        }
     }
 }

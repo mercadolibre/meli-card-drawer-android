@@ -13,16 +13,16 @@ public class CardFontConfigurationFactory {
         CardFontConfiguration configuration;
         switch (fontType) {
         case FontType.DARK_TYPE:
-            configuration = new DarkFontConfiguration(context);
+            configuration = new DarkFontConfiguration(context, new ShadowConfiguration(context));
             break;
         case FontType.LIGHT_TYPE:
-            configuration = new LightFontConfiguration(context);
+            configuration = new LightFontConfiguration(context, new ShadowConfiguration(context));
             break;
         case FontType.DARK_NO_SHADOW_TYPE:
-            configuration = new DarkNoShadowFontConfiguration(context);
+            configuration = new DarkFontConfiguration(context);
             break;
         case FontType.LIGHT_NO_SHADOW_TYPE:
-            configuration = new LightNoShadowFontConfiguration(context);
+            configuration = new LightFontConfiguration(context);
             break;
         default:
             configuration = new DefaultFontConfiguration(color);

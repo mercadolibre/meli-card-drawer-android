@@ -18,11 +18,11 @@ public interface CardFontConfiguration {
      * @param width of the textView that contains the font
      * @param height of the textView that contains the font
      */
-    default void setGradient(@NonNull TextPaint textPaint, int width, int height) {}
+    void setGradient(@NonNull TextPaint textPaint, int width, int height);
 
     /**
      * Sets the shadow for configuration
      * @param textPaint textPaint for the shadow
      */
-    default void setShadow(@NonNull TextPaint textPaint) {}
+    void setShadow(@NonNull TextPaint textPaint);
 }
