@@ -3,6 +3,7 @@ package com.meli.android.carddrawer.configuration;
 import android.content.Context;
 import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
+import com.meli.android.carddrawer.configuration.shadow.ShadowFontConfiguration;
 
 public class CardFontConfigurationFactory {
     private CardFontConfigurationFactory() {
@@ -13,10 +14,10 @@ public class CardFontConfigurationFactory {
         CardFontConfiguration configuration;
         switch (fontType) {
         case FontType.DARK_TYPE:
-            configuration = new DarkFontConfiguration(context, new ShadowConfiguration(context));
+            configuration = new DarkFontConfiguration(context, new ShadowFontConfiguration(context));
             break;
         case FontType.LIGHT_TYPE:
-            configuration = new LightFontConfiguration(context, new ShadowConfiguration(context));
+            configuration = new LightFontConfiguration(context, new ShadowFontConfiguration(context));
             break;
         case FontType.DARK_NO_SHADOW_TYPE:
             configuration = new DarkFontConfiguration(context);

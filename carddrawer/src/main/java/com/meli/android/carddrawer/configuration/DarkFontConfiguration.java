@@ -8,6 +8,7 @@ import android.support.v4.content.ContextCompat;
 import android.text.TextPaint;
 
 import com.meli.android.carddrawer.R;
+import com.meli.android.carddrawer.configuration.shadow.ShadowConfiguration;
 
 public class DarkFontConfiguration implements CardFontConfiguration {
 
@@ -18,18 +19,19 @@ public class DarkFontConfiguration implements CardFontConfiguration {
     private final int fontGradientColorBottom;
     private final int fontGradientColorTop;
     private final int fontGradientColorCenter;
-    private ShadowConfiguration shadowConfiguration;
+    @NonNull
+    private final ShadowConfiguration shadowFontConfiguration;
 
     DarkFontConfiguration(@NonNull final Context context) {
-        this(context, null);
+        this(context, new ShadowConfiguration() {});
     }
 
-    DarkFontConfiguration(@NonNull Context context, final ShadowConfiguration shadowConfiguration) {
+    DarkFontConfiguration(@NonNull Context context, @NonNull final ShadowConfiguration shadowConfiguration) {
         fontColor = ContextCompat.getColor(context, R.color.card_drawer_dark_font_empty_color);
         fontGradientColorBottom = ContextCompat.getColor(context, R.color.card_drawer_dark_font_color_bottom);
         fontGradientColorTop = ContextCompat.getColor(context, R.color.card_drawer_dark_font_color_top);
         fontGradientColorCenter = ContextCompat.getColor(context, R.color.card_drawer_dark_font_color_center);
-        this.shadowConfiguration = shadowConfiguration;
+        shadowFontConfiguration = shadowConfiguration;
     }
 
     @Override
@@ -50,8 +52,6 @@ public class DarkFontConfiguration implements CardFontConfiguration {
 
     @Override
     public void setShadow(@NonNull final TextPaint textPaint) {
-        if (shadowConfiguration != null) {
-            shadowConfiguration.drawShadow(textPaint);
-        }
+        shadowFontConfiguration.drawShadow(textPaint);
     }
 }

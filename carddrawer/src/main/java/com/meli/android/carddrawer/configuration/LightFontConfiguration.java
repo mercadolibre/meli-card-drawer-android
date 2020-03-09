@@ -8,23 +8,25 @@ import android.support.v4.content.ContextCompat;
 import android.text.TextPaint;
 
 import com.meli.android.carddrawer.R;
+import com.meli.android.carddrawer.configuration.shadow.ShadowConfiguration;
 
 public class LightFontConfiguration implements CardFontConfiguration {
 
     private int fontColor;
     private int lightFontGradientColorBottom;
     private int lightFontGradientColorTop;
-    private ShadowConfiguration shadowConfiguration;
+    @NonNull
+    private final ShadowConfiguration shadowFontConfiguration;
 
     LightFontConfiguration(@NonNull final Context context) {
-        this(context, null);
+        this(context, new ShadowConfiguration() {});
     }
 
-    LightFontConfiguration(@NonNull final Context context, final ShadowConfiguration shadowConfiguration) {
+    LightFontConfiguration(@NonNull final Context context, @NonNull final ShadowConfiguration shadowConfiguration) {
         fontColor = ContextCompat.getColor(context, R.color.card_drawer_light_font_empty_color);
         lightFontGradientColorBottom = ContextCompat.getColor(context, R.color.card_drawer_light_font_color_bottom);
         lightFontGradientColorTop = ContextCompat.getColor(context, R.color.card_drawer_light_font_color_top);
-        this.shadowConfiguration = shadowConfiguration;
+        shadowFontConfiguration = shadowConfiguration;
     }
 
     @Override
@@ -42,8 +44,6 @@ public class LightFontConfiguration implements CardFontConfiguration {
 
     @Override
     public void setShadow(@NonNull final TextPaint textPaint) {
-        if (shadowConfiguration != null) {
-            shadowConfiguration.drawShadow(textPaint);
-        }
+        shadowFontConfiguration.drawShadow(textPaint);
     }
 }

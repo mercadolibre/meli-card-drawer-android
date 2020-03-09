@@ -7,6 +7,7 @@ import android.text.TextPaint;
 import com.meli.android.carddrawer.BasicRobolectricTest;
 import com.meli.android.carddrawer.R;
 
+import com.meli.android.carddrawer.configuration.shadow.ShadowFontConfiguration;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,8 +27,8 @@ public class DarkFontConfigurationTest extends BasicRobolectricTest {
 
     @Before
     public void doBefore() {
-        final ShadowConfiguration shadowConfiguration = new ShadowConfiguration(getContext());
-        darkFontConfiguration = new DarkFontConfiguration(getContext(), shadowConfiguration);
+        final ShadowFontConfiguration shadowFontConfiguration = new ShadowFontConfiguration(getContext());
+        darkFontConfiguration = new DarkFontConfiguration(getContext(), shadowFontConfiguration);
     }
 
     @Test
