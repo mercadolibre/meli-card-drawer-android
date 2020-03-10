@@ -32,7 +32,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.732" />
+        app:layout_constraintGuide_percent="0.75" />
 
     <include
         android:layout_width="0dp"
@@ -60,7 +60,7 @@
         app:layout_constraintEnd_toEndOf="@id/card_header_back_guideline_right"
         app:layout_constraintTop_toTopOf="@id/card_header_back_guideline_horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:src="@drawable/card_drawer_sec_code_band"/>
+        android:src="@drawable/card_drawer_cvv_band"/>
 
     <android.support.v7.widget.AppCompatTextView
         android:id="@+id/cho_card_code_back"
@@ -72,12 +72,12 @@
         android:maxLines="1"
         android:typeface="monospace"
         android:gravity="center"
-        android:textColor="@color/card_drawer_gray"
-        tools:text="213"
+        android:textColor="@color/card_drawer_cvv_text_dark"
+        tools:text="2134"
         app:layout_constraintStart_toStartOf="@id/card_header_back_guideline_cvv"
         app:layout_constraintEnd_toEndOf="@id/cho_card_code_back_container"
         app:layout_constraintTop_toTopOf="@id/cho_card_code_back_container"
         app:layout_constraintBottom_toBottomOf="@id/cho_card_code_back_container"
-        app:layout_constraintHeight_percent="0.2"/>
+        app:layout_constraintHeight_percent="0.165"/>
 
 </android.support.constraint.ConstraintLayout>
