@@ -85,13 +85,13 @@ public class VisaCardBlueConfiguration implements CardUI {
 
     @Override
     public void setCardLogoImage(@NonNull ImageView cardLogo) {
-        Drawable cardDrawable = context.getResources().getDrawable(R.drawable.card_drawer_app_card_logo_visa);
+        Drawable cardDrawable = context.getResources().getDrawable(R.drawable.card_drawer_mla_pm_debvisa_white);
         cardLogo.setImageDrawable(cardDrawable);
     }
 
     @Override
     public void setBankImage(@NonNull ImageView bankImage) {
-        Drawable bankDrawable = context.getResources().getDrawable(R.drawable.card_drawer_app_bank_logo_galicia);
+        Drawable bankDrawable = context.getResources().getDrawable(R.drawable.card_drawer_mla_issuer_160_white);
         bankImage.setImageDrawable(bankDrawable);
     }
 
