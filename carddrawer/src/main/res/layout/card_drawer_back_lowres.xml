@@ -100,7 +100,7 @@
 
     <ImageView
         android:id="@+id/card_drawer_circle_cvv"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="0dp"
         app:layout_constraintStart_toStartOf="@id/card_header_back_guideline_cvv"
         app:layout_constraintEnd_toEndOf="@id/card_header_back_guideline_right"
@@ -120,10 +120,11 @@
         android:gravity="center"
         android:textColor="@color/card_drawer_cvv_text_dark"
         tools:text="213"
-        app:layout_constraintStart_toStartOf="@id/card_header_back_guideline_cvv"
-        app:layout_constraintEnd_toEndOf="@id/cho_card_code_back_container"
+        app:layout_constraintStart_toStartOf="@id/card_drawer_circle_cvv"
+        app:layout_constraintEnd_toEndOf="@id/card_drawer_circle_cvv"
         app:layout_constraintTop_toTopOf="@id/cho_card_code_back_container"
         app:layout_constraintBottom_toBottomOf="@id/cho_card_code_back_container"
+        app:layout_constraintWidth_percent="0.1"
         app:layout_constraintHeight_percent="0.165"/>
 
 </android.support.constraint.ConstraintLayout>
