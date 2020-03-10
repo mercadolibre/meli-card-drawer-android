@@ -7,11 +7,46 @@
     android:layout_height="wrap_content">
 
     <android.support.constraint.Guideline
-        android:id="@+id/card_header_back_guideline_horizontal"
+        android:id="@+id/card_header_back_guideline_band_top"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.446"/>
+        app:layout_constraintGuide_percent="0.16" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/card_header_back_guideline_band_bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.41"/>
+
+    <android.support.constraint.Guideline
+        android:id="@+id/card_header_back_guideline_circle_band_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.458"/>
+
+    <android.support.constraint.Guideline
+        android:id="@+id/card_header_back_guideline_circle_band_bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.79"/>
+
+    <android.support.constraint.Guideline
+        android:id="@+id/card_header_back_guideline_cvv_band_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.50"/>
+
+    <android.support.constraint.Guideline
+        android:id="@+id/card_header_back_guideline_cvv_band_bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.75"/>
 
     <android.support.constraint.Guideline
         android:id="@+id/card_header_back_guideline_left"
@@ -48,8 +83,9 @@
         android:background="@color/card_drawer_band"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintDimensionRatio="H,256:32"
-        app:layout_constraintBottom_toTopOf="@id/card_header_back_guideline_horizontal" />
+        app:layout_constraintDimensionRatio="H,256:24"
+        app:layout_constraintTop_toBottomOf="@+id/card_header_back_guideline_band_top"
+        app:layout_constraintBottom_toTopOf="@id/card_header_back_guideline_band_bottom" />
 
     <ImageView
         android:id="@+id/cho_card_code_back_container"
@@ -58,9 +94,19 @@
         android:adjustViewBounds="true"
         app:layout_constraintStart_toStartOf="@id/card_header_back_guideline_left"
         app:layout_constraintEnd_toEndOf="@id/card_header_back_guideline_right"
-        app:layout_constraintTop_toTopOf="@id/card_header_back_guideline_horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/card_header_back_guideline_cvv_band_top"
+        app:layout_constraintBottom_toTopOf="@id/card_header_back_guideline_cvv_band_bottom"
         android:src="@drawable/card_drawer_cvv_band"/>
+
+    <ImageView
+        android:id="@+id/card_drawer_circle_cvv"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="@id/card_header_back_guideline_cvv"
+        app:layout_constraintEnd_toEndOf="@id/card_header_back_guideline_right"
+        app:layout_constraintTop_toBottomOf="@id/card_header_back_guideline_circle_band_top"
+        app:layout_constraintBottom_toTopOf="@id/card_header_back_guideline_circle_band_bottom"
+        android:src="@drawable/card_drawer_red_circle"/>
 
     <android.support.v7.widget.AppCompatTextView
         android:id="@+id/cho_card_code_back"
@@ -73,7 +119,7 @@
         android:typeface="monospace"
         android:gravity="center"
         android:textColor="@color/card_drawer_cvv_text_dark"
-        tools:text="2134"
+        tools:text="213"
         app:layout_constraintStart_toStartOf="@id/card_header_back_guideline_cvv"
         app:layout_constraintEnd_toEndOf="@id/cho_card_code_back_container"
         app:layout_constraintTop_toTopOf="@id/cho_card_code_back_container"

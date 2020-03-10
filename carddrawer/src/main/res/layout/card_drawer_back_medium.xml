@@ -7,7 +7,7 @@
     android:layout_height="wrap_content">
 
     <android.support.constraint.Guideline
-        android:id="@+id/card_header_back_guideline_horizontal"
+        android:id="@+id/card_header_back_guideline_cvv_band_top"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -53,7 +53,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintDimensionRatio="H,256:24"
-        app:layout_constraintBottom_toTopOf="@id/card_header_back_guideline_horizontal" />
+        app:layout_constraintBottom_toTopOf="@id/card_header_back_guideline_cvv_band_top" />
 
     <ImageView
         android:id="@+id/cho_card_code_back_container"
@@ -62,7 +62,7 @@
         android:adjustViewBounds="true"
         app:layout_constraintStart_toStartOf="@id/card_header_back_guideline_left"
         app:layout_constraintEnd_toEndOf="@id/card_header_back_guideline_right"
-        app:layout_constraintTop_toTopOf="@id/card_header_back_guideline_horizontal"
+        app:layout_constraintTop_toTopOf="@id/card_header_back_guideline_cvv_band_top"
         app:layout_constraintBottom_toBottomOf="parent"
         android:src="@drawable/card_drawer_cvv_band"/>
 
