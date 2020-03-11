@@ -13,7 +13,7 @@ import com.meli.android.carddrawer.model.CardUI;
 
 public class VisaCardRedConfiguration implements CardUI {
     private static final int NUMBER_CARD = 4;
-    private static final int NUMBER_SEC_CODE = 3;
+    private static final int NUMBER_SEC_CODE = 4;
     private final Context context;
 
     public VisaCardRedConfiguration(@NonNull Context context) {
