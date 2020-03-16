@@ -47,12 +47,12 @@ public class VisaCardYellowConfiguration implements CardUI {
 
     @Override
     public int getBankImageRes() {
-        return R.drawable.card_drawer_app_bank_logo_galicia;
+        return R.drawable.card_drawer_mla_issuer_test01_white;
     }
 
     @Override
     public int getCardLogoImageRes() {
-        return R.drawable.card_drawer_app_card_logo_visa;
+        return R.drawable.card_drawer_mla_pm_visa_white;
     }
 
     @Override

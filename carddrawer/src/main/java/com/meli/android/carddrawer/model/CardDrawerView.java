@@ -98,6 +98,8 @@ public class CardDrawerView extends FrameLayout implements Observer {
             getResources().getDimensionPixelSize(R.dimen.card_drawer_layout_padding));
         @Behaviour final int behaviour = typedArray.getInt(R.styleable.CardDrawerView_card_header_behaviour, Behaviour.REGULAR);
 
+        typedArray.recycle();
+
         defaultCardWidth = cardFrontLayout.getResources().getDimensionPixelSize(R.dimen.card_drawer_card_width);
         smallTextSize = getResources().getDimensionPixelSize(R.dimen.card_drawer_name_font_size);
 
