@@ -32,7 +32,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.53"/>
+        app:layout_constraintGuide_percent="0.54"/>
 
     <android.support.constraint.Guideline
         android:id="@+id/card_header_back_guideline_band_top"

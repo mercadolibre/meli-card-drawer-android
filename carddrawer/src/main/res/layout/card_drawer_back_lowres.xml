@@ -74,7 +74,7 @@
         android:layout_height="0dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintDimensionRatio="H,256:94"
+        app:layout_constraintDimensionRatio="H,256:96"
         layout="@layout/card_drawer_back_background"/>
 
     <View
