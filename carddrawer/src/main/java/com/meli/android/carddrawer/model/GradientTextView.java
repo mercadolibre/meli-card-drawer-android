@@ -14,8 +14,7 @@ import com.meli.android.carddrawer.configuration.CardFontConfigurationFactory;
 import com.meli.android.carddrawer.configuration.FontType;
 
 public class GradientTextView extends android.support.v7.widget.AppCompatTextView {
-    private @FontType
-    String fontType;
+    @FontType private String fontType;
     private String placeHolder;
     private int fontColor;
 

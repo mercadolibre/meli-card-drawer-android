@@ -4,13 +4,11 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.widget.ImageView;
-
 import com.meli.android.carddrawer.app.R;
 import com.meli.android.carddrawer.configuration.FontType;
 import com.meli.android.carddrawer.configuration.SecurityCodeLocation;
 import com.meli.android.carddrawer.model.CardAnimationType;
 import com.meli.android.carddrawer.model.CardUI;
-
 
 /**
  * It is an example of configuration.
@@ -18,8 +16,7 @@ import com.meli.android.carddrawer.model.CardUI;
  */
 
 public class MasterCardConfiguration implements CardUI {
-    private static final int NUMBER_CARD = 8;
-    private static final int NUMBER_SEC_CODE = 3;
+    private static final int NUMBER_SEC_CODE = 4;
     private final Context context;
 
     public MasterCardConfiguration(@NonNull Context context) {
@@ -28,7 +25,7 @@ public class MasterCardConfiguration implements CardUI {
 
     @Override
     public int[] getCardNumberPattern() {
-        return new int[]{NUMBER_CARD, NUMBER_CARD, NUMBER_CARD};
+        return new int[]{4, 6, 5};
     }
 
     @Override
@@ -73,7 +70,7 @@ public class MasterCardConfiguration implements CardUI {
 
     @Override
     public String getSecurityCodeLocation() {
-        return SecurityCodeLocation.BACK;
+        return SecurityCodeLocation.FRONT;
     }
 
     @Override
