@@ -3,6 +3,7 @@ package com.meli.android.carddrawer.model;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.GradientDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.ColorInt;
@@ -40,6 +41,7 @@ import java.util.Observer;
 
 @SuppressWarnings({ "PMD.ConstructorCallsOverridableMethod", "PMD.TooManyFields", "PMD.GodClass" })
 public class CardDrawerView extends FrameLayout implements Observer {
+    private static final float NUMBER_LETTER_SPACING = 0.125f;
 
     protected CardAnimator cardAnimator;
 
@@ -61,8 +63,8 @@ public class CardDrawerView extends FrameLayout implements Observer {
     protected ImageView cardFrontGradient;
     protected ImageView cardBackGradient;
     private ImageView overlayImage;
-    private int smallTextSize;
-    private int defaultCardWidth;
+    private float defaultTextSize;
+    private float defaultCardWidth;
 
     public CardDrawerView(@NonNull final Context context) {
         this(context, null);
@@ -100,13 +102,16 @@ public class CardDrawerView extends FrameLayout implements Observer {
 
         typedArray.recycle();
 
-        defaultCardWidth = cardFrontLayout.getResources().getDimensionPixelSize(R.dimen.card_drawer_card_width);
-        smallTextSize = getResources().getDimensionPixelSize(R.dimen.card_drawer_name_font_size);
+        defaultCardWidth = getResources().getDimension(R.dimen.card_drawer_card_width);
+        defaultTextSize = getResources().getDimension(R.dimen.card_drawer_font_size);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            cardNumber.setLetterSpacing(NUMBER_LETTER_SPACING);
+        }
 
         setInternalPadding(internalPadding);
         setBehaviour(behaviour);
 
-        final float distance = cardFrontLayout.getResources().getDimension(R.dimen.card_drawer_camera_distance);
+        final float distance = getResources().getDimension(R.dimen.card_drawer_camera_distance);
         cardFrontLayout.setCameraDistance(distance);
         cardBackLayout.setCameraDistance(distance);
 
@@ -114,7 +119,7 @@ public class CardDrawerView extends FrameLayout implements Observer {
         source = new DefaultCardConfiguration(context);
         final Animation fadeIn = getFadeInAnimation(context);
         final Animation fadeOut = AnimationUtils.loadAnimation(context, android.R.anim.fade_out);
-        fadeOut.setDuration(context.getResources().getInteger(R.integer.card_drawer_paint_animation_time));
+        fadeOut.setDuration(getResources().getInteger(R.integer.card_drawer_paint_animation_time));
 
         setupImageSwitcher(cardLogoView, fadeIn, fadeOut);
         if (issuerLogoView != null) {
@@ -315,13 +320,11 @@ public class CardDrawerView extends FrameLayout implements Observer {
     }
 
     protected String getCardNumberPlaceHolder() {
-        final NumberFormatter cardNumberTextProcessor = new NumberFormatter(source.getCardNumberPattern());
-        return cardNumberTextProcessor.formatEmptyText();
+        return NumberFormatter.INSTANCE.format("", source.getCardNumberPattern());
     }
 
     private String getSecCodePlaceHolder() {
-        final NumberFormatter cardNumberTextProcessor = new NumberFormatter(source.getSecurityCodePattern());
-        return cardNumberTextProcessor.formatEmptyText();
+        return NumberFormatter.INSTANCE.format("", source.getSecurityCodePattern());
     }
 
     @VisibleForTesting
@@ -333,13 +336,7 @@ public class CardDrawerView extends FrameLayout implements Observer {
     }
 
     protected void updateNumber() {
-        NumberFormatter cardNumberTextProcessor = new NumberFormatter(source.getCardNumberPattern());
-        String number = cardNumberTextProcessor.formatEmptyText();
-        if (card.getNumber() != null && !card.getNumber().isEmpty()) {
-            cardNumberTextProcessor = new NumberFormatter(source.getCardNumberPattern());
-            number = cardNumberTextProcessor.formatTextForVisualFeedback(card.getNumber());
-        }
-        cardNumber.setText(number);
+        cardNumber.setText(NumberFormatter.INSTANCE.format(card.getNumber(), source.getCardNumberPattern()));
     }
 
     protected void updateName() {
@@ -359,11 +356,7 @@ public class CardDrawerView extends FrameLayout implements Observer {
     }
 
     protected void updateSecCode() {
-        final NumberFormatter secCodeFormatter = new NumberFormatter(source.getSecurityCodePattern());
-        String secCode = secCodeFormatter.formatEmptyText();
-        if (card.getSecCode() != null && !card.getSecCode().isEmpty()) {
-            secCode = secCodeFormatter.formatTextForVisualFeedback(card.getSecCode());
-        }
+        final String secCode = NumberFormatter.INSTANCE.format(card.getSecCode(), source.getSecurityCodePattern());
 
         if (codeFront != null) {
             codeFront.setText(secCode);
@@ -432,8 +425,8 @@ public class CardDrawerView extends FrameLayout implements Observer {
             frontParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
             backParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
         } else {
-            frontParams.width = defaultCardWidth;
-            backParams.width = defaultCardWidth;
+            frontParams.width = Math.round(defaultCardWidth);
+            backParams.width = Math.round(defaultCardWidth);
         }
 
         cardFrontLayout.setLayoutParams(frontParams);
@@ -444,7 +437,9 @@ public class CardDrawerView extends FrameLayout implements Observer {
     protected void onSizeChanged(final int w, final int h, final int oldw, final int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
 
-        final float newTextSize = (float) cardFrontLayout.getMeasuredWidth() * smallTextSize / defaultCardWidth;
+        final float cardSizeMultiplier = (float) cardFrontLayout.getMeasuredWidth() / defaultCardWidth;
+
+        final float newTextSize = defaultTextSize * cardSizeMultiplier;
 
         cardName.setTextSize(TypedValue.COMPLEX_UNIT_PX, newTextSize);
         cardDate.setTextSize(TypedValue.COMPLEX_UNIT_PX, newTextSize);

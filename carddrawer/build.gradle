@@ -2,6 +2,8 @@ apply plugin: 'com.android.library'
 apply plugin: 'com.novoda.bintray-release'
 apply from: rootProject.file('jacoco.gradle')
 apply from: rootProject.file('publish.gradle')
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion androidTarget as int
@@ -47,4 +49,5 @@ dependencies {
     androidTestImplementation "com.android.support.test.espresso:espresso-core:$espresso"
     testImplementation "org.robolectric:robolectric:$robolectric"
     testImplementation "org.mockito:mockito-core:$mockito"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
 }
