@@ -76,7 +76,7 @@
     <com.meli.android.carddrawer.model.GradientTextView
         android:id="@+id/cho_card_name"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:ellipsize="end"
         android:gravity="bottom"
         android:maxLines="1"
@@ -84,7 +84,6 @@
         android:typeface="monospace"
         app:layout_constraintBottom_toBottomOf="@id/card_header_front_guideline_bottom"
         app:layout_constraintEnd_toStartOf="@+id/cho_card_date"
-        app:layout_constraintHeight_percent="0.0759"
         app:layout_constraintHorizontal_weight="8"
         app:layout_constraintStart_toStartOf="@id/card_header_front_guideline_left"
         tools:text="Nombre y apellido" />
@@ -92,13 +91,12 @@
     <com.meli.android.carddrawer.model.GradientTextView
         android:id="@+id/cho_card_date"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:gravity="bottom|end"
         android:maxLines="1"
         android:typeface="monospace"
         app:layout_constraintBottom_toBottomOf="@id/card_header_front_guideline_bottom"
         app:layout_constraintEnd_toEndOf="@id/card_header_front_guideline_right"
-        app:layout_constraintHeight_percent="0.0759"
         app:layout_constraintHorizontal_weight="2"
         app:layout_constraintStart_toEndOf="@id/cho_card_name"
         tools:background="@android:color/holo_blue_light"
@@ -130,19 +128,18 @@
         app:layout_constraintEnd_toEndOf="@id/cho_card_code_front"
         app:layout_constraintStart_toStartOf="@id/cho_card_code_front"
         app:layout_constraintTop_toTopOf="@id/cho_card_code_front"
-        app:layout_constraintWidth_percent="0.16"
-        app:layout_constraintHeight_percent="0.21" />
+        app:layout_constraintWidth_percent="0.13"
+        app:layout_constraintHeight_percent="0.19" />
 
     <com.meli.android.carddrawer.model.GradientTextView
         android:id="@+id/cho_card_code_front"
         android:layout_width="wrap_content"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:gravity="bottom"
         android:maxLines="1"
         android:typeface="monospace"
         app:layout_constraintBottom_toBottomOf="@id/card_header_front_guideline_cvv"
         app:layout_constraintEnd_toEndOf="@id/card_header_front_guideline_right"
-        app:layout_constraintHeight_percent="0.0759"
         tools:text="****"
         tools:visibility="visible" />
 

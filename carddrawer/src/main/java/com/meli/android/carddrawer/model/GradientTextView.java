@@ -3,11 +3,11 @@ package com.meli.android.carddrawer.model;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
 import android.support.v4.content.ContextCompat;
 import android.text.TextPaint;
 import android.util.AttributeSet;
-
 import com.meli.android.carddrawer.R;
 import com.meli.android.carddrawer.configuration.CardFontConfiguration;
 import com.meli.android.carddrawer.configuration.CardFontConfigurationFactory;
@@ -18,25 +18,23 @@ public class GradientTextView extends android.support.v7.widget.AppCompatTextVie
     private String placeHolder;
     private int fontColor;
 
-    public GradientTextView(Context context) {
-        super(context);
-        init();
+    public GradientTextView(@NonNull final Context context) {
+        this(context, null);
     }
 
-    public GradientTextView(Context context, AttributeSet attrs) {
-        super(context, attrs);
-        init();
+    public GradientTextView(@NonNull final Context context, @Nullable final AttributeSet attrs) {
+        this(context, attrs, 0);
     }
 
-    public GradientTextView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public GradientTextView(@NonNull final Context context, @Nullable final AttributeSet attrs, final int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        init();
+        init(context);
     }
 
-    private void init() {
-        this.fontType = FontType.NONE;
-        this.placeHolder = " ";
-        this.fontColor = ContextCompat.getColor(getContext(), R.color.card_drawer_card_default_font_color);
+    private void init(@NonNull final Context context) {
+        fontType = FontType.NONE;
+        placeHolder = " ";
+        fontColor = ContextCompat.getColor(context, R.color.card_drawer_card_default_font_color);
     }
 
     public void init(@FontType final String fontType, final String placeHolder, final int fontColor) {
@@ -46,13 +44,13 @@ public class GradientTextView extends android.support.v7.widget.AppCompatTextVie
     }
 
     @Override
-    protected void onDraw(Canvas canvas) {
+    protected void onDraw(final Canvas canvas) {
         final TextPaint paint = getPaint();
         paint.clearShadowLayer();
         paint.setShader(null);
 
-        CardFontConfiguration configuration = getConfiguration();
-        super.setTextColor(configuration.getColor());
+        final CardFontConfiguration configuration = getConfiguration();
+        setTextColor(configuration.getColor());
         if (getText() != null && !getText().equals(placeHolder)) {
             // draw the shadow
             configuration.setShadow(paint);
