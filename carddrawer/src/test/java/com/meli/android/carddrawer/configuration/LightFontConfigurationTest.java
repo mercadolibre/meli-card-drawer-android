@@ -58,13 +58,4 @@ public class LightFontConfigurationTest extends BasicRobolectricTest {
 
         verify(textPaint, never()).setShadowLayer(anyFloat(), anyFloat(), anyFloat(), anyInt());
     }
-
-    @Test
-    public void setGradient_callsSetShaderWithGradient() {
-        TextPaint textPaint = mock(TextPaint.class);
-
-        lightFontConfiguration.setGradient(textPaint, 10, 10);
-
-        verify(textPaint).setShader(any(LinearGradient.class));
-    }
 }

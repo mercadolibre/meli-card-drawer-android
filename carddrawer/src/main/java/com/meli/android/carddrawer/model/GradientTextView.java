@@ -58,12 +58,9 @@ public class GradientTextView extends android.support.v7.widget.AppCompatTextVie
             configuration.setShadow(paint);
             paint.setShader(null);
             super.onDraw(canvas);
-
-            // draw the gradient filled text
-            paint.clearShadowLayer();
-            configuration.setGradient(paint, getWidth(), getHeight());
+        } else {
+            super.onDraw(canvas);
         }
-        super.onDraw(canvas);
     }
 
     @VisibleForTesting

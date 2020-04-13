@@ -48,8 +48,6 @@ public class GradientTextViewTest extends BasicRobolectricTest {
         Canvas canvas = mock(Canvas.class);
 
         gradientTextViewSpy.onDraw(canvas);
-
-        verify(configurator).setGradient(any(TextPaint.class), anyInt(), anyInt());
         verify(configurator).setShadow(any(TextPaint.class));
     }
 
@@ -65,7 +63,6 @@ public class GradientTextViewTest extends BasicRobolectricTest {
 
         gradientTextViewSpy.onDraw(canvas);
 
-        verify(configurator, never()).setGradient(any(TextPaint.class), anyInt(), anyInt());
         verify(configurator, never()).setShadow(any(TextPaint.class));
     }
 
