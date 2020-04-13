@@ -57,10 +57,8 @@ public class GradientTextView extends android.support.v7.widget.AppCompatTextVie
             // draw the shadow
             configuration.setShadow(paint);
             paint.setShader(null);
-            super.onDraw(canvas);
-        } else {
-            super.onDraw(canvas);
         }
+        super.onDraw(canvas);
     }
 
     @VisibleForTesting
