@@ -1,6 +1,5 @@
 package com.meli.android.carddrawer.configuration;
 
-import android.graphics.LinearGradient;
 import android.support.v4.content.ContextCompat;
 import android.text.TextPaint;
 
@@ -15,7 +14,6 @@ import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyFloat;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.mock;
@@ -57,14 +55,4 @@ public class DarkFontConfigurationTest extends BasicRobolectricTest {
 
         verify(textPaint, never()).setShadowLayer(anyFloat(), anyFloat(), anyFloat(), anyInt());
     }
-
-    @Test
-    public void setGradient_callsSetShaderWithGradient() {
-        TextPaint textPaint = mock(TextPaint.class);
-
-        darkFontConfiguration.setGradient(textPaint, 10, 10);
-
-        verify(textPaint).setShader(any(LinearGradient.class));
-    }
-
 }

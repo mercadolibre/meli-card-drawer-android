@@ -19,11 +19,6 @@ public class DefaultFontConfiguration implements CardFontConfiguration {
     }
 
     @Override
-    public void setGradient(@NonNull TextPaint textPaint, int width, int height) {
-        // Do nothing for this configuration
-    }
-
-    @Override
     public void setShadow(@NonNull TextPaint textPaint) {
         // Do nothing for this configuration
     }

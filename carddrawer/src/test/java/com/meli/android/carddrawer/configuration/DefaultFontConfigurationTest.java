@@ -38,13 +38,4 @@ public class DefaultFontConfigurationTest {
 
         verify(textPaint, never()).setShadowLayer(anyFloat(), anyFloat(), anyFloat(), anyInt());
     }
-
-    @Test
-    public void setGradient_doesntCallSetShaderWithGradient() {
-        TextPaint textPaint = mock(TextPaint.class);
-
-        defaultFontConfiguration.setGradient(textPaint, 10, 10);
-
-        verify(textPaint, never()).setShader(any(LinearGradient.class));
-    }
 }
