@@ -13,5 +13,6 @@
     <dimen name="card_drawer_corner_radius">8dp</dimen>
 
     <dimen name="card_drawer_font_size">10dp</dimen>
+    <dimen name="card_drawer_font_size_small">8dp</dimen>
 
 </resources>

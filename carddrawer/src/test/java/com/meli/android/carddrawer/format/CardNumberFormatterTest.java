@@ -16,10 +16,13 @@ public class CardNumberFormatterTest {
         final int[] pattern = {4, 6, 5};
         final String input = "123412345612345";
         final String expected = "1234  123456  12345";
+        final String expectedShort = "12345";
 
         final String result = NumberFormatter.INSTANCE.format(input, pattern);
+        final String resultShort = NumberFormatter.INSTANCE.formatShort(input, pattern);
 
         Assert.assertEquals("Text was not properly grouped", expected, result);
+        Assert.assertEquals("Text was not properly grouped", expectedShort, resultShort);
     }
 
     @Test
@@ -27,10 +30,13 @@ public class CardNumberFormatterTest {
         final int[] pattern = {4, 4, 4, 4};
         final String input = "1234123412341234";
         final String expected = "1234  1234  1234  1234";
+        final String expectedShort = "1234 1234";
 
         final String result = NumberFormatter.INSTANCE.format(input, pattern);
+        final String resultShort = NumberFormatter.INSTANCE.formatShort(input, pattern);
 
         Assert.assertEquals("Text was not properly grouped", expected, result);
+        Assert.assertEquals("Text was not properly grouped", expectedShort, resultShort);
     }
 
     @Test
@@ -38,10 +44,13 @@ public class CardNumberFormatterTest {
         final int[] pattern = {4, 4, 4, 4};
         final String input = "12341234123";
         final String expected = "1234  1234  123*  ****";
+        final String expectedShort = "123* ****";
 
         final String result = NumberFormatter.INSTANCE.format(input, pattern);
+        final String resultShort = NumberFormatter.INSTANCE.formatShort(input, pattern);
 
         Assert.assertEquals("Text was not properly filled", expected, result);
+        Assert.assertEquals("Text was not properly filled", expectedShort, resultShort);
     }
 
     @Test
@@ -49,19 +58,12 @@ public class CardNumberFormatterTest {
         final int[] pattern = {4, 4, 4, 4};
         final String input = "";
         final String expected = "****  ****  ****  ****";
+        final String expectedShort = "**** ****";
 
         final String result = NumberFormatter.INSTANCE.format(input, pattern);
+        final String resultShort = NumberFormatter.INSTANCE.formatShort(input, pattern);
 
         Assert.assertEquals("Text was not properly filled", expected, result);
-    }
-
-    @Test
-    public void formatTextForInput_withSeparatedFilledTextProcessor_andVisaPattern_withEmptyNumber_shouldReturnEmptyString() {
-        final int[] pattern = {4, 4, 4, 4};
-        final String expected = "****  ****  ****  ****";
-
-        final String result = NumberFormatter.INSTANCE.format("", pattern);
-
-        assertEquals("Text shouldn't be filled", expected, result);
+        Assert.assertEquals("Text was not properly filled", expectedShort, resultShort);
     }
 }

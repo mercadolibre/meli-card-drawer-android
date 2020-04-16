@@ -4,13 +4,14 @@ import android.content.Context;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.VisibleForTesting;
 import android.util.AttributeSet;
-import android.view.animation.Animation;
-import android.widget.ImageSwitcher;
-import android.widget.ImageView;
 import com.meli.android.carddrawer.R;
+import com.meli.android.carddrawer.format.NumberFormatter;
 
 public class CardDrawerViewLowres extends CardDrawerView {
+
+    private float codeFrontTextSize;
 
     public CardDrawerViewLowres(@NonNull final Context context) {
         this(context, null);
@@ -20,9 +21,19 @@ public class CardDrawerViewLowres extends CardDrawerView {
         this(context, attrs, 0);
     }
 
-    public CardDrawerViewLowres(@NonNull final Context context, @Nullable final AttributeSet attrs,
-        final int defStyleAttr) {
+    public CardDrawerViewLowres(@NonNull final Context context, @Nullable final AttributeSet attrs, final int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+    }
+
+    @Override
+    protected void init(@NonNull final Context context, @Nullable final AttributeSet attrs) {
+        codeFrontTextSize = getResources().getDimension(R.dimen.card_drawer_font_size_small);
+        super.init(context, attrs);
+    }
+
+    @Override
+    protected float getCodeFrontTextSize() {
+        return codeFrontTextSize;
     }
 
     @Override
@@ -32,31 +43,25 @@ public class CardDrawerViewLowres extends CardDrawerView {
     }
 
     @Override
-    protected void updateIssuerLogo(final ImageSwitcher issuerLogoView, @NonNull final CardUI source,
-        final boolean animate) {
-        //No issuer logo on low res.
+    @VisibleForTesting
+    protected void updateCardInformation() {
+        updateNumber();
+        updateName();
+        updateSecCode();
     }
 
     @Override
-    protected void setupImageSwitcher(@NonNull final ImageSwitcher imageSwitcher, @NonNull final Animation fadeIn,
-        @NonNull final Animation fadeOut) {
-        super.setupImageSwitcher(imageSwitcher, fadeIn, fadeOut);
-        fadeOut.setAnimationListener(new Animation.AnimationListener() {
-            @Override
-            public void onAnimationStart(final Animation animation) {
-                //Nothing to do here
-            }
+    protected String getFormattedNumber(@NonNull final String input, @NonNull final int... pattern) {
+        return NumberFormatter.INSTANCE.formatShort(input, pattern);
+    }
 
-            @Override
-            public void onAnimationEnd(final Animation animation) {
-                final ImageView imageView = (ImageView) imageSwitcher.getNextView();
-                imageView.setImageResource(0);
-            }
+    @Override
+    protected void onSizeChanged(final int w, final int h, final int oldw, final int oldh) {
+        super.onSizeChanged(w, h, oldw, oldh);
 
-            @Override
-            public void onAnimationRepeat(final Animation animation) {
-                //Nothing to do here
-            }
-        });
+        final float cardSizeMultiplier = (float) cardFrontLayout.getMeasuredWidth() / defaultCardWidth;
+        final float newTextSize = defaultTextSize * cardSizeMultiplier;
+
+        setTextPixelSize(cardNumber, newTextSize);
     }
 }
