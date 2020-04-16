@@ -1,3 +1,7 @@
+### Release 2.3.0
+New layout for all card variants
+Migrated to Gradle 5.x
+
 ### Release 2.2.0
 Added custom gradient feature (removed backgroundType for this)
 Added CardView for round corners
