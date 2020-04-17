@@ -26,6 +26,33 @@ public class CardNumberFormatterTest {
     }
 
     @Test
+    public void formatTextForVisualFeedback_withPatternsWithZeroValue_shouldReturnGroupedString() {
+        final int[] pattern = {0, 0, 4, 4};
+        final String input = "12345678";
+        final String expected = "1234  5678";
+        final String expectedShort = "1234 5678";
+
+        final String result = NumberFormatter.INSTANCE.format(input, pattern);
+        final String resultShort = NumberFormatter.INSTANCE.formatShort(input, pattern);
+
+        Assert.assertEquals("Text was not properly grouped", expected, result);
+        Assert.assertEquals("Text was not properly grouped", expectedShort, resultShort);
+    }
+
+    @Test
+    public void formatTextForVisualFeedback_withEmptyPattern_shouldReturnEmptyString() {
+        final int[] pattern = {};
+        final String input = "12345678";
+        final String expected = "";
+
+        final String result = NumberFormatter.INSTANCE.format(input, pattern);
+        final String resultShort = NumberFormatter.INSTANCE.formatShort(input, pattern);
+
+        Assert.assertEquals("Text was not properly grouped", expected, result);
+        Assert.assertEquals("Text was not properly grouped", expected, resultShort);
+    }
+
+    @Test
     public void formatTextForVisualFeedback_withSeparatedFilledTextProcessor_andVisaPattern_withFullNumber_shouldReturnGroupedString() {
         final int[] pattern = {4, 4, 4, 4};
         final String input = "1234123412341234";
