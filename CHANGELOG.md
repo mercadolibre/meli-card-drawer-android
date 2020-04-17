@@ -1,3 +1,6 @@
+### Release 2.3.1
+Fix crash in number formatter with patterns with group zero size
+
 ### Release 2.3.0
 New layout for all card variants
 Migrated to Gradle 5.x
