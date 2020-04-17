@@ -11,10 +11,13 @@ object NumberFormatter {
 
     fun formatShort(input: String?, vararg pattern: Int): String {
         var totalCount = 0
+        var groupSize = 0
         var i = pattern.size - 1
-        var groupSize = pattern[i]
+        if (i >= 0) {
+            groupSize = pattern[i]
+        }
         while(i >= 0 && groupSize + totalCount <= SHORT_PATTERN_MAX_CHARS) {
-            if (totalCount > 0) {
+            if (totalCount > 0 && groupSize > 0) {
                 //separator
                 totalCount++
             }
