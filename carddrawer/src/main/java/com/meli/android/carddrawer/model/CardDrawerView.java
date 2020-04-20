@@ -310,12 +310,18 @@ public class CardDrawerView extends FrameLayout implements Observer {
         }
     }
 
-    protected String resolveFontType(@NonNull @FontType final String type, final boolean hasToShow) {
-        if (!hasToShow) {
-            if (type.equals(FontType.DARK_TYPE)) {
-                return FontType.DARK_NO_SHADOW_TYPE;
+    protected String resolveFontType(@NonNull @FontType final String type, final boolean showShadow) {
+        if (!showShadow) {
+            switch (type) {
+                case FontType.DARK_TYPE: {
+                    return FontType.DARK_NO_SHADOW_TYPE;
+                }
+                case FontType.LIGHT_TYPE: {
+                    return FontType.LIGHT_NO_SHADOW_TYPE;
+                }
+                default:
+                    return type;
             }
-            return FontType.LIGHT_NO_SHADOW_TYPE;
         }
         return type;
     }
