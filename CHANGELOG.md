@@ -1,3 +1,6 @@
+### Release 2.3.2
+Fix bottom margin not aligned to baseline
+
 ### Release 2.3.1
 Fix crash in number formatter with patterns with group zero size
 
