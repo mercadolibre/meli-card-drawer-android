@@ -37,7 +37,7 @@ public class VisaCardYellowConfiguration implements CardUI {
 
     @Override
     public String getFontType() {
-        return FontType.DARK_TYPE;
+        return FontType.NONE;
     }
 
     @Override
