@@ -1,7 +1,7 @@
 package com.meli.android.carddrawer.format
 
 object NumberFormatter {
-    private const val SHORT_PATTERN_MAX_CHARS = 10
+    private const val SHORT_PATTERN_MAX_CHARS = 12
     private const val NON_VALID = "[^*0-9]"
     private const val SEPARATOR = "  "
     private const val SHORT_SEPARATOR = " "
