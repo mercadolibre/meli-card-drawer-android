@@ -1,3 +1,6 @@
+### Release 2.3.3
+Revised margins for medium card
+
 ### Release 2.3.2
 Fix bottom margin not aligned to baseline
 
