@@ -5,8 +5,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 
-import static org.junit.Assert.assertEquals;
-
 @RunWith(RobolectricTestRunner.class)
 public class CardNumberFormatterTest {
 
@@ -16,7 +14,7 @@ public class CardNumberFormatterTest {
         final int[] pattern = {4, 6, 5};
         final String input = "123412345612345";
         final String expected = "1234  123456  12345";
-        final String expectedShort = "12345";
+        final String expectedShort = "123456 12345";
 
         final String result = NumberFormatter.INSTANCE.format(input, pattern);
         final String resultShort = NumberFormatter.INSTANCE.formatShort(input, pattern);

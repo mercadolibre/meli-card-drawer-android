@@ -18,7 +18,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.4762"/>
+        app:layout_constraintGuide_percent="0.53"/>
 
     <android.support.constraint.Guideline
         android:id="@+id/card_header_back_guideline_band"
@@ -46,7 +46,7 @@
         android:layout_height="0dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintDimensionRatio="H,256:84"
+        app:layout_constraintDimensionRatio="H,256:68"
         layout="@layout/card_drawer_back_background"/>
 
     <View
