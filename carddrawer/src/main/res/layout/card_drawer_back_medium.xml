@@ -79,7 +79,7 @@
         app:layout_constraintStart_toStartOf="@id/cho_card_code_back"
         app:layout_constraintTop_toTopOf="@id/cho_card_code_back"
         app:layout_constraintWidth_percent="0.13"
-        app:layout_constraintHeight_percent="0.3962" />
+        app:layout_constraintHeight_percent="0.4894" />
 
     <android.support.v7.widget.AppCompatTextView
         android:id="@+id/cho_card_code_back"
