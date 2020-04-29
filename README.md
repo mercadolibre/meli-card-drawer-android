@@ -5,16 +5,9 @@
 Add this line to your app's `build.gradle` inside the `dependencies` section:
 
    ```android
-   implementation 'com.mercadolibre.android:carddrawer:1.+'
+   implementation 'com.mercadolibre.android:carddrawer:2.+'
    ```
-Add this line to your project's `build.gradle` inside the `repositories` section:   
-   
-   ```android
-    maven {
-            url "https://dl.bintray.com/mercadolibre/android-public"
-        }
-   ```   
-   
+
 ## 🌟 Features
 - [x] Easy to integrate
 - [x] Card number, name, expiration date and CVV support (Card)

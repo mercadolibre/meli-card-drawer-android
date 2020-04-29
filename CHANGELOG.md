@@ -1,3 +1,6 @@
+### Release 2.3.4
+Revised margins for lowres card
+
 ### Release 2.3.3
 Revised margins for medium card
 
