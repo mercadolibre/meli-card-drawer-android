@@ -18,14 +18,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.5"/>
+        app:layout_constraintGuide_percent="0.57"/>
 
     <android.support.constraint.Guideline
         android:id="@+id/card_header_back_guideline_band"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.1666" />
+        app:layout_constraintGuide_percent="0.1905" />
 
     <android.support.constraint.Guideline
         android:id="@+id/card_header_back_guideline_left"
@@ -46,7 +46,7 @@
         android:layout_height="0dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintDimensionRatio="H,256:96"
+        app:layout_constraintDimensionRatio="H,256:84"
         layout="@layout/card_drawer_back_background"/>
 
     <View
@@ -79,7 +79,7 @@
         app:layout_constraintStart_toStartOf="@id/cho_card_code_back"
         app:layout_constraintTop_toTopOf="@id/cho_card_code_back"
         app:layout_constraintWidth_percent="0.13"
-        app:layout_constraintHeight_percent="0.346" />
+        app:layout_constraintHeight_percent="0.3962" />
 
     <android.support.v7.widget.AppCompatTextView
         android:id="@+id/cho_card_code_back"
