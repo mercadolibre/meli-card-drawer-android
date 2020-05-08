@@ -9,7 +9,6 @@
     <dimen name="card_drawer_shadow_radius">2dp</dimen>
     <dimen name="card_drawer_logo_height">36dp</dimen>
 
-    <dimen name="card_drawer_elevation">0dp</dimen>
     <dimen name="card_drawer_corner_radius">8dp</dimen>
 
     <dimen name="card_drawer_font_size">10dp</dimen>
