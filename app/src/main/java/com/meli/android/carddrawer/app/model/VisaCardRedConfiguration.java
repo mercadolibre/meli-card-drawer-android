@@ -1,10 +1,11 @@
 package com.meli.android.carddrawer.app.model;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.widget.ImageView;
-
 import com.meli.android.carddrawer.app.R;
 import com.meli.android.carddrawer.configuration.FontType;
 import com.meli.android.carddrawer.configuration.SecurityCodeLocation;
@@ -83,5 +84,11 @@ public class VisaCardRedConfiguration implements CardUI {
     @Override
     public void setBankImage(@NonNull ImageView bankImage) {
         bankImage.setImageResource(this.getBankImageRes());
+    }
+
+    @Nullable
+    @Override
+    public Typeface getCustomFont() {
+        return Typeface.SERIF;
     }
 }

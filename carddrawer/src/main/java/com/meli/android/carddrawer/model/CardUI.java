@@ -1,5 +1,6 @@
 package com.meli.android.carddrawer.model;
 
+import android.graphics.Typeface;
 import android.support.annotation.ColorInt;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
@@ -128,4 +129,10 @@ public interface CardUI {
      */
     @CardAnimationType
     String getAnimationType();
+
+    /**
+     * @return custom font for the card
+     */
+    @Nullable
+    default Typeface getCustomFont() { return null; }
 }
