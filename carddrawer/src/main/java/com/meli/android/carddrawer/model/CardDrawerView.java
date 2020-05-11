@@ -2,6 +2,7 @@ package com.meli.android.carddrawer.model;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -30,7 +31,7 @@ import com.meli.android.carddrawer.configuration.DefaultCardConfiguration;
 import com.meli.android.carddrawer.configuration.FieldPosition;
 import com.meli.android.carddrawer.configuration.FontType;
 import com.meli.android.carddrawer.configuration.SecurityCodeLocation;
-import com.meli.android.carddrawer.format.MonospaceTypefaceSetter;
+import com.meli.android.carddrawer.format.TypefaceSetter;
 import com.meli.android.carddrawer.format.NumberFormatter;
 import com.mercadolibre.android.picassodiskcache.PicassoDiskLoader;
 import java.lang.annotation.Retention;
@@ -125,7 +126,7 @@ public class CardDrawerView extends FrameLayout implements Observer {
         if (issuerLogoView != null) {
             setupImageSwitcher(issuerLogoView, fadeIn, fadeOut);
         }
-        setMonospaceFont();
+        TypefaceSetter.INSTANCE.init(context);
         card = new Card();
         card.addObserver(this);
         updateCardInformation();
@@ -221,21 +222,22 @@ public class CardDrawerView extends FrameLayout implements Observer {
         imageSwitcher.setOutAnimation(fadeOut);
     }
 
-    private void setMonospaceFont() {
+    private void updateFont(@Nullable final Typeface customTypeface) {
         if (cardNumber != null) {
-            MonospaceTypefaceSetter.setRobotoMono(getContext(), cardNumber);
+            TypefaceSetter.INSTANCE.set(cardNumber, customTypeface);
         }
         if (cardName != null) {
-            MonospaceTypefaceSetter.setRobotoMono(getContext(), cardName);
+            cardName.setAllCaps(customTypeface == null);
+            TypefaceSetter.INSTANCE.set(cardName, customTypeface);
         }
         if (cardDate != null) {
-            MonospaceTypefaceSetter.setRobotoMono(getContext(), cardDate);
+            TypefaceSetter.INSTANCE.set(cardDate, customTypeface);
         }
         if (codeFront != null) {
-            MonospaceTypefaceSetter.setRobotoMono(getContext(), codeFront);
+            TypefaceSetter.INSTANCE.set(codeFront, customTypeface);
         }
         if (codeBack != null) {
-            MonospaceTypefaceSetter.setRobotoMono(getContext(), codeBack);
+            TypefaceSetter.INSTANCE.set(codeBack, customTypeface);
         }
     }
 
@@ -250,6 +252,7 @@ public class CardDrawerView extends FrameLayout implements Observer {
         updateCardBackgroundGradient(source.getCardGradientColors());
         updateIssuerLogo(issuerLogoView, source, animate);
         updateCardLogo(cardLogoView, source, animate);
+        updateFont(source.getCustomFont());
         setCardTextColor(source.getFontType(), source.getCardFontColor());
         if (animate) {
             cardNumber.startAnimation(getFadeInAnimation(getContext()));
