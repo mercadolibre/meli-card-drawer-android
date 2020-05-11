@@ -1,3 +1,7 @@
+### Release 2.4.0
+Added custom font support
+Removed unused card view
+
 ### Release 2.3.4
 Revised margins for lowres card
 
