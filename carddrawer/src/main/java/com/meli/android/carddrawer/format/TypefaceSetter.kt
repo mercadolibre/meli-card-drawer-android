@@ -1,6 +1,5 @@
 package com.meli.android.carddrawer.format
 
-import android.content.Context
 import android.graphics.Typeface
 import android.os.Handler
 import android.os.HandlerThread
@@ -14,38 +13,40 @@ import com.meli.android.carddrawer.R
  */
 object TypefaceSetter {
     private const val HANDLER_THREAD_NAME = "fonts"
-    private var HANDLER: Handler? = null
+    private val handlerThread = HandlerThread(HANDLER_THREAD_NAME)
     private var robotoMono: Typeface? = null
 
-    fun init(context: Context) {
-        fetchRobotoMono(context)
-    }
-
     fun set(textView: TextView, customTypeface: Typeface?) {
-        textView.typeface = customTypeface ?: robotoMono ?: Typeface.MONOSPACE
+        customTypeface?.let {
+            textView.typeface = it
+        } ?: setMonospace(textView)
     }
 
-    private fun fetchRobotoMono(context: Context) {
-        val authority = context.resources.getString(R.string.card_drawer_gms_font_provider_authority)
-        val packageName = context.resources.getString(R.string.card_drawer_gms_font_provider_package)
-        val certificates = R.array.card_drawer_com_google_android_gms_fonts_certs
-        val query = context.resources.getString(R.string.card_drawer_roboto_mono_query)
-        val request = FontRequest(authority, packageName, query, certificates)
-        val callback: FontsContractCompat.FontRequestCallback = object : FontsContractCompat.FontRequestCallback() {
-            override fun onTypefaceRetrieved(typeface: Typeface) {
-                robotoMono = typeface
-            }
+    private fun setMonospace(textView: TextView) {
+        robotoMono?.let {
+            textView.typeface = it
+        } ?: run {
+            val context = textView.context
+            val authority = context.resources.getString(R.string.card_drawer_gms_font_provider_authority)
+            val packageName = context.resources.getString(R.string.card_drawer_gms_font_provider_package)
+            val certificates = R.array.card_drawer_com_google_android_gms_fonts_certs
+            val query = context.resources.getString(R.string.card_drawer_roboto_mono_query)
+            val request = FontRequest(authority, packageName, query, certificates)
+            val callback: FontsContractCompat.FontRequestCallback = object : FontsContractCompat.FontRequestCallback() {
+                override fun onTypefaceRetrieved(typeface: Typeface) {
+                    robotoMono = typeface
+                    textView.typeface = typeface
+                }
 
-            override fun onTypefaceRequestFailed(reason: Int) {
-                // Do nothing.
+                override fun onTypefaceRequestFailed(reason: Int) {
+                    textView.typeface = Typeface.MONOSPACE
+                }
             }
+            FontsContractCompat.requestFont(context, request, callback, Handler(handlerThread.looper))
         }
-        FontsContractCompat.requestFont(context, request, callback, HANDLER!!)
     }
 
     init {
-        val handlerThread = HandlerThread(HANDLER_THREAD_NAME)
         handlerThread.start()
-        HANDLER = Handler(handlerThread.looper)
     }
 }

@@ -1,8 +1,8 @@
 package com.meli.android.carddrawer.format;
 
 import android.graphics.Typeface;
-import android.os.Handler;
 import android.widget.TextView;
+import com.meli.android.carddrawer.TestUtils;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,15 +18,11 @@ public class TypefaceSetterTest {
 
     @Before
     public void setUp() {
-        // Run the fonts fetching command in the current thread's looper. This way we avoid
-        // async waitings and race conditions
-        ReflectionHelpers.setStaticField(TypefaceSetter.class, "HANDLER", new Handler());
-
-        TypefaceSetter.INSTANCE.init(RuntimeEnvironment.application);
+        TestUtils.initTypefaceSetter();
     }
 
     @Test
-    public void monospaceTypefaceSetter_ActuallySetsTypeface() {
+    public void typefaceSetter_SetsCustomTypeface() {
         // Prepare test environment
         final TextView textView = new TextView(RuntimeEnvironment.application);
         final Typeface typeface = mock(Typeface.class);
@@ -36,5 +32,17 @@ public class TypefaceSetterTest {
 
         // Assert the test performed as expected
         assertEquals(typeface, textView.getTypeface());
+    }
+
+    @Test
+    public void typefaceSetter_SetsDefaultTypeface() {
+        // Prepare test environment
+        final TextView textView = new TextView(RuntimeEnvironment.application);
+
+        // Perform op
+        TypefaceSetter.INSTANCE.set(textView, null);
+
+        // Assert the test performed as expected
+        assertEquals(ReflectionHelpers.getStaticField(TypefaceSetter.class, "robotoMono"), textView.getTypeface());
     }
 }
