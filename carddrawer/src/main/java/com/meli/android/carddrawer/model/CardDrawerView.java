@@ -126,7 +126,6 @@ public class CardDrawerView extends FrameLayout implements Observer {
         if (issuerLogoView != null) {
             setupImageSwitcher(issuerLogoView, fadeIn, fadeOut);
         }
-        TypefaceSetter.INSTANCE.init(context);
         card = new Card();
         card.addObserver(this);
         updateCardInformation();
