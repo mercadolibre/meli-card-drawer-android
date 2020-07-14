@@ -1,3 +1,6 @@
+## Release 2.5.0
+* Added viewTreeObserver in card animation
+
 ## Release 2.4.1
 * Fixed roboto mono not loading all the times
 
