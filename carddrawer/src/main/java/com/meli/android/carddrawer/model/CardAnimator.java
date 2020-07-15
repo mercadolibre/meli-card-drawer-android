@@ -16,6 +16,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.view.animation.FastOutSlowInInterpolator;
 import android.view.View;
 import android.view.ViewAnimationUtils;
+import android.view.ViewTreeObserver;
 import android.view.animation.AlphaAnimation;
 import android.widget.ImageView;
 
@@ -288,47 +289,56 @@ public class CardAnimator {
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    private void animateReveal(final ImageView imageReveal, final ImageView imageBackground, @ColorInt final int color) {
+    private void animateReveal(final ImageView imageReveal, final ImageView imageBackground,
+        @ColorInt final int color) {
         // Wait for view to be ready. This is needed because of some illegal state exceptions in prod.
-        imageReveal.post(new Runnable() {
-            @Override
-            public void run() {
-                // first tint the top image
-                imageReveal.setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
-                final int width = imageReveal.getWidth();
+        imageReveal.getViewTreeObserver().addOnPreDrawListener(
+            new ViewTreeObserver.OnPreDrawListener() {
+                @Override
+                public boolean onPreDraw() {
+                    imageReveal.setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
+                    final int width = imageReveal.getWidth();
 
-                // we multiply by an extra value as a hack because otherwise the end listener
-                // gets fired way too soon and we see glitches
-                final Animator anim = ViewAnimationUtils.createCircularReveal(
+                    // we multiply by an extra value as a hack because otherwise the end listener
+                    // gets fired way too soon and we see glitches
+                    final Animator anim = ViewAnimationUtils.createCircularReveal(
                         imageReveal, 0, 0, 0, ANIMATION_EXTRA_FACTOR * width);
-                anim.setDuration(imageReveal.getResources().getInteger(R.integer.card_drawer_paint_animation_time));
-                anim.setInterpolator(new FastOutSlowInInterpolator());
-                anim.addListener(new EndAnimationListener(imageBackground, color));
-                anim.start();
-            }
-        });
+                    anim.setDuration(imageReveal.getResources()
+                        .getInteger(R.integer.card_drawer_paint_animation_time));
+                    anim.setInterpolator(new FastOutSlowInInterpolator());
+                    anim.addListener(new EndAnimationListener(imageBackground, color));
+                    anim.start();
+
+                    imageReveal.getViewTreeObserver().removeOnPreDrawListener(this);
+                    return false;
+                }
+            });
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    private void animateUnveal(final ImageView imageReveal, final ImageView imageBackground, @ColorInt final int color) {
+    private void animateUnveal(final ImageView imageReveal, final ImageView imageBackground,
+        @ColorInt final int color) {
         // Wait for view to be ready. This is needed because of some illegal state exceptions in prod.
-        imageReveal.post(new Runnable() {
-            @Override
-            public void run() {
-                // first tint the background image
-                imageBackground.setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
-                final int width = imageReveal.getWidth();
-                // we multiply by an extra value as a hack because otherwise the end
-                // listener gets fired way too soon and we see glitches
-                final Animator anim = ViewAnimationUtils.createCircularReveal(
+        imageReveal.getViewTreeObserver().addOnPreDrawListener(
+            new ViewTreeObserver.OnPreDrawListener() {
+                @Override
+                public boolean onPreDraw() {
+                    // first tint the background image
+                    imageBackground.setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
+                    final int width = imageReveal.getWidth();
+                    // we multiply by an extra value as a hack because otherwise the end
+                    // listener gets fired way too soon and we see glitches
+                    final Animator anim = ViewAnimationUtils.createCircularReveal(
                         imageReveal, 0, 0, ANIMATION_EXTRA_FACTOR * width, 0);
-                anim.setDuration(imageReveal.getResources().getInteger(R.integer.card_drawer_paint_animation_time));
-                anim.setInterpolator(new FastOutSlowInInterpolator());
-                anim.addListener(new EndAnimationListener(imageReveal, color));
-                anim.start();
-            }
-        });
+                    anim.setDuration(imageReveal.getResources()
+                        .getInteger(R.integer.card_drawer_paint_animation_time));
+                    anim.setInterpolator(new FastOutSlowInInterpolator());
+                    anim.addListener(new EndAnimationListener(imageReveal, color));
+                    anim.start();
 
+                    imageReveal.getViewTreeObserver().removeOnPreDrawListener(this);
+                    return false;
+                }
+            });
     }
-
 }
