@@ -252,6 +252,7 @@ public class CardDrawerView extends FrameLayout implements Observer {
         updateIssuerLogo(issuerLogoView, source, animate);
         updateCardLogo(cardLogoView, source, animate);
         updateFont(source.getCustomFont());
+        updateOverlay(overlayImage, source);
         setCardTextColor(source.getFontType(), source.getCardFontColor());
         if (animate) {
             cardNumber.startAnimation(getFadeInAnimation(getContext()));
@@ -263,6 +264,11 @@ public class CardDrawerView extends FrameLayout implements Observer {
                 codeFront.startAnimation(getFadeInAnimation(getContext()));
             }
         }
+    }
+
+    @VisibleForTesting
+    protected void updateOverlay(final ImageView overlayImage, @NonNull final CardUI source) {
+        source.setOverlayImage(overlayImage);
     }
 
     @VisibleForTesting
@@ -395,6 +401,8 @@ public class CardDrawerView extends FrameLayout implements Observer {
         }
     }
 
+    // Use setOverlayImage from CardUi
+    @Deprecated
     public void setOverlayImage(@Nullable @DrawableRes Integer image) {
         if (image != null) {
             overlayImage.setImageResource(image);

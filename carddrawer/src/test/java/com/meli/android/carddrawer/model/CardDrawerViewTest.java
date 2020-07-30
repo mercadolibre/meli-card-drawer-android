@@ -329,4 +329,15 @@ public class CardDrawerViewTest extends BasicRobolectricTest {
         verify(source).setCardLogoImage(cardImageView);
     }
 
+    @Test
+    public void updateOverlay() {
+        ImageView overlayImageView = mock(ImageView.class);
+        CardUI source = mock(CardUI.class);
+        CardDrawerView spyHeader = spy(header);
+
+        spyHeader.updateOverlay(overlayImageView, source);
+        verify(source).setOverlayImage(overlayImageView);
+        verifyNoMoreInteractions(source);
+        verifyNoMoreInteractions(overlayImageView);
+    }
 }

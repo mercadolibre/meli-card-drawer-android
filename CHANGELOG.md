@@ -1,3 +1,6 @@
+## Release 2.6.0
+* Added setOverlay in CardUI and this method was deprecated in CardDrawerView
+
 ## Release 2.5.0
 * Added viewTreeObserver in card animation
 

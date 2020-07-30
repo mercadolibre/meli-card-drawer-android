@@ -62,6 +62,12 @@ public interface CardUI {
     default void setBankImage(@NonNull final ImageView bankImage) {}
 
     /**
+     * Sets overlay image to the Imageview
+     * @param overlayImage the overlay imageview
+     */
+    default void setOverlayImage(@NonNull final ImageView overlayImage) {}
+
+    /**
      * @return the security code position
      */
     @SecurityCodeLocation
