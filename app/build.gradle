@@ -5,7 +5,7 @@ apply from: rootProject.file('jacoco.gradle')
 
 android {
     compileSdkVersion androidTarget as int
-    buildToolsVersion androidBuildToolsVersion
+    buildToolsVersion androidBuildTools
 
     defaultConfig {
         applicationId "com.meli.android.carddrawer"
@@ -13,7 +13,7 @@ android {
         targetSdkVersion androidTarget as int
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
     }
     buildTypes {
         release {
@@ -30,10 +30,10 @@ android {
 dependencies {
     implementation project(':carddrawer')
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "com.android.support:appcompat-v7:$supportLibraryVersion"
-    implementation "com.android.support.constraint:constraint-layout:$constraintLayout"
+    implementation "androidx.appcompat:appcompat:$appCompat"
+    implementation "androidx.constraintlayout:constraintlayout:$constraintLayout"
     testImplementation "junit:junit:$junit"
-    androidTestImplementation "com.android.support.test:runner:$testRunner"
-    androidTestImplementation "com.android.support.test.espresso:espresso-core:$espresso"
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+    androidTestImplementation "androidx.test.ext:junit:$testRunner"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espresso"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin"
 }

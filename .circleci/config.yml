@@ -6,7 +6,7 @@
 default: &defaultJob
   # The docker image all jobs that inherit from us will have (Which should be all of them)
   docker:
-      - image: circleci/android:api-28
+      - image: circleci/android:api-29
 
 ##
 # We define a job for building. This job will be in charge of running:

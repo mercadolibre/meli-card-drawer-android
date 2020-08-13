@@ -1,7 +1,6 @@
 package com.meli.android.carddrawer.configuration;
 
-import android.graphics.LinearGradient;
-import android.support.v4.content.ContextCompat;
+import androidx.core.content.ContextCompat;
 import android.text.TextPaint;
 
 import com.meli.android.carddrawer.BasicRobolectricTest;

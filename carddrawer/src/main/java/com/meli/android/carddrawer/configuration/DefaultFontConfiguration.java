@@ -1,7 +1,7 @@
 package com.meli.android.carddrawer.configuration;
 
-import android.support.annotation.ColorInt;
-import android.support.annotation.NonNull;
+import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
 import android.text.TextPaint;
 
 public class DefaultFontConfiguration implements CardFontConfiguration {

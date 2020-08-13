@@ -1,6 +1,6 @@
 package com.meli.android.carddrawer.configuration.shadow;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.text.TextPaint;
 
 public interface ShadowConfiguration {

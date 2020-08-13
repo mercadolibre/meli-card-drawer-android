@@ -2,7 +2,7 @@ package com.meli.android.carddrawer;
 
 import android.animation.Animator;
 import android.graphics.PorterDuff;
-import android.support.annotation.ColorInt;
+import androidx.annotation.ColorInt;
 import android.view.animation.Animation;
 import android.widget.ImageView;
 

@@ -1,7 +1,7 @@
 package com.meli.android.carddrawer.configuration
 
 import android.content.Context
-import android.support.v4.content.ContextCompat
+import androidx.core.content.ContextCompat
 import com.meli.android.carddrawer.R
 import com.meli.android.carddrawer.model.CardAnimationType
 import com.meli.android.carddrawer.model.CardUI
