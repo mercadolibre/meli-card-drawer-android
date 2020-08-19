@@ -1,6 +1,6 @@
 package com.meli.android.carddrawer.app.model;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import com.meli.android.carddrawer.model.Card;
 import java.util.ArrayList;
 import java.util.Collection;

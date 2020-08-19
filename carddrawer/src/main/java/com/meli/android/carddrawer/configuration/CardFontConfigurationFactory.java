@@ -1,8 +1,8 @@
 package com.meli.android.carddrawer.configuration;
 
 import android.content.Context;
-import android.support.annotation.ColorInt;
-import android.support.annotation.NonNull;
+import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
 import com.meli.android.carddrawer.configuration.shadow.ShadowFontConfiguration;
 
 public class CardFontConfigurationFactory {

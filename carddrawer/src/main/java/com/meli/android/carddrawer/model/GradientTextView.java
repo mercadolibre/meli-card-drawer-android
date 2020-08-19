@@ -2,10 +2,11 @@ package com.meli.android.carddrawer.model;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.annotation.VisibleForTesting;
-import android.support.v4.content.ContextCompat;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
+import androidx.appcompat.widget.AppCompatTextView;
+import androidx.core.content.ContextCompat;
 import android.text.TextPaint;
 import android.util.AttributeSet;
 import com.meli.android.carddrawer.R;
@@ -13,7 +14,7 @@ import com.meli.android.carddrawer.configuration.CardFontConfiguration;
 import com.meli.android.carddrawer.configuration.CardFontConfigurationFactory;
 import com.meli.android.carddrawer.configuration.FontType;
 
-public class GradientTextView extends android.support.v7.widget.AppCompatTextView {
+public class GradientTextView extends AppCompatTextView {
     @FontType private String fontType;
     private String placeHolder;
     private int fontColor;
