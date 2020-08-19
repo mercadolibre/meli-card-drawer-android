@@ -1,3 +1,6 @@
+## Release 2.7.0
+* Migrated to AndroidX and API 29.
+
 ## Release 2.6.0
 * Added setOverlay in CardUI and this method was deprecated in CardDrawerView
 
