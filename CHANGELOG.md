@@ -1,3 +1,7 @@
+## Release 2.8.0
+* Converted images to webp.
+* Fix animations when view not attached.
+
 ## Release 2.7.0
 * Migrated to AndroidX and API 29.
 
