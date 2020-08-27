@@ -25,7 +25,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageSwitcher;
 import android.widget.ImageView;
 import android.widget.TextView;
-import com.meli.android.carddrawer.GradientHelper;
+import com.meli.android.carddrawer.ViewHelper;
 import com.meli.android.carddrawer.R;
 import com.meli.android.carddrawer.configuration.DefaultCardConfiguration;
 import com.meli.android.carddrawer.configuration.FieldPosition;
@@ -510,7 +510,7 @@ public class CardDrawerView extends FrameLayout implements Observer {
     }
 
     private void updateCardBackgroundGradient(@Nullable final List<String> gradientColors) {
-        final GradientDrawable gradientDrawable = GradientHelper.getGradientDrawable(getResources(), gradientColors);
+        final GradientDrawable gradientDrawable = ViewHelper.getGradientDrawable(getResources(), gradientColors);
         cardFrontGradient.setImageDrawable(gradientDrawable);
         cardBackGradient.setImageDrawable(gradientDrawable);
     }
