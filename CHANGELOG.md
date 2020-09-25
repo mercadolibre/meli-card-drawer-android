@@ -1,3 +1,6 @@
+## Release 2.9.0
+* Added show card front without animation.
+
 ## Release 2.8.0
 * Converted images to webp.
 * Fix animations when view not attached.

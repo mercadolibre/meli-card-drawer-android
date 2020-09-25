@@ -215,6 +215,13 @@ public class CardDrawerView extends FrameLayout implements Observer {
         cardAnimator.switchViewWithoutAnimation(FieldPosition.POSITION_BACK);
     }
 
+    /**
+     * Shows the front card without animation. Uses the saved card style or default
+     */
+    public void showFront() {
+        cardAnimator.switchViewWithoutAnimation(FieldPosition.POSITION_FRONT);
+    }
+
     protected void setupImageSwitcher(final ImageSwitcher imageSwitcher, final Animation fadeIn,
         final Animation fadeOut) {
         imageSwitcher.setInAnimation(fadeIn);
