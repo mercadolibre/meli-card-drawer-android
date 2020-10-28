@@ -48,6 +48,9 @@ dependencies {
     androidTestImplementation "androidx.test.ext:junit:$testRunner"
     androidTestImplementation "androidx.test.espresso:espresso-core:$espresso"
     testImplementation "org.robolectric:robolectric:$robolectric"
+    testImplementation ('org.bouncycastle:bcprov-jdk15on:1.64') {
+        force = true // Workaround until Robolectric issue is solved https://github.com/robolectric/robolectric/issues/5921
+    }
     testImplementation "org.mockito:mockito-core:$mockito"
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin"
 }

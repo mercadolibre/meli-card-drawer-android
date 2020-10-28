@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.meli.android.carddrawer.BasicRobolectricTest;
 import com.meli.android.carddrawer.R;
+import com.meli.android.carddrawer.TestUtils;
 import com.meli.android.carddrawer.configuration.DefaultCardConfiguration;
 import com.meli.android.carddrawer.configuration.FieldPosition;
 import com.meli.android.carddrawer.configuration.FontType;
@@ -43,6 +44,7 @@ public class CardDrawerViewTest extends BasicRobolectricTest {
 
     @Before
     public void doBefore() {
+        TestUtils.initTypefaceSetter();
         header = new CardDrawerView(getContext());
     }
 

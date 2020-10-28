@@ -27,6 +27,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.meli.android.carddrawer.ViewHelper;
 import com.meli.android.carddrawer.R;
+import com.meli.android.carddrawer.configuration.AccountMoneyLegacyConfiguration;
+import com.meli.android.carddrawer.configuration.CardDrawerStyle;
 import com.meli.android.carddrawer.configuration.DefaultCardConfiguration;
 import com.meli.android.carddrawer.configuration.FieldPosition;
 import com.meli.android.carddrawer.configuration.FontType;
@@ -64,6 +66,7 @@ public class CardDrawerView extends FrameLayout implements Observer {
     protected ImageView cardFrontGradient;
     protected ImageView cardBackGradient;
     private ImageView overlayImage;
+    private View accountMoneyOverlayLegacy;
     protected float defaultTextSize;
     protected float defaultCardWidth;
 
@@ -100,6 +103,7 @@ public class CardDrawerView extends FrameLayout implements Observer {
             R.styleable.CardDrawerView_card_header_internal_padding,
             getResources().getDimensionPixelSize(R.dimen.card_drawer_layout_padding));
         @Behaviour final int behaviour = typedArray.getInt(R.styleable.CardDrawerView_card_header_behaviour, Behaviour.REGULAR);
+        final int styleIndex = typedArray.getInt(R.styleable.CardDrawerView_card_header_style, CardDrawerStyle.REGULAR.getValue());
 
         typedArray.recycle();
 
@@ -129,6 +133,10 @@ public class CardDrawerView extends FrameLayout implements Observer {
         card = new Card();
         card.addObserver(this);
         updateCardInformation();
+        final CardDrawerStyle style = CardDrawerStyle.fromValue(styleIndex);
+        if (style != CardDrawerStyle.REGULAR) {
+            setStyle(style);
+        }
     }
 
     private void bindViews() {
@@ -145,6 +153,7 @@ public class CardDrawerView extends FrameLayout implements Observer {
         cardBackLayout = findViewById(R.id.card_header_back);
         cardFrontGradient = findViewById(R.id.cho_card_gradient_front);
         cardBackGradient = findViewById(R.id.cho_card_gradient_back);
+        accountMoneyOverlayLegacy = findViewById(R.id.cho_am_legacy_overlay);
     }
 
     @NonNull
@@ -258,8 +267,11 @@ public class CardDrawerView extends FrameLayout implements Observer {
         updateCardBackgroundGradient(source.getCardGradientColors());
         updateIssuerLogo(issuerLogoView, source, animate);
         updateCardLogo(cardLogoView, source, animate);
-        updateFont(source.getCustomFont());
+        if (!isInEditMode()) {
+            updateFont(source.getCustomFont());
+        }
         updateOverlay(overlayImage, source);
+        internalSetStyle(source.getStyle());
         setCardTextColor(source.getFontType(), source.getCardFontColor());
         if (animate) {
             cardNumber.startAnimation(getFadeInAnimation(getContext()));
@@ -455,6 +467,22 @@ public class CardDrawerView extends FrameLayout implements Observer {
 
         cardFrontLayout.setLayoutParams(frontParams);
         cardBackLayout.setLayoutParams(backParams);
+    }
+
+    public void setStyle(@NonNull final CardDrawerStyle style) {
+        if (style == CardDrawerStyle.ACCOUNT_MONEY_LEGACY) {
+            show(new AccountMoneyLegacyConfiguration());
+        }
+    }
+
+    private void internalSetStyle(@NonNull final CardDrawerStyle style) {
+        if (style == CardDrawerStyle.ACCOUNT_MONEY_LEGACY) {
+            accountMoneyOverlayLegacy.setVisibility(VISIBLE);
+            overlayImage.setVisibility(GONE);
+        } else {
+            accountMoneyOverlayLegacy.setVisibility(GONE);
+            overlayImage.setVisibility(VISIBLE);
+        }
     }
 
     @Override

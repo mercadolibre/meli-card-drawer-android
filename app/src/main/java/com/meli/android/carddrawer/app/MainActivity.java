@@ -11,6 +11,7 @@ import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
 import com.meli.android.carddrawer.app.model.CardComposite;
+import com.meli.android.carddrawer.app.model.CustomAccountMoneyConfiguration;
 import com.meli.android.carddrawer.app.model.MasterCardConfiguration;
 import com.meli.android.carddrawer.app.model.UrlTestConfiguration;
 import com.meli.android.carddrawer.app.model.VisaCardBlueConfiguration;
@@ -18,8 +19,10 @@ import com.meli.android.carddrawer.app.model.VisaCardGrayConfiguration;
 import com.meli.android.carddrawer.app.model.VisaCardGreenConfiguration;
 import com.meli.android.carddrawer.app.model.VisaCardRedConfiguration;
 import com.meli.android.carddrawer.app.model.VisaCardYellowConfiguration;
+import com.meli.android.carddrawer.configuration.CardDrawerStyle;
 import com.meli.android.carddrawer.configuration.DefaultCardConfiguration;
 import com.meli.android.carddrawer.model.CardDrawerView;
+import com.meli.android.carddrawer.model.CardUI;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -141,108 +144,98 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initCardName() {
-        TextView cardName = findViewById(R.id.card_name);
+        final TextView cardName = findViewById(R.id.card_name);
 
         cardName.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            public void beforeTextChanged(final CharSequence charSequence, final int i, final int i1, final int i2) {
                 //Do nothing
             }
 
             @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            public void onTextChanged(final CharSequence charSequence, final int i, final int i1, final int i2) {
                 card.setName(charSequence.toString());
             }
 
             @Override
-            public void afterTextChanged(Editable editable) {
+            public void afterTextChanged(final Editable editable) {
                 //Do nothing
             }
         });
 
-        cardName.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                cardDrawerView.show();
-                cardDrawerViewLowRes.show();
-                cardDrawerViewMedium.show();
-            }
+        cardName.setOnClickListener(v -> {
+            cardDrawerView.show();
+            cardDrawerViewLowRes.show();
+            cardDrawerViewMedium.show();
         });
     }
 
     private void initCardNumber() {
-        TextView cardNumber = findViewById(R.id.card_number);
+        final TextView cardNumber = findViewById(R.id.card_number);
 
         cardNumber.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            public void beforeTextChanged(final CharSequence charSequence, final int i, final int i1, final int i2) {
                 //Do nothing
             }
 
             @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            public void onTextChanged(final CharSequence charSequence, final int i, final int i1, final int i2) {
                 card.setNumber(charSequence.toString());
             }
 
             @Override
-            public void afterTextChanged(Editable editable) {
+            public void afterTextChanged(final Editable editable) {
                 //Do nothing
             }
         });
 
-        cardNumber.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                cardDrawerView.show();
-                cardDrawerViewLowRes.show();
-                cardDrawerViewMedium.show();
-            }
+        cardNumber.setOnClickListener(v -> {
+            cardDrawerView.show();
+            cardDrawerViewLowRes.show();
+            cardDrawerViewMedium.show();
         });
     }
 
     private void initCardConfigurationOptions() {
-        Spinner cardsSpinner = findViewById(R.id.spinner_cards);
+        final Spinner cardsSpinner = findViewById(R.id.spinner_cards);
 
         final List<CardConfigurationOption> cardOptions = new ArrayList<>();
 
-        DefaultCardConfiguration defaultCardConfiguration = new DefaultCardConfiguration(this);
-        cardOptions.add(new CardConfigurationOption(defaultCardConfiguration, "Default"));
+        cardOptions.add(new CardConfigurationOption("Default", new DefaultCardConfiguration(this)));
+        cardOptions.add(new CardConfigurationOption("Visa blue", new VisaCardBlueConfiguration(this)));
+        cardOptions.add(new CardConfigurationOption("Visa green", new VisaCardGreenConfiguration(this)));
+        cardOptions.add(new CardConfigurationOption("Visa red", new VisaCardRedConfiguration(this)));
+        cardOptions.add(new CardConfigurationOption("Visa gray", new VisaCardGrayConfiguration(this)));
+        cardOptions.add(new CardConfigurationOption("Visa yellow", new VisaCardYellowConfiguration(this)));
+        cardOptions.add(new CardConfigurationOption("Master", new MasterCardConfiguration(this)));
+        cardOptions.add(new CardConfigurationOption("Url Test", new UrlTestConfiguration(this)));
+        cardOptions.add(new CardConfigurationOption("Account money legacy", CardDrawerStyle.ACCOUNT_MONEY_LEGACY));
+        cardOptions.add(new CardConfigurationOption("Custom account money", new CustomAccountMoneyConfiguration()));
 
-        VisaCardBlueConfiguration visaCardBlueConfiguration = new VisaCardBlueConfiguration(this);
-        cardOptions.add(new CardConfigurationOption(visaCardBlueConfiguration, "Visa blue"));
-
-        VisaCardGreenConfiguration visaCardGreenConfiguration = new VisaCardGreenConfiguration(this);
-        cardOptions.add(new CardConfigurationOption(visaCardGreenConfiguration, "Visa green"));
-
-        VisaCardRedConfiguration visaCardRedConfiguration = new VisaCardRedConfiguration(this);
-        cardOptions.add(new CardConfigurationOption(visaCardRedConfiguration, "Visa red"));
-
-        VisaCardGrayConfiguration visaCardGrayConfiguration = new VisaCardGrayConfiguration(this);
-        cardOptions.add(new CardConfigurationOption(visaCardGrayConfiguration, "Visa gray"));
-
-        VisaCardYellowConfiguration visaCardYellowConfiguration = new VisaCardYellowConfiguration(this);
-        cardOptions.add(new CardConfigurationOption(visaCardYellowConfiguration, "Visa yellow"));
-
-        MasterCardConfiguration masterCardConfiguration = new MasterCardConfiguration(this);
-        cardOptions.add(new CardConfigurationOption(masterCardConfiguration, "Master"));
-
-        final UrlTestConfiguration urlTestConfiguration = new UrlTestConfiguration(this);
-        cardOptions.add(new CardConfigurationOption(urlTestConfiguration, "Url Test"));
-
-        ArrayAdapter<CardConfigurationOption> cardAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, cardOptions);
+        final ArrayAdapter<CardConfigurationOption> cardAdapter =
+            new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, cardOptions);
         cardAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         cardsSpinner.setAdapter(cardAdapter);
         cardsSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                CardConfigurationOption selection = cardOptions.get(position);
-                cardDrawerView.show(selection.getCardConfiguration());
-                cardDrawerViewLowRes.show(selection.getCardConfiguration());
-                cardDrawerViewMedium.show(selection.getCardConfiguration());
+            public void onItemSelected(final AdapterView<?> parent, final View view, final int position, final long id) {
+                final CardConfigurationOption selection = cardOptions.get(position);
+                final CardUI configuration = selection.getCardConfiguration();
+                final CardDrawerStyle style = selection.getCardStyle();
+                if (configuration != null) {
+                    cardDrawerView.show(configuration);
+                    cardDrawerViewLowRes.show(configuration);
+                    cardDrawerViewMedium.show(configuration);
+                } else if (style != null) {
+                    cardDrawerView.setStyle(style);
+                    cardDrawerViewLowRes.setStyle(style);
+                    cardDrawerViewMedium.setStyle(style);
+                }
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> parent) {
+            public void onNothingSelected(final AdapterView<?> parent) {
                 // do nothing
             }
         });

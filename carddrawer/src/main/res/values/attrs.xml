@@ -6,5 +6,10 @@
             <enum name="regular" value="0"/>
             <enum name="responsive" value="1"/>
         </attr>
+        <attr name="card_header_style" format="enum">
+            <enum name="regular" value="0"/>
+            <enum name="account_money" value="1"/>
+            <enum name="account_money_legacy" value="2"/>
+        </attr>
     </declare-styleable>
 </resources>
