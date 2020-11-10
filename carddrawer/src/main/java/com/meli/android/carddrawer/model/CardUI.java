@@ -148,5 +148,6 @@ public interface CardUI {
      *
      * @return custom style for the card
      */
-    default CardDrawerStyle getStyle() { return CardDrawerStyle.REGULAR; }
+    @Nullable
+    default CardDrawerStyle getStyle() { return null; }
 }
