@@ -36,11 +36,19 @@
         android:src="@drawable/card_drawer_overlay" />
 
     <include
-        android:id="@+id/cho_am_legacy_overlay"
+        android:id="@+id/cho_am_default_overlay"
         layout="@layout/card_drawer_am_overlay"
         android:layout_gravity="end"
         android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="match_parent" />
+
+    <ImageView
+        android:id="@+id/cho_am_hybrid_overlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:scaleType="fitEnd"
+        android:src="@drawable/card_drawer_hybrid_overlay" />
 
 </FrameLayout>

@@ -12,6 +12,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 import com.meli.android.carddrawer.app.model.CardComposite;
 import com.meli.android.carddrawer.app.model.CustomAccountMoneyConfiguration;
+import com.meli.android.carddrawer.app.model.HybridCreditConfiguration;
 import com.meli.android.carddrawer.app.model.MasterCardConfiguration;
 import com.meli.android.carddrawer.app.model.UrlTestConfiguration;
 import com.meli.android.carddrawer.app.model.VisaCardBlueConfiguration;
@@ -210,7 +211,9 @@ public class MainActivity extends AppCompatActivity {
         cardOptions.add(new CardConfigurationOption("Visa yellow", new VisaCardYellowConfiguration(this)));
         cardOptions.add(new CardConfigurationOption("Master", new MasterCardConfiguration(this)));
         cardOptions.add(new CardConfigurationOption("Url Test", new UrlTestConfiguration(this)));
-        cardOptions.add(new CardConfigurationOption("Account money legacy", CardDrawerStyle.ACCOUNT_MONEY_LEGACY));
+        cardOptions.add(new CardConfigurationOption("Hybrid Account Money", CardDrawerStyle.ACCOUNT_MONEY_HYBRID));
+        cardOptions.add(new CardConfigurationOption("Hybrid Credit", new HybridCreditConfiguration()));
+        cardOptions.add(new CardConfigurationOption("Default Account Money", CardDrawerStyle.ACCOUNT_MONEY_DEFAULT));
         cardOptions.add(new CardConfigurationOption("Custom account money", new CustomAccountMoneyConfiguration()));
 
         final ArrayAdapter<CardConfigurationOption> cardAdapter =
