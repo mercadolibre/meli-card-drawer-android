@@ -1,3 +1,8 @@
+## Release 2.10.0
+* Added styles concept.
+* Added account money style for default and hybrid.
+* Added Calibre support.
+
 ## Release 2.9.0
 * Added show card front without animation.
 
