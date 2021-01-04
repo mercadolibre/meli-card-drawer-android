@@ -1,3 +1,6 @@
+## Release 2.11.1
+* Using the same gray for disabled cards. Can be customized by user.
+
 ## Release 2.11.0
 * Added disabled support.
 
