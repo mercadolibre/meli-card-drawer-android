@@ -150,4 +150,12 @@ public interface CardUI {
      */
     @Nullable
     default CardDrawerStyle getStyle() { return null; }
+
+    /**
+     * Custom color for disabled state
+     *
+     * @return custom color for disabled state
+     */
+    @ColorInt
+    default Integer getDisabledColor() { return null; }
 }

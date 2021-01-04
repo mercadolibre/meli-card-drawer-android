@@ -2,6 +2,7 @@ package com.meli.android.carddrawer.model;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
@@ -140,6 +141,12 @@ public class CardDrawerView extends FrameLayoutWithDisableSupport implements Obs
         }
     }
 
+    @Override
+    public void setEnabled(final boolean enabled) {
+        super.setEnabled(enabled);
+        updateColor(source);
+    }
+
     private void bindViews() {
         overlayImage = findViewById(R.id.cho_card_overlay);
         issuerLogoView = findViewById(R.id.cho_card_issuer);
@@ -265,7 +272,7 @@ public class CardDrawerView extends FrameLayoutWithDisableSupport implements Obs
      */
     public void update(@NonNull final CardUI source) {
         final boolean animate = !CardAnimationType.NONE.equals(source.getAnimationType());
-        cardAnimator.colorCard(source.getCardBackgroundColor(), source.getAnimationType());
+        updateColor(source);
         updateCardBackgroundGradient(source.getCardGradientColors());
         updateIssuerLogo(issuerLogoView, source, animate);
         updateCardLogo(cardLogoView, source, animate);
@@ -369,6 +376,12 @@ public class CardDrawerView extends FrameLayoutWithDisableSupport implements Obs
         updateName();
         updateDate();
         updateSecCode();
+    }
+
+    private void updateColor(@NonNull final CardUI source) {
+        final int disabledColor = source.getDisabledColor() != null ? source.getDisabledColor() : Color.GRAY;
+        final int backgroundColor = isEnabled() ? source.getCardBackgroundColor() : disabledColor;
+        cardAnimator.colorCard(backgroundColor, source.getAnimationType());
     }
 
     protected void updateNumber() {
