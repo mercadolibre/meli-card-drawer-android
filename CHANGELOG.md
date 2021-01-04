@@ -1,3 +1,6 @@
+## Release 2.11.0
+* Added disabled support.
+
 ## Release 2.10.0
 * Added styles concept.
 * Added account money style for default and hybrid.
