@@ -1,7 +1,6 @@
 package com.meli.android.carddrawer.app;
 
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -10,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
+import androidx.appcompat.app.AppCompatActivity;
 import com.meli.android.carddrawer.app.model.CardComposite;
 import com.meli.android.carddrawer.app.model.CustomAccountMoneyConfiguration;
 import com.meli.android.carddrawer.app.model.HybridCreditConfiguration;
@@ -88,6 +88,13 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
             });
+
+        final Switch switchDisabled = findViewById(R.id.card_header_disabled_switch);
+        switchDisabled.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            cardDrawerView.setEnabled(!isChecked);
+            cardDrawerViewLowRes.setEnabled(!isChecked);
+            cardDrawerViewMedium.setEnabled(!isChecked);
+        });
 
         initCardConfigurationOptions();
         initCardNumber();
