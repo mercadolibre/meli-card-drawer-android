@@ -1,3 +1,6 @@
+## Release 2.11.2
+* Updated AM default logo.
+
 ## Release 2.11.1
 * Using the same gray for disabled cards. Can be customized by user.
 
