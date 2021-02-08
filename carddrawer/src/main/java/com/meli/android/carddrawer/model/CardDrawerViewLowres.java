@@ -50,6 +50,15 @@ public class CardDrawerViewLowres extends CardDrawerView {
         updateSecCode();
     }
 
+
+    private void setUpConstraintForCardNumber() {
+
+    }
+
+    private void setUpConstraintForCardName() {
+
+    }
+
     @Override
     protected String getFormattedNumber(@NonNull final String input, @NonNull final int... pattern) {
         return NumberFormatter.INSTANCE.formatShort(input, pattern);

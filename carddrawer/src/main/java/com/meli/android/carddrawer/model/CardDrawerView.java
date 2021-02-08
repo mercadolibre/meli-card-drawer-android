@@ -25,6 +25,7 @@ import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import com.meli.android.carddrawer.R;
 import com.meli.android.carddrawer.ViewHelper;
 import com.meli.android.carddrawer.configuration.AccountMoneyDefaultConfiguration;
@@ -34,7 +35,6 @@ import com.meli.android.carddrawer.configuration.DefaultCardConfiguration;
 import com.meli.android.carddrawer.configuration.FieldPosition;
 import com.meli.android.carddrawer.configuration.FontType;
 import com.meli.android.carddrawer.configuration.SecurityCodeLocation;
-import com.meli.android.carddrawer.format.NumberFormatter;
 import com.meli.android.carddrawer.format.TypefaceSetter;
 import com.mercadolibre.android.picassodiskcache.PicassoDiskLoader;
 import java.lang.annotation.Retention;
@@ -71,6 +71,9 @@ public class CardDrawerView extends FrameLayoutWithDisableSupport implements Obs
     private View accountMoneyHybridOverlay;
     protected float defaultTextSize;
     protected float defaultCardWidth;
+    protected CornerView safeZone;
+    private View customView;
+    protected SafeZoneConfiguration safeZoneConfiguration = new CardDrawerSafeZoneConfiguration();
 
     public CardDrawerView(@NonNull final Context context) {
         this(context, null);
@@ -104,8 +107,10 @@ public class CardDrawerView extends FrameLayoutWithDisableSupport implements Obs
         final int internalPadding = typedArray.getDimensionPixelSize(
             R.styleable.CardDrawerView_card_header_internal_padding,
             getResources().getDimensionPixelSize(R.dimen.card_drawer_layout_padding));
-        @Behaviour final int behaviour = typedArray.getInt(R.styleable.CardDrawerView_card_header_behaviour, Behaviour.REGULAR);
-        final int styleIndex = typedArray.getInt(R.styleable.CardDrawerView_card_header_style, CardDrawerStyle.REGULAR.getValue());
+        @Behaviour
+        final int behaviour = typedArray.getInt(R.styleable.CardDrawerView_card_header_behaviour, Behaviour.REGULAR);
+        final int styleIndex =
+            typedArray.getInt(R.styleable.CardDrawerView_card_header_style, CardDrawerStyle.REGULAR.getValue());
 
         typedArray.recycle();
 
@@ -148,21 +153,25 @@ public class CardDrawerView extends FrameLayoutWithDisableSupport implements Obs
     }
 
     private void bindViews() {
-        overlayImage = findViewById(R.id.cho_card_overlay);
-        issuerLogoView = findViewById(R.id.cho_card_issuer);
-        cardLogoView = findViewById(R.id.cho_card_logo);
-        codeFront = findViewById(R.id.cho_card_code_front);
-        codeBack = findViewById(R.id.cho_card_code_back);
-        codeFrontRedCircle = findViewById(R.id.cho_card_code_front_red_circle);
-        cardNumber = findViewById(R.id.cho_card_number);
-        cardName = findViewById(R.id.cho_card_name);
-        cardDate = findViewById(R.id.cho_card_date);
         cardFrontLayout = findViewById(R.id.card_header_front);
         cardBackLayout = findViewById(R.id.card_header_back);
-        cardFrontGradient = findViewById(R.id.cho_card_gradient_front);
-        cardBackGradient = findViewById(R.id.cho_card_gradient_back);
-        accountMoneyDefaultOverlay = findViewById(R.id.cho_am_default_overlay);
-        accountMoneyHybridOverlay = findViewById(R.id.cho_am_hybrid_overlay);
+
+        overlayImage = cardFrontLayout.findViewById(R.id.cho_card_overlay);
+        issuerLogoView = cardFrontLayout.findViewById(R.id.cho_card_issuer);
+        cardLogoView = cardFrontLayout.findViewById(R.id.cho_card_logo);
+        codeFront = cardFrontLayout.findViewById(R.id.cho_card_code_front);
+        codeFrontRedCircle = cardFrontLayout.findViewById(R.id.cho_card_code_front_red_circle);
+        cardNumber = cardFrontLayout.findViewById(R.id.cho_card_number);
+        cardName = cardFrontLayout.findViewById(R.id.cho_card_name);
+        cardDate = cardFrontLayout.findViewById(R.id.cho_card_date);
+        accountMoneyDefaultOverlay = cardFrontLayout.findViewById(R.id.cho_am_default_overlay);
+        accountMoneyHybridOverlay = cardFrontLayout.findViewById(R.id.cho_am_hybrid_overlay);
+
+        codeBack = cardBackLayout.findViewById(R.id.cho_card_code_back);
+        cardFrontGradient = cardFrontLayout.findViewById(R.id.cho_card_gradient_front);
+        cardBackGradient = cardBackLayout.findViewById(R.id.cho_card_gradient_back);
+
+        safeZone = cardFrontLayout.findViewById(R.id.safe_zone);
     }
 
     @NonNull
@@ -294,6 +303,27 @@ public class CardDrawerView extends FrameLayoutWithDisableSupport implements Obs
         }
     }
 
+    public void setCustomView(@Nullable final View view) {
+        customView = view;
+        setUpCustomViewConfiguration();
+    }
+
+    private void setUpCustomViewConfiguration() {
+        if (customView != null) {
+            safeZoneConfiguration.updateConfiguration((ConstraintLayout) cardFrontLayout);
+            updateNumber();
+            safeZone.addView(customView);
+        } else if (safeZoneIsNotEmpty()) {
+            safeZoneConfiguration.resetConfiguration((ConstraintLayout) cardFrontLayout);
+            updateNumber();
+            safeZone.removeAllViews();
+        }
+    }
+
+    private boolean safeZoneIsNotEmpty() {
+        return safeZone.getChildCount() > 0;
+    }
+
     @VisibleForTesting
     protected void updateOverlay(final ImageView overlayImage, @NonNull final CardUI source) {
         source.setOverlayImage(overlayImage);
@@ -332,7 +362,7 @@ public class CardDrawerView extends FrameLayoutWithDisableSupport implements Obs
     /**
      * Paints all card fields with this color
      *
-     * @param fontType the font type
+     * @param fontType  the font type
      * @param fontColor the font color
      **/
     public void setCardTextColor(@NonNull @FontType final String fontType, @ColorInt final int fontColor) {
@@ -349,14 +379,14 @@ public class CardDrawerView extends FrameLayoutWithDisableSupport implements Obs
     protected String resolveFontType(@NonNull @FontType final String type, final boolean showShadow) {
         if (!showShadow) {
             switch (type) {
-                case FontType.DARK_TYPE: {
-                    return FontType.DARK_NO_SHADOW_TYPE;
-                }
-                case FontType.LIGHT_TYPE: {
-                    return FontType.LIGHT_NO_SHADOW_TYPE;
-                }
-                default:
-                    return type;
+            case FontType.DARK_TYPE: {
+                return FontType.DARK_NO_SHADOW_TYPE;
+            }
+            case FontType.LIGHT_TYPE: {
+                return FontType.LIGHT_NO_SHADOW_TYPE;
+            }
+            default:
+                return type;
             }
         }
         return type;
@@ -508,6 +538,7 @@ public class CardDrawerView extends FrameLayoutWithDisableSupport implements Obs
 
         setTextPixelSize(cardName, newTextSize);
         setTextPixelSize(codeBack, newTextSize);
+        setTextPixelSize(cardNumber, newTextSize);
         if (cardDate != null) {
             setTextPixelSize(cardDate, newTextSize);
         }
@@ -564,7 +595,7 @@ public class CardDrawerView extends FrameLayoutWithDisableSupport implements Obs
     }
 
     protected String getFormattedNumber(@NonNull final String input, @NonNull final int... pattern) {
-        return NumberFormatter.INSTANCE.format(input, pattern);
+        return safeZoneConfiguration.getFormattedNumber(input, pattern);
     }
 
     protected float getCodeFrontTextSize() {
