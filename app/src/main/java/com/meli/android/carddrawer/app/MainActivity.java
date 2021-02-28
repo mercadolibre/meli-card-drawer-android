@@ -9,14 +9,12 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import com.meli.android.carddrawer.app.model.CardComposite;
 import com.meli.android.carddrawer.app.model.CustomAccountMoneyConfiguration;
 import com.meli.android.carddrawer.app.model.HybridCreditConfiguration;
 import com.meli.android.carddrawer.app.model.MasterCardConfiguration;
-import com.meli.android.carddrawer.app.model.SwitchFactoryModelSample;
 import com.meli.android.carddrawer.app.model.UrlTestConfiguration;
 import com.meli.android.carddrawer.app.model.VisaCardBlueConfiguration;
 import com.meli.android.carddrawer.app.model.VisaCardGrayConfiguration;
@@ -25,12 +23,10 @@ import com.meli.android.carddrawer.app.model.VisaCardRedConfiguration;
 import com.meli.android.carddrawer.app.model.VisaCardYellowConfiguration;
 import com.meli.android.carddrawer.configuration.CardDrawerStyle;
 import com.meli.android.carddrawer.configuration.DefaultCardConfiguration;
-import com.meli.android.carddrawer.model.CardDrawerSwitchView;
 import com.meli.android.carddrawer.model.CardDrawerView;
 import com.meli.android.carddrawer.model.CardUI;
 import java.util.ArrayList;
 import java.util.List;
-import org.jetbrains.annotations.NotNull;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -65,9 +61,8 @@ public class MainActivity extends AppCompatActivity {
 
         switchCustomView.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
-                final CardDrawerSwitchView view = new CardDrawerSwitchView(this);
-                view.setSwitchModel(SwitchFactoryModelSample.createModel());
-                view.setSwitchListener(id -> Toast.makeText(this, id, Toast.LENGTH_LONG).show());
+                final View view = new View(this);
+                view.setBackgroundColor(ContextCompat.getColor(this, android.R.color.holo_blue_dark));
                 cardDrawerView.setCustomView(view);
             } else {
                 cardDrawerView.setCustomView(null);

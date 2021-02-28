@@ -4,7 +4,6 @@ import android.view.View.*
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
 import com.meli.android.carddrawer.R
-import com.meli.android.carddrawer.format.NumberFormatter.format
 import com.meli.android.carddrawer.format.NumberFormatter.formatShort
 
 internal class CardDrawerSafeZoneConfiguration : SafeZoneConfiguration {
