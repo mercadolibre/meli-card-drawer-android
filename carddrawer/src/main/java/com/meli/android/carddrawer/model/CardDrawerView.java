@@ -73,7 +73,7 @@ public class CardDrawerView extends FrameLayoutWithDisableSupport implements Obs
     protected float defaultCardWidth;
     protected CornerView safeZone;
     private View customView;
-    protected SafeZoneConfiguration safeZoneConfiguration = new CardDrawerSafeZoneConfiguration();
+    protected SafeZoneConfiguration safeZoneConfiguration;
 
     public CardDrawerView(@NonNull final Context context) {
         this(context, null);
@@ -92,6 +92,11 @@ public class CardDrawerView extends FrameLayoutWithDisableSupport implements Obs
     @LayoutRes
     protected int getLayout() {
         return R.layout.card_drawer_layout;
+    }
+
+    @NonNull
+    protected SafeZoneConfiguration getSafeZoneConfiguration() {
+        return new SafeZoneHighResConfiguration();
     }
 
     /**
@@ -113,12 +118,12 @@ public class CardDrawerView extends FrameLayoutWithDisableSupport implements Obs
             typedArray.getInt(R.styleable.CardDrawerView_card_header_style, CardDrawerStyle.REGULAR.getValue());
 
         typedArray.recycle();
-
         defaultCardWidth = getResources().getDimension(R.dimen.card_drawer_card_width);
         defaultTextSize = getResources().getDimension(R.dimen.card_drawer_font_size);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             cardNumber.setLetterSpacing(NUMBER_LETTER_SPACING);
         }
+        safeZoneConfiguration = getSafeZoneConfiguration();
 
         setInternalPadding(internalPadding);
         setBehaviour(behaviour);

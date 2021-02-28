@@ -6,26 +6,18 @@ import androidx.constraintlayout.widget.ConstraintSet
 import com.meli.android.carddrawer.R
 import com.meli.android.carddrawer.format.NumberFormatter.formatShort
 
-internal class CardDrawerSafeZoneConfiguration : SafeZoneConfiguration {
+internal class SafeZoneHighResConfiguration : SafeZoneConfiguration() {
 
-    private var defaultConfiguration: ConstraintSet? = null
-
-    override fun updateConfiguration(constraintLayout: ConstraintLayout) {
-        defaultConfiguration = ConstraintSet().also { it.clone(constraintLayout) }
-
-        val constraintSet = ConstraintSet()
-        constraintSet.clone(constraintLayout)
-
-        setUpExpirationVisibility(constraintLayout)
+    override fun setUpConstraintConfiguration(constraintSet: ConstraintSet) {
         setUpConstraintCardNumber(constraintSet)
         setUpConstraintCardName(constraintSet)
-
-        constraintSet.applyTo(constraintLayout)
     }
 
-    override fun resetConfiguration(constraintLayout: ConstraintLayout) {
-        defaultConfiguration?.applyTo(constraintLayout)
-        defaultConfiguration = null
+    override fun setUpConstraintLayoutConfiguration(constraintLayout: ConstraintLayout) {
+        setUpExpirationVisibility(constraintLayout)
+    }
+
+    override fun resetConstraintLayoutConfiguration(constraintLayout: ConstraintLayout) {
         setUpExpirationVisibility(constraintLayout)
     }
 
@@ -35,9 +27,13 @@ internal class CardDrawerSafeZoneConfiguration : SafeZoneConfiguration {
                 defaultConfiguration?.let {
                     textView.visibility = INVISIBLE
                 } ?: let {
-                        textView.visibility = VISIBLE
-                    }
+                    textView.visibility = VISIBLE
+                }
             }
+    }
+
+    override fun getFormattedNumber(input: String?, vararg pattern: Int): String {
+        return defaultConfiguration?.let { formatShort(input, *pattern) } ?: super.getFormattedNumber(input, *pattern)
     }
 
     private fun setUpConstraintCardName(constraintSet: ConstraintSet) {
@@ -84,10 +80,5 @@ internal class CardDrawerSafeZoneConfiguration : SafeZoneConfiguration {
             ConstraintSet.BOTTOM,
             R.id.card_header_front_guideline_number,
             ConstraintSet.TOP, 0)
-    }
-
-    override fun getFormattedNumber(input: String?, vararg pattern: Int): String {
-        return defaultConfiguration?.let { formatShort(input, *pattern) }
-            ?: super.getFormattedNumber(input, *pattern)
     }
 }

@@ -61,11 +61,15 @@ public class MainActivity extends AppCompatActivity {
 
         switchCustomView.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
-                final View view = new View(this);
-                view.setBackgroundColor(ContextCompat.getColor(this, android.R.color.holo_blue_dark));
-                cardDrawerView.setCustomView(view);
+                final View viewHighRes = new View(this);
+                viewHighRes.setBackgroundColor(ContextCompat.getColor(this, android.R.color.holo_blue_dark));
+                cardDrawerView.setCustomView(viewHighRes);
+                final View viewLowRes = new View(this);
+                viewLowRes.setBackgroundColor(ContextCompat.getColor(this, android.R.color.holo_blue_dark));
+                cardDrawerViewLowRes.setCustomView(viewLowRes);
             } else {
                 cardDrawerView.setCustomView(null);
+                cardDrawerViewLowRes.setCustomView(null);
             }
         });
 

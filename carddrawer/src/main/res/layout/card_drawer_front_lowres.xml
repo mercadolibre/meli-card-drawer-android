@@ -135,10 +135,12 @@
         tools:visibility="visible" />
 
     <com.meli.android.carddrawer.model.CornerView
+        android:id="@+id/safe_zone"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        app:bottom_right_corner_radius="8dp"
         app:layout_constraintStart_toEndOf="@+id/card_header_front_guideline_center_horizontal"
-        app:layout_constraintTop_toBottomOf="@+id/card_header_front_guideline_logos"
+        app:layout_constraintTop_toBottomOf="@+id/card_header_front_guideline_center_vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
