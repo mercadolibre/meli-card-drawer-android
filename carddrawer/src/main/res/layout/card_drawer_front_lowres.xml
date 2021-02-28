@@ -56,13 +56,6 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.5" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/card_header_front_guideline_top_name_card_number"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.69" />
-
     <TextView
         android:id="@+id/text_guideline"
         android:layout_width="match_parent"
@@ -100,7 +93,6 @@
         android:maxLines="1"
         android:typeface = "monospace"
         android:textAllCaps="true"
-        app:layout_constraintTop_toBottomOf="@+id/card_header_front_guideline_top_name_card_number"
         app:layout_constraintBaseline_toBaselineOf="@id/text_guideline"
         app:layout_constraintEnd_toStartOf="@+id/cho_card_number"
         app:layout_constraintStart_toStartOf="@id/card_header_front_guideline_left" />
@@ -112,7 +104,6 @@
         android:maxLines="1"
         android:typeface="monospace"
         android:gravity="bottom|end"
-        app:layout_constraintTop_toBottomOf="@+id/card_header_front_guideline_top_name_card_number"
         app:layout_constraintEnd_toStartOf="@id/card_header_front_guideline_right"
         app:layout_constraintStart_toEndOf="@id/cho_card_name"
         app:layout_constraintBaseline_toBaselineOf="@id/text_guideline"
@@ -138,8 +129,7 @@
         android:gravity="bottom"
         android:maxLines="1"
         android:typeface="monospace"
-        app:layout_constraintTop_toBottomOf="@+id/card_header_front_guideline_center_vertical"
-        app:layout_constraintBottom_toTopOf="@id/card_header_front_guideline_top_name_card_number"
+        app:layout_constraintBottom_toTopOf="@id/cho_card_number"
         app:layout_constraintEnd_toEndOf="@id/card_header_front_guideline_right"
         tools:text="****"
         tools:visibility="visible" />
