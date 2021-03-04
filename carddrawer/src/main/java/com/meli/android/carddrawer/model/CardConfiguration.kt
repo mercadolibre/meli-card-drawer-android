@@ -43,7 +43,7 @@ internal abstract class CardConfiguration(protected var source: CardUI) {
     protected fun setVisibilityForRedCircle(view: View, codeFront: TextView) {
         view.visibility = when {
             defaultConfiguration != null -> View.INVISIBLE
-            !cardCodeIsDefaultOrEmpty(codeFront) -> View.VISIBLE
+            canPerformAction(view) && !cardCodeIsDefaultOrEmpty(codeFront) -> View.VISIBLE
             else -> View.INVISIBLE
         }
     }
