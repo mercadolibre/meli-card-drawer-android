@@ -10,7 +10,6 @@ import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 import com.meli.android.carddrawer.app.model.CardComposite;
 import com.meli.android.carddrawer.app.model.CustomAccountMoneyConfiguration;
 import com.meli.android.carddrawer.app.model.HybridCreditConfiguration;
@@ -62,10 +61,8 @@ public class MainActivity extends AppCompatActivity {
         switchCustomView.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
                 final View viewHighRes = new View(this);
-                viewHighRes.setBackgroundColor(ContextCompat.getColor(this, android.R.color.holo_blue_dark));
                 cardDrawerView.setCustomView(viewHighRes);
                 final View viewLowRes = new View(this);
-                viewLowRes.setBackgroundColor(ContextCompat.getColor(this, android.R.color.holo_blue_dark));
                 cardDrawerViewLowRes.setCustomView(viewLowRes);
             } else {
                 cardDrawerView.setCustomView(null);

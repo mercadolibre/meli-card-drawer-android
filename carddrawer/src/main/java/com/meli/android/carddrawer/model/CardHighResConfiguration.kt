@@ -1,12 +1,13 @@
 package com.meli.android.carddrawer.model
 
-import android.view.View.*
+import android.view.View
+import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
 import com.meli.android.carddrawer.R
 import com.meli.android.carddrawer.format.NumberFormatter.formatShort
 
-internal class SafeZoneHighResConfiguration : SafeZoneConfiguration() {
+internal class CardHighResConfiguration(source: CardUI): CardConfiguration(source) {
 
     override fun setUpConstraintConfiguration(constraintSet: ConstraintSet) {
         setUpConstraintCardNumber(constraintSet)
@@ -14,22 +15,26 @@ internal class SafeZoneHighResConfiguration : SafeZoneConfiguration() {
     }
 
     override fun setUpConstraintLayoutConfiguration(constraintLayout: ConstraintLayout) {
-        setUpExpirationVisibility(constraintLayout)
+        setUpVisibility(constraintLayout)
     }
 
     override fun resetConstraintLayoutConfiguration(constraintLayout: ConstraintLayout) {
-        setUpExpirationVisibility(constraintLayout)
+        setUpVisibility(constraintLayout)
     }
 
-    private fun setUpExpirationVisibility(constraintLayout: ConstraintLayout) {
-        constraintLayout
-            .findViewById<GradientTextView>(R.id.cho_card_date).also { textView ->
-                defaultConfiguration?.let {
-                    textView.visibility = INVISIBLE
-                } ?: let {
-                    textView.visibility = VISIBLE
-                }
+    private fun setUpVisibility(constraintLayout: ConstraintLayout) {
+        constraintLayout.also {
+            val codeFront = it.findViewById<TextView>(R.id.cho_card_code_front).also (::setVisibility)
+            it.findViewById<View>(R.id.cho_card_date).also (::setVisibility)
+            it.findViewById<View>(R.id.cho_card_code_front_red_circle).also { view ->
+                setVisibilityForRedCircle(view, codeFront)
             }
+        }
+    }
+
+    override fun canPerformAction(view: View) = when (view.id) {
+        R.id.cho_card_date -> defaultConfiguration == null
+        else -> super.canPerformAction(view)
     }
 
     override fun getFormattedNumber(input: String?, vararg pattern: Int): String {

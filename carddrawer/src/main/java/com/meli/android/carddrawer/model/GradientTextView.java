@@ -2,6 +2,8 @@ package com.meli.android.carddrawer.model;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.util.Log;
+import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;

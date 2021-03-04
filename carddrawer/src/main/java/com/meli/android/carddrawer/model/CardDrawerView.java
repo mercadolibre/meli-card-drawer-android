@@ -42,6 +42,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
+import kotlin.Unit;
 
 @SuppressWarnings({ "PMD.ConstructorCallsOverridableMethod", "PMD.TooManyFields", "PMD.GodClass" })
 public class CardDrawerView extends FrameLayoutWithDisableSupport implements Observer {
@@ -73,7 +74,7 @@ public class CardDrawerView extends FrameLayoutWithDisableSupport implements Obs
     protected float defaultCardWidth;
     protected CornerView safeZone;
     private View customView;
-    protected SafeZoneConfiguration safeZoneConfiguration;
+    protected CardConfiguration cardConfiguration;
 
     public CardDrawerView(@NonNull final Context context) {
         this(context, null);
@@ -95,8 +96,8 @@ public class CardDrawerView extends FrameLayoutWithDisableSupport implements Obs
     }
 
     @NonNull
-    protected SafeZoneConfiguration getSafeZoneConfiguration() {
-        return new SafeZoneHighResConfiguration();
+    protected CardConfiguration getCardConfiguration() {
+        return new CardHighResConfiguration(source);
     }
 
     /**
@@ -123,7 +124,6 @@ public class CardDrawerView extends FrameLayoutWithDisableSupport implements Obs
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             cardNumber.setLetterSpacing(NUMBER_LETTER_SPACING);
         }
-        safeZoneConfiguration = getSafeZoneConfiguration();
 
         setInternalPadding(internalPadding);
         setBehaviour(behaviour);
@@ -134,6 +134,7 @@ public class CardDrawerView extends FrameLayoutWithDisableSupport implements Obs
 
         cardAnimator = new CardAnimator(context, cardFrontLayout, cardBackLayout);
         source = new DefaultCardConfiguration(context);
+        cardConfiguration = getCardConfiguration();
         final Animation fadeIn = getFadeInAnimation(context);
         final Animation fadeOut = AnimationUtils.loadAnimation(context, android.R.anim.fade_out);
         fadeOut.setDuration(getResources().getInteger(R.integer.card_drawer_paint_animation_time));
@@ -195,9 +196,10 @@ public class CardDrawerView extends FrameLayoutWithDisableSupport implements Obs
      */
     public void show(@NonNull final CardUI cardUI) {
         source = cardUI;
+        cardConfiguration.updateSource(source);
         hideSecCircle();
         updateCardInformation();
-        if (cardUI.getSecurityCodeLocation().equals(SecurityCodeLocation.FRONT) && codeFront != null) {
+        if (codeFront != null && cardConfiguration.canShow(codeFront)) {
             codeFront.setVisibility(View.VISIBLE);
         }
         update(source);
@@ -228,8 +230,9 @@ public class CardDrawerView extends FrameLayoutWithDisableSupport implements Obs
      */
     public void showSecurityCode(@NonNull final CardUI cardUI) {
         source = cardUI;
+        cardConfiguration.updateSource(source);
         int securityCodeFieldPosition = FieldPosition.POSITION_FRONT;
-        if (SecurityCodeLocation.FRONT.equals(cardUI.getSecurityCodeLocation())) {
+        if (cardConfiguration.canShow(codeFront)) {
             codeFront.setVisibility(View.VISIBLE);
         } else {
             securityCodeFieldPosition = FieldPosition.POSITION_BACK;
@@ -286,6 +289,7 @@ public class CardDrawerView extends FrameLayoutWithDisableSupport implements Obs
      */
     public void update(@NonNull final CardUI source) {
         final boolean animate = !CardAnimationType.NONE.equals(source.getAnimationType());
+        cardConfiguration.updateSource(source);
         updateColor(source);
         updateCardBackgroundGradient(source.getCardGradientColors());
         updateIssuerLogo(issuerLogoView, source, animate);
@@ -297,15 +301,23 @@ public class CardDrawerView extends FrameLayoutWithDisableSupport implements Obs
         internalSetStyle(source.getStyle() != null ? source.getStyle() : CardDrawerStyle.REGULAR);
         setCardTextColor(source.getFontType(), source.getCardFontColor());
         if (animate) {
-            cardNumber.startAnimation(getFadeInAnimation(getContext()));
-            cardName.startAnimation(getFadeInAnimation(getContext()));
+            fadeInAnimateView(cardNumber);
+            fadeInAnimateView(cardName);
+
             if (cardDate != null) {
-                cardDate.startAnimation(getFadeInAnimation(getContext()));
+                fadeInAnimateView(cardDate);
             }
-            if (source.getSecurityCodeLocation().equals(SecurityCodeLocation.FRONT) && codeFront != null) {
-                codeFront.startAnimation(getFadeInAnimation(getContext()));
+            if (codeFront != null && source.getSecurityCodeLocation().equals(SecurityCodeLocation.FRONT)) {
+                fadeInAnimateView(codeFront);
             }
         }
+    }
+
+    private void fadeInAnimateView(@NonNull final View view) {
+        cardConfiguration.canAnimate(view, v -> {
+            v.startAnimation(getFadeInAnimation(getContext()));
+            return Unit.INSTANCE;
+        });
     }
 
     public void setCustomView(@Nullable final View view) {
@@ -315,11 +327,11 @@ public class CardDrawerView extends FrameLayoutWithDisableSupport implements Obs
 
     private void setUpCustomViewConfiguration() {
         if (customView != null) {
-            safeZoneConfiguration.updateConfiguration((ConstraintLayout) cardFrontLayout);
+            cardConfiguration.updateConfiguration((ConstraintLayout) cardFrontLayout);
             updateNumber();
             safeZone.addView(customView);
         } else if (safeZoneIsNotEmpty()) {
-            safeZoneConfiguration.resetConfiguration((ConstraintLayout) cardFrontLayout);
+            cardConfiguration.resetConfiguration((ConstraintLayout) cardFrontLayout);
             updateNumber();
             safeZone.removeAllViews();
         }
@@ -455,7 +467,7 @@ public class CardDrawerView extends FrameLayoutWithDisableSupport implements Obs
      * Shows the security code circle
      */
     public void showSecCircle() {
-        if (source.getSecurityCodeLocation().equals(SecurityCodeLocation.FRONT)) {
+        if (cardConfiguration.canShow(codeFrontRedCircle)) {
             codeFrontRedCircle.setVisibility(VISIBLE);
         }
     }
@@ -472,7 +484,7 @@ public class CardDrawerView extends FrameLayoutWithDisableSupport implements Obs
 
     // Use setOverlayImage from CardUi
     @Deprecated
-    public void setOverlayImage(@Nullable @DrawableRes Integer image) {
+    public void setOverlayImage(@Nullable @DrawableRes final Integer image) {
         if (image != null) {
             overlayImage.setImageResource(image);
         } else {
@@ -600,7 +612,7 @@ public class CardDrawerView extends FrameLayoutWithDisableSupport implements Obs
     }
 
     protected String getFormattedNumber(@NonNull final String input, @NonNull final int... pattern) {
-        return safeZoneConfiguration.getFormattedNumber(input, pattern);
+        return cardConfiguration.getFormattedNumber(input, pattern);
     }
 
     protected float getCodeFrontTextSize() {

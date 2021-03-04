@@ -32,8 +32,8 @@ public class CardDrawerViewLowres extends CardDrawerView {
 
     @NonNull
     @Override
-    protected SafeZoneConfiguration getSafeZoneConfiguration() {
-        return new SafeZoneLowResConfiguration();
+    protected CardConfiguration getCardConfiguration() {
+        return new CardLowResConfiguration(source);
     }
 
     @Override
