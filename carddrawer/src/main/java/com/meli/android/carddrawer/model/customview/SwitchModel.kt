@@ -5,11 +5,19 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class SwitchModel(
+    val description: Text,
     val states: SwitchStates,
     val options: List<SwitchOption>,
     val backgroundColor: String,
     val default: String
 ): Parcelable {
+
+    @Parcelize
+    data class Text(
+        val textColor: String,
+        val weight: String,
+        val text: String
+    ) :Parcelable
 
     @Parcelize
     data class SwitchOption(
