@@ -33,12 +33,12 @@ internal class CardHighResConfiguration(source: CardUI): CardConfiguration(sourc
     }
 
     override fun canPerformAction(view: View) = when (view.id) {
-        R.id.cho_card_date -> defaultConfiguration == null
+        R.id.cho_card_date -> !hasSafeZone()
         else -> super.canPerformAction(view)
     }
 
     override fun getFormattedNumber(input: String?, vararg pattern: Int): String {
-        return defaultConfiguration?.let { formatShort(input, *pattern) } ?: super.getFormattedNumber(input, *pattern)
+        return if (hasSafeZone()) { formatShort(input, *pattern) } else { super.getFormattedNumber(input, *pattern) }
     }
 
     private fun setUpConstraintCardName(constraintSet: ConstraintSet) {
