@@ -4,13 +4,10 @@ import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Path
 import android.graphics.RectF
-import android.os.Parcelable
 import android.util.AttributeSet
 import android.view.View
 import android.widget.FrameLayout
 import com.meli.android.carddrawer.R
-
-private const val VIEW_ID = 3216432
 
 internal class CornerView @JvmOverloads constructor(
     context: Context,
@@ -40,9 +37,6 @@ internal class CornerView @JvmOverloads constructor(
         }
         typedArray.recycle()
         setLayerType(View.LAYER_TYPE_SOFTWARE, null)
-        if (id == View.NO_ID) {
-            id = VIEW_ID
-        }
     }
 
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
