@@ -32,7 +32,7 @@ public class CardDrawerViewLowres extends CardDrawerView {
 
     @NonNull
     @Override
-    protected CardConfiguration getCardConfiguration() {
+    protected CardConfiguration buildCardConfiguration() {
         return new CardLowResConfiguration(source);
     }
 

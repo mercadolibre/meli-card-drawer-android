@@ -10,7 +10,7 @@ import com.meli.android.carddrawer.format.NumberFormatter
 
 internal abstract class CardConfiguration(protected var source: CardUI) {
 
-    protected var defaultConfiguration: ConstraintSet? = null
+    private var defaultConfiguration: ConstraintSet? = null
 
     fun updateSource(source: CardUI) {
         this.source = source
@@ -34,7 +34,7 @@ internal abstract class CardConfiguration(protected var source: CardUI) {
 
     protected fun setVisibility(view: View) {
         view.visibility = when {
-            defaultConfiguration != null -> View.INVISIBLE
+            hasSafeZone() -> View.INVISIBLE
             canPerformAction(view) -> View.VISIBLE
             else -> View.INVISIBLE
         }
@@ -42,11 +42,13 @@ internal abstract class CardConfiguration(protected var source: CardUI) {
 
     protected fun setVisibilityForRedCircle(view: View, codeFront: TextView) {
         view.visibility = when {
-            defaultConfiguration != null -> View.INVISIBLE
+            hasSafeZone() -> View.INVISIBLE
             canPerformAction(view) && !cardCodeIsDefaultOrEmpty(codeFront) -> View.VISIBLE
             else -> View.INVISIBLE
         }
     }
+
+    protected fun hasSafeZone() = defaultConfiguration != null
 
     private fun cardCodeIsDefaultOrEmpty(codeFront: TextView) = codeFront.text.isNullOrEmpty()
         || codeFront.text == getFormattedNumber("", source.securityCodePattern)
@@ -64,7 +66,7 @@ internal abstract class CardConfiguration(protected var source: CardUI) {
         return when (view.id) {
             R.id.cho_card_code_front,
             R.id.cho_card_code_front_red_circle -> {
-                source.securityCodeLocation == SecurityCodeLocation.FRONT && defaultConfiguration == null
+                source.securityCodeLocation == SecurityCodeLocation.FRONT && !hasSafeZone()
             }
             else -> true
         }

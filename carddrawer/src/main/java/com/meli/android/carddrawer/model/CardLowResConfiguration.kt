@@ -45,7 +45,7 @@ internal class CardLowResConfiguration(source: CardUI): CardConfiguration(source
     }
 
     override fun canPerformAction(view: View) = when (view.id) {
-        R.id.cho_card_name -> defaultConfiguration == null
+        R.id.cho_card_name -> !hasSafeZone()
         else -> super.canPerformAction(view)
     }
 

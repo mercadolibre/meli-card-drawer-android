@@ -96,7 +96,7 @@ public class CardDrawerView extends FrameLayoutWithDisableSupport implements Obs
     }
 
     @NonNull
-    protected CardConfiguration getCardConfiguration() {
+    protected CardConfiguration buildCardConfiguration() {
         return new CardHighResConfiguration(source);
     }
 
@@ -134,7 +134,7 @@ public class CardDrawerView extends FrameLayoutWithDisableSupport implements Obs
 
         cardAnimator = new CardAnimator(context, cardFrontLayout, cardBackLayout);
         source = new DefaultCardConfiguration(context);
-        cardConfiguration = getCardConfiguration();
+        cardConfiguration = buildCardConfiguration();
         final Animation fadeIn = getFadeInAnimation(context);
         final Animation fadeOut = AnimationUtils.loadAnimation(context, android.R.anim.fade_out);
         fadeOut.setDuration(getResources().getInteger(R.integer.card_drawer_paint_animation_time));
