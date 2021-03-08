@@ -3,6 +3,7 @@ package com.meli.android.carddrawer.app;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -24,6 +25,7 @@ import com.meli.android.carddrawer.configuration.CardDrawerStyle;
 import com.meli.android.carddrawer.configuration.DefaultCardConfiguration;
 import com.meli.android.carddrawer.model.CardDrawerView;
 import com.meli.android.carddrawer.model.CardUI;
+import com.meli.android.carddrawer.model.customview.CardDrawerSwitch;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -60,9 +62,11 @@ public class MainActivity extends AppCompatActivity {
 
         switchCustomView.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
-                final View viewHighRes = new View(this);
+                final CardDrawerSwitch viewHighRes = new CardDrawerSwitch(this);
+                viewHighRes.setSwitchListener(id -> Log.i("JORGE", "ID:"+ id));
+                viewHighRes.setSwitchModel(SwitchFactoryModelSample.createModel());
                 cardDrawerView.setCustomView(viewHighRes);
-                final View viewLowRes = new View(this);
+                final CardDrawerSwitch viewLowRes = new CardDrawerSwitch(this);
                 cardDrawerViewLowRes.setCustomView(viewLowRes);
             } else {
                 cardDrawerView.setCustomView(null);

@@ -8,7 +8,9 @@ data class SwitchModel(
     val description: Text,
     val states: SwitchStates,
     val options: List<SwitchOption>,
-    val backgroundColor: String,
+    val switchBackgroundColor: String,
+    val pillBackgroundColor: String,
+    val safeZoneBackgroundColor: String,
     val default: String
 ): Parcelable {
 
