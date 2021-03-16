@@ -307,7 +307,7 @@ public class CardDrawerView extends FrameLayoutWithDisableSupport implements Obs
             if (cardDate != null) {
                 fadeInAnimateView(cardDate);
             }
-            if (codeFront != null && source.getSecurityCodeLocation().equals(SecurityCodeLocation.FRONT)) {
+            if (codeFront != null && cardConfiguration.canShow(codeFront)) {
                 fadeInAnimateView(codeFront);
             }
         }
