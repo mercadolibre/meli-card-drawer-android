@@ -20,7 +20,6 @@
             android:paddingRight="20dp"
             android:paddingTop="20dp">
 
-
             <com.meli.android.carddrawer.model.CardDrawerView
                 android:id="@+id/card_header_container"
                 android:layout_width="match_parent"
