@@ -41,7 +41,6 @@
         android:id="@+id/switch_center_guideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/andes_red_400"
         android:orientation="vertical"
         app:layout_constraintEnd_toStartOf="@+id/card_drawer_switch_container"
         app:layout_constraintGuide_percent="0.35"
