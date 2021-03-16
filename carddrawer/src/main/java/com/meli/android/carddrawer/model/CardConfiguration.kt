@@ -17,7 +17,9 @@ internal abstract class CardConfiguration(protected var source: CardUI) {
     }
 
     fun updateConfiguration(constraintLayout: ConstraintLayout) {
-        defaultConfiguration = ConstraintSet().also { it.clone(constraintLayout) }
+        if (defaultConfiguration == null) {
+            defaultConfiguration = ConstraintSet().also { it.clone(constraintLayout) }
+        }
 
         val constraintSet = ConstraintSet()
         setUpConstraintLayoutConfiguration(constraintLayout)
