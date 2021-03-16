@@ -54,8 +54,22 @@ public class MainActivity extends AppCompatActivity {
                 cardDrawerViewLowRes.setBehaviour(behaviour);
                 cardDrawerViewMedium.setBehaviour(behaviour);
             });
+        final Switch switchCustomView = findViewById(R.id.card_drawer_custom_view_switch);
         final Switch switchLowres = findViewById(R.id.card_header_lowres_switch);
         final Switch switchMedium = findViewById(R.id.card_header_medium_switch);
+
+        switchCustomView.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                final View viewHighRes = new View(this);
+                cardDrawerView.setCustomView(viewHighRes);
+                final View viewLowRes = new View(this);
+                cardDrawerViewLowRes.setCustomView(viewLowRes);
+            } else {
+                cardDrawerView.setCustomView(null);
+                cardDrawerViewLowRes.setCustomView(null);
+            }
+        });
+
         switchLowres.setOnCheckedChangeListener(
             (buttonView, isChecked) -> {
                 if (isChecked) {

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:layout_height="24dp"
     tools:layout_width="256dp"
+    android:id="@+id/image_switcher"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 

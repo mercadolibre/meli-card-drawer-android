@@ -12,4 +12,12 @@
             <enum name="account_money_default" value="2"/>
         </attr>
     </declare-styleable>
+
+    <declare-styleable name="CornerView">
+        <attr name="corner_radius" format="dimension"/>
+        <attr name="top_left_corner_radius" format="dimension"/>
+        <attr name="top_right_corner_radius" format="dimension"/>
+        <attr name="bottom_left_corner_radius" format="dimension"/>
+        <attr name="bottom_right_corner_radius" format="dimension"/>
+    </declare-styleable>
 </resources>
