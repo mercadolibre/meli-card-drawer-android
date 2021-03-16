@@ -1,6 +1,6 @@
 package com.meli.android.carddrawer.utils
 
-enum class DensityName {
+internal enum class DensityName {
     XXXHDPI,
     XXHDPI,
     XHDPI,

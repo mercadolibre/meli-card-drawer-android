@@ -4,16 +4,16 @@ import android.content.Context
 import android.util.DisplayMetrics
 import androidx.annotation.Dimension
 
-fun Context.dpToPx(@Dimension(unit = 0) dps: Int): Float {
+internal fun Context.dpToPx(@Dimension(unit = 0) dps: Int): Float {
     return (resources.displayMetrics.density * dps.toFloat())
 }
 
-fun Context.getDensity(): Float {
+internal fun Context.getDensity(): Float {
     val densityScale = 1.0f / DisplayMetrics.DENSITY_DEFAULT
     return resources.displayMetrics.density / densityScale
 }
 
-fun Context.getDensityName(): DensityName {
+internal fun Context.getDensityName(): DensityName {
     val density = getDensity()
 
     return when {

@@ -13,7 +13,7 @@ import com.meli.android.carddrawer.utils.DensityName
 import com.meli.android.carddrawer.utils.getDensityName
 import kotlin.math.roundToInt
 
-object CardDrawerSwitchHelper {
+internal object CardDrawerSwitchHelper {
 
     private fun getTrackTextSize(context: Context, multiplier: Float): Float {
         with(context) {
