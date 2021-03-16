@@ -606,7 +606,7 @@ public class CardDrawerView extends FrameLayoutWithDisableSupport implements Obs
     }
 
     private void updateCardBackgroundGradient(@Nullable final List<String> gradientColors) {
-        final GradientDrawable gradientDrawable = ViewHelper.getGradientDrawable(getResources(), gradientColors);
+        final GradientDrawable gradientDrawable = ViewHelper.getGradientDrawable(getContext(), gradientColors);
         cardFrontGradient.setImageDrawable(gradientDrawable);
         cardBackGradient.setImageDrawable(gradientDrawable);
     }

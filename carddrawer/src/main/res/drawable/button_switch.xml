@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/thumb"
+        android:gravity="center">
+        <shape android:shape="rectangle">
+            <solid android:color="#ffffff"/>
+            <size
+                android:width="60dp"
+                android:height="26dp" />
+
+            <corners android:radius="60dp" />
+        </shape>
+    </item>
+
+    <item
+        android:id="@+id/gradient_thumb"
+        android:gravity="center">
+
+        <shape android:shape="rectangle">
+
+            <size
+                android:width="56dp"
+                android:height="22dp" />
+
+            <corners android:radius="60dp" />
+
+            <gradient
+                android:startColor="#e2e2e2"
+                android:centerColor="#ffffff"
+                android:endColor="#ffffff"
+                android:angle="270"/>
+        </shape>
+    </item>
+
+</layer-list>

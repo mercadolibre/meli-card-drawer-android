@@ -1,13 +1,15 @@
 package com.meli.android.carddrawer.app
 
+import android.graphics.Typeface
 import com.meli.android.carddrawer.model.customview.SwitchModel
 
 object SwitchFactoryModelSample {
+
     @JvmStatic
-    fun createModel() : SwitchModel {
+    fun createModel():SwitchModel {
         val states = SwitchModel.SwitchStates(
-            SwitchModel.SwitchStates.State("#8c8c8c", "#000000", "semi_bold"),
-            SwitchModel.SwitchStates.State("#ffffff", "#000000", "semi_bold")
+            SwitchModel.SwitchStates.State("#8c8c8c", Typeface.DEFAULT),
+            SwitchModel.SwitchStates.State("#ffffff", Typeface.DEFAULT)
         )
         val options = arrayListOf(
             SwitchModel.SwitchOption("debit_card", "Débito"),
@@ -15,7 +17,7 @@ object SwitchFactoryModelSample {
         )
         val description = SwitchModel.Text(
             "#ffffff",
-            "semi_bold",
+            Typeface.DEFAULT,
             "Você paga com"
         )
         return SwitchModel(
@@ -26,5 +28,10 @@ object SwitchFactoryModelSample {
             "#ffffff",
             "#26000000",
             "debit_card")
+    }
+
+    @JvmStatic
+    fun createModelForAccountMoneyHybrid() : SwitchModel {
+        return createModel().copy(switchBackgroundColor = "#009ee3")
     }
 }

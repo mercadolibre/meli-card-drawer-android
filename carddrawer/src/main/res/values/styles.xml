@@ -1,5 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="SwitchTextAppearance" parent="@android:style/TextAppearance.Holo.Small">
+    <style name="SwitchTextAppearanceXxxhdpiRegular" parent="@android:style/TextAppearance.Holo.Small">
+        <item name="android:textSize">@dimen/card_drawer_switch_xxxhdpi_text_regular</item>
+    </style>
+    <style name="SwitchTextAppearanceXxxhdpiResponsive" parent="@android:style/TextAppearance.Holo.Small">
+        <item name="android:textSize">@dimen/card_drawer_switch_xxxhdpi_text_responsive</item>
+    </style>
+    <style name="SwitchTextAppearanceXxhdpiRegular" parent="@android:style/TextAppearance.Holo.Small">
+        <item name="android:textSize">@dimen/card_drawer_switch_xxhdpi_text_regular</item>
+    </style>
+    <style name="SwitchTextAppearanceXxhdpiResponsive" parent="@android:style/TextAppearance.Holo.Small">
+        <item name="android:textSize">@dimen/card_drawer_switch_xxhdpi_text_responsive</item>
+    </style>
+    <style name="SwitchTextAppearanceXhdpiRegular" parent="@android:style/TextAppearance.Holo.Small">
+        <item name="android:textSize">@dimen/card_drawer_switch_xhdpi_text_regular</item>
+    </style>
+    <style name="SwitchTextAppearanceXhdpiResponsive" parent="@android:style/TextAppearance.Holo.Small">
+        <item name="android:textSize">@dimen/card_drawer_switch_xhdpi_text_responsive</item>
+    </style>
+    <style name="SwitchTextAppearanceHdpiRegular" parent="@android:style/TextAppearance.Holo.Small">
+        <item name="android:textSize">@dimen/card_drawer_switch_hdpi_text_regular</item>
+    </style>
+    <style name="SwitchTextAppearanceHdpiResponsive" parent="@android:style/TextAppearance.Holo.Small">
+        <item name="android:textSize">@dimen/card_drawer_switch_hdpi_text_responsive</item>
+    </style>
+    <style name="SwitchTextAppearanceMdpiRegular" parent="@android:style/TextAppearance.Holo.Small">
+        <item name="android:textSize">@dimen/card_drawer_switch_mdpi_text_regular</item>
+    </style>
+    <style name="SwitchTextAppearanceMdpiResponsive" parent="@android:style/TextAppearance.Holo.Small">
+        <item name="android:textSize">@dimen/card_drawer_switch_mdpi_text_responsive</item>
     </style>
 </resources>

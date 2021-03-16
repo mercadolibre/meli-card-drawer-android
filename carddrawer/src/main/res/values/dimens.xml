@@ -14,4 +14,20 @@
     <dimen name="card_drawer_font_size">10dp</dimen>
     <dimen name="card_drawer_font_size_small">8dp</dimen>
 
+    <!-- Card drawer switch -->
+
+    <dimen name="card_drawer_switch_xxxhdpi_text_regular">12dp</dimen>
+    <dimen name="card_drawer_switch_xxxhdpi_text_responsive">14dp</dimen>
+
+    <dimen name="card_drawer_switch_xxhdpi_text_regular">12dp</dimen>
+    <dimen name="card_drawer_switch_xxhdpi_text_responsive">14dp</dimen>
+
+    <dimen name="card_drawer_switch_xhdpi_text_regular">12dp</dimen>
+    <dimen name="card_drawer_switch_xhdpi_text_responsive">16dp</dimen>
+
+    <dimen name="card_drawer_switch_hdpi_text_regular">10dp</dimen>
+    <dimen name="card_drawer_switch_hdpi_text_responsive">11dp</dimen>
+
+    <dimen name="card_drawer_switch_mdpi_text_regular">12dp</dimen>
+    <dimen name="card_drawer_switch_mdpi_text_responsive">18dp</dimen>
 </resources>
