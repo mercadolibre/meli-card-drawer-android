@@ -1,5 +1,7 @@
 package com.meli.android.carddrawer.format
 
+import android.content.Context
+import android.graphics.Paint
 import android.graphics.Typeface
 import android.os.Handler
 import android.os.HandlerThread
@@ -7,11 +9,13 @@ import androidx.core.provider.FontRequest
 import androidx.core.provider.FontsContractCompat
 import android.widget.TextView
 import com.meli.android.carddrawer.R
+import com.mercadolibre.android.andesui.font.Font
+import com.mercadolibre.android.andesui.font.TypefaceHelper
 
 /**
  * A helper class for setting typeface to views
  */
-object TypefaceSetter {
+internal object TypefaceHelper {
     private const val HANDLER_THREAD_NAME = "fonts"
     private val handlerThread = HandlerThread(HANDLER_THREAD_NAME)
     private var robotoMono: Typeface? = null
@@ -20,6 +24,18 @@ object TypefaceSetter {
         customTypeface?.let {
             textView.typeface = it
         } ?: setMonospace(textView)
+    }
+
+    fun set(textView: TextView, cardDrawerFont: CardDrawerFont) {
+        TypefaceHelper.setTypeface(textView, cardDrawerFont.font)
+    }
+
+    fun set(context: Context, paint: Paint, cardDrawerFont: CardDrawerFont) {
+        TypefaceHelper.setTypeface(context, paint, cardDrawerFont.font)
+    }
+
+    fun get(context: Context, cardDrawerFont: CardDrawerFont): Typeface? {
+        return TypefaceHelper.getFontTypeface(context, cardDrawerFont.font)
     }
 
     private fun setMonospace(textView: TextView) {

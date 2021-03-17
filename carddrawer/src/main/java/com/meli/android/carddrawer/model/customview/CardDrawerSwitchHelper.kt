@@ -3,7 +3,6 @@ package com.meli.android.carddrawer.model.customview
 import android.content.Context
 import android.graphics.Color
 import android.graphics.Paint
-import android.graphics.Typeface
 import android.os.Build
 import android.text.Layout
 import android.text.StaticLayout
@@ -120,7 +119,7 @@ internal object CardDrawerSwitchHelper {
     }
 
     fun makeTrackTextPaint(
-        context: Context, textColor: String, trackTextTypeFace: Typeface, multiplier: Float): TextPaint {
+        context: Context, textColor: String, multiplier: Float): TextPaint {
         val textPaint = TextPaint(Paint.ANTI_ALIAS_FLAG)
         textPaint.density = context.resources.displayMetrics.density
         textPaint.color = Color.parseColor(textColor)
@@ -129,7 +128,6 @@ internal object CardDrawerSwitchHelper {
         textPaint.isFakeBoldText = false
         textPaint.style = Paint.Style.FILL
         textPaint.textSize = getTrackTextSize(context, multiplier)
-        textPaint.typeface = trackTextTypeFace
         return textPaint
     }
 }

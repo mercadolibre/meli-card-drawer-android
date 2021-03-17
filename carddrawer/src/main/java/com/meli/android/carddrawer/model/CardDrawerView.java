@@ -35,7 +35,7 @@ import com.meli.android.carddrawer.configuration.DefaultCardConfiguration;
 import com.meli.android.carddrawer.configuration.FieldPosition;
 import com.meli.android.carddrawer.configuration.FontType;
 import com.meli.android.carddrawer.configuration.SecurityCodeLocation;
-import com.meli.android.carddrawer.format.TypefaceSetter;
+import com.meli.android.carddrawer.format.TypefaceHelper;
 import com.mercadolibre.android.picassodiskcache.PicassoDiskLoader;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -265,20 +265,20 @@ public class CardDrawerView extends FrameLayoutWithDisableSupport implements Obs
 
     private void updateFont(@Nullable final Typeface customTypeface) {
         if (cardNumber != null) {
-            TypefaceSetter.INSTANCE.set(cardNumber, customTypeface);
+            TypefaceHelper.INSTANCE.set(cardNumber, customTypeface);
         }
         if (cardName != null) {
             cardName.setAllCaps(customTypeface == null);
-            TypefaceSetter.INSTANCE.set(cardName, customTypeface);
+            TypefaceHelper.INSTANCE.set(cardName, customTypeface);
         }
         if (cardDate != null) {
-            TypefaceSetter.INSTANCE.set(cardDate, customTypeface);
+            TypefaceHelper.INSTANCE.set(cardDate, customTypeface);
         }
         if (codeFront != null) {
-            TypefaceSetter.INSTANCE.set(codeFront, customTypeface);
+            TypefaceHelper.INSTANCE.set(codeFront, customTypeface);
         }
         if (codeBack != null) {
-            TypefaceSetter.INSTANCE.set(codeBack, customTypeface);
+            TypefaceHelper.INSTANCE.set(codeBack, customTypeface);
         }
     }
 

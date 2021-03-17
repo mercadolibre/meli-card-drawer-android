@@ -14,7 +14,7 @@ import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 
 @RunWith(RobolectricTestRunner.class)
-public class TypefaceSetterTest {
+public class TypefaceHelperTest {
 
     @Before
     public void setUp() {
@@ -28,7 +28,7 @@ public class TypefaceSetterTest {
         final Typeface typeface = mock(Typeface.class);
 
         // Perform op
-        TypefaceSetter.INSTANCE.set(textView, typeface);
+        TypefaceHelper.INSTANCE.set(textView, typeface);
 
         // Assert the test performed as expected
         assertEquals(typeface, textView.getTypeface());
@@ -40,9 +40,9 @@ public class TypefaceSetterTest {
         final TextView textView = new TextView(RuntimeEnvironment.application);
 
         // Perform op
-        TypefaceSetter.INSTANCE.set(textView, null);
+        TypefaceHelper.INSTANCE.set(textView, (Typeface) null);
 
         // Assert the test performed as expected
-        assertEquals(ReflectionHelpers.getStaticField(TypefaceSetter.class, "robotoMono"), textView.getTypeface());
+        assertEquals(ReflectionHelpers.getStaticField(TypefaceHelper.class, "robotoMono"), textView.getTypeface());
     }
 }

@@ -18,7 +18,9 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import com.meli.android.carddrawer.ColorUtils.safeParcelColor
 import com.meli.android.carddrawer.R
-import com.meli.android.carddrawer.format.TypefaceSetter.set
+import com.meli.android.carddrawer.format.CardDrawerFont
+import com.meli.android.carddrawer.format.TypefaceHelper.get
+import com.meli.android.carddrawer.format.TypefaceHelper.set
 import com.meli.android.carddrawer.model.customview.CardDrawerSwitchHelper.getThumbTextAppearance
 import com.meli.android.carddrawer.model.customview.CardDrawerSwitchHelper.makeTextLayout
 import com.meli.android.carddrawer.model.customview.CardDrawerSwitchHelper.makeTrackTextPaint
@@ -79,7 +81,7 @@ class CardDrawerSwitch @JvmOverloads constructor(
         with(switchModel.description) {
             description.text = text
             description.setTextColor(safeParcelColor(textColor))
-            set(description, typeface)
+            set(description, CardDrawerFont.from(weight))
         }
     }
 
@@ -100,16 +102,16 @@ class CardDrawerSwitch @JvmOverloads constructor(
     private fun setUpSwitch(cardSizeMultiplier: Float, widthMultiplier: Float, heightMultiplier: Float) {
         val (op1, op2) = switchModel.options.let { it.first() to it.last() }
         val trackTextColor = switchModel.states.uncheckedState.textColor
-        val trackTextTypeFace = switchModel.states.uncheckedState.typeface
+        val trackTextWeight = switchModel.states.uncheckedState.weight
         val thumbBackgroundColor = switchModel.pillBackgroundColor
         val trackBackgroundColor = switchModel.switchBackgroundColor
         val thumbTextColor = switchModel.states.checkedState.textColor
-        val thumbTextTypeface = switchModel.states.checkedState.typeface
+        val thumbTextWeight = switchModel.states.checkedState.weight
         val switchCompat = SwitchCompat(context)
         val trackDrawable = makeTrackDrawableWithText(
             trackTextColor,
             trackBackgroundColor,
-            trackTextTypeFace,
+            trackTextWeight,
             op1.name,
             op2.name,
             cardSizeMultiplier,
@@ -142,7 +144,7 @@ class CardDrawerSwitch @JvmOverloads constructor(
             post {
                 setTextColor(Color.parseColor(thumbTextColor))
                 setSwitchTextAppearance(context, getThumbTextAppearance(context, cardSizeMultiplier))
-                setSwitchTypeface(thumbTextTypeface)
+                setSwitchTypeface(get(context, CardDrawerFont.from(thumbTextWeight)))
                 this.thumbDrawable = thumbLayerDrawable
                 this.trackDrawable = trackDrawable
             }
@@ -173,7 +175,7 @@ class CardDrawerSwitch @JvmOverloads constructor(
     private fun makeTrackDrawableWithText(
         trackTextColor: String,
         trackBackgroundColor: String,
-        trackTextTypeFace: Typeface,
+        trackTextWeight: String,
         leftText: String,
         rightText: String,
         cardSizeMultiplier: Float,
@@ -186,9 +188,11 @@ class CardDrawerSwitch @JvmOverloads constructor(
             Bitmap.Config.ARGB_8888)
         val canvas = Canvas(bitmap)
         val currentBounds = canvas.clipBounds
-        val textPaint = makeTrackTextPaint(context, trackTextColor, trackTextTypeFace, cardSizeMultiplier)
+        val textPaint = makeTrackTextPaint(context, trackTextColor, cardSizeMultiplier)
         val sLeftText = makeTextLayout(leftText, textPaint)
         val sRightText = makeTextLayout(rightText, textPaint)
+
+        set(context, textPaint, CardDrawerFont.from(trackTextWeight))
 
         trackDrawable.bounds = currentBounds
         trackDrawable.draw(canvas)
