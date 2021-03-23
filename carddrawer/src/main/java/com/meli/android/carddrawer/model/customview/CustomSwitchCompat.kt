@@ -763,16 +763,9 @@ internal class CustomSwitchCompat @JvmOverloads constructor(context: Context, at
 
     override fun jumpDrawablesToCurrentState() {
         super.jumpDrawablesToCurrentState()
-        if (thumbDrawable != null) {
-            thumbDrawable!!.jumpToCurrentState()
-        }
-        if (trackDrawable != null) {
-            trackDrawable!!.jumpToCurrentState()
-        }
-        if (positionAnimator != null && positionAnimator!!.isStarted) {
-            positionAnimator!!.end()
-            positionAnimator = null
-        }
+        thumbDrawable?.jumpToCurrentState()
+        trackDrawable?.jumpToCurrentState()
+        positionAnimator = positionAnimator?.takeIf { it.isStarted }?.let { it.end() ; null }
     }
 
     override fun onInitializeAccessibilityEvent(event: AccessibilityEvent) {

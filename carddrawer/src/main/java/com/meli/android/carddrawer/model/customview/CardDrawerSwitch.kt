@@ -241,9 +241,6 @@ class CardDrawerSwitch @JvmOverloads constructor(
                 R.id.switch_bottom_guideline_low_res,
                 ConstraintSet.BOTTOM
             )
-        }.applyTo(this@CardDrawerSwitch)
-        ConstraintSet().also {
-            it.clone(this@CardDrawerSwitch)
             it.connect(
                 switchCompatContainer.id,
                 ConstraintSet.TOP,
