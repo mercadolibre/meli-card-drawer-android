@@ -46,6 +46,9 @@ import kotlin.Unit;
 
 @SuppressWarnings({ "PMD.ConstructorCallsOverridableMethod", "PMD.TooManyFields", "PMD.GodClass" })
 public class CardDrawerView extends FrameLayoutWithDisableSupport implements Observer {
+    private static final String STATE_CARD = "state_card";
+    private static final String STATE_ENABLED = "state_enabled";
+    private static final String STATE_SUPER = "state_super";
     private static final float NUMBER_LETTER_SPACING = 0.125f;
 
     protected CardAnimator cardAnimator;
@@ -75,6 +78,7 @@ public class CardDrawerView extends FrameLayoutWithDisableSupport implements Obs
     protected CornerView safeZone;
     private View customView;
     protected CardConfiguration cardConfiguration;
+    private boolean enabled = true;
 
     public CardDrawerView(@NonNull final Context context) {
         this(context, null);
@@ -154,7 +158,7 @@ public class CardDrawerView extends FrameLayoutWithDisableSupport implements Obs
 
     @Override
     public void setEnabled(final boolean enabled) {
-        super.setEnabled(enabled);
+        this.enabled = enabled;
         updateColor(source);
     }
 
@@ -427,7 +431,7 @@ public class CardDrawerView extends FrameLayoutWithDisableSupport implements Obs
 
     private void updateColor(@NonNull final CardUI source) {
         final int disabledColor = source.getDisabledColor() != null ? source.getDisabledColor() : Color.GRAY;
-        final int backgroundColor = isEnabled() ? source.getCardBackgroundColor() : disabledColor;
+        final int backgroundColor = enabled ? source.getCardBackgroundColor() : disabledColor;
         cardAnimator.colorCard(backgroundColor, source.getAnimationType());
     }
 
@@ -574,8 +578,9 @@ public class CardDrawerView extends FrameLayoutWithDisableSupport implements Obs
         // Construct bundle
         final Bundle bundle = new Bundle();
         // Store base view state
-        bundle.putParcelable("instanceState", super.onSaveInstanceState());
-        bundle.putParcelable("card", card);
+        bundle.putParcelable(STATE_SUPER, super.onSaveInstanceState());
+        bundle.putParcelable(STATE_CARD, card);
+        bundle.putBoolean(STATE_ENABLED, enabled);
         cardAnimator.saveState(bundle);
 
         return bundle;
@@ -587,12 +592,13 @@ public class CardDrawerView extends FrameLayoutWithDisableSupport implements Obs
         // Checks if the state is the bundle we saved
         if (state instanceof Bundle) {
             final Bundle bundle = (Bundle) state;
-            final Card savedCard = bundle.getParcelable("card");
+            enabled = bundle.getBoolean(STATE_ENABLED);
+            final Card savedCard = bundle.getParcelable(STATE_CARD);
             card.fillCard(savedCard);
             updateCardInformation();
             cardAnimator.restoreState(bundle);
 
-            state = bundle.getParcelable("instanceState");
+            state = bundle.getParcelable(STATE_SUPER);
         }
         // Pass base view state on to super
         super.onRestoreInstanceState(state);
