@@ -27,8 +27,9 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="@+id/switch_bottom_guideline"
-        app:layout_constraintEnd_toStartOf="@+id/switch_end_guideline"
+        app:layout_constraintEnd_toStartOf="@id/switch_end_guideline"
         app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintVertical_bias="0.1835"
         app:layout_constraintStart_toEndOf="@+id/switch_left_guideline"
         app:layout_constraintTop_toTopOf="@+id/switch_top_guideline" />
 
@@ -47,10 +48,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintEnd_toStartOf="@+id/card_drawer_switch_container"
+        app:layout_constraintEnd_toStartOf="@id/card_drawer_switch_container"
         app:layout_constraintGuide_percent="0.5"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/description" />
+        app:layout_constraintStart_toEndOf="@id/description" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/switch_start_guideline"

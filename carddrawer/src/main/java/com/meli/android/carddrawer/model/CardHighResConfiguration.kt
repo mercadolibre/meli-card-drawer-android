@@ -45,12 +45,12 @@ internal class CardHighResConfiguration(source: CardUI): CardConfiguration(sourc
         constraintSet.connect(
             R.id.cho_card_name,
             ConstraintSet.TOP,
-            R.id.card_header_front_guideline_cvv,
+            R.id.card_header_front_guideline_safezone_number,
             ConstraintSet.BOTTOM, 0)
         constraintSet.connect(
             R.id.cho_card_name,
             ConstraintSet.BOTTOM,
-            R.id.card_header_front_guideline_number,
+            R.id.card_header_front_guideline_safezone,
             ConstraintSet.TOP, 0)
         constraintSet.connect(
             R.id.cho_card_name,
@@ -78,12 +78,12 @@ internal class CardHighResConfiguration(source: CardUI): CardConfiguration(sourc
         constraintSet.connect(
             R.id.cho_card_number,
             ConstraintSet.TOP,
-            R.id.card_header_front_guideline_cvv,
+            R.id.card_header_front_guideline_safezone_number,
             ConstraintSet.BOTTOM, 0)
         constraintSet.connect(
             R.id.cho_card_number,
             ConstraintSet.BOTTOM,
-            R.id.card_header_front_guideline_number,
+            R.id.card_header_front_guideline_safezone,
             ConstraintSet.TOP, 0)
     }
 }
