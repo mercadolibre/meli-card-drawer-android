@@ -1,6 +1,7 @@
 package com.meli.android.carddrawer.model.customview;
 
 import android.animation.ObjectAnimator;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
@@ -36,8 +37,6 @@ import com.meli.android.carddrawer.R;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
-import static android.content.ContentValues.TAG;
-
 public final class CustomSwitchCompat extends CompoundButton {
     private static final int THUMB_ANIMATION_DURATION = 250;
 
@@ -46,6 +45,7 @@ public final class CustomSwitchCompat extends CompoundButton {
     private static final int TOUCH_MODE_DRAGGING = 2;
     public static final float HALF_POSITION = 0.5f;
     public static final float DEFAULT_THUMB_SIZE_MULTIPLIED = 1.5f;
+    public static final float DEFAULT_HORIZONTAL_SKEW_FACTOR = -0.25f;
 
     // We force the accessibility events to have a class name of Switch, since screen readers
     // already know how to handle their events
@@ -231,7 +231,7 @@ public final class CustomSwitchCompat extends CompoundButton {
             final int typefaceStyle = tf != null ? tf.getStyle() : 0;
             final int need = style & ~typefaceStyle;
             thumbTextPaint.setFakeBoldText((need & Typeface.BOLD) != 0);
-            thumbTextPaint.setTextSkewX((need & Typeface.ITALIC) != 0 ? -0.25f : 0);
+            thumbTextPaint.setTextSkewX((need & Typeface.ITALIC) != 0 ? DEFAULT_HORIZONTAL_SKEW_FACTOR : 0);
         } else {
             thumbTextPaint.setFakeBoldText(false);
             thumbTextPaint.setTextSkewX(0);
@@ -263,7 +263,7 @@ public final class CustomSwitchCompat extends CompoundButton {
             final int typefaceStyle = tf != null ? tf.getStyle() : 0;
             final int need = style & ~typefaceStyle;
             trackTextPaint.setFakeBoldText((need & Typeface.BOLD) != 0);
-            trackTextPaint.setTextSkewX((need & Typeface.ITALIC) != 0 ? -0.25f : 0);
+            trackTextPaint.setTextSkewX((need & Typeface.ITALIC) != 0 ? DEFAULT_HORIZONTAL_SKEW_FACTOR : 0);
         } else {
             trackTextPaint.setFakeBoldText(false);
             trackTextPaint.setTextSkewX(0);
@@ -281,6 +281,7 @@ public final class CustomSwitchCompat extends CompoundButton {
         }
     }
 
+    @SuppressWarnings("unused")
     public float getThumbSizeMultiplied() {
         return thumbSizeMultiplied;
     }
@@ -495,6 +496,7 @@ public final class CustomSwitchCompat extends CompoundButton {
         return x > thumbLeft && x < thumbRight && y > thumbTop && y < thumbBottom;
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onTouchEvent(final MotionEvent ev) {
         velocityTracker.addMovement(ev);
@@ -553,6 +555,7 @@ public final class CustomSwitchCompat extends CompoundButton {
                 }
                 return true;
             }
+            default:
             }
             break;
         }
@@ -569,6 +572,7 @@ public final class CustomSwitchCompat extends CompoundButton {
             velocityTracker.clear();
             break;
         }
+        default:
         }
 
         return super.onTouchEvent(ev);
@@ -688,10 +692,9 @@ public final class CustomSwitchCompat extends CompoundButton {
             switchLeft = switchRight - switchWidth + opticalInsetLeft + opticalInsetRight;
         }
 
-        final int switchTop;
-        final int switchBottom;
+        int switchTop = 0;
+        int switchBottom = 0;
         switch (getGravity() & Gravity.VERTICAL_GRAVITY_MASK) {
-        default:
         case Gravity.TOP:
             switchTop = getPaddingTop();
             switchBottom = switchTop + switchHeight;
@@ -706,6 +709,7 @@ public final class CustomSwitchCompat extends CompoundButton {
             switchBottom = getHeight() - getPaddingBottom();
             switchTop = switchBottom - switchHeight;
             break;
+        default:
         }
 
         this.switchLeft = switchLeft;
@@ -934,7 +938,7 @@ public final class CustomSwitchCompat extends CompoundButton {
 
     @Override
     public void drawableHotspotChanged(final float x, final float y) {
-        if (Build.VERSION.SDK_INT >= 21) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             super.drawableHotspotChanged(x, y);
         }
 
@@ -1049,7 +1053,7 @@ public final class CustomSwitchCompat extends CompoundButton {
                     return result;
                 }
             } catch (final Exception e) {
-                Log.e(TAG, "Couldn't obtain the optical insets. Ignoring.");
+                Log.e("CARD_DRAWER", "Couldn't obtain the optical insets. Ignoring.");
             }
         }
 
