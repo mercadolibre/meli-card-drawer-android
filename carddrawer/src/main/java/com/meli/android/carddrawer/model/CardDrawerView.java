@@ -36,6 +36,7 @@ import com.meli.android.carddrawer.configuration.FieldPosition;
 import com.meli.android.carddrawer.configuration.FontType;
 import com.meli.android.carddrawer.configuration.SecurityCodeLocation;
 import com.meli.android.carddrawer.format.TypefaceHelper;
+import com.meli.android.carddrawer.model.customview.CustomViewConfiguration;
 import com.mercadolibre.android.picassodiskcache.PicassoDiskLoader;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -65,6 +66,7 @@ public class CardDrawerView extends FrameLayoutWithDisableSupport implements Obs
     protected Card card;
     protected View cardFrontLayout;
     protected View cardBackLayout;
+    protected View frontBackground;
     protected ImageView cardFrontGradient;
     protected ImageView cardBackGradient;
     private ImageView overlayImage;
@@ -75,6 +77,7 @@ public class CardDrawerView extends FrameLayoutWithDisableSupport implements Obs
     protected CornerView safeZone;
     private View customView;
     protected CardConfiguration cardConfiguration;
+    protected CardDrawerStyle style;
 
     public CardDrawerView(@NonNull final Context context) {
         this(context, null);
@@ -98,6 +101,11 @@ public class CardDrawerView extends FrameLayoutWithDisableSupport implements Obs
     @NonNull
     protected CardConfiguration buildCardConfiguration() {
         return new CardHighResConfiguration(source);
+    }
+
+    @NonNull
+    public CustomViewConfiguration getCustomViewConfiguration() {
+        return new CustomViewConfiguration(Type.HIGH, style);
     }
 
     /**
@@ -162,6 +170,7 @@ public class CardDrawerView extends FrameLayoutWithDisableSupport implements Obs
         cardFrontLayout = findViewById(R.id.card_header_front);
         cardBackLayout = findViewById(R.id.card_header_back);
 
+        frontBackground = cardFrontLayout.findViewById(R.id.front_background);
         overlayImage = cardFrontLayout.findViewById(R.id.cho_card_overlay);
         issuerLogoView = cardFrontLayout.findViewById(R.id.cho_card_issuer);
         cardLogoView = cardFrontLayout.findViewById(R.id.cho_card_logo);
@@ -537,12 +546,14 @@ public class CardDrawerView extends FrameLayoutWithDisableSupport implements Obs
         } else if (style == CardDrawerStyle.ACCOUNT_MONEY_HYBRID) {
             show(new AccountMoneyHybridConfiguration());
         }
+        this.style = style;
     }
 
     private void internalSetStyle(@NonNull final CardDrawerStyle style) {
         accountMoneyDefaultOverlay.setVisibility(style == CardDrawerStyle.ACCOUNT_MONEY_DEFAULT ? VISIBLE : GONE);
         accountMoneyHybridOverlay.setVisibility(style == CardDrawerStyle.ACCOUNT_MONEY_HYBRID ? VISIBLE : GONE);
         overlayImage.setVisibility(style == CardDrawerStyle.REGULAR ? VISIBLE : GONE);
+        this.style = style;
     }
 
     @Override
@@ -603,6 +614,14 @@ public class CardDrawerView extends FrameLayoutWithDisableSupport implements Obs
     public @interface Behaviour {
         int REGULAR = 0;
         int RESPONSIVE = 1;
+    }
+
+    @Retention(RetentionPolicy.SOURCE)
+    @IntDef({ Type.HIGH, Type.MEDIUM, Type.LOW })
+    public @interface Type {
+        int HIGH = 0;
+        int MEDIUM = 1;
+        int LOW = 2;
     }
 
     private void updateCardBackgroundGradient(@Nullable final List<String> gradientColors) {

@@ -4,11 +4,11 @@
     <item
         android:id="@+id/thumb"
         android:gravity="center">
-        <shape android:shape="rectangle">
+        <shape>
             <solid android:color="#ffffff"/>
             <size
-                android:width="@dimen/card_drawer_thumb_switch_width_high_res"
-                android:height="28dp" />
+                android:width="@dimen/card_drawer_thumb_switch_width_low_res"
+                android:height="@dimen/card_drawer_thumb_switch_height_low_res" />
 
             <corners android:radius="30dp" />
         </shape>
@@ -18,11 +18,11 @@
         android:id="@+id/gradient_thumb"
         android:gravity="center">
 
-        <shape android:shape="rectangle">
+        <shape>
 
             <size
-                android:width="@dimen/card_drawer_gradient_thumb_switch_width_high_res"
-                android:height="24dp" />
+                android:width="@dimen/card_drawer_gradient_thumb_switch_width_low_res"
+                android:height="@dimen/card_drawer_gradient_thumb_switch_height_low_res" />
 
             <corners android:radius="30dp" />
 

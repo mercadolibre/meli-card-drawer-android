@@ -3,6 +3,7 @@
 
     <!-- Card form -->
     <dimen name="card_drawer_card_width">256dp</dimen>
+    <dimen name="card_drawer_switch_width">148dp</dimen>
     <dimen name="card_drawer_camera_distance">2560dp</dimen>
     <dimen name="card_drawer_layout_padding">20dp</dimen>
 
@@ -16,18 +17,17 @@
 
     <!-- Card drawer switch -->
 
-    <dimen name="card_drawer_switch_xxxhdpi_text_regular">12dp</dimen>
-    <dimen name="card_drawer_switch_xxxhdpi_text_responsive">14dp</dimen>
+    <dimen name="card_drawer_gradient_layer_padding_high_res">6dp</dimen>
+    <dimen name="card_drawer_thumb_layer_padding_high_res">4dp</dimen>
 
-    <dimen name="card_drawer_switch_xxhdpi_text_regular">12dp</dimen>
-    <dimen name="card_drawer_switch_xxhdpi_text_responsive">14dp</dimen>
+    <dimen name="card_drawer_switch_text_size_high_res">12dp</dimen>
+    <dimen name="card_drawer_switch_text_size_low_res">10dp</dimen>
 
-    <dimen name="card_drawer_switch_xhdpi_text_regular">12dp</dimen>
-    <dimen name="card_drawer_switch_xhdpi_text_responsive">16dp</dimen>
+    <dimen name="card_drawer_gradient_layer_padding_low_res">5.5dp</dimen>
+    <dimen name="card_drawer_thumb_layer_padding_low_res">3.4dp</dimen>
 
-    <dimen name="card_drawer_switch_hdpi_text_regular">10dp</dimen>
-    <dimen name="card_drawer_switch_hdpi_text_responsive">11dp</dimen>
+    <dimen name="card_drawer_track_switch_width">94dp</dimen>
 
-    <dimen name="card_drawer_switch_mdpi_text_regular">12dp</dimen>
-    <dimen name="card_drawer_switch_mdpi_text_responsive">18dp</dimen>
+    <dimen name="card_drawer_thumb_switch_width_high_res">72dp</dimen>
+    <dimen name="card_drawer_gradient_thumb_switch_width_high_res">68dp</dimen>
 </resources>

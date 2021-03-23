@@ -5,6 +5,7 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
 import com.meli.android.carddrawer.R
+import com.meli.android.carddrawer.configuration.CardDrawerStyle
 import com.meli.android.carddrawer.configuration.SecurityCodeLocation
 import com.meli.android.carddrawer.format.NumberFormatter
 
@@ -49,6 +50,8 @@ internal abstract class CardConfiguration(protected var source: CardUI) {
             else -> View.INVISIBLE
         }
     }
+
+    protected fun isRegularStyle() = source.style == null || source.style == CardDrawerStyle.REGULAR
 
     protected fun hasSafeZone() = defaultConfiguration != null
 

@@ -7,6 +7,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import android.util.AttributeSet;
 import com.meli.android.carddrawer.R;
+import com.meli.android.carddrawer.model.customview.CustomViewConfiguration;
 
 public class CardDrawerViewLowres extends CardDrawerView {
 
@@ -34,6 +35,12 @@ public class CardDrawerViewLowres extends CardDrawerView {
     @Override
     protected CardConfiguration buildCardConfiguration() {
         return new CardLowResConfiguration(source);
+    }
+
+    @NonNull
+    @Override
+    public CustomViewConfiguration getCustomViewConfiguration() {
+        return new CustomViewConfiguration(Type.LOW, style);
     }
 
     @Override

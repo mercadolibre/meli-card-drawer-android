@@ -20,4 +20,22 @@
         <attr name="bottom_left_corner_radius" format="dimension"/>
         <attr name="bottom_right_corner_radius" format="dimension"/>
     </declare-styleable>
+
+    <declare-styleable name="CustomSwitchCompat">
+        <attr name="android:thumb" format="reference"/>
+        <attr name="android:track" format="reference"/>
+        <attr name="android:switchMinWidth" format="dimension"/>
+        <attr name="android:switchPadding" format="dimension"/>
+        <attr name="android:thumbTextPadding" format="dimension"/>
+        <attr name="android:switchTextOff" format="reference"/>
+        <attr name="android:switchTextOn" format="reference"/>
+        <attr name="android:switchTextAppearance" format="reference"/>
+        <attr name="android:textSize" format="dimension"/>
+        <attr name="android:checked" format="boolean"/>
+        <attr name="android:showText" format="boolean"/>
+
+        <attr name="thumbTextSize" format="dimension"/>
+        <attr name="trackTextSize" format="dimension"/>
+
+    </declare-styleable>
 </resources>
