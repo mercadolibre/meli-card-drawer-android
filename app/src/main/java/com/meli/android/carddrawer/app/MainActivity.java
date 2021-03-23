@@ -265,16 +265,11 @@ public class MainActivity extends AppCompatActivity {
                         model = SwitchFactoryModelSample.createModel();
                     }
                     final CardDrawerSwitch viewHighRes = new CardDrawerSwitch(MainActivity.this);
-                    viewHighRes.setSwitchListener(optionId -> {
-                        Log.i("CARD_DRAWER", "ID: "+ optionId);
-                    });
+                    viewHighRes.setSwitchListener(optionId -> Log.i("CARD_DRAWER", "ID: "+ optionId));
                     viewHighRes.setSwitchModel(model);
                     cardDrawerView.setCustomView(viewHighRes);
                     final CardDrawerSwitch viewLowRes = new CardDrawerSwitch(MainActivity.this);
-                    viewLowRes.setSwitchListener(optionId -> {
-                        Log.i("CARD_DRAWER", "ID: "+ optionId);
-
-                    });
+                    viewLowRes.setSwitchListener(optionId -> Log.i("CARD_DRAWER", "ID: "+ optionId));
                     viewLowRes.setSwitchModel(model);
                     viewLowRes.setConfiguration(cardDrawerViewLowRes.getCustomViewConfiguration());
                     cardDrawerViewLowRes.setCustomView(viewLowRes);

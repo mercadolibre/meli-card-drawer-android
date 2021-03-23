@@ -38,7 +38,6 @@ class CardDrawerSwitch @JvmOverloads constructor(
     private lateinit var switchSelection: String
     private lateinit var switchCompatContainer: FrameLayout
     private lateinit var description: TextView
-
     private var gradientLayerPadding = getDimension(R.dimen.card_drawer_gradient_layer_padding_high_res)
     private var thumbLayerPadding = getDimension(R.dimen.card_drawer_thumb_layer_padding_high_res)
     private var thumbLayerDrawable = (getDrawable(R.drawable.button_switch) as LayerDrawable)
@@ -116,8 +115,8 @@ class CardDrawerSwitch @JvmOverloads constructor(
             height = WRAP_CONTENT
             setShowThumbText(true)
             setShowTrackText(true)
-            leftText = op1.name
-            rightText = op2.name
+            setLeftText(op1.name)
+            setRightText(op2.name)
             isChecked = switchSelection != op1.id
             thumbSizeMultiplied = THUMB_SIZE_MULTIPLIED
 
@@ -140,8 +139,8 @@ class CardDrawerSwitch @JvmOverloads constructor(
                 setTrackTypeface(get(context, CardDrawerFont.from(trackTextWeight)))
                 setTrackTextSize(switchTextSize * cardSizeMultiplier)
                 setThumbTextSize(switchTextSize * cardSizeMultiplier)
-                this.thumbDrawable = thumbLayerDrawable
-                this.trackDrawable = trackGradientDrawable
+                setThumbDrawable(thumbLayerDrawable)
+                setTrackDrawable(trackGradientDrawable)
             }
         }
     }
