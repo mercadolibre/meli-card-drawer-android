@@ -3,7 +3,7 @@ package com.meli.android.carddrawer.format
 import android.graphics.Typeface
 import com.mercadolibre.android.andesui.font.Font
 
-enum class CardDrawerFont(val index: Int, val font: Font, val style: Int) {
+internal enum class CardDrawerFont(val index: Int, val font: Font, val style: Int) {
     BLACK(0, Font.BLACK, Typeface.BOLD),
     BOLD(1, Font.BOLD, Typeface.BOLD),
     EXTRA_BOLD(2, Font.EXTRA_BOLD, Typeface.BOLD),
