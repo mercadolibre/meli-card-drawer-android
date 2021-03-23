@@ -125,7 +125,6 @@ class CardDrawerSwitch @JvmOverloads constructor(
             }
 
             setOnCheckedChangeListener { _, isChecked ->
-                // If isChecked = true it is in the On position
                 switchSelection = if (!isChecked) op1.id else op2.id
                 onSwitchListener?.onChange(switchSelection)
             }
