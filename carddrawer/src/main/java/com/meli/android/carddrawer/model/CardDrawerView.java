@@ -300,6 +300,7 @@ public class CardDrawerView extends FrameLayoutWithDisableSupport implements Obs
      */
     public void update(@NonNull final CardUI source) {
         final boolean animate = !CardAnimationType.NONE.equals(source.getAnimationType());
+        style = source.getStyle() != null ? source.getStyle() : CardDrawerStyle.REGULAR;
         cardConfiguration.updateSource(source);
         updateColor(source);
         updateCardBackgroundGradient(source.getCardGradientColors());
@@ -309,7 +310,7 @@ public class CardDrawerView extends FrameLayoutWithDisableSupport implements Obs
             updateFont(source.getCustomFont());
         }
         updateOverlay(overlayImage, source);
-        internalSetStyle(source.getStyle() != null ? source.getStyle() : CardDrawerStyle.REGULAR);
+        setUpVisibilityOverlay();
         setCardTextColor(source.getFontType(), source.getCardFontColor());
         if (animate) {
             fadeInAnimateView(cardNumber);
@@ -543,24 +544,27 @@ public class CardDrawerView extends FrameLayoutWithDisableSupport implements Obs
     }
 
     public void setStyle(@NonNull final CardDrawerStyle style) {
+        this.style = style != null ? style : CardDrawerStyle.REGULAR;
+        updateCardConfigurationByStyle();
+    }
+
+    private void updateCardConfigurationByStyle() {
         if (style == CardDrawerStyle.ACCOUNT_MONEY_DEFAULT) {
             show(new AccountMoneyDefaultConfiguration());
         } else if (style == CardDrawerStyle.ACCOUNT_MONEY_HYBRID) {
             show(new AccountMoneyHybridConfiguration());
         }
-        this.style = style;
     }
 
-    private void internalSetStyle(@NonNull final CardDrawerStyle style) {
+    private void setUpVisibilityOverlay() {
         accountMoneyDefaultOverlay.setVisibility(style == CardDrawerStyle.ACCOUNT_MONEY_DEFAULT ? VISIBLE : GONE);
         accountMoneyHybridOverlay.setVisibility(style == CardDrawerStyle.ACCOUNT_MONEY_HYBRID ? VISIBLE : GONE);
         overlayImage.setVisibility(style == CardDrawerStyle.REGULAR ? VISIBLE : GONE);
-        this.style = style;
     }
 
     @Override
-    protected void onSizeChanged(final int w, final int h, final int oldw, final int oldh) {
-        super.onSizeChanged(w, h, oldw, oldh);
+    protected void onSizeChanged(final int w, final int h, final int oldW, final int oldH) {
+        super.onSizeChanged(w, h, oldW, oldH);
 
         final float cardSizeMultiplier = (float) cardFrontLayout.getMeasuredWidth() / defaultCardWidth;
 

@@ -1,6 +1,5 @@
 package com.meli.android.carddrawer.model.customview
 
-
 import com.meli.android.carddrawer.configuration.CardDrawerStyle
 import com.meli.android.carddrawer.model.CardDrawerView
 
