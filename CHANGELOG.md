@@ -1,3 +1,7 @@
+## Release 2.12.0
+* Added safezone support.
+* Added switch view for combo cards.
+
 ## Release 2.11.2
 * Updated AM default logo.
 
