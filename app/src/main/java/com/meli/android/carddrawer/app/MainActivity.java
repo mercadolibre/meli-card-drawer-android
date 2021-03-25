@@ -3,13 +3,15 @@ package com.meli.android.carddrawer.app;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
-import android.widget.Switch;
 import android.widget.TextView;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SwitchCompat;
 import com.meli.android.carddrawer.app.model.CardComposite;
 import com.meli.android.carddrawer.app.model.CustomAccountMoneyConfiguration;
 import com.meli.android.carddrawer.app.model.HybridCreditConfiguration;
@@ -24,6 +26,8 @@ import com.meli.android.carddrawer.configuration.CardDrawerStyle;
 import com.meli.android.carddrawer.configuration.DefaultCardConfiguration;
 import com.meli.android.carddrawer.model.CardDrawerView;
 import com.meli.android.carddrawer.model.CardUI;
+import com.meli.android.carddrawer.model.customview.CardDrawerSwitch;
+import com.meli.android.carddrawer.model.customview.SwitchModel;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     /* default */ CardDrawerView cardDrawerView;
     /* default */ CardDrawerView cardDrawerViewLowRes;
     /* default */ CardDrawerView cardDrawerViewMedium;
+    /* default */ SwitchCompat switchCustomView;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -42,11 +47,13 @@ public class MainActivity extends AppCompatActivity {
         cardDrawerView = findViewById(R.id.card_header_container);
         cardDrawerViewLowRes = findViewById(R.id.card_header_lowres_container);
         cardDrawerViewMedium = findViewById(R.id.card_header_medium_container);
+        switchCustomView = findViewById(R.id.card_drawer_custom_view_switch);
+
         card = new CardComposite();
         card.addCard(cardDrawerView.getCard());
         card.addCard(cardDrawerViewLowRes.getCard());
         card.addCard(cardDrawerViewMedium.getCard());
-        ((Switch) findViewById(R.id.card_header_switch_responsive)).setOnCheckedChangeListener(
+        ((SwitchCompat) findViewById(R.id.card_header_switch_responsive)).setOnCheckedChangeListener(
             (buttonView, isChecked) -> {
                 final int behaviour = isChecked ?
                     CardDrawerView.Behaviour.RESPONSIVE : CardDrawerView.Behaviour.REGULAR;
@@ -54,21 +61,9 @@ public class MainActivity extends AppCompatActivity {
                 cardDrawerViewLowRes.setBehaviour(behaviour);
                 cardDrawerViewMedium.setBehaviour(behaviour);
             });
-        final Switch switchCustomView = findViewById(R.id.card_drawer_custom_view_switch);
-        final Switch switchLowres = findViewById(R.id.card_header_lowres_switch);
-        final Switch switchMedium = findViewById(R.id.card_header_medium_switch);
 
-        switchCustomView.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if (isChecked) {
-                final View viewHighRes = new View(this);
-                cardDrawerView.setCustomView(viewHighRes);
-                final View viewLowRes = new View(this);
-                cardDrawerViewLowRes.setCustomView(viewLowRes);
-            } else {
-                cardDrawerView.setCustomView(null);
-                cardDrawerViewLowRes.setCustomView(null);
-            }
-        });
+        final SwitchCompat switchLowres = findViewById(R.id.card_header_lowres_switch);
+        final SwitchCompat switchMedium = findViewById(R.id.card_header_medium_switch);
 
         switchLowres.setOnCheckedChangeListener(
             (buttonView, isChecked) -> {
@@ -103,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
 
-        final Switch switchDisabled = findViewById(R.id.card_header_disabled_switch);
+        final SwitchCompat switchDisabled = findViewById(R.id.card_header_disabled_switch);
         switchDisabled.setOnCheckedChangeListener((buttonView, isChecked) -> {
             cardDrawerView.setEnabled(!isChecked);
             cardDrawerViewLowRes.setEnabled(!isChecked);
@@ -255,6 +250,32 @@ public class MainActivity extends AppCompatActivity {
                     cardDrawerView.setStyle(style);
                     cardDrawerViewLowRes.setStyle(style);
                     cardDrawerViewMedium.setStyle(style);
+                }
+
+                setUpCustomView(style, switchCustomView.isChecked());
+                switchCustomView.setOnCheckedChangeListener((buttonView, isChecked) -> setUpCustomView(style, isChecked));
+            }
+
+            private void setUpCustomView(@NonNull final CardDrawerStyle style, @NonNull final Boolean isChecked) {
+                if (isChecked) {
+                    final SwitchModel model;
+                    if (style == CardDrawerStyle.ACCOUNT_MONEY_HYBRID) {
+                        model = SwitchFactoryModelSample.createModelForAccountMoneyHybrid();
+                    } else {
+                        model = SwitchFactoryModelSample.createModel();
+                    }
+                    final CardDrawerSwitch viewHighRes = new CardDrawerSwitch(MainActivity.this);
+                    viewHighRes.setSwitchListener(optionId -> Log.i("CARD_DRAWER", "ID: "+ optionId));
+                    viewHighRes.setSwitchModel(model);
+                    cardDrawerView.setCustomView(viewHighRes);
+                    final CardDrawerSwitch viewLowRes = new CardDrawerSwitch(MainActivity.this);
+                    viewLowRes.setSwitchListener(optionId -> Log.i("CARD_DRAWER", "ID: "+ optionId));
+                    viewLowRes.setSwitchModel(model);
+                    viewLowRes.setConfiguration(cardDrawerViewLowRes.buildCustomViewConfiguration());
+                    cardDrawerViewLowRes.setCustomView(viewLowRes);
+                } else {
+                    cardDrawerView.setCustomView(null);
+                    cardDrawerViewLowRes.setCustomView(null);
                 }
             }
 

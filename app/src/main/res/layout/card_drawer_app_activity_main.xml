@@ -20,7 +20,6 @@
             android:paddingRight="20dp"
             android:paddingTop="20dp">
 
-
             <com.meli.android.carddrawer.model.CardDrawerView
                 android:id="@+id/card_header_container"
                 android:layout_width="match_parent"
@@ -103,7 +102,7 @@
                     android:textSize="16dp"
                     android:text="@string/card_drawer_app_responsive"/>
 
-                <Switch
+                <androidx.appcompat.widget.SwitchCompat
                     android:id="@+id/card_header_switch_responsive"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -123,7 +122,7 @@
                     android:textSize="16dp"
                     android:text="@string/card_drawer_app_custom_view"/>
 
-                <Switch
+                <androidx.appcompat.widget.SwitchCompat
                     android:id="@+id/card_drawer_custom_view_switch"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -143,7 +142,7 @@
                     android:textSize="16dp"
                     android:text="@string/card_drawer_app_low_res"/>
 
-                <Switch
+                <androidx.appcompat.widget.SwitchCompat
                     android:id="@+id/card_header_lowres_switch"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -163,7 +162,7 @@
                     android:textSize="16dp"
                     android:text="@string/card_drawer_app_medium_res"/>
 
-                <Switch
+                <androidx.appcompat.widget.SwitchCompat
                     android:id="@+id/card_header_medium_switch"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -183,7 +182,7 @@
                     android:textSize="16dp"
                     android:text="Disabled"/>
 
-                <Switch
+                <androidx.appcompat.widget.SwitchCompat
                     android:id="@+id/card_header_disabled_switch"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

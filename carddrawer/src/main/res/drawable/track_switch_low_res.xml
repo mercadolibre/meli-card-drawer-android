@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <corners android:radius="30dp" />
+
+    <size
+        android:width="@dimen/card_drawer_track_switch_width"
+        android:height="@dimen/card_drawer_thumb_switch_height_low_res" />
+</shape>

@@ -35,7 +35,8 @@ import com.meli.android.carddrawer.configuration.DefaultCardConfiguration;
 import com.meli.android.carddrawer.configuration.FieldPosition;
 import com.meli.android.carddrawer.configuration.FontType;
 import com.meli.android.carddrawer.configuration.SecurityCodeLocation;
-import com.meli.android.carddrawer.format.TypefaceSetter;
+import com.meli.android.carddrawer.format.TypefaceHelper;
+import com.meli.android.carddrawer.model.customview.CustomViewConfiguration;
 import com.mercadolibre.android.picassodiskcache.PicassoDiskLoader;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -46,6 +47,9 @@ import kotlin.Unit;
 
 @SuppressWarnings({ "PMD.ConstructorCallsOverridableMethod", "PMD.TooManyFields", "PMD.GodClass" })
 public class CardDrawerView extends FrameLayoutWithDisableSupport implements Observer {
+    private static final String STATE_CARD = "state_card";
+    private static final String STATE_ENABLED = "state_enabled";
+    private static final String STATE_SUPER = "state_super";
     private static final float NUMBER_LETTER_SPACING = 0.125f;
 
     protected CardAnimator cardAnimator;
@@ -75,6 +79,8 @@ public class CardDrawerView extends FrameLayoutWithDisableSupport implements Obs
     protected CornerView safeZone;
     private View customView;
     protected CardConfiguration cardConfiguration;
+    protected CardDrawerStyle style;
+    private boolean enabled = true;
 
     public CardDrawerView(@NonNull final Context context) {
         this(context, null);
@@ -98,6 +104,11 @@ public class CardDrawerView extends FrameLayoutWithDisableSupport implements Obs
     @NonNull
     protected CardConfiguration buildCardConfiguration() {
         return new CardHighResConfiguration(source);
+    }
+
+    @NonNull
+    public CustomViewConfiguration buildCustomViewConfiguration() {
+        return new CustomViewConfiguration(Type.HIGH, style);
     }
 
     /**
@@ -154,7 +165,7 @@ public class CardDrawerView extends FrameLayoutWithDisableSupport implements Obs
 
     @Override
     public void setEnabled(final boolean enabled) {
-        super.setEnabled(enabled);
+        this.enabled = enabled;
         updateColor(source);
     }
 
@@ -265,20 +276,20 @@ public class CardDrawerView extends FrameLayoutWithDisableSupport implements Obs
 
     private void updateFont(@Nullable final Typeface customTypeface) {
         if (cardNumber != null) {
-            TypefaceSetter.INSTANCE.set(cardNumber, customTypeface);
+            TypefaceHelper.INSTANCE.set(cardNumber, customTypeface);
         }
         if (cardName != null) {
             cardName.setAllCaps(customTypeface == null);
-            TypefaceSetter.INSTANCE.set(cardName, customTypeface);
+            TypefaceHelper.INSTANCE.set(cardName, customTypeface);
         }
         if (cardDate != null) {
-            TypefaceSetter.INSTANCE.set(cardDate, customTypeface);
+            TypefaceHelper.INSTANCE.set(cardDate, customTypeface);
         }
         if (codeFront != null) {
-            TypefaceSetter.INSTANCE.set(codeFront, customTypeface);
+            TypefaceHelper.INSTANCE.set(codeFront, customTypeface);
         }
         if (codeBack != null) {
-            TypefaceSetter.INSTANCE.set(codeBack, customTypeface);
+            TypefaceHelper.INSTANCE.set(codeBack, customTypeface);
         }
     }
 
@@ -289,6 +300,7 @@ public class CardDrawerView extends FrameLayoutWithDisableSupport implements Obs
      */
     public void update(@NonNull final CardUI source) {
         final boolean animate = !CardAnimationType.NONE.equals(source.getAnimationType());
+        style = source.getStyle() != null ? source.getStyle() : CardDrawerStyle.REGULAR;
         cardConfiguration.updateSource(source);
         updateColor(source);
         updateCardBackgroundGradient(source.getCardGradientColors());
@@ -298,7 +310,7 @@ public class CardDrawerView extends FrameLayoutWithDisableSupport implements Obs
             updateFont(source.getCustomFont());
         }
         updateOverlay(overlayImage, source);
-        internalSetStyle(source.getStyle() != null ? source.getStyle() : CardDrawerStyle.REGULAR);
+        setUpVisibilityOverlay();
         setCardTextColor(source.getFontType(), source.getCardFontColor());
         if (animate) {
             fadeInAnimateView(cardNumber);
@@ -427,7 +439,7 @@ public class CardDrawerView extends FrameLayoutWithDisableSupport implements Obs
 
     private void updateColor(@NonNull final CardUI source) {
         final int disabledColor = source.getDisabledColor() != null ? source.getDisabledColor() : Color.GRAY;
-        final int backgroundColor = isEnabled() ? source.getCardBackgroundColor() : disabledColor;
+        final int backgroundColor = enabled ? source.getCardBackgroundColor() : disabledColor;
         cardAnimator.colorCard(backgroundColor, source.getAnimationType());
     }
 
@@ -532,6 +544,11 @@ public class CardDrawerView extends FrameLayoutWithDisableSupport implements Obs
     }
 
     public void setStyle(@NonNull final CardDrawerStyle style) {
+        this.style = style != null ? style : CardDrawerStyle.REGULAR;
+        updateCardConfigurationByStyle();
+    }
+
+    private void updateCardConfigurationByStyle() {
         if (style == CardDrawerStyle.ACCOUNT_MONEY_DEFAULT) {
             show(new AccountMoneyDefaultConfiguration());
         } else if (style == CardDrawerStyle.ACCOUNT_MONEY_HYBRID) {
@@ -539,15 +556,15 @@ public class CardDrawerView extends FrameLayoutWithDisableSupport implements Obs
         }
     }
 
-    private void internalSetStyle(@NonNull final CardDrawerStyle style) {
+    private void setUpVisibilityOverlay() {
         accountMoneyDefaultOverlay.setVisibility(style == CardDrawerStyle.ACCOUNT_MONEY_DEFAULT ? VISIBLE : GONE);
         accountMoneyHybridOverlay.setVisibility(style == CardDrawerStyle.ACCOUNT_MONEY_HYBRID ? VISIBLE : GONE);
         overlayImage.setVisibility(style == CardDrawerStyle.REGULAR ? VISIBLE : GONE);
     }
 
     @Override
-    protected void onSizeChanged(final int w, final int h, final int oldw, final int oldh) {
-        super.onSizeChanged(w, h, oldw, oldh);
+    protected void onSizeChanged(final int w, final int h, final int oldW, final int oldH) {
+        super.onSizeChanged(w, h, oldW, oldH);
 
         final float cardSizeMultiplier = (float) cardFrontLayout.getMeasuredWidth() / defaultCardWidth;
 
@@ -574,8 +591,9 @@ public class CardDrawerView extends FrameLayoutWithDisableSupport implements Obs
         // Construct bundle
         final Bundle bundle = new Bundle();
         // Store base view state
-        bundle.putParcelable("instanceState", super.onSaveInstanceState());
-        bundle.putParcelable("card", card);
+        bundle.putParcelable(STATE_SUPER, super.onSaveInstanceState());
+        bundle.putParcelable(STATE_CARD, card);
+        bundle.putBoolean(STATE_ENABLED, enabled);
         cardAnimator.saveState(bundle);
 
         return bundle;
@@ -587,12 +605,13 @@ public class CardDrawerView extends FrameLayoutWithDisableSupport implements Obs
         // Checks if the state is the bundle we saved
         if (state instanceof Bundle) {
             final Bundle bundle = (Bundle) state;
-            final Card savedCard = bundle.getParcelable("card");
+            enabled = bundle.getBoolean(STATE_ENABLED);
+            final Card savedCard = bundle.getParcelable(STATE_CARD);
             card.fillCard(savedCard);
             updateCardInformation();
             cardAnimator.restoreState(bundle);
 
-            state = bundle.getParcelable("instanceState");
+            state = bundle.getParcelable(STATE_SUPER);
         }
         // Pass base view state on to super
         super.onRestoreInstanceState(state);
@@ -605,8 +624,16 @@ public class CardDrawerView extends FrameLayoutWithDisableSupport implements Obs
         int RESPONSIVE = 1;
     }
 
+    @Retention(RetentionPolicy.SOURCE)
+    @IntDef({ Type.HIGH, Type.MEDIUM, Type.LOW })
+    public @interface Type {
+        int HIGH = 0;
+        int MEDIUM = 1;
+        int LOW = 2;
+    }
+
     private void updateCardBackgroundGradient(@Nullable final List<String> gradientColors) {
-        final GradientDrawable gradientDrawable = ViewHelper.getGradientDrawable(getResources(), gradientColors);
+        final GradientDrawable gradientDrawable = ViewHelper.getGradientDrawable(getContext(), gradientColors);
         cardFrontGradient.setImageDrawable(gradientDrawable);
         cardBackGradient.setImageDrawable(gradientDrawable);
     }

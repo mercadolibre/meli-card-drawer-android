@@ -5,6 +5,7 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
 import com.meli.android.carddrawer.R
+import com.meli.android.carddrawer.configuration.CardDrawerStyle
 import com.meli.android.carddrawer.format.NumberFormatter
 
 internal class CardLowResConfiguration(source: CardUI): CardConfiguration(source) {
@@ -28,20 +29,40 @@ internal class CardLowResConfiguration(source: CardUI): CardConfiguration(source
             it.findViewById<View>(R.id.cho_card_code_front_red_circle).also { view ->
                 setVisibilityForRedCircle(view, codeFront)
             }
+            it.findViewById<View>(R.id.cho_card_number).also(::setVisibilityForCardNumber)
         }
     }
 
+    private fun setVisibilityForCardNumber(view: View) {
+        view.visibility = if(isRegularStyle()) View.VISIBLE else View.GONE
+    }
+
     private fun setUpConstraintCardNumber(constraintSet: ConstraintSet) {
-        constraintSet.connect(
-            R.id.cho_card_number,
-            ConstraintSet.START,
-            R.id.card_header_front_guideline_left,
-            ConstraintSet.END
-        )
-        constraintSet.clear(
-            R.id.cho_card_number,
-            ConstraintSet.END
-        )
+        if(isRegularStyle()) {
+            constraintSet.connect(
+                R.id.cho_card_number,
+                ConstraintSet.START,
+                R.id.card_header_front_guideline_left,
+                ConstraintSet.END
+            )
+            constraintSet.clear(
+                R.id.cho_card_number,
+                ConstraintSet.END
+            )
+            constraintSet.connect(
+                R.id.safe_zone,
+                ConstraintSet.START,
+                R.id.card_header_front_guideline_center_horizontal,
+                ConstraintSet.END
+            )
+        } else {
+            constraintSet.connect(
+                R.id.safe_zone,
+                ConstraintSet.START,
+                ConstraintSet.PARENT_ID,
+                ConstraintSet.START
+            )
+        }
     }
 
     override fun canPerformAction(view: View) = when (view.id) {

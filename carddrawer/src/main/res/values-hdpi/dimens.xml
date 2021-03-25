@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Card form -->
+    <dimen name="card_drawer_card_width">256dp</dimen>
+    <dimen name="card_drawer_switch_width">148dp</dimen>
+    <dimen name="card_drawer_camera_distance">2560dp</dimen>
+    <dimen name="card_drawer_layout_padding">20dp</dimen>
+
+    <dimen name="card_drawer_shadow_radius">2dp</dimen>
+    <dimen name="card_drawer_logo_height">36dp</dimen>
+
+    <dimen name="card_drawer_corner_radius">8dp</dimen>
+
+    <dimen name="card_drawer_font_size">10dp</dimen>
+    <dimen name="card_drawer_font_size_small">8dp</dimen>
+
+    <!-- Card drawer switch -->
+
+    <dimen name="card_drawer_thumb_switch_width_low_res">60dp</dimen>
+    <dimen name="card_drawer_gradient_thumb_switch_width_low_res">56dp</dimen>
+
+    <dimen name="card_drawer_thumb_switch_height_low_res">22.5dp</dimen>
+    <dimen name="card_drawer_gradient_thumb_switch_height_low_res">18.5dp</dimen>
+</resources>
