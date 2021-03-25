@@ -7,7 +7,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import android.util.AttributeSet;
 import com.meli.android.carddrawer.R;
-import com.meli.android.carddrawer.format.NumberFormatter;
+import com.meli.android.carddrawer.model.customview.CustomViewConfiguration;
 
 public class CardDrawerViewLowres extends CardDrawerView {
 
@@ -31,6 +31,18 @@ public class CardDrawerViewLowres extends CardDrawerView {
         super.init(context, attrs);
     }
 
+    @NonNull
+    @Override
+    protected CardConfiguration buildCardConfiguration() {
+        return new CardLowResConfiguration(source);
+    }
+
+    @NonNull
+    @Override
+    public CustomViewConfiguration buildCustomViewConfiguration() {
+        return new CustomViewConfiguration(Type.LOW, style);
+    }
+
     @Override
     protected float getCodeFrontTextSize() {
         return codeFrontTextSize;
@@ -48,11 +60,6 @@ public class CardDrawerViewLowres extends CardDrawerView {
         updateNumber();
         updateName();
         updateSecCode();
-    }
-
-    @Override
-    protected String getFormattedNumber(@NonNull final String input, @NonNull final int... pattern) {
-        return NumberFormatter.INSTANCE.formatShort(input, pattern);
     }
 
     @Override
