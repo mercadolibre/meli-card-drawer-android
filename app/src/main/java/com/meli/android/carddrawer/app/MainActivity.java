@@ -271,7 +271,7 @@ public class MainActivity extends AppCompatActivity {
                     final CardDrawerSwitch viewLowRes = new CardDrawerSwitch(MainActivity.this);
                     viewLowRes.setSwitchListener(optionId -> Log.i("CARD_DRAWER", "ID: "+ optionId));
                     viewLowRes.setSwitchModel(model);
-                    viewLowRes.setConfiguration(cardDrawerViewLowRes.getCustomViewConfiguration());
+                    viewLowRes.setConfiguration(cardDrawerViewLowRes.buildCustomViewConfiguration());
                     cardDrawerViewLowRes.setCustomView(viewLowRes);
                 } else {
                     cardDrawerView.setCustomView(null);

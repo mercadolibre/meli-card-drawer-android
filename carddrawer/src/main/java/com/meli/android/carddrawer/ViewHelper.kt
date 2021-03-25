@@ -10,9 +10,9 @@ internal object ViewHelper {
 
     @JvmStatic
     fun getGradientDrawable(context: Context,
-        gradientColors: List<String?>?): GradientDrawable {
+        gradientColors: List<String>?): GradientDrawable {
         val gradientDrawable = ContextCompat.getDrawable(context, R.drawable.card_drawer_gradient) as GradientDrawable
-        return if (gradientColors == null || gradientColors.isEmpty()) {
+        return if (gradientColors.isNullOrEmpty()) {
             gradientDrawable
         } else {
             val gradientCopy = gradientDrawable.mutate().constantState!!.newDrawable() as GradientDrawable

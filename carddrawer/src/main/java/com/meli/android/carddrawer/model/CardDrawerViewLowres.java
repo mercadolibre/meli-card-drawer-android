@@ -39,7 +39,7 @@ public class CardDrawerViewLowres extends CardDrawerView {
 
     @NonNull
     @Override
-    public CustomViewConfiguration getCustomViewConfiguration() {
+    public CustomViewConfiguration buildCustomViewConfiguration() {
         return new CustomViewConfiguration(Type.LOW, style);
     }
 

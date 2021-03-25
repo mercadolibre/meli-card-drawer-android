@@ -107,7 +107,7 @@ public class CardDrawerView extends FrameLayoutWithDisableSupport implements Obs
     }
 
     @NonNull
-    public CustomViewConfiguration getCustomViewConfiguration() {
+    public CustomViewConfiguration buildCustomViewConfiguration() {
         return new CustomViewConfiguration(Type.HIGH, style);
     }
 
