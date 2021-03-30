@@ -19,7 +19,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.78" />
+        app:layout_constraintGuide_percent="0.7142" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/card_header_front_guideline_left"
@@ -47,14 +47,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.357" />
+        app:layout_constraintGuide_percent="0.333" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/card_header_front_guideline_center_vertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.5" />
+        app:layout_constraintGuide_percent="0.428" />
 
     <TextView
         android:id="@+id/text_guideline"
