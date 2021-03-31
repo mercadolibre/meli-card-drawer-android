@@ -5,7 +5,6 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
 import com.meli.android.carddrawer.R
-import com.meli.android.carddrawer.configuration.CardDrawerStyle
 import com.meli.android.carddrawer.format.NumberFormatter
 
 internal class CardLowResConfiguration(source: CardUI): CardConfiguration(source) {
@@ -44,6 +43,16 @@ internal class CardLowResConfiguration(source: CardUI): CardConfiguration(source
                 ConstraintSet.START,
                 R.id.card_header_front_guideline_left,
                 ConstraintSet.END
+            )
+            constraintSet.connect(
+                R.id.cho_card_number,
+                ConstraintSet.BOTTOM,
+                R.id.card_header_front_guideline_bottom,
+                ConstraintSet.TOP
+            )
+            constraintSet.clear(
+                R.id.cho_card_number,
+                ConstraintSet.BASELINE
             )
             constraintSet.clear(
                 R.id.cho_card_number,

@@ -67,14 +67,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.2848" />
+        app:layout_constraintGuide_percent="0.3648" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/card_header_front_guideline_safezone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.5" />
+        app:layout_constraintGuide_percent="0.58" />
 
     <TextView
         android:id="@+id/text_guideline"
