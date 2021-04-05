@@ -17,7 +17,7 @@ internal object CustomSwitchHelper {
 
     @JvmStatic
     fun makeTextLayout(textToDraw: CharSequence, textPaint: TextPaint): StaticLayout {
-        val textWidth = Layout.getDesiredWidth(textToDraw, textPaint).roundToInt()
+        val textWidth = textPaint.measureText(textToDraw.toString()).roundToInt()
         return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             StaticLayout
                 .Builder
