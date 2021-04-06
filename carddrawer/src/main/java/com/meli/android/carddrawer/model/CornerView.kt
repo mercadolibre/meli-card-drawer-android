@@ -13,7 +13,7 @@ internal class CornerView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
-) : FrameLayout(context, attrs, defStyleAttr) {
+) : FrameLayout(context, attrs, defStyleAttr), ConstraintLayoutWithDisabledSupport.Child {
 
     private var topLeftCornerRadius = 0f
     private var topRightCornerRadius = 0f
@@ -64,5 +64,9 @@ internal class CornerView @JvmOverloads constructor(
             removeAllViews()
         }
         super.addView(child)
+    }
+
+    override fun shouldBeGreyedOut(): Boolean {
+        return false
     }
 }
