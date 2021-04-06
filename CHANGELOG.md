@@ -1,5 +1,9 @@
+## Release 2.13.1
+* Fixes Switch text on API 30.
+* Fixes safezone disabled support.
+
 ## Release 2.13.0
-* Changed margins on switch and card drawer with custom view
+* Changed margins on switch and card drawer with custom view.
 
 ## Release 2.12.0
 * Added safezone support.
