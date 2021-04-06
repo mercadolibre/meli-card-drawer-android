@@ -7,13 +7,14 @@ import android.graphics.ColorMatrixColorFilter
 import android.graphics.Paint
 import android.os.Build
 import android.util.AttributeSet
-import android.widget.FrameLayout
+import android.view.View
+import androidx.constraintlayout.widget.ConstraintLayout
 
-open class FrameLayoutWithDisableSupport @JvmOverloads constructor(
+open class ConstraintLayoutWithDisabledSupport @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
-) : FrameLayout(context, attrs, defStyleAttr) {
+) : ConstraintLayout(context, attrs, defStyleAttr) {
 
     private val paint = Paint()
 
@@ -30,35 +31,24 @@ open class FrameLayoutWithDisableSupport @JvmOverloads constructor(
         paint.colorFilter = ColorMatrixColorFilter(cm)
     }
 
-    override fun dispatchDraw(canvas: Canvas?) {
-        if (!isEnabled) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+    override fun drawChild(canvas: Canvas?, child: View?, drawingTime: Long): Boolean {
+        val shouldBeGreyedOut = child !is Child || child.shouldBeGreyedOut()
+        var restoreCount: Int? = null
+        if (!isEnabled && shouldBeGreyedOut) {
+            restoreCount = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 canvas?.saveLayer(null, paint)
             } else {
                 canvas?.saveLayer(null, paint, Canvas.ALL_SAVE_FLAG)
             }
         }
-
-        super.dispatchDraw(canvas)
-
-        if (!isEnabled) {
-            canvas?.restore()
+        val returnValue = super.drawChild(canvas, child, drawingTime)
+        restoreCount?.let {
+            canvas?.restoreToCount(it)
         }
+        return returnValue
     }
 
-    override fun draw(canvas: Canvas?) {
-        if (!isEnabled) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                canvas?.saveLayer(null, paint)
-            } else {
-                canvas?.saveLayer(null, paint, Canvas.ALL_SAVE_FLAG)
-            }
-        }
-
-        super.draw(canvas)
-
-        if (!isEnabled) {
-            canvas?.restore()
-        }
+    interface Child {
+        fun shouldBeGreyedOut(): Boolean
     }
 }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<com.meli.android.carddrawer.model.ConstraintLayoutWithDisabledSupport
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -95,4 +95,4 @@
         app:layout_constraintTop_toTopOf="@id/cho_card_code_back_container"
         app:layout_constraintBottom_toBottomOf="@id/cho_card_code_back_container" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</com.meli.android.carddrawer.model.ConstraintLayoutWithDisabledSupport>

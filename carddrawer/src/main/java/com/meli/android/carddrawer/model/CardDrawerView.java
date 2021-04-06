@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.FrameLayout;
 import android.widget.ImageSwitcher;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -46,9 +47,8 @@ import java.util.Observer;
 import kotlin.Unit;
 
 @SuppressWarnings({ "PMD.ConstructorCallsOverridableMethod", "PMD.TooManyFields", "PMD.GodClass" })
-public class CardDrawerView extends FrameLayoutWithDisableSupport implements Observer {
+public class CardDrawerView extends FrameLayout implements Observer {
     private static final String STATE_CARD = "state_card";
-    private static final String STATE_ENABLED = "state_enabled";
     private static final String STATE_SUPER = "state_super";
     private static final float NUMBER_LETTER_SPACING = 0.125f;
 
@@ -80,7 +80,6 @@ public class CardDrawerView extends FrameLayoutWithDisableSupport implements Obs
     private View customView;
     protected CardConfiguration cardConfiguration;
     protected CardDrawerStyle style;
-    private boolean enabled = true;
 
     public CardDrawerView(@NonNull final Context context) {
         this(context, null);
@@ -165,7 +164,9 @@ public class CardDrawerView extends FrameLayoutWithDisableSupport implements Obs
 
     @Override
     public void setEnabled(final boolean enabled) {
-        this.enabled = enabled;
+        super.setEnabled(enabled);
+        cardFrontLayout.setEnabled(enabled);
+        cardBackLayout.setEnabled(enabled);
         updateColor(source);
     }
 
@@ -439,7 +440,7 @@ public class CardDrawerView extends FrameLayoutWithDisableSupport implements Obs
 
     private void updateColor(@NonNull final CardUI source) {
         final int disabledColor = source.getDisabledColor() != null ? source.getDisabledColor() : Color.GRAY;
-        final int backgroundColor = enabled ? source.getCardBackgroundColor() : disabledColor;
+        final int backgroundColor = isEnabled() ? source.getCardBackgroundColor() : disabledColor;
         cardAnimator.colorCard(backgroundColor, source.getAnimationType());
     }
 
@@ -593,7 +594,6 @@ public class CardDrawerView extends FrameLayoutWithDisableSupport implements Obs
         // Store base view state
         bundle.putParcelable(STATE_SUPER, super.onSaveInstanceState());
         bundle.putParcelable(STATE_CARD, card);
-        bundle.putBoolean(STATE_ENABLED, enabled);
         cardAnimator.saveState(bundle);
 
         return bundle;
@@ -605,7 +605,6 @@ public class CardDrawerView extends FrameLayoutWithDisableSupport implements Obs
         // Checks if the state is the bundle we saved
         if (state instanceof Bundle) {
             final Bundle bundle = (Bundle) state;
-            enabled = bundle.getBoolean(STATE_ENABLED);
             final Card savedCard = bundle.getParcelable(STATE_CARD);
             card.fillCard(savedCard);
             updateCardInformation();
