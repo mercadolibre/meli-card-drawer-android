@@ -1,3 +1,6 @@
+## Release 2.13.2
+* Fixes safezone disabled support for lowres.
+
 ## Release 2.13.1
 * Fixes Switch text on API 30.
 * Fixes safezone disabled support.
