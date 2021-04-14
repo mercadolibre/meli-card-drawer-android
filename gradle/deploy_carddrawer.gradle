@@ -1,0 +1,14 @@
+ext {
+    artifactLib = 'carddrawer'
+    libraryName = 'com.mercadolibre.android.carddrawer'
+    libraryDescription = 'Android library for shared credit card UI component'
+    siteUrl = 'https://github.com/mercadolibre/meli-card-drawer-android'
+    gitUrl = 'https://github.com/mercadolibre/meli-card-drawer-android.git'
+    licenseName = 'The Apache Software License, Version 2.0'
+    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+    groupName = "com.mercadolibre.android"
+}
+
+group = groupName
+
+apply from:"$rootDir/gradle/deploy_base.gradle"
