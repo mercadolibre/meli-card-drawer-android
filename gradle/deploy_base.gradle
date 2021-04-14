@@ -1,0 +1,123 @@
+apply plugin:'maven-publish'
+
+def versionLocation = "build/last_deployed_version.txt"
+
+task javadoc(type:Javadoc) {
+    failOnError = false
+    options.encoding = 'UTF-8'
+    source = android.sourceSets.main.java.srcDirs
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+    exclude '**/BuildConfig.java'
+    exclude '**/R.java'
+    exclude '**/internal/**'
+}
+
+task androidJavadocsJar(type:Jar, dependsOn:javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+task androidSourcesJar(type:Jar) {
+    classifier = 'sources'
+    from android.sourceSets.main.java.sourceFiles
+}
+
+task printLastVersion {
+    doLast {
+        try {
+            println file(versionLocation).text
+        } catch(Exception ignored) {
+            //nothing to do here
+        }
+    }
+}
+
+artifacts {
+    archives androidSourcesJar
+    archives androidJavadocsJar
+}
+
+def localProperties = new Properties()
+
+if (project.rootProject.file('local.properties').exists()) {
+    localProperties.load(project.rootProject.file('local.properties').newDataInputStream())
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            maven(MavenPublication) {
+                from components.release
+                groupId = group
+                artifactId = artifactLib
+
+                pom {
+                    name = libraryName
+                    description = libraryDescription
+                    url = siteUrl
+
+                    licenses {
+                        license {
+                            name = licenseName
+                            url = licenseUrl
+                        }
+                    }
+                    scm {
+                        connection = gitUrl
+                        developerConnection = gitUrl
+                        url = siteUrl
+                    }
+                }
+            }
+        }
+
+        repositories {
+            maven {
+                name = 'releases'
+                url = 'https://artifacts.mercadolibre.com/repository/android-releases/'
+                credentials {
+                    username = "$System.env.NEXUS_DEPLOYER_USER"
+                    password = "$System.env.NEXUS_DEPLOYER_PASSWORD"
+                }
+            }
+            maven {
+                name = 'experimental'
+                url = 'https://artifacts.mercadolibre.com/repository/android-experimental'
+                credentials {
+                    username = "$System.env.NEXUS_DEPLOYER_USER"
+                    password = "$System.env.NEXUS_DEPLOYER_PASSWORD"
+                }
+            }
+        }
+
+        tasks.register("publishLocal") {
+            dependsOn publishMavenPublicationToMavenLocal
+            version = "LOCAL-$libraryVersion-$dateNow"
+
+            doLast {
+                println "Deployed ${project.name} version: ${version}"
+                file(versionLocation).text = version
+            }
+        }
+
+        tasks.register("publishExperimental") {
+            dependsOn publishMavenPublicationToExperimentalRepository
+            version = "EXPERIMENTAL-$libraryVersion-$dateNow"
+
+            doLast {
+                println "Deployed ${project.name} version: ${version}"
+                file(versionLocation).text = version
+            }
+        }
+
+        tasks.register("publishRelease") {
+            dependsOn publishMavenPublicationToReleasesRepository
+            version = libraryVersion
+
+            doLast {
+                println "Deployed ${project.name} version: ${version}"
+                file(versionLocation).text = version
+            }
+        }
+    }
+}

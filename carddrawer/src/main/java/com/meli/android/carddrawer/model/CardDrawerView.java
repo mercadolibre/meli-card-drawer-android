@@ -102,7 +102,7 @@ public class CardDrawerView extends FrameLayout implements Observer {
 
     @NonNull
     protected CardConfiguration buildCardConfiguration() {
-        return new CardHighResConfiguration(source);
+        return new CardDefaultResConfiguration(source);
     }
 
     @NonNull

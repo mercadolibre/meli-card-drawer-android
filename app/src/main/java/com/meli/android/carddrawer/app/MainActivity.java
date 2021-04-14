@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     /* default */ CardDrawerView cardDrawerView;
     /* default */ CardDrawerView cardDrawerViewLowRes;
     /* default */ CardDrawerView cardDrawerViewMedium;
+    /* default */ CardDrawerView cardDrawerViewMediumRes;
     /* default */ SwitchCompat switchCustomView;
 
     @Override
@@ -47,12 +48,14 @@ public class MainActivity extends AppCompatActivity {
         cardDrawerView = findViewById(R.id.card_header_container);
         cardDrawerViewLowRes = findViewById(R.id.card_header_lowres_container);
         cardDrawerViewMedium = findViewById(R.id.card_header_medium_container);
+        cardDrawerViewMediumRes = findViewById(R.id.card_header_mediumres_container);
         switchCustomView = findViewById(R.id.card_drawer_custom_view_switch);
 
         card = new CardComposite();
         card.addCard(cardDrawerView.getCard());
         card.addCard(cardDrawerViewLowRes.getCard());
         card.addCard(cardDrawerViewMedium.getCard());
+        card.addCard(cardDrawerViewMediumRes.getCard());
         ((SwitchCompat) findViewById(R.id.card_header_switch_responsive)).setOnCheckedChangeListener(
             (buttonView, isChecked) -> {
                 final int behaviour = isChecked ?
@@ -60,49 +63,88 @@ public class MainActivity extends AppCompatActivity {
                 cardDrawerView.setBehaviour(behaviour);
                 cardDrawerViewLowRes.setBehaviour(behaviour);
                 cardDrawerViewMedium.setBehaviour(behaviour);
+                cardDrawerViewMediumRes.setBehaviour(behaviour);
             });
 
         final SwitchCompat switchLowres = findViewById(R.id.card_header_lowres_switch);
         final SwitchCompat switchMedium = findViewById(R.id.card_header_medium_switch);
+        final SwitchCompat switchMediumRes = findViewById(R.id.card_header_mediumres_switch);
 
         switchLowres.setOnCheckedChangeListener(
             (buttonView, isChecked) -> {
                 if (isChecked) {
                     switchMedium.setChecked(false);
+                    switchMediumRes.setChecked(false);
                     cardDrawerViewLowRes.setVisibility(View.VISIBLE);
                     cardDrawerViewMedium.setVisibility(View.GONE);
+                    cardDrawerViewMediumRes.setVisibility(View.GONE);
                     cardDrawerView.setVisibility(View.GONE);
                 } else {
                     cardDrawerViewLowRes.setVisibility(View.GONE);
                     if (switchMedium.isChecked()) {
                         cardDrawerViewMedium.setVisibility(View.VISIBLE);
                     } else {
-                        cardDrawerView.setVisibility(View.VISIBLE);
+                        if (switchMediumRes.isChecked()) {
+                            cardDrawerViewMediumRes.setVisibility(View.VISIBLE);
+                        } else {
+                            cardDrawerView.setVisibility(View.VISIBLE);
+                        }
                     }
                 }
             });
+
         switchMedium.setOnCheckedChangeListener(
             (buttonView, isChecked) -> {
                 if (isChecked) {
                     switchLowres.setChecked(false);
+                    switchMediumRes.setChecked(false);
                     cardDrawerViewMedium.setVisibility(View.VISIBLE);
                     cardDrawerView.setVisibility(View.GONE);
                     cardDrawerViewLowRes.setVisibility(View.GONE);
+                    cardDrawerViewMediumRes.setVisibility(View.GONE);
                 } else {
                     cardDrawerViewMedium.setVisibility(View.GONE);
                     if (switchLowres.isChecked()) {
                         cardDrawerViewLowRes.setVisibility(View.VISIBLE);
                     } else {
-                        cardDrawerView.setVisibility(View.VISIBLE);
+                        if (switchMediumRes.isChecked()) {
+                            cardDrawerViewMediumRes.setVisibility(View.VISIBLE);
+                        } else {
+                            cardDrawerView.setVisibility(View.VISIBLE);
+                        }
                     }
                 }
             });
+
+        switchMediumRes.setOnCheckedChangeListener(
+                (buttonView, isChecked) -> {
+                    if (isChecked) {
+                        switchLowres.setChecked(false);
+                        switchMedium.setChecked(false);
+                        cardDrawerViewMediumRes.setVisibility(View.VISIBLE);
+                        cardDrawerView.setVisibility(View.GONE);
+                        cardDrawerViewMedium.setVisibility(View.GONE);
+                        cardDrawerViewLowRes.setVisibility(View.GONE);
+                    } else {
+                        cardDrawerViewMediumRes.setVisibility(View.GONE);
+                        if (switchLowres.isChecked()) {
+                            cardDrawerViewLowRes.setVisibility(View.VISIBLE);
+                        } else {
+                            if (switchMedium.isChecked()) {
+                                cardDrawerViewMedium.setVisibility(View.VISIBLE);
+                            } else {
+                                cardDrawerView.setVisibility(View.VISIBLE);
+                            }
+                        }
+                    }
+                });
 
         final SwitchCompat switchDisabled = findViewById(R.id.card_header_disabled_switch);
         switchDisabled.setOnCheckedChangeListener((buttonView, isChecked) -> {
             cardDrawerView.setEnabled(!isChecked);
             cardDrawerViewLowRes.setEnabled(!isChecked);
             cardDrawerViewMedium.setEnabled(!isChecked);
+            cardDrawerViewMediumRes.setEnabled(!isChecked);
         });
 
         initCardConfigurationOptions();
@@ -121,6 +163,7 @@ public class MainActivity extends AppCompatActivity {
                 cardDrawerView.showSecurityCode();
                 cardDrawerViewLowRes.showSecurityCode();
                 cardDrawerViewMedium.showSecurityCode();
+                cardDrawerViewMediumRes.showSecurityCode();
             }
 
             @Override
@@ -134,6 +177,7 @@ public class MainActivity extends AppCompatActivity {
                     cardDrawerView.show();
                     cardDrawerViewLowRes.show();
                     cardDrawerViewMedium.show();
+                    cardDrawerViewMediumRes.show();
                 }
             }
         });
@@ -184,6 +228,7 @@ public class MainActivity extends AppCompatActivity {
             cardDrawerView.show();
             cardDrawerViewLowRes.show();
             cardDrawerViewMedium.show();
+            cardDrawerViewMediumRes.show();
         });
     }
 
@@ -211,6 +256,7 @@ public class MainActivity extends AppCompatActivity {
             cardDrawerView.show();
             cardDrawerViewLowRes.show();
             cardDrawerViewMedium.show();
+            cardDrawerViewMediumRes.show();
         });
     }
 
@@ -246,10 +292,13 @@ public class MainActivity extends AppCompatActivity {
                     cardDrawerView.show(configuration);
                     cardDrawerViewLowRes.show(configuration);
                     cardDrawerViewMedium.show(configuration);
+                    cardDrawerViewMediumRes.show(configuration);
+
                 } else if (style != null) {
                     cardDrawerView.setStyle(style);
                     cardDrawerViewLowRes.setStyle(style);
                     cardDrawerViewMedium.setStyle(style);
+                    cardDrawerViewMediumRes.setStyle(style);
                 }
 
                 setUpCustomView(style, switchCustomView.isChecked());
@@ -273,9 +322,15 @@ public class MainActivity extends AppCompatActivity {
                     viewLowRes.setSwitchModel(model);
                     viewLowRes.setConfiguration(cardDrawerViewLowRes.buildCustomViewConfiguration());
                     cardDrawerViewLowRes.setCustomView(viewLowRes);
+                    final CardDrawerSwitch viewMediumRes = new CardDrawerSwitch(MainActivity.this);
+                    viewMediumRes.setSwitchListener(optionId -> Log.i("CARD_DRAWER", "ID: "+ optionId));
+                    viewMediumRes.setSwitchModel(model);
+                    viewMediumRes.setConfiguration(cardDrawerViewMediumRes.buildCustomViewConfiguration());
+                    cardDrawerViewMediumRes.setCustomView(viewMediumRes);
                 } else {
                     cardDrawerView.setCustomView(null);
                     cardDrawerViewLowRes.setCustomView(null);
+                    cardDrawerViewMediumRes.setCustomView(null);
                 }
             }
 

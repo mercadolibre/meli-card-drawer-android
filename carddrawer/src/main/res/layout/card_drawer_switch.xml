@@ -101,4 +101,18 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.7812" />
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/switch_top_guideline_medium_res"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.0875" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/switch_bottom_guideline_medium_res"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.9812" />
+
 </merge>
