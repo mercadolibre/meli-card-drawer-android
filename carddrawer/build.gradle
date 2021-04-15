@@ -1,9 +1,7 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.novoda.bintray-release'
-apply from: rootProject.file('jacoco.gradle')
-apply from: rootProject.file('publish.gradle')
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply from: rootProject.file('gradle/jacoco.gradle')
 
 android {
     compileSdkVersion androidTarget as int
@@ -37,13 +35,14 @@ android {
     }
 }
 
+apply from:"$rootDir/gradle/deploy_carddrawer.gradle"
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     implementation "com.mercadolibre.android:picasso-disk-cache:$picassoDiskCache"
     implementation "androidx.appcompat:appcompat:$appCompat"
     implementation "androidx.constraintlayout:constraintlayout:$constraintLayout"
-    implementation "androidx.cardview:cardview:$cardView"
     testImplementation "junit:junit:$junit"
     androidTestImplementation "androidx.test.ext:junit:$testRunner"
     androidTestImplementation "androidx.test.espresso:espresso-core:$espresso"

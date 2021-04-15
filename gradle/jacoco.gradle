@@ -57,9 +57,9 @@ def createReportTask(def variant) {
         reportTask.dependsOn testTask
         reportTask.group = "reporting"
         reportTask.description = "Generates Jacoco coverage reports for the ${variant.name} variant."
-        reportTask.executionData = project.files(executionData)
-        reportTask.sourceDirectories = project.files(sourceDirs)
-        reportTask.classDirectories = classesDir
+        reportTask.executionData.setFrom(project.files(executionData))
+        reportTask.sourceDirectories.setFrom(project.files(sourceDirs))
+        reportTask.classDirectories.setFrom(classesDir)
         reportTask.reports {
             csv.enabled false
             html.enabled true

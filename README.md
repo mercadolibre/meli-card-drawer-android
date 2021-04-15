@@ -133,9 +133,8 @@ public interface CardUI {
 
 ## How to make a local publish
 ```
-./gradlew build publishToMavenLocal
+./gradlew publishLocal
 ```
-Pro tip: first change the version name in ```gradle.properties``` to ```X.XX.X-LOCAL```
 
 ## 👨🏻‍💻 Author
 Mercado Libre
