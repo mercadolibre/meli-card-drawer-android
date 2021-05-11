@@ -186,20 +186,52 @@ class CardDrawerSwitch @JvmOverloads constructor(
 
     fun setConfiguration(configuration: CustomViewConfiguration) {
         with(configuration) {
-            if (cardDrawerType == CardDrawerView.Type.LOW) {
-                val visibility = if (cardDrawerStyle == CardDrawerStyle.REGULAR) {
-                    configureForRegularStyle()
-                    defaultSwitchWidth /= 2
-                    View.GONE
-                } else {
-                    configureForHybridStyle()
-                    View.VISIBLE
+            when (cardDrawerType) {
+                CardDrawerView.Type.LOW -> {
+                    val visibility = if (cardDrawerStyle == CardDrawerStyle.REGULAR) {
+                        configureForRegularStyle()
+                        defaultSwitchWidth /= 2
+                        View.GONE
+                    } else {
+                        configureForHybridStyle()
+                        View.VISIBLE
+                    }
+                    description.visibility = visibility
+                    setBackgroundColor(Color.TRANSPARENT)
+                    configureForLowRes()
                 }
-                description.visibility = visibility
-                setBackgroundColor(Color.TRANSPARENT)
-                configureForLowRes()
+                CardDrawerView.Type.MEDIUM -> {
+                    configureForMediumRes()
+                }
             }
         }
+    }
+
+    private fun configureForMediumRes() {
+        ConstraintSet().also {
+            it.clone(this@CardDrawerSwitch)
+            it.connect(
+                    switchCompatContainer.id,
+                    ConstraintSet.BOTTOM,
+                    R.id.switch_bottom_guideline_medium_res,
+                    ConstraintSet.BOTTOM
+            )
+            it.connect(
+                    switchCompatContainer.id,
+                    ConstraintSet.TOP,
+                    R.id.switch_top_guideline_medium_res,
+                    ConstraintSet.TOP
+            )
+        }.applyTo(this@CardDrawerSwitch)
+        customSwitchForMediumAndLowRes()
+    }
+
+    private fun customSwitchForMediumAndLowRes() {
+        switchTextSize = getDimension(R.dimen.card_drawer_switch_text_size_low_res)
+        gradientLayerPadding = getDimension(R.dimen.card_drawer_gradient_layer_padding_low_res)
+        thumbLayerPadding = getDimension(R.dimen.card_drawer_thumb_layer_padding_low_res)
+        thumbLayerDrawable = (getDrawable(R.drawable.button_switch_low_res) as LayerDrawable)
+        trackGradientDrawable = (getDrawable(R.drawable.track_switch_low_res) as GradientDrawable)
     }
 
     private fun configureForRegularStyle() {
@@ -248,11 +280,7 @@ class CardDrawerSwitch @JvmOverloads constructor(
                 ConstraintSet.TOP
             )
         }.applyTo(this@CardDrawerSwitch)
-        switchTextSize = getDimension(R.dimen.card_drawer_switch_text_size_low_res)
-        gradientLayerPadding = getDimension(R.dimen.card_drawer_gradient_layer_padding_low_res)
-        thumbLayerPadding = getDimension(R.dimen.card_drawer_thumb_layer_padding_low_res)
-        thumbLayerDrawable = (getDrawable(R.drawable.button_switch_low_res) as LayerDrawable)
-        trackGradientDrawable = (getDrawable(R.drawable.track_switch_low_res) as GradientDrawable)
+        customSwitchForMediumAndLowRes()
     }
 
     @Suppress("unused")
