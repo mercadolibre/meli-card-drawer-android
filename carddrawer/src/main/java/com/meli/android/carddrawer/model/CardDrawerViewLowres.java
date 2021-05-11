@@ -1,17 +1,15 @@
 package com.meli.android.carddrawer.model;
 
 import android.content.Context;
+import android.content.res.Resources;
+import android.util.AttributeSet;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.VisibleForTesting;
-import android.util.AttributeSet;
 import com.meli.android.carddrawer.R;
 import com.meli.android.carddrawer.model.customview.CustomViewConfiguration;
 
 public class CardDrawerViewLowres extends CardDrawerView {
-
-    private float codeFrontTextSize;
 
     public CardDrawerViewLowres(@NonNull final Context context) {
         this(context, null);
@@ -25,16 +23,10 @@ public class CardDrawerViewLowres extends CardDrawerView {
         super(context, attrs, defStyleAttr);
     }
 
-    @Override
-    protected void init(@NonNull final Context context, @Nullable final AttributeSet attrs) {
-        codeFrontTextSize = getResources().getDimension(R.dimen.card_drawer_font_size_small);
-        super.init(context, attrs);
-    }
-
     @NonNull
     @Override
-    protected CardConfiguration buildCardConfiguration() {
-        return new CardLowResConfiguration(source);
+    protected CardConfiguration buildCardConfiguration(@NonNull final CardUI cardUI) {
+        return new CardLowResConfiguration(cardUI);
     }
 
     @NonNull
@@ -44,31 +36,27 @@ public class CardDrawerViewLowres extends CardDrawerView {
     }
 
     @Override
-    protected float getCodeFrontTextSize() {
-        return codeFrontTextSize;
-    }
-
-    @Override
     @LayoutRes
     protected int getLayout() {
         return R.layout.card_drawer_layout_lowres;
     }
 
     @Override
-    @VisibleForTesting
-    protected void updateCardInformation() {
-        updateNumber();
-        updateName();
-        updateSecCode();
+    protected void updateDate(@NonNull final CardUI cardUI) {
+        //Nothing to do here
     }
 
     @Override
     protected void onSizeChanged(final int w, final int h, final int oldw, final int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
 
-        final float cardSizeMultiplier = (float) cardFrontLayout.getMeasuredWidth() / defaultCardWidth;
-        final float newTextSize = defaultTextSize * cardSizeMultiplier;
+        final Resources resources = getResources();
+        final float cardSizeMultiplier =
+            cardFrontLayout.getMeasuredWidth() / resources.getDimension(R.dimen.card_drawer_card_width);
 
-        setTextPixelSize(cardNumber, newTextSize);
+        setTextPixelSize(cardNumber, resources.getDimension(R.dimen.card_drawer_font_size) * cardSizeMultiplier);
+        if (codeFront != null) {
+            setTextPixelSize(codeFront, resources.getDimension(R.dimen.card_drawer_font_size_small) * cardSizeMultiplier);
+        }
     }
 }

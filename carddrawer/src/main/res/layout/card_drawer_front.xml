@@ -151,18 +151,19 @@
         app:layout_constraintBottom_toBottomOf="@+id/card_header_front_guideline_number"
         tools:text="6666 6666 6666 6666" />
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/cho_card_code_front_red_circle"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:adjustViewBounds="true"
-        android:src="@drawable/card_drawer_red_circle"
+        android:src="@drawable/card_drawer_cvv_ring"
+        android:tint="@color/card_drawer_cvv_circle"
         app:layout_constraintBottom_toBottomOf="@id/cho_card_code_front"
         app:layout_constraintEnd_toEndOf="@id/cho_card_code_front"
         app:layout_constraintStart_toStartOf="@id/cho_card_code_front"
         app:layout_constraintTop_toTopOf="@id/cho_card_code_front"
-        app:layout_constraintWidth_percent="0.13"
-        app:layout_constraintHeight_percent="0.19" />
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintWidth_percent="0.13" />
 
     <com.meli.android.carddrawer.model.GradientTextView
         android:id="@+id/cho_card_code_front"
@@ -185,6 +186,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/card_header_front_guideline_safezone"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 </com.meli.android.carddrawer.model.ConstraintLayoutWithDisabledSupport>

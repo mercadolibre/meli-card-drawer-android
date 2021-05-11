@@ -68,18 +68,19 @@
         app:layout_constraintTop_toTopOf="@id/card_header_back_guideline_cvv_band"
         android:src="@drawable/card_drawer_cvv_band"/>
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/card_drawer_circle_cvv"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:adjustViewBounds="true"
-        android:src="@drawable/card_drawer_red_circle"
+        android:src="@drawable/card_drawer_cvv_ring"
+        android:tint="@color/card_drawer_cvv_circle"
         app:layout_constraintBottom_toBottomOf="@id/cho_card_code_back"
         app:layout_constraintEnd_toEndOf="@id/cho_card_code_back"
         app:layout_constraintStart_toStartOf="@id/cho_card_code_back"
         app:layout_constraintTop_toTopOf="@id/cho_card_code_back"
         app:layout_constraintWidth_percent="0.13"
-        app:layout_constraintHeight_percent="0.2641" />
+        app:layout_constraintDimensionRatio="1:1" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/cho_card_code_back"

@@ -7,7 +7,7 @@ import androidx.constraintlayout.widget.ConstraintSet
 import com.meli.android.carddrawer.R
 import com.meli.android.carddrawer.format.NumberFormatter.formatShort
 
-internal class CardDefaultResConfiguration(source: CardUI): CardConfiguration(source) {
+internal class CardDefaultResConfiguration(source: CardUI?): CardConfiguration(source) {
 
     override fun setUpConstraintConfiguration(constraintSet: ConstraintSet) {
         setUpConstraintCardNumber(constraintSet)

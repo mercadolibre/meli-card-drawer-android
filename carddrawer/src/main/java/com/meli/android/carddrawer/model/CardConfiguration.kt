@@ -9,7 +9,7 @@ import com.meli.android.carddrawer.configuration.CardDrawerStyle
 import com.meli.android.carddrawer.configuration.SecurityCodeLocation
 import com.meli.android.carddrawer.format.NumberFormatter
 
-internal abstract class CardConfiguration(protected var source: CardUI) {
+internal abstract class CardConfiguration(protected var source: CardUI?) {
 
     private var defaultConfiguration: ConstraintSet? = null
 
@@ -51,12 +51,12 @@ internal abstract class CardConfiguration(protected var source: CardUI) {
         }
     }
 
-    protected fun isRegularStyle() = source.style == null || source.style == CardDrawerStyle.REGULAR
+    protected fun isRegularStyle() = source?.style == null || source?.style == CardDrawerStyle.REGULAR
 
     protected fun hasSafeZone() = defaultConfiguration != null
 
-    private fun cardCodeIsDefaultOrEmpty(codeFront: TextView) = codeFront.text.isNullOrEmpty()
-        || codeFront.text == getFormattedNumber("", source.securityCodePattern)
+    private fun cardCodeIsDefaultOrEmpty(codeFront: TextView) = source == null || codeFront.text.isNullOrEmpty()
+        || codeFront.text == getFormattedNumber("", source!!.securityCodePattern)
 
     fun canShow(view: View) = canPerformAction(view)
     fun canAnimate(view: View, block: (View) -> Unit) {
@@ -71,7 +71,7 @@ internal abstract class CardConfiguration(protected var source: CardUI) {
         return when (view.id) {
             R.id.cho_card_code_front,
             R.id.cho_card_code_front_red_circle -> {
-                source.securityCodeLocation == SecurityCodeLocation.FRONT && !hasSafeZone()
+                source?.securityCodeLocation == SecurityCodeLocation.FRONT && !hasSafeZone()
             }
             else -> true
         }
