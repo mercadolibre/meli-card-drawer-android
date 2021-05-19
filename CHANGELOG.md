@@ -1,3 +1,6 @@
+## Release 2.14.0
+* Added medium res card.
+
 ## Release 2.13.2
 * Fixes safezone disabled support for lowres.
 
