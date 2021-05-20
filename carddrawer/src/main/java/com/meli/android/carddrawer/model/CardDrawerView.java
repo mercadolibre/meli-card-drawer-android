@@ -62,6 +62,7 @@ public class CardDrawerView extends FrameLayout implements Observer {
     private View codeFrontRedCircle;
 
     protected GradientTextView cardName;
+    protected GradientTextView cardSubtitle;
     protected GradientTextView cardNumber;
     private GradientTextView cardDate;
 
@@ -181,6 +182,7 @@ public class CardDrawerView extends FrameLayout implements Observer {
         codeFrontRedCircle = cardFrontLayout.findViewById(R.id.cho_card_code_front_red_circle);
         cardNumber = cardFrontLayout.findViewById(R.id.cho_card_number);
         cardName = cardFrontLayout.findViewById(R.id.cho_card_name);
+        cardSubtitle = cardFrontLayout.findViewById(R.id.cho_card_subtitle);
         cardDate = cardFrontLayout.findViewById(R.id.cho_card_date);
         accountMoneyDefaultOverlay = cardFrontLayout.findViewById(R.id.cho_am_default_overlay);
         accountMoneyHybridOverlay = cardFrontLayout.findViewById(R.id.cho_am_hybrid_overlay);
@@ -283,6 +285,9 @@ public class CardDrawerView extends FrameLayout implements Observer {
             cardName.setAllCaps(customTypeface == null);
             TypefaceHelper.INSTANCE.set(cardName, customTypeface);
         }
+        if (cardSubtitle != null) {
+            TypefaceHelper.INSTANCE.set(cardSubtitle, customTypeface);
+        }
         if (cardDate != null) {
             TypefaceHelper.INSTANCE.set(cardDate, customTypeface);
         }
@@ -316,6 +321,7 @@ public class CardDrawerView extends FrameLayout implements Observer {
         if (animate) {
             fadeInAnimateView(cardNumber);
             fadeInAnimateView(cardName);
+            fadeInAnimateView(cardSubtitle);
 
             if (cardDate != null) {
                 fadeInAnimateView(cardDate);
@@ -398,6 +404,7 @@ public class CardDrawerView extends FrameLayout implements Observer {
     public void setCardTextColor(@NonNull @FontType final String fontType, @ColorInt final int fontColor) {
         cardNumber.init(resolveFontType(fontType, true), getCardNumberPlaceHolder(), fontColor);
         cardName.init(resolveFontType(fontType, false), source.getNamePlaceHolder(), fontColor);
+        cardSubtitle.init(resolveFontType(fontType, false), source.getSubtitlePlaceHolder(), fontColor);
         if (cardDate != null) {
             cardDate.init(resolveFontType(fontType, false), source.getExpirationPlaceHolder(), fontColor);
         }
@@ -434,6 +441,7 @@ public class CardDrawerView extends FrameLayout implements Observer {
     protected void updateCardInformation() {
         updateNumber();
         updateName();
+        updateSubtitle();
         updateDate();
         updateSecCode();
     }
@@ -454,6 +462,14 @@ public class CardDrawerView extends FrameLayout implements Observer {
             name = card.getName();
         }
         cardName.setText(name);
+    }
+
+    protected void updateSubtitle() {
+        String subtitle = source.getSubtitlePlaceHolder();
+        if (card.getSubtitle() != null && !card.getSubtitle().isEmpty()) {
+            subtitle = card.getSubtitle();
+        }
+        cardSubtitle.setText(subtitle);
     }
 
     protected void updateDate() {
@@ -572,6 +588,7 @@ public class CardDrawerView extends FrameLayout implements Observer {
         final float newTextSize = defaultTextSize * cardSizeMultiplier;
 
         setTextPixelSize(cardName, newTextSize);
+        setTextPixelSize(cardSubtitle, newTextSize);
         setTextPixelSize(codeBack, newTextSize);
         setTextPixelSize(cardNumber, newTextSize);
         if (cardDate != null) {

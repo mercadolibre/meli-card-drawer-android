@@ -59,6 +59,7 @@ public class CardDrawerViewLowres extends CardDrawerView {
     protected void updateCardInformation() {
         updateNumber();
         updateName();
+        updateSubtitle();
         updateSecCode();
     }
 

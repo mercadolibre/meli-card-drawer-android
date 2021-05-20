@@ -121,6 +121,19 @@
         tools:text="Nombre y apellido" />
 
     <com.meli.android.carddrawer.model.GradientTextView
+        android:id="@+id/cho_card_subtitle"
+        android:textSize="10sp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="bottom"
+        android:typeface="monospace"
+        app:layout_constraintBaseline_toBaselineOf="@id/text_guideline"
+        app:layout_constraintEnd_toStartOf="@+id/cho_card_date"
+        app:layout_constraintHorizontal_weight="8"
+        app:layout_constraintStart_toStartOf="@id/card_header_front_guideline_left"
+        tools:text="Subtitulo" />
+
+    <com.meli.android.carddrawer.model.GradientTextView
         android:id="@id/cho_card_date"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

@@ -5,7 +5,7 @@ import com.meli.android.carddrawer.R
 import com.meli.android.carddrawer.model.CardAnimationType
 import com.meli.android.carddrawer.model.CardUI
 
-internal class AccountMoneyHybridConfiguration : CardUI {
+open class AccountMoneyHybridConfiguration : CardUI {
     override fun getBankImageRes() = 0
     override fun getCardLogoImageRes() = R.drawable.card_drawer_hybrid_logo
     override fun getSecurityCodeLocation() = SecurityCodeLocation.NONE

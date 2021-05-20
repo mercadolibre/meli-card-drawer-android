@@ -9,6 +9,7 @@ import java.util.Observable;
 public class Card extends Observable implements Parcelable {
     private String number;
     private String name;
+    private String subtitle;
     private String expiration;
     private String secCode;
 
@@ -32,6 +33,16 @@ public class Card extends Observable implements Parcelable {
 
     public void setName(@NonNull final String name) {
         this.name = name;
+        setChanged();
+        notifyObservers();
+    }
+
+    public String getSubtitle() {
+        return subtitle;
+    }
+
+    public void setSubtitle(@NonNull final String subtitle) {
+        this.subtitle = subtitle;
         setChanged();
         notifyObservers();
     }

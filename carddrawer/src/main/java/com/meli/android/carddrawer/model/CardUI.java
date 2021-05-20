@@ -119,6 +119,13 @@ public interface CardUI {
     String getNamePlaceHolder();
 
     /**
+     * Ej: NOMBRE Y APELLIDO
+     *
+     * @return the name place holder to show
+     */
+    default String getSubtitlePlaceHolder() { return null; }
+
+    /**
      * Ej: MM/AA
      *
      * @return the expiration date place holder to show
