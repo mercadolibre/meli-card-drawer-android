@@ -30,13 +30,6 @@
         app:layout_constraintGuide_percent="0.9" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/end_guideline2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.9" />
-
-    <androidx.constraintlayout.widget.Guideline
         android:id="@+id/image_guideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -50,13 +43,20 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.5949" />
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/tag_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.65" />
+
     <include
         android:id="@+id/card_drawer_tag"
         layout="@layout/card_drawer_tag"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/generic_ring" />
+        app:layout_constraintStart_toEndOf="@+id/tag_guideline" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/generic_ring"
