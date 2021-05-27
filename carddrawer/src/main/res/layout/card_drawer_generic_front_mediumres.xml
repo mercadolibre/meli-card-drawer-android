@@ -42,40 +42,13 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.5079" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <include
+        android:id="@+id/card_drawer_tag"
+        layout="@layout/card_drawer_tag"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/generic_ring">
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/card_tag_background"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:src="@drawable/card_tag_background"
-            app:layout_constraintBottom_toBottomOf="@+id/card_tag"
-            app:layout_constraintEnd_toEndOf="@+id/card_tag"
-            app:layout_constraintStart_toStartOf="@+id/card_tag"
-            app:layout_constraintTop_toTopOf="@+id/card_tag"
-            tools:tint="@color/andes_accent_color_100" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/card_tag"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:importantForAccessibility="yes"
-            android:maxLines="1"
-            android:paddingHorizontal="@dimen/andes_tag_medium_margin"
-            android:paddingVertical="6dp"
-            android:textAllCaps="true"
-            android:textSize="@dimen/andes_tag_small_text_size"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="novo tag larger for ellipsis"
-            tools:textColor="@color/andes_blue_mp_500" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        app:layout_constraintStart_toEndOf="@+id/generic_ring" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/generic_ring"

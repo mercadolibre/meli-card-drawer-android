@@ -51,6 +51,7 @@ import java.util.Observable;
 import java.util.Observer;
 import kotlin.Pair;
 import kotlin.Unit;
+import org.jetbrains.annotations.NotNull;
 
 @SuppressWarnings({ "PMD.ConstructorCallsOverridableMethod", "PMD.TooManyFields", "PMD.GodClass" })
 public class CardDrawerView extends FrameLayout implements Observer {
@@ -262,14 +263,7 @@ public class CardDrawerView extends FrameLayout implements Observer {
             PicassoDiskLoader.get(getContext()).load(genericPaymentMethod.getImageUrl()).into(paymentMethodImage);
         }
 
-        if (genericPaymentMethod.getTag() != null){
-            final CardDrawerSource.Tag tag = genericPaymentMethod.getTag();
-            final AppCompatImageView tagBackground = genericFrontLayout.findViewById(R.id.card_tag_background);
-            final AppCompatTextView tagText = genericFrontLayout.findViewById(R.id.card_tag);
-            tagBackground.setColorFilter(tag.getBackgroundColor(), PorterDuff.Mode.SRC_ATOP);
-            tagText.setText(tag.getText());
-            tagText.setTextColor(tag.getTextColor());
-        }
+        showTag(genericPaymentMethod, genericFrontLayout);
 
         genericPaymentMethod.setPaymentMethodImage(paymentMethodImage);
         genericTitle.setText(genericPaymentMethod.getTitle().getText());
@@ -284,6 +278,22 @@ public class CardDrawerView extends FrameLayout implements Observer {
         }
         frontBackground.setColorFilter(genericPaymentMethod.getBackgroundColor(), PorterDuff.Mode.SRC_ATOP);
         backBackground.setColorFilter(genericPaymentMethod.getBackgroundColor(), PorterDuff.Mode.SRC_ATOP);
+    }
+
+    /**
+     * Shows the card tag if it's assigned. Else it's left empty so it doesn't show.
+     * @param source The source to get the tag from
+     * @param layout Used to find the card tag views
+     */
+    private void showTag(@NotNull final CardDrawerSource source, @NotNull final ViewGroup layout) {
+        final CardDrawerSource.Tag tag = source.getTag();
+        if (tag != null){
+            final AppCompatImageView tagBackground = layout.findViewById(R.id.card_tag_background);
+            final AppCompatTextView tagText = layout.findViewById(R.id.card_tag);
+            tagBackground.setColorFilter(tag.getBackgroundColor(), PorterDuff.Mode.SRC_ATOP);
+            tagText.setText(tag.getText());
+            tagText.setTextColor(tag.getTextColor());
+        }
     }
 
     /**
