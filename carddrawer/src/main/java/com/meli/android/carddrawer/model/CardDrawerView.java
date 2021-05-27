@@ -77,6 +77,8 @@ public class CardDrawerView extends FrameLayout implements Observer {
     protected View cardBackLayout;
     private ViewGroup genericFrontLayout;
     private ViewGroup genericBackLayout;
+    private AppCompatImageView tagBackground;
+    private AppCompatTextView tagName;
     private AppCompatTextView genericTitle;
     private AppCompatTextView genericSubtitle;
     protected ImageView cardFrontGradient;
@@ -185,6 +187,7 @@ public class CardDrawerView extends FrameLayout implements Observer {
         cardBackLayout = findViewById(R.id.card_header_back);
         genericFrontLayout = findViewById(R.id.card_drawer_generic_front);
         genericBackLayout = findViewById(R.id.card_drawer_generic_back);
+
         genericTitle = genericFrontLayout.findViewById(R.id.generic_title);
         genericSubtitle = genericFrontLayout.findViewById(R.id.generic_subtitle);
 
@@ -258,6 +261,16 @@ public class CardDrawerView extends FrameLayout implements Observer {
         if (!TextUtils.isEmpty(genericPaymentMethod.getImageUrl())) {
             PicassoDiskLoader.get(getContext()).load(genericPaymentMethod.getImageUrl()).into(paymentMethodImage);
         }
+
+        if (genericPaymentMethod.getTag() != null){
+            final CardDrawerSource.Tag tag = genericPaymentMethod.getTag();
+            final AppCompatImageView tagBackground = genericFrontLayout.findViewById(R.id.card_tag_background);
+            final AppCompatTextView tagText = genericFrontLayout.findViewById(R.id.card_tag);
+            tagBackground.setColorFilter(tag.getBackgroundColor(), PorterDuff.Mode.SRC_ATOP);
+            tagText.setText(tag.getText());
+            tagText.setTextColor(tag.getTextColor());
+        }
+
         genericPaymentMethod.setPaymentMethodImage(paymentMethodImage);
         genericTitle.setText(genericPaymentMethod.getTitle().getText());
         genericTitle.setTextColor(genericPaymentMethod.getTitle().getColor());

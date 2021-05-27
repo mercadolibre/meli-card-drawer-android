@@ -4,13 +4,16 @@ import android.os.Parcelable
 import android.widget.ImageView
 import kotlinx.android.parcel.Parcelize
 
-sealed class CardDrawerSource {
+sealed class CardDrawerSource(open val tag: Tag? = null) {
     abstract val backgroundColor: Int
     open val disabledBackgroundColor: Int?
         get() = null
     open val animationType: String
         get() = CardAnimationType.NONE
     open fun setPaymentMethodImage(paymentMethod: ImageView) = Unit
+
+    @Parcelize
+    data class Tag(val text: String, val backgroundColor: Int, val textColor: Int) : Parcelable
 }
 
 @Parcelize
@@ -18,13 +21,16 @@ open class GenericPaymentMethod(
     override val backgroundColor: Int,
     val title: Text,
     val imageUrl: String? = null,
-    val subtitle: Text? = null
-) : CardDrawerSource(), Parcelable {
+    val subtitle: Text? = null,
+    override val tag : Tag? = null
+) : CardDrawerSource(tag), Parcelable {
     @Parcelize
     data class Text(val text: String, val color: Int): Parcelable
 }
 
-class PaymentCard(val cardUI: CardUI) : CardDrawerSource() {
+class PaymentCard(val cardUI: CardUI, tag : Tag? = null) : CardDrawerSource(tag) {
+    constructor(cardUI: CardUI) : this(cardUI, null)
+
     override val backgroundColor: Int
         get() = cardUI.cardBackgroundColor
     override val disabledBackgroundColor: Int?

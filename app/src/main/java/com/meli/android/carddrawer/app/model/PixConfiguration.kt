@@ -9,5 +9,6 @@ class PixConfiguration(context: Context) : GenericPaymentMethod(
     Color.WHITE,
     Text("PIX", Color.parseColor("#CC000000")),
     "https://mobile.mercadolibre.com/remote_resources/image/card_drawer_mlb_pm_pix_normal?density=${DensityHelper.getName(context)}&locale=es_AR&version=1",
-    Text("Aprovação Imediata", Color.parseColor("#00A650"))
+    Text("Aprovação Imediata", Color.parseColor("#00A650")),
+    Tag("Novo", Color.parseColor("#1A4189E6"), Color.parseColor("#009EE3"))
 )
