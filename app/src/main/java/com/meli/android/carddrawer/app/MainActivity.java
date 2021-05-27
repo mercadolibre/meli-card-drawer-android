@@ -1,5 +1,6 @@
 package com.meli.android.carddrawer.app;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -266,7 +267,8 @@ public class MainActivity extends AppCompatActivity {
 
         final List<CardConfigurationOption> cardOptions = new ArrayList<>();
 
-        cardOptions.add(new CardConfigurationOption("Default", new DefaultCardConfiguration(this)));
+        cardOptions.add(new CardConfigurationOption("Default", new DefaultCardConfiguration(this),
+            new CardDrawerSource.Tag("Novo", Color.parseColor("#000000"), Color.parseColor("#FFFFFF"))));
         cardOptions.add(new CardConfigurationOption("Visa blue", new VisaCardBlueConfiguration(this)));
         cardOptions.add(new CardConfigurationOption("Visa green", new VisaCardGreenConfiguration(this)));
         cardOptions.add(new CardConfigurationOption("Visa red", new VisaCardRedConfiguration(this)));

@@ -222,29 +222,31 @@ public class CardDrawerView extends FrameLayout implements Observer {
     /**
      * Paints the front card with animation
      *
-     * @param cardUI has the card style and animation type. Use NONE for show without animation.
+     * @param paymentCard has the CardUI.
+     * CardUI has the card style and animation type. Use NONE for show without animation.
      */
-    public void show(@NonNull final CardUI cardUI) {
-        source = new PaymentCard(cardUI);
+    public void show(@NonNull final PaymentCard paymentCard) {
+        source = paymentCard;
         cardFrontLayout.setVisibility(VISIBLE);
         cardBackLayout.setVisibility(VISIBLE);
         genericFrontLayout.setVisibility(GONE);
         genericBackLayout.setVisibility(GONE);
-        cardConfiguration.updateSource(cardUI);
+        cardConfiguration.updateSource(paymentCard.getCardUI());
+        showTag(source, (ViewGroup) cardFrontLayout);
         hideSecCircle();
         updateCardInformation();
         if (codeFront != null && cardConfiguration.canShow(codeFront)) {
             codeFront.setVisibility(View.VISIBLE);
         }
-        update(cardUI);
+        update(paymentCard.getCardUI());
     }
 
     public void show(@NonNull final CardDrawerSource source) {
         BaseExtensionsKt.process(source, genericPaymentMethod -> {
             show(genericPaymentMethod);
             return Unit.INSTANCE;
-        }, cardUI -> {
-            show(cardUI);
+        }, paymentCard -> {
+            show(paymentCard);
             return Unit.INSTANCE;
         });
     }
@@ -281,12 +283,14 @@ public class CardDrawerView extends FrameLayout implements Observer {
     }
 
     /**
-     * Shows the card tag if it's assigned. Else it's left empty so it doesn't show.
+     * Shows the card tag if it's assigned.
      * @param source The source to get the tag from
      * @param layout Used to find the card tag views
      */
+    @SuppressWarnings("VariableNotUsedInsideIf")
     private void showTag(@NotNull final CardDrawerSource source, @NotNull final ViewGroup layout) {
         final CardDrawerSource.Tag tag = source.getTag();
+        final ViewGroup tagContainer = layout.findViewById(R.id.card_drawer_tag);
         if (tag != null){
             final AppCompatImageView tagBackground = layout.findViewById(R.id.card_tag_background);
             final AppCompatTextView tagText = layout.findViewById(R.id.card_tag);
@@ -294,6 +298,7 @@ public class CardDrawerView extends FrameLayout implements Observer {
             tagText.setText(tag.getText());
             tagText.setTextColor(tag.getTextColor());
         }
+        tagContainer.setVisibility(tag != null ? VISIBLE : GONE);
     }
 
     /**
@@ -308,9 +313,9 @@ public class CardDrawerView extends FrameLayout implements Observer {
      * Updates the header to match the position of the security code. Flip the card.
      */
     public void showSecurityCode() {
-        BaseExtensionsKt.processPaymentCard(source, cardUI -> {
+        BaseExtensionsKt.processPaymentCard(source, paymentCard -> {
             final int securityCodeFieldPosition =
-                cardUI.getSecurityCodeLocation().equals(SecurityCodeLocation.FRONT)
+                paymentCard.getCardUI().getSecurityCodeLocation().equals(SecurityCodeLocation.FRONT)
                 ? FieldPosition.POSITION_FRONT : FieldPosition.POSITION_BACK;
             cardAnimator.switchView(securityCodeFieldPosition);
             showSecCircle();
@@ -421,8 +426,8 @@ public class CardDrawerView extends FrameLayout implements Observer {
         BaseExtensionsKt.process(source, genericPaymentMethod -> {
             setUpCustomViewConfiguration(null);
             return Unit.INSTANCE;
-        }, cardUI -> {
-            setUpCustomViewConfiguration(cardUI);
+        }, paymentCard -> {
+            setUpCustomViewConfiguration(paymentCard.getCardUI());
             return Unit.INSTANCE;
         });
     }
@@ -490,8 +495,8 @@ public class CardDrawerView extends FrameLayout implements Observer {
      **/
     @Deprecated
     public void setCardTextColor(@NonNull @FontType final String fontType, @ColorInt final int fontColor) {
-        BaseExtensionsKt.processPaymentCard(source, cardUI -> {
-            setCardTextColor(cardUI, fontType, fontColor);
+        BaseExtensionsKt.processPaymentCard(source, paymentCard -> {
+            setCardTextColor(paymentCard.getCardUI(), fontType, fontColor);
             return Unit.INSTANCE;
         });
     }
@@ -538,7 +543,8 @@ public class CardDrawerView extends FrameLayout implements Observer {
 
     @VisibleForTesting
     protected void updateCardInformation() {
-        BaseExtensionsKt.processPaymentCard(source, cardUI -> {
+        BaseExtensionsKt.processPaymentCard(source, paymentCard -> {
+            final CardUI cardUI = paymentCard.getCardUI();
             updateNumber(cardUI);
             updateName(cardUI);
             updateDate(cardUI);
@@ -599,9 +605,9 @@ public class CardDrawerView extends FrameLayout implements Observer {
      * Hides the security code circle
      */
     public void hideSecCircle() {
-        BaseExtensionsKt.processPaymentCard(source, cardUI -> {
+        BaseExtensionsKt.processPaymentCard(source, paymentCard -> {
             codeFrontRedCircle.setVisibility(INVISIBLE);
-            if (cardUI.getSecurityCodeLocation().equals(SecurityCodeLocation.BACK)) {
+            if (paymentCard.getCardUI().getSecurityCodeLocation().equals(SecurityCodeLocation.BACK)) {
                 codeFront.setVisibility(View.GONE);
             }
             return Unit.INSTANCE;
@@ -673,9 +679,9 @@ public class CardDrawerView extends FrameLayout implements Observer {
 
     private void updateCardConfigurationByStyle() {
         if (style == CardDrawerStyle.ACCOUNT_MONEY_DEFAULT) {
-            show(new AccountMoneyDefaultConfiguration());
+            show(new PaymentCard(new AccountMoneyDefaultConfiguration()));
         } else if (style == CardDrawerStyle.ACCOUNT_MONEY_HYBRID) {
-            show(new AccountMoneyHybridConfiguration());
+            show(new PaymentCard(new AccountMoneyHybridConfiguration()));
         }
     }
 

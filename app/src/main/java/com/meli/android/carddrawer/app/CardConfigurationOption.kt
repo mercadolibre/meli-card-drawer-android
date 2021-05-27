@@ -10,6 +10,8 @@ class CardConfigurationOption private constructor(private val cardName: String, 
     val cardStyle: CardDrawerStyle?) {
 
     constructor(cardName: String, cardConfiguration: CardUI): this(cardName, PaymentCard(cardConfiguration), null)
+    constructor(cardName: String, cardConfiguration: CardUI, tag : CardDrawerSource.Tag?) :
+        this(cardName, PaymentCard(cardConfiguration, tag), null)
     constructor(cardName: String, genericPayment: GenericPaymentMethod): this(cardName, genericPayment, null)
     constructor(cardName: String, cardStyle: CardDrawerStyle): this(cardName, null, cardStyle)
 

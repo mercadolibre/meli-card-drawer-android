@@ -7,15 +7,15 @@ import com.meli.android.carddrawer.model.PaymentCard
 
 internal fun CardDrawerSource.process(
     genericPaymentMethodBlock: (genericPaymentMethod: GenericPaymentMethod) -> Unit = {},
-    paymentCardBlock: (cardUI: CardUI) -> Unit = {}
+    paymentCardBlock: (paymentCard: PaymentCard) -> Unit = {}
 ) {
     when(this) {
         is GenericPaymentMethod -> genericPaymentMethodBlock(this)
-        is PaymentCard -> paymentCardBlock(cardUI)
+        is PaymentCard -> paymentCardBlock(this)
     }
 }
 
-internal fun CardDrawerSource.processPaymentCard(block: (cardUI: CardUI) -> Unit) {
+internal fun CardDrawerSource.processPaymentCard(block: (paymentCard: PaymentCard) -> Unit) {
     process(paymentCardBlock = block)
 }
 
