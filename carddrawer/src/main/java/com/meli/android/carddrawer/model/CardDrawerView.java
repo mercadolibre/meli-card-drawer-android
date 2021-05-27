@@ -222,10 +222,24 @@ public class CardDrawerView extends FrameLayout implements Observer {
     /**
      * Paints the front card with animation
      *
+     * @param cardUI has the card style and animation type. Use NONE for show without animation.
+     *
+     * Preserved so we don't break integrators
+     */
+    // TODO: Maybe we can deprecate this in favor of new show that allows
+    //  CardDrawerSource with new tag functionality
+    @SuppressWarnings("unused")
+    public void show(@NonNull final CardUI cardUI) {
+        show(new PaymentCard(cardUI));
+    }
+
+    /**
+     * Paints the front card with animation
+     *
      * @param paymentCard has the CardUI.
      * CardUI has the card style and animation type. Use NONE for show without animation.
      */
-    public void show(@NonNull final PaymentCard paymentCard) {
+    private void show(@NonNull final PaymentCard paymentCard) {
         source = paymentCard;
         cardFrontLayout.setVisibility(VISIBLE);
         cardBackLayout.setVisibility(VISIBLE);
@@ -672,16 +686,23 @@ public class CardDrawerView extends FrameLayout implements Observer {
         genericBackLayout.setLayoutParams(genericBackParams);
     }
 
-    public void setStyle(@NonNull final CardDrawerStyle style) {
+    /**
+     * Sets card from style with tag
+     */
+    public void setStyle(@NonNull final CardDrawerStyle style, @Nullable final CardDrawerSource.Tag tag) {
         this.style = style;
-        updateCardConfigurationByStyle();
+        updateCardConfigurationByStyle(tag);
     }
 
-    private void updateCardConfigurationByStyle() {
+    public void setStyle(@NonNull final CardDrawerStyle style) {
+        setStyle(style, null);
+    }
+
+    private void updateCardConfigurationByStyle(@Nullable final CardDrawerSource.Tag tag) {
         if (style == CardDrawerStyle.ACCOUNT_MONEY_DEFAULT) {
-            show(new PaymentCard(new AccountMoneyDefaultConfiguration()));
+            show(new PaymentCard(new AccountMoneyDefaultConfiguration(), tag));
         } else if (style == CardDrawerStyle.ACCOUNT_MONEY_HYBRID) {
-            show(new PaymentCard(new AccountMoneyHybridConfiguration()));
+            show(new PaymentCard(new AccountMoneyHybridConfiguration(), tag));
         }
     }
 

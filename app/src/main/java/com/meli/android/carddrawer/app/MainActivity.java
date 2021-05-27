@@ -266,20 +266,20 @@ public class MainActivity extends AppCompatActivity {
         final Spinner cardsSpinner = findViewById(R.id.spinner_cards);
 
         final List<CardConfigurationOption> cardOptions = new ArrayList<>();
-
-        cardOptions.add(new CardConfigurationOption("Default", new DefaultCardConfiguration(this),
-            new CardDrawerSource.Tag("Novo", Color.parseColor("#000000"), Color.parseColor("#FFFFFF"))));
-        cardOptions.add(new CardConfigurationOption("Visa blue", new VisaCardBlueConfiguration(this)));
-        cardOptions.add(new CardConfigurationOption("Visa green", new VisaCardGreenConfiguration(this)));
-        cardOptions.add(new CardConfigurationOption("Visa red", new VisaCardRedConfiguration(this)));
-        cardOptions.add(new CardConfigurationOption("Visa gray", new VisaCardGrayConfiguration(this)));
-        cardOptions.add(new CardConfigurationOption("Visa yellow", new VisaCardYellowConfiguration(this)));
-        cardOptions.add(new CardConfigurationOption("Master", new MasterCardConfiguration(this)));
-        cardOptions.add(new CardConfigurationOption("Url Test", new UrlTestConfiguration(this)));
-        cardOptions.add(new CardConfigurationOption("Hybrid Account Money", CardDrawerStyle.ACCOUNT_MONEY_HYBRID));
-        cardOptions.add(new CardConfigurationOption("Hybrid Credit", new HybridCreditConfiguration()));
-        cardOptions.add(new CardConfigurationOption("Default Account Money", CardDrawerStyle.ACCOUNT_MONEY_DEFAULT));
-        cardOptions.add(new CardConfigurationOption("Custom account money", new CustomAccountMoneyConfiguration()));
+        final CardDrawerSource.Tag tag = new CardDrawerSource.Tag("Novo largo para ver como se ve",
+            Color.parseColor("#1A4189E6"), Color.parseColor("#009EE3"));
+        cardOptions.add(new CardConfigurationOption("Default", new DefaultCardConfiguration(this), tag));
+        cardOptions.add(new CardConfigurationOption("Visa blue", new VisaCardBlueConfiguration(this), tag));
+        cardOptions.add(new CardConfigurationOption("Visa green", new VisaCardGreenConfiguration(this), tag));
+        cardOptions.add(new CardConfigurationOption("Visa red", new VisaCardRedConfiguration(this), tag));
+        cardOptions.add(new CardConfigurationOption("Visa gray", new VisaCardGrayConfiguration(this), tag));
+        cardOptions.add(new CardConfigurationOption("Visa yellow", new VisaCardYellowConfiguration(this), tag));
+        cardOptions.add(new CardConfigurationOption("Master", new MasterCardConfiguration(this), tag));
+        cardOptions.add(new CardConfigurationOption("Url Test", new UrlTestConfiguration(this), tag));
+        cardOptions.add(new CardConfigurationOption("Hybrid Account Money", CardDrawerStyle.ACCOUNT_MONEY_HYBRID, tag));
+        cardOptions.add(new CardConfigurationOption("Hybrid Credit", new HybridCreditConfiguration(), tag));
+        cardOptions.add(new CardConfigurationOption("Default Account Money", CardDrawerStyle.ACCOUNT_MONEY_DEFAULT, tag));
+        cardOptions.add(new CardConfigurationOption("Custom account money", new CustomAccountMoneyConfiguration(), tag));
         cardOptions.add(new CardConfigurationOption("PIX", new PixConfiguration(this)));
 
         final ArrayAdapter<CardConfigurationOption> cardAdapter =
@@ -292,16 +292,17 @@ public class MainActivity extends AppCompatActivity {
                 final CardConfigurationOption selection = cardOptions.get(position);
                 final CardDrawerSource source = selection.getCardConfiguration();
                 final CardDrawerStyle style = selection.getCardStyle();
+                final CardDrawerSource.Tag tag = selection.getStyledCardTag();
                 if (source != null) {
                     cardDrawerView.show(source);
                     cardDrawerViewLowRes.show(source);
                     cardDrawerViewMedium.show(source);
                     cardDrawerViewMediumRes.show(source);
                 } else if (style != null) {
-                    cardDrawerView.setStyle(style);
-                    cardDrawerViewLowRes.setStyle(style);
-                    cardDrawerViewMedium.setStyle(style);
-                    cardDrawerViewMediumRes.setStyle(style);
+                    cardDrawerView.setStyle(style, tag);
+                    cardDrawerViewLowRes.setStyle(style, tag);
+                    cardDrawerViewMedium.setStyle(style, tag);
+                    cardDrawerViewMediumRes.setStyle(style, tag);
                 }
 
                 setUpCustomView(style, switchCustomView.isChecked());
