@@ -188,4 +188,19 @@
         app:layout_constraintTop_toBottomOf="@+id/card_header_front_guideline_safezone"
         app:layout_constraintBottom_toBottomOf="parent" />
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/tag_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.65" />
+
+    <include
+        android:id="@+id/card_drawer_tag"
+        layout="@layout/card_drawer_tag"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tag_guideline" />
+
 </com.meli.android.carddrawer.model.ConstraintLayoutWithDisabledSupport>
