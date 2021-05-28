@@ -104,6 +104,8 @@
     <include
         android:id="@+id/card_drawer_tag"
         layout="@layout/card_drawer_tag"
+        android:visibility="gone"
+        tools:visibility="visible"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
