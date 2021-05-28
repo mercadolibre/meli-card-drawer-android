@@ -76,7 +76,7 @@ public class CardDrawerView extends FrameLayout implements Observer {
     protected Card card;
     protected View cardFrontLayout;
     protected View cardBackLayout;
-    private ViewGroup genericFrontLayout;
+    protected ViewGroup genericFrontLayout;
     private ViewGroup genericBackLayout;
     private AppCompatImageView tagBackground;
     private AppCompatTextView tagName;
@@ -302,7 +302,7 @@ public class CardDrawerView extends FrameLayout implements Observer {
      * @param layout Used to find the card tag views
      */
     @SuppressWarnings("VariableNotUsedInsideIf")
-    private void showTag(@NotNull final CardDrawerSource source, @NotNull final ViewGroup layout) {
+    protected void showTag(@NotNull final CardDrawerSource source, @NotNull final ViewGroup layout) {
         final CardDrawerSource.Tag tag = source.getTag();
         final ViewGroup tagContainer = layout.findViewById(R.id.card_drawer_tag);
         if (tag != null){

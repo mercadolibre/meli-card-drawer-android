@@ -138,7 +138,7 @@ public class CardDrawerViewTest extends BasicRobolectricTest {
         CardAnimator cardAnimatorMock = mock(CardAnimator.class);
         doNothing().when(spyHeader).updateCardInformation();
         ReflectionHelpers.setField(spyHeader, "cardAnimator", cardAnimatorMock);
-        spyHeader.show(new PaymentCard(cardUI));
+        spyHeader.show(cardUI);
         verify(cardAnimatorMock).colorCard(anyInt(), anyString());
         verify(spyHeader).updateCardInformation();
     }
