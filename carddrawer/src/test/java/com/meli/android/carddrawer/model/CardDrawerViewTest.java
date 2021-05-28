@@ -1,11 +1,18 @@
 package com.meli.android.carddrawer.model;
 
+import android.graphics.Color;
+import android.graphics.ColorFilter;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageSwitcher;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.appcompat.widget.AppCompatImageView;
+import androidx.appcompat.widget.AppCompatTextView;
 import com.meli.android.carddrawer.BasicRobolectricTest;
 import com.meli.android.carddrawer.R;
 import com.meli.android.carddrawer.TestUtils;
@@ -46,6 +53,12 @@ public class CardDrawerViewTest extends BasicRobolectricTest {
     public void doBefore() {
         TestUtils.initTypefaceSetter();
         header = new CardDrawerView(getContext());
+    }
+
+    public CardDrawerSource.Tag getTestTag(){
+        return new CardDrawerSource.Tag("Novo",
+            Color.parseColor("#CCCCCC"),
+            Color.parseColor("#FFFFFF"));
     }
 
     @Test
@@ -341,5 +354,65 @@ public class CardDrawerViewTest extends BasicRobolectricTest {
         verify(source).setOverlayImage(overlayImageView);
         verifyNoMoreInteractions(source);
         verifyNoMoreInteractions(overlayImageView);
+    }
+
+    @Test
+    public void showTagShouldNotShowTagWhenGenericPaymentMethodHasNoTag(){
+        final CardDrawerView spyHeader = spy(header);
+        final GenericPaymentMethod genericMethod = new GenericPaymentMethod(0,
+            new GenericPaymentMethod.Text("Test", Color.parseColor("#000000")),
+            null, null, null);
+        spyHeader.show(genericMethod);
+        assertEquals(View.GONE, spyHeader.genericFrontLayout.findViewById(R.id.card_drawer_tag).getVisibility());
+    }
+
+    @Test
+    public void showTagShouldShowTagWhenGenericPaymentMethodHasTag() {
+        final CardDrawerSource.Tag tag = getTestTag();
+        final CardDrawerView spyHeader = spy(header);
+        final GenericPaymentMethod genericMethod = new GenericPaymentMethod(0,
+            new GenericPaymentMethod.Text("Test", Color.parseColor("#000000")),
+            null,
+            null,
+            tag);
+        spyHeader.show(genericMethod);
+        assertEquals(View.VISIBLE, spyHeader.genericFrontLayout.findViewById(R.id.card_drawer_tag).getVisibility());
+    }
+
+    @Test
+    public void showShouldShowTagWhenPaymentCardHasTag() {
+        final CardDrawerSource.Tag tag = getTestTag();
+        final CardDrawerView spyHeader = spy(header);
+        final CardUI cardUI = new DefaultCardConfiguration(getContext());
+        final PaymentCard paymentCard = new PaymentCard(cardUI ,tag);
+        spyHeader.show(paymentCard);
+        assertEquals(View.VISIBLE, spyHeader.cardFrontLayout.findViewById(R.id.card_drawer_tag).getVisibility());
+    }
+
+    @Test
+    public void showShouldNotShowTagWhenPaymentCardHasNoTag() {
+        final CardDrawerView spyHeader = spy(header);
+        final CardUI cardUI = new DefaultCardConfiguration(getContext());
+        final PaymentCard paymentCard = new PaymentCard(cardUI);
+        spyHeader.show(paymentCard);
+        assertEquals(View.GONE, spyHeader.cardFrontLayout.findViewById(R.id.card_drawer_tag).getVisibility());
+    }
+
+    @Test
+    public void showShouldSetTestAndColorsFromTagForGenericPaymentMethod() {
+        final CardDrawerSource.Tag tag = getTestTag();
+        final CardDrawerView spyHeader = spy(header);
+        final GenericPaymentMethod genericMethod = new GenericPaymentMethod(0,
+            new GenericPaymentMethod.Text("Test", Color.parseColor("#000000")),
+            null,
+            null,
+            tag);
+        spyHeader.show(genericMethod);
+        final AppCompatTextView textView = spyHeader.genericFrontLayout.findViewById(R.id.card_tag);
+        final AppCompatImageView tagBackground = spyHeader.genericFrontLayout.findViewById(R.id.card_tag_background);
+        assertEquals(tag.getText(), textView.getText());
+        assertEquals(tag.getTextColor(), textView.getCurrentTextColor());
+        assertEquals(new PorterDuffColorFilter(tag.getBackgroundColor(), PorterDuff.Mode.SRC_ATOP),
+            tagBackground.getColorFilter());
     }
 }
