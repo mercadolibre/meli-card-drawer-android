@@ -302,7 +302,7 @@ public class CardDrawerView extends FrameLayout implements Observer {
      * @param layout Used to find the card tag views
      */
     @SuppressWarnings("VariableNotUsedInsideIf")
-    protected void showTag(@NotNull final CardDrawerSource source, @NotNull final ViewGroup layout) {
+    private void showTag(@NotNull final CardDrawerSource source, @NotNull final ViewGroup layout) {
         final CardDrawerSource.Tag tag = source.getTag();
         final ViewGroup tagContainer = layout.findViewById(R.id.card_drawer_tag);
         if (tag != null){
