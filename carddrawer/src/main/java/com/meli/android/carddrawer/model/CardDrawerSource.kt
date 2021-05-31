@@ -29,7 +29,8 @@ open class GenericPaymentMethod(
     data class Text(val text: String, val color: Int): Parcelable
 }
 
-class PaymentCard(val cardUI: CardUI, tag : Tag? = null) : CardDrawerSource(tag) {
+@Parcelize
+class PaymentCard(val cardUI: CardUI, override val tag : Tag? = null) : CardDrawerSource(tag), Parcelable {
     constructor(cardUI: CardUI) : this(cardUI, null)
 
     override val backgroundColor: Int
