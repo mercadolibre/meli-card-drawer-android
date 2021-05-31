@@ -31,6 +31,7 @@ import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.res.ResourcesCompat;
 import com.meli.android.carddrawer.R;
 import com.meli.android.carddrawer.ViewHelper;
 import com.meli.android.carddrawer.configuration.AccountMoneyDefaultConfiguration;
@@ -40,6 +41,7 @@ import com.meli.android.carddrawer.configuration.DefaultCardConfiguration;
 import com.meli.android.carddrawer.configuration.FieldPosition;
 import com.meli.android.carddrawer.configuration.FontType;
 import com.meli.android.carddrawer.configuration.SecurityCodeLocation;
+import com.meli.android.carddrawer.format.CardDrawerFont;
 import com.meli.android.carddrawer.format.TypefaceHelper;
 import com.meli.android.carddrawer.internal.BaseExtensionsKt;
 import com.meli.android.carddrawer.model.customview.CustomViewConfiguration;
@@ -78,8 +80,6 @@ public class CardDrawerView extends FrameLayout implements Observer {
     protected View cardBackLayout;
     protected ViewGroup genericFrontLayout;
     private ViewGroup genericBackLayout;
-    private AppCompatImageView tagBackground;
-    private AppCompatTextView tagName;
     private AppCompatTextView genericTitle;
     private AppCompatTextView genericSubtitle;
     protected ImageView cardFrontGradient;
@@ -309,6 +309,8 @@ public class CardDrawerView extends FrameLayout implements Observer {
             final AppCompatImageView tagBackground = layout.findViewById(R.id.card_tag_background);
             final AppCompatTextView tagText = layout.findViewById(R.id.card_tag);
             tagBackground.setColorFilter(tag.getBackgroundColor(), PorterDuff.Mode.SRC_ATOP);
+            // This is because andes font-configurator is not initialized and therefore TypefaceHelper.set doesn't work
+            tagText.setTypeface(tagText.getTypeface(), CardDrawerFont.from(tag.getWeight()).getStyle());
             tagText.setText(tag.getText());
             tagText.setTextColor(tag.getTextColor());
         }

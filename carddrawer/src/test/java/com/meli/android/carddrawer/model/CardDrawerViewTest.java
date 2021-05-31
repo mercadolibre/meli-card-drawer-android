@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.graphics.ColorFilter;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
+import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,7 +59,8 @@ public class CardDrawerViewTest extends BasicRobolectricTest {
     public CardDrawerSource.Tag getTestTag(){
         return new CardDrawerSource.Tag("Novo",
             Color.parseColor("#CCCCCC"),
-            Color.parseColor("#FFFFFF"));
+            Color.parseColor("#FFFFFF"),
+            "regular");
     }
 
     @Test

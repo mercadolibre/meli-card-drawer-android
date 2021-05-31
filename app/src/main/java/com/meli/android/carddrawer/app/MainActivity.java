@@ -266,8 +266,8 @@ public class MainActivity extends AppCompatActivity {
         final Spinner cardsSpinner = findViewById(R.id.spinner_cards);
 
         final List<CardConfigurationOption> cardOptions = new ArrayList<>();
-        final CardDrawerSource.Tag tag = new CardDrawerSource.Tag("Novo largo para ver como se ve",
-            Color.parseColor("#1A4189E6"), Color.parseColor("#009EE3"));
+        final CardDrawerSource.Tag tag = new CardDrawerSource.Tag("Novo",
+            Color.parseColor("#1A4189E6"), Color.parseColor("#009EE3"), "regular");
         cardOptions.add(new CardConfigurationOption("Default", new DefaultCardConfiguration(this), tag));
         cardOptions.add(new CardConfigurationOption("Visa blue", new VisaCardBlueConfiguration(this), tag));
         cardOptions.add(new CardConfigurationOption("Visa green", new VisaCardGreenConfiguration(this), tag));

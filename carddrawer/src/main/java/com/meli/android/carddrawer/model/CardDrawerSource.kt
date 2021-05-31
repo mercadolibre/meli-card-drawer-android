@@ -13,7 +13,7 @@ sealed class CardDrawerSource(open val tag: Tag? = null) {
     open fun setPaymentMethodImage(paymentMethod: ImageView) = Unit
 
     @Parcelize
-    data class Tag(val text: String, val backgroundColor: Int, val textColor: Int) : Parcelable
+    data class Tag(val text: String, val backgroundColor: Int, val textColor: Int, val weight : String) : Parcelable
 }
 
 @Parcelize
