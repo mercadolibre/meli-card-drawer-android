@@ -1,16 +1,15 @@
 package com.meli.android.carddrawer.model;
 
 import android.graphics.Typeface;
+import android.widget.ImageView;
 import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.Size;
-import android.widget.ImageView;
 import com.meli.android.carddrawer.configuration.CardDrawerStyle;
 import com.meli.android.carddrawer.configuration.FontType;
 import com.meli.android.carddrawer.configuration.SecurityCodeLocation;
-import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -26,7 +25,7 @@ import java.util.List;
  *
  * Provides two methods for loading images. Choose which one to implement (Ex: getBankImageRes or setBankImage)
  */
-public interface CardUI extends Serializable {
+public interface CardUI {
     /**
      * @return the bank logo url to show
      */

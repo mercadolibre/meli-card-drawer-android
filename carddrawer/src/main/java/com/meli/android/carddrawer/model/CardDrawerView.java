@@ -31,7 +31,6 @@ import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.core.content.res.ResourcesCompat;
 import com.meli.android.carddrawer.R;
 import com.meli.android.carddrawer.ViewHelper;
 import com.meli.android.carddrawer.configuration.AccountMoneyDefaultConfiguration;
@@ -53,7 +52,6 @@ import java.util.Observable;
 import java.util.Observer;
 import kotlin.Pair;
 import kotlin.Unit;
-import org.jetbrains.annotations.NotNull;
 
 @SuppressWarnings({ "PMD.ConstructorCallsOverridableMethod", "PMD.TooManyFields", "PMD.GodClass" })
 public class CardDrawerView extends FrameLayout implements Observer {
@@ -302,7 +300,7 @@ public class CardDrawerView extends FrameLayout implements Observer {
      * @param layout Used to find the card tag views
      */
     @SuppressWarnings("VariableNotUsedInsideIf")
-    private void showTag(@NotNull final CardDrawerSource source, @NotNull final ViewGroup layout) {
+    private void showTag(@NonNull final CardDrawerSource source, @NonNull final ViewGroup layout) {
         final CardDrawerSource.Tag tag = source.getTag();
         final ViewGroup tagContainer = layout.findViewById(R.id.card_drawer_tag);
         if (tag != null){
