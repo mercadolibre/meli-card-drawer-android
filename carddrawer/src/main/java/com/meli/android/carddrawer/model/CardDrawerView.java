@@ -304,9 +304,8 @@ public class CardDrawerView extends FrameLayout implements Observer {
         final CardDrawerSource.Tag tag = source.getTag();
         final ViewGroup tagContainer = layout.findViewById(R.id.card_drawer_tag);
         if (tag != null){
-            final AppCompatImageView tagBackground = layout.findViewById(R.id.card_tag_background);
             final AppCompatTextView tagText = layout.findViewById(R.id.card_tag);
-            tagBackground.setColorFilter(tag.getBackgroundColor(), PorterDuff.Mode.SRC_ATOP);
+            tagText.getBackground().setColorFilter(tag.getBackgroundColor(), PorterDuff.Mode.SRC_ATOP);
             // This is because andes font-configurator is not initialized and therefore TypefaceHelper.set doesn't work
             tagText.setTypeface(tagText.getTypeface(), CardDrawerFont.from(tag.getWeight()).getStyle());
             tagText.setText(tag.getText());

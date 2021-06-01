@@ -32,4 +32,7 @@
 
     <dimen name="card_drawer_thumb_switch_width_high_res">72dp</dimen>
     <dimen name="card_drawer_gradient_thumb_switch_width_high_res">68dp</dimen>
+    <dimen name="small_tag_text">11sp</dimen>
+    <dimen name="small_tag_vertical_padding">2dp</dimen>
+    <dimen name="tag_vertical_padding">6dp</dimen>
 </resources>
