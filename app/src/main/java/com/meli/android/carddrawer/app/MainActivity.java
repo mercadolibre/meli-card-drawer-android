@@ -31,6 +31,7 @@ import com.meli.android.carddrawer.model.CardDrawerView;
 import com.meli.android.carddrawer.model.customview.CardDrawerSwitch;
 import com.meli.android.carddrawer.model.customview.SwitchModel;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -147,6 +148,23 @@ public class MainActivity extends AppCompatActivity {
             cardDrawerViewLowRes.setEnabled(!isChecked);
             cardDrawerViewMedium.setEnabled(!isChecked);
             cardDrawerViewMediumRes.setEnabled(!isChecked);
+        });
+
+        final SwitchCompat switchShowTag = findViewById(R.id.card_header_show_tag_switch);
+        switchShowTag.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            List<View> frontViews = Arrays.asList(
+                cardDrawerView.findViewById(R.id.card_header_front).findViewById(R.id.card_drawer_tag),
+                cardDrawerViewLowRes.findViewById(R.id.card_header_front).findViewById(R.id.card_drawer_tag),
+                cardDrawerViewMedium.findViewById(R.id.card_header_front).findViewById(R.id.card_drawer_tag),
+                cardDrawerViewMediumRes.findViewById(R.id.card_header_front).findViewById(R.id.card_drawer_tag),
+                cardDrawerView.findViewById(R.id.card_drawer_generic_front).findViewById(R.id.card_drawer_tag),
+                cardDrawerViewLowRes.findViewById(R.id.card_drawer_generic_front).findViewById(R.id.card_drawer_tag),
+                cardDrawerViewMedium.findViewById(R.id.card_drawer_generic_front).findViewById(R.id.card_drawer_tag),
+                cardDrawerViewMediumRes.findViewById(R.id.card_drawer_generic_front)
+            );
+            for (final View v: frontViews){
+                v.setVisibility(isChecked ? View.VISIBLE : View.GONE);
+            }
         });
 
         initCardConfigurationOptions();
