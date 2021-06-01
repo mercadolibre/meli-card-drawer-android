@@ -136,7 +136,7 @@ public class CardDrawerViewTest extends BasicRobolectricTest {
         CardUI cardUI = new DefaultCardConfiguration(getContext());
         CardAnimator cardAnimatorMock = mock(CardAnimator.class);
         ReflectionHelpers.setField(spyHeader, "cardAnimator", cardAnimatorMock);
-        ReflectionHelpers.setField(spyHeader, "source", cardUI);
+        ReflectionHelpers.setField(spyHeader, "source", new PaymentCard(cardUI));
         spyHeader.show();
 
         verify(cardAnimatorMock).switchView(FieldPosition.POSITION_FRONT);
@@ -145,13 +145,13 @@ public class CardDrawerViewTest extends BasicRobolectricTest {
 
     @Test
     public void showSecurityCode_withFrontLocation_showsSecCodeCircleAndCallsAnimator() {
-        final CardUI source = mock(CardUI.class);
-        when(source.getSecurityCodeLocation()).thenReturn(SecurityCodeLocation.FRONT);
+        final CardUI cardUI = mock(CardUI.class);
+        when(cardUI.getSecurityCodeLocation()).thenReturn(SecurityCodeLocation.FRONT);
         final CardAnimator cardAnimatorMock = mock(CardAnimator.class);
         final View codeFront = ReflectionHelpers.getField(header, "codeFront");
         final View codeFrontRedCircle = ReflectionHelpers.getField(header, "codeFrontRedCircle");
         ReflectionHelpers.setField(header, "cardAnimator", cardAnimatorMock);
-        ReflectionHelpers.setField(header, "source", source);
+        ReflectionHelpers.setField(header, "source", new PaymentCard(cardUI));
 
         header.showSecurityCode();
 
@@ -163,12 +163,12 @@ public class CardDrawerViewTest extends BasicRobolectricTest {
 
     @Test
     public void showSecurityCode_withBackLocation_showsSecCodeCircleAndCallsAnimator() {
-        final CardUI source = mock(CardUI.class);
-        when(source.getSecurityCodeLocation()).thenReturn(SecurityCodeLocation.BACK);
+        final CardUI cardUI = mock(CardUI.class);
+        when(cardUI.getSecurityCodeLocation()).thenReturn(SecurityCodeLocation.BACK);
         final CardAnimator cardAnimatorMock = mock(CardAnimator.class);
         final View codeBack = ReflectionHelpers.getField(header, "codeBack");
         ReflectionHelpers.setField(header, "cardAnimator", cardAnimatorMock);
-        ReflectionHelpers.setField(header, "source", source);
+        ReflectionHelpers.setField(header, "source", new PaymentCard(cardUI));
 
         header.showSecurityCode();
 
@@ -241,11 +241,11 @@ public class CardDrawerViewTest extends BasicRobolectricTest {
 
     @Test
     public void hideSecCircle_withFrontPosition_hidesSecCode() {
-        final CardUI source = mock(CardUI.class);
-        when(source.getSecurityCodeLocation()).thenReturn(SecurityCodeLocation.FRONT);
+        final CardUI cardUI = mock(CardUI.class);
+        when(cardUI.getSecurityCodeLocation()).thenReturn(SecurityCodeLocation.FRONT);
         final View codeFront = ReflectionHelpers.getField(header, "codeFront");
         final View codeFrontRedCircle = ReflectionHelpers.getField(header, "codeFrontRedCircle");
-        ReflectionHelpers.setField(header, "source", source);
+        ReflectionHelpers.setField(header, "source", new PaymentCard(cardUI));
 
         header.hideSecCircle();
 
@@ -259,10 +259,10 @@ public class CardDrawerViewTest extends BasicRobolectricTest {
         CardAnimator cardAnimatorMock = mock(CardAnimator.class);
         GradientTextView codeFront = new GradientTextView(getContext());
         codeFront.setVisibility(View.VISIBLE);
-        CardUI source = mock(CardUI.class);
-        when(source.getSecurityCodeLocation()).thenReturn(SecurityCodeLocation.BACK);
+        CardUI cardUI = mock(CardUI.class);
+        when(cardUI.getSecurityCodeLocation()).thenReturn(SecurityCodeLocation.BACK);
 
-        ReflectionHelpers.setField(spyHeader, "source", source);
+        ReflectionHelpers.setField(spyHeader, "source", new PaymentCard(cardUI));
         ReflectionHelpers.setField(spyHeader, "cardAnimator", cardAnimatorMock);
         ReflectionHelpers.setField(spyHeader, "codeFront", codeFront);
 
@@ -285,9 +285,9 @@ public class CardDrawerViewTest extends BasicRobolectricTest {
         ReflectionHelpers.setField(spyHeader, "cardDate", cardDate);
         ReflectionHelpers.setField(spyHeader, "codeFront", codeFront);
 
-        CardUI source = new DefaultCardConfiguration(getContext());
+        CardUI cardUI = new DefaultCardConfiguration(getContext());
 
-        ReflectionHelpers.setField(spyHeader, "source", source);
+        ReflectionHelpers.setField(spyHeader, "source", new PaymentCard(cardUI));
 
         String fontType = FontType.LIGHT_TYPE;
         int color = 2;
@@ -295,8 +295,8 @@ public class CardDrawerViewTest extends BasicRobolectricTest {
         spyHeader.setCardTextColor(fontType, color);
 
         verify(cardNumber).init(spyHeader.resolveFontType(fontType, true), "****  ****  ****  ****", color);
-        verify(cardName).init(spyHeader.resolveFontType(fontType, false), source.getNamePlaceHolder(), color);
-        verify(cardDate).init(spyHeader.resolveFontType(fontType, false), source.getExpirationPlaceHolder(), color);
+        verify(cardName).init(spyHeader.resolveFontType(fontType, false), cardUI.getNamePlaceHolder(), color);
+        verify(cardDate).init(spyHeader.resolveFontType(fontType, false), cardUI.getExpirationPlaceHolder(), color);
         verify(codeFront).init(spyHeader.resolveFontType(fontType, false), "****", color);
     }
 

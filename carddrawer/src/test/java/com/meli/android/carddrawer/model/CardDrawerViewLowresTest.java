@@ -44,9 +44,9 @@ public class CardDrawerViewLowresTest extends CardDrawerViewTest {
         ReflectionHelpers.setField(spyHeader, "cardDate", cardDate);
         ReflectionHelpers.setField(spyHeader, "codeFront", codeFront);
 
-        final CardUI source = new DefaultCardConfiguration(getContext());
+        final CardUI cardUI = new DefaultCardConfiguration(getContext());
 
-        ReflectionHelpers.setField(spyHeader, "source", source);
+        ReflectionHelpers.setField(spyHeader, "source", new PaymentCard(cardUI));
 
         final String fontType = FontType.LIGHT_TYPE;
         final int color = 2;
@@ -54,8 +54,8 @@ public class CardDrawerViewLowresTest extends CardDrawerViewTest {
         spyHeader.setCardTextColor(fontType, color);
 
         verify(cardNumber).init(spyHeader.resolveFontType(fontType, true), "**** ****", color);
-        verify(cardName).init(spyHeader.resolveFontType(fontType, false), source.getNamePlaceHolder(), color);
-        verify(cardDate).init(spyHeader.resolveFontType(fontType, false), source.getExpirationPlaceHolder(), color);
+        verify(cardName).init(spyHeader.resolveFontType(fontType, false), cardUI.getNamePlaceHolder(), color);
+        verify(cardDate).init(spyHeader.resolveFontType(fontType, false), cardUI.getExpirationPlaceHolder(), color);
         verify(codeFront).init(spyHeader.resolveFontType(fontType, false), "****", color);
     }
 

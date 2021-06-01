@@ -16,6 +16,7 @@ import com.meli.android.carddrawer.app.model.CardComposite;
 import com.meli.android.carddrawer.app.model.CustomAccountMoneyConfiguration;
 import com.meli.android.carddrawer.app.model.HybridCreditConfiguration;
 import com.meli.android.carddrawer.app.model.MasterCardConfiguration;
+import com.meli.android.carddrawer.app.model.PixConfiguration;
 import com.meli.android.carddrawer.app.model.UrlTestConfiguration;
 import com.meli.android.carddrawer.app.model.VisaCardBlueConfiguration;
 import com.meli.android.carddrawer.app.model.VisaCardGrayConfiguration;
@@ -24,8 +25,8 @@ import com.meli.android.carddrawer.app.model.VisaCardRedConfiguration;
 import com.meli.android.carddrawer.app.model.VisaCardYellowConfiguration;
 import com.meli.android.carddrawer.configuration.CardDrawerStyle;
 import com.meli.android.carddrawer.configuration.DefaultCardConfiguration;
+import com.meli.android.carddrawer.model.CardDrawerSource;
 import com.meli.android.carddrawer.model.CardDrawerView;
-import com.meli.android.carddrawer.model.CardUI;
 import com.meli.android.carddrawer.model.customview.CardDrawerSwitch;
 import com.meli.android.carddrawer.model.customview.SwitchModel;
 import java.util.ArrayList;
@@ -277,6 +278,7 @@ public class MainActivity extends AppCompatActivity {
         cardOptions.add(new CardConfigurationOption("Hybrid Credit", new HybridCreditConfiguration()));
         cardOptions.add(new CardConfigurationOption("Default Account Money", CardDrawerStyle.ACCOUNT_MONEY_DEFAULT));
         cardOptions.add(new CardConfigurationOption("Custom account money", new CustomAccountMoneyConfiguration()));
+        cardOptions.add(new CardConfigurationOption("PIX", new PixConfiguration(this)));
 
         final ArrayAdapter<CardConfigurationOption> cardAdapter =
             new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, cardOptions);
@@ -286,14 +288,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(final AdapterView<?> parent, final View view, final int position, final long id) {
                 final CardConfigurationOption selection = cardOptions.get(position);
-                final CardUI configuration = selection.getCardConfiguration();
+                final CardDrawerSource source = selection.getCardConfiguration();
                 final CardDrawerStyle style = selection.getCardStyle();
-                if (configuration != null) {
-                    cardDrawerView.show(configuration);
-                    cardDrawerViewLowRes.show(configuration);
-                    cardDrawerViewMedium.show(configuration);
-                    cardDrawerViewMediumRes.show(configuration);
-
+                if (source != null) {
+                    cardDrawerView.show(source);
+                    cardDrawerViewLowRes.show(source);
+                    cardDrawerViewMedium.show(source);
+                    cardDrawerViewMediumRes.show(source);
                 } else if (style != null) {
                     cardDrawerView.setStyle(style);
                     cardDrawerViewLowRes.setStyle(style);
