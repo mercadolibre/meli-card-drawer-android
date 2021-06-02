@@ -152,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
 
         final SwitchCompat switchShowTag = findViewById(R.id.card_header_show_tag_switch);
         switchShowTag.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            List<View> frontViews = Arrays.asList(
+            final List<View> frontViews = Arrays.asList(
                 cardDrawerView.findViewById(R.id.card_header_front).findViewById(R.id.card_drawer_tag),
                 cardDrawerViewLowRes.findViewById(R.id.card_header_front).findViewById(R.id.card_drawer_tag),
                 cardDrawerViewMedium.findViewById(R.id.card_header_front).findViewById(R.id.card_drawer_tag),
@@ -160,7 +160,7 @@ public class MainActivity extends AppCompatActivity {
                 cardDrawerView.findViewById(R.id.card_drawer_generic_front).findViewById(R.id.card_drawer_tag),
                 cardDrawerViewLowRes.findViewById(R.id.card_drawer_generic_front).findViewById(R.id.card_drawer_tag),
                 cardDrawerViewMedium.findViewById(R.id.card_drawer_generic_front).findViewById(R.id.card_drawer_tag),
-                cardDrawerViewMediumRes.findViewById(R.id.card_drawer_generic_front)
+                cardDrawerViewMediumRes.findViewById(R.id.card_drawer_generic_front).findViewById(R.id.card_drawer_tag)
             );
             for (final View v: frontViews){
                 v.setVisibility(isChecked ? View.VISIBLE : View.GONE);
