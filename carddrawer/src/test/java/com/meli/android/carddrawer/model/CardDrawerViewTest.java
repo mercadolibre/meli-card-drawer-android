@@ -162,6 +162,7 @@ public class CardDrawerViewTest extends BasicRobolectricTest {
     public void showSecurityCode_withFrontLocation_showsSecCodeCircleAndCallsAnimator() {
         final CardUI cardUI = mock(CardUI.class);
         when(cardUI.getSecurityCodeLocation()).thenReturn(SecurityCodeLocation.FRONT);
+        when(cardUI.getAnimationType()).thenReturn(CardAnimationType.NONE);
         final CardAnimator cardAnimatorMock = mock(CardAnimator.class);
         final View codeFront = ReflectionHelpers.getField(header, "codeFront");
         final View codeFrontRedCircle = ReflectionHelpers.getField(header, "codeFrontRedCircle");
@@ -180,6 +181,7 @@ public class CardDrawerViewTest extends BasicRobolectricTest {
     public void showSecurityCode_withBackLocation_showsSecCodeCircleAndCallsAnimator() {
         final CardUI cardUI = mock(CardUI.class);
         when(cardUI.getSecurityCodeLocation()).thenReturn(SecurityCodeLocation.BACK);
+        when(cardUI.getAnimationType()).thenReturn(CardAnimationType.NONE);
         final CardAnimator cardAnimatorMock = mock(CardAnimator.class);
         final View codeBack = ReflectionHelpers.getField(header, "codeBack");
         ReflectionHelpers.setField(header, "cardAnimator", cardAnimatorMock);
@@ -258,6 +260,7 @@ public class CardDrawerViewTest extends BasicRobolectricTest {
     public void hideSecCircle_withFrontPosition_hidesSecCode() {
         final CardUI cardUI = mock(CardUI.class);
         when(cardUI.getSecurityCodeLocation()).thenReturn(SecurityCodeLocation.FRONT);
+        when(cardUI.getAnimationType()).thenReturn(CardAnimationType.NONE);
         final View codeFront = ReflectionHelpers.getField(header, "codeFront");
         final View codeFrontRedCircle = ReflectionHelpers.getField(header, "codeFrontRedCircle");
         ReflectionHelpers.setField(header, "source", new PaymentCard(cardUI));
@@ -276,6 +279,7 @@ public class CardDrawerViewTest extends BasicRobolectricTest {
         codeFront.setVisibility(View.VISIBLE);
         CardUI cardUI = mock(CardUI.class);
         when(cardUI.getSecurityCodeLocation()).thenReturn(SecurityCodeLocation.BACK);
+        when(cardUI.getAnimationType()).thenReturn(CardAnimationType.NONE);
 
         ReflectionHelpers.setField(spyHeader, "source", new PaymentCard(cardUI));
         ReflectionHelpers.setField(spyHeader, "cardAnimator", cardAnimatorMock);
@@ -411,10 +415,9 @@ public class CardDrawerViewTest extends BasicRobolectricTest {
             tag);
         spyHeader.show(genericMethod);
         final AppCompatTextView textView = spyHeader.genericFrontLayout.findViewById(R.id.card_tag);
-        final AppCompatImageView tagBackground = spyHeader.genericFrontLayout.findViewById(R.id.card_tag_background);
         assertEquals(tag.getText(), textView.getText());
         assertEquals(tag.getTextColor(), textView.getCurrentTextColor());
         assertEquals(new PorterDuffColorFilter(tag.getBackgroundColor(), PorterDuff.Mode.SRC_ATOP),
-            tagBackground.getColorFilter());
+            textView.getBackground().getColorFilter());
     }
 }
