@@ -7,6 +7,7 @@ import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import com.meli.android.carddrawer.R;
+import com.meli.android.carddrawer.internal.TagDimensions;
 import com.meli.android.carddrawer.model.customview.CustomViewConfiguration;
 
 public class CardDrawerViewLowres extends CardDrawerView {
@@ -57,10 +58,14 @@ public class CardDrawerViewLowres extends CardDrawerView {
         if (codeFront != null) {
             setTextPixelSize(codeFront, resources.getDimension(R.dimen.card_drawer_font_size_small) * cardSizeMultiplier);
         }
-        final float tagTextSize = resources.getDimension(R.dimen.card_drawer_small_font_tag) * cardSizeMultiplier;
-        final int paddingH = Math.round(resources.getDimension(R.dimen.andes_tag_medium_margin) * cardSizeMultiplier);
-        final int paddingV = Math.round(resources.getDimension(R.dimen.card_drawer_small_tag_vertical_padding) * cardSizeMultiplier);
-        setTextPixelSize(cardTagText, tagTextSize, paddingH, paddingV);
-        setTextPixelSize(genericTagText, tagTextSize, paddingH, paddingV);
+    }
+
+    @Override
+    protected TagDimensions getCardTagDimensions(final Resources resources, final float cardSizeMultiplier){
+        return new TagDimensions(
+            resources.getDimension(R.dimen.card_drawer_small_font_tag) * cardSizeMultiplier,
+            Math.round(resources.getDimension(R.dimen.andes_tag_medium_margin) * cardSizeMultiplier),
+            Math.round(resources.getDimension(R.dimen.card_drawer_small_tag_vertical_padding) * cardSizeMultiplier)
+        );
     }
 }

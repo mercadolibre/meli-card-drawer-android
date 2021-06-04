@@ -43,10 +43,12 @@ import com.meli.android.carddrawer.configuration.SecurityCodeLocation;
 import com.meli.android.carddrawer.format.CardDrawerFont;
 import com.meli.android.carddrawer.format.TypefaceHelper;
 import com.meli.android.carddrawer.internal.BaseExtensionsKt;
+import com.meli.android.carddrawer.internal.TagDimensions;
 import com.meli.android.carddrawer.model.customview.CustomViewConfiguration;
 import com.mercadolibre.android.picassodiskcache.PicassoDiskLoader;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
@@ -721,19 +723,17 @@ public class CardDrawerView extends FrameLayout implements Observer {
 
         final Resources resources = getResources();
         final float cardSizeMultiplier = getCardSizeMultiplier();
-
         final float newTextSize = resources.getDimension(R.dimen.card_drawer_font_size) * cardSizeMultiplier;
 
         setTextPixelSize(cardName, newTextSize);
         setTextPixelSize(codeBack, newTextSize);
         setTextPixelSize(cardNumber, newTextSize);
+
         setTextPixelSize(genericTitle, resources.getDimension(R.dimen.card_drawer_font_generic_title) * cardSizeMultiplier);
         setTextPixelSize(genericSubtitle, resources.getDimension(R.dimen.card_drawer_font_generic_subtitle) * cardSizeMultiplier);
-        final float tagTextSize = resources.getDimension(R.dimen.card_drawer_font_tag) * cardSizeMultiplier;
-        final int paddingHorizontal = Math.round(resources.getDimension(R.dimen.andes_tag_medium_margin) * cardSizeMultiplier);
-        final int paddingVertical = Math.round(resources.getDimension(R.dimen.card_drawer_tag_vertical_padding) * cardSizeMultiplier);
-        setTextPixelSize(genericTagText, tagTextSize, paddingHorizontal, paddingVertical);
-        setTextPixelSize(cardTagText, tagTextSize, paddingHorizontal, paddingVertical);
+
+        setCardTagTextPixelSize(resources, cardSizeMultiplier);
+
         if (cardDate != null) {
             setTextPixelSize(cardDate, newTextSize);
         }
@@ -742,8 +742,23 @@ public class CardDrawerView extends FrameLayout implements Observer {
         }
     }
 
+    private void setCardTagTextPixelSize(final Resources resources, final float cardSizeMultiplier) {
+        final TagDimensions cardTagDimensions = getCardTagDimensions(resources, cardSizeMultiplier);
+        setTextPixelSize(genericTagText, cardTagDimensions.getFontSize(), cardTagDimensions.getPaddingH(),
+            cardTagDimensions.getPaddingV());
+        setTextPixelSize(cardTagText, cardTagDimensions.getFontSize(), cardTagDimensions.getPaddingH(),
+            cardTagDimensions.getPaddingV());
+    }
+
+    protected TagDimensions getCardTagDimensions(final Resources resources, final float cardSizeMultiplier){
+        return new TagDimensions(resources.getDimension(R.dimen.card_drawer_font_tag) * cardSizeMultiplier,
+            Math.round(resources.getDimension(R.dimen.andes_tag_medium_margin) * cardSizeMultiplier),
+            Math.round(resources.getDimension(R.dimen.card_drawer_tag_vertical_padding) * cardSizeMultiplier)
+        );
+    }
+
     protected void setTextPixelSize(@NonNull final TextView view,  final float size, final int paddingH, final int paddingV) {
-        view.setPadding(paddingH, paddingV, paddingH, paddingV);
+        view.post(() -> view.setPadding(paddingH, paddingV, paddingH, paddingV));
         setTextPixelSize(view, size);
     }
 
