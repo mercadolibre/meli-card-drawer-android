@@ -114,7 +114,7 @@
         app:layout_constraintGuide_percent="0.65" />
 
     <include
-        android:id="@+id/card_drawer_tag"
+        android:id="@+id/card_tag_container"
         layout="@layout/card_drawer_small_tag"
         android:visibility="gone"
         tools:visibility="visible"

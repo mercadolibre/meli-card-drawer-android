@@ -1,18 +1,14 @@
 package com.meli.android.carddrawer.model;
 
 import android.graphics.Color;
-import android.graphics.ColorFilter;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
-import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageSwitcher;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
 import com.meli.android.carddrawer.BasicRobolectricTest;
 import com.meli.android.carddrawer.R;
@@ -369,7 +365,7 @@ public class CardDrawerViewTest extends BasicRobolectricTest {
             new GenericPaymentMethod.Text("Test", Color.parseColor("#000000")),
             null, null, null);
         spyHeader.show(genericMethod);
-        assertEquals(View.GONE, spyHeader.genericFrontLayout.findViewById(R.id.card_drawer_tag).getVisibility());
+        assertEquals(View.GONE, spyHeader.genericFrontLayout.findViewById(R.id.card_tag_container).getVisibility());
     }
 
     @Test
@@ -382,7 +378,7 @@ public class CardDrawerViewTest extends BasicRobolectricTest {
             null,
             tag);
         spyHeader.show(genericMethod);
-        assertEquals(View.VISIBLE, spyHeader.genericFrontLayout.findViewById(R.id.card_drawer_tag).getVisibility());
+        assertEquals(View.VISIBLE, spyHeader.genericFrontLayout.findViewById(R.id.card_tag_container).getVisibility());
     }
 
     @Test
@@ -392,7 +388,7 @@ public class CardDrawerViewTest extends BasicRobolectricTest {
         final CardUI cardUI = new DefaultCardConfiguration(getContext());
         final PaymentCard paymentCard = new PaymentCard(cardUI ,tag);
         spyHeader.show(paymentCard);
-        assertEquals(View.VISIBLE, spyHeader.cardFrontLayout.findViewById(R.id.card_drawer_tag).getVisibility());
+        assertEquals(View.VISIBLE, spyHeader.cardFrontLayout.findViewById(R.id.card_tag_container).getVisibility());
     }
 
     @Test
@@ -401,7 +397,7 @@ public class CardDrawerViewTest extends BasicRobolectricTest {
         final CardUI cardUI = new DefaultCardConfiguration(getContext());
         final PaymentCard paymentCard = new PaymentCard(cardUI);
         spyHeader.show(paymentCard);
-        assertEquals(View.GONE, spyHeader.cardFrontLayout.findViewById(R.id.card_drawer_tag).getVisibility());
+        assertEquals(View.GONE, spyHeader.cardFrontLayout.findViewById(R.id.card_tag_container).getVisibility());
     }
 
     @Test

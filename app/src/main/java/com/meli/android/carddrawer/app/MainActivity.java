@@ -153,14 +153,14 @@ public class MainActivity extends AppCompatActivity {
         final SwitchCompat switchShowTag = findViewById(R.id.card_header_show_tag_switch);
         switchShowTag.setOnCheckedChangeListener((buttonView, isChecked) -> {
             final List<View> frontViews = Arrays.asList(
-                cardDrawerView.findViewById(R.id.card_header_front).findViewById(R.id.card_drawer_tag),
-                cardDrawerViewLowRes.findViewById(R.id.card_header_front).findViewById(R.id.card_drawer_tag),
-                cardDrawerViewMedium.findViewById(R.id.card_header_front).findViewById(R.id.card_drawer_tag),
-                cardDrawerViewMediumRes.findViewById(R.id.card_header_front).findViewById(R.id.card_drawer_tag),
-                cardDrawerView.findViewById(R.id.card_drawer_generic_front).findViewById(R.id.card_drawer_tag),
-                cardDrawerViewLowRes.findViewById(R.id.card_drawer_generic_front).findViewById(R.id.card_drawer_tag),
-                cardDrawerViewMedium.findViewById(R.id.card_drawer_generic_front).findViewById(R.id.card_drawer_tag),
-                cardDrawerViewMediumRes.findViewById(R.id.card_drawer_generic_front).findViewById(R.id.card_drawer_tag)
+                cardDrawerView.findViewById(R.id.card_header_front).findViewById(R.id.card_tag_container),
+                cardDrawerViewLowRes.findViewById(R.id.card_header_front).findViewById(R.id.card_tag_container),
+                cardDrawerViewMedium.findViewById(R.id.card_header_front).findViewById(R.id.card_tag_container),
+                cardDrawerViewMediumRes.findViewById(R.id.card_header_front).findViewById(R.id.card_tag_container),
+                cardDrawerView.findViewById(R.id.card_drawer_generic_front).findViewById(R.id.card_tag_container),
+                cardDrawerViewLowRes.findViewById(R.id.card_drawer_generic_front).findViewById(R.id.card_tag_container),
+                cardDrawerViewMedium.findViewById(R.id.card_drawer_generic_front).findViewById(R.id.card_tag_container),
+                cardDrawerViewMediumRes.findViewById(R.id.card_drawer_generic_front).findViewById(R.id.card_tag_container)
             );
             for (final View v: frontViews){
                 v.setVisibility(isChecked ? View.VISIBLE : View.GONE);

@@ -51,12 +51,16 @@ public class CardDrawerViewLowres extends CardDrawerView {
         super.onSizeChanged(w, h, oldw, oldh);
 
         final Resources resources = getResources();
-        final float cardSizeMultiplier =
-            cardFrontLayout.getMeasuredWidth() / resources.getDimension(R.dimen.card_drawer_card_width);
+        final float cardSizeMultiplier = getCardSizeMultiplier();
 
         setTextPixelSize(cardNumber, resources.getDimension(R.dimen.card_drawer_font_size) * cardSizeMultiplier);
         if (codeFront != null) {
             setTextPixelSize(codeFront, resources.getDimension(R.dimen.card_drawer_font_size_small) * cardSizeMultiplier);
         }
+        final float tagTextSize = resources.getDimension(R.dimen.card_drawer_small_font_tag) * cardSizeMultiplier;
+        final int paddingH = Math.round(resources.getDimension(R.dimen.andes_tag_medium_margin) * cardSizeMultiplier);
+        final int paddingV = Math.round(resources.getDimension(R.dimen.card_drawer_small_tag_vertical_padding) * cardSizeMultiplier);
+        setTextPixelSize(cardTagText, tagTextSize, paddingH, paddingV);
+        setTextPixelSize(genericTagText, tagTextSize, paddingH, paddingV);
     }
 }

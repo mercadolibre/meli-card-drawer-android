@@ -74,12 +74,14 @@ public class CardDrawerView extends FrameLayout implements Observer {
 
     protected CardDrawerSource source;
     protected Card card;
-    protected View cardFrontLayout;
-    protected View cardBackLayout;
+    protected ViewGroup cardFrontLayout;
+    protected ViewGroup cardBackLayout;
     protected ViewGroup genericFrontLayout;
     private ViewGroup genericBackLayout;
     private AppCompatTextView genericTitle;
     private AppCompatTextView genericSubtitle;
+    protected AppCompatTextView genericTagText;
+    protected AppCompatTextView cardTagText;
     protected ImageView cardFrontGradient;
     protected ImageView cardBackGradient;
     private ImageView overlayImage;
@@ -189,6 +191,8 @@ public class CardDrawerView extends FrameLayout implements Observer {
 
         genericTitle = genericFrontLayout.findViewById(R.id.generic_title);
         genericSubtitle = genericFrontLayout.findViewById(R.id.generic_subtitle);
+        genericTagText = genericFrontLayout.findViewById(R.id.card_tag);
+        cardTagText = cardFrontLayout.findViewById(R.id.card_tag);
 
         overlayImage = cardFrontLayout.findViewById(R.id.cho_card_overlay);
         issuerLogoView = cardFrontLayout.findViewById(R.id.cho_card_issuer);
@@ -244,7 +248,7 @@ public class CardDrawerView extends FrameLayout implements Observer {
         genericFrontLayout.setVisibility(GONE);
         genericBackLayout.setVisibility(GONE);
         cardConfiguration.updateSource(paymentCard.getCardUI());
-        showTag(source, (ViewGroup) cardFrontLayout);
+        showTag(source, cardTagText, cardFrontLayout);
         hideSecCircle();
         updateCardInformation();
         if (codeFront != null && cardConfiguration.canShow(codeFront)) {
@@ -277,7 +281,7 @@ public class CardDrawerView extends FrameLayout implements Observer {
             PicassoDiskLoader.get(getContext()).load(genericPaymentMethod.getImageUrl()).into(paymentMethodImage);
         }
 
-        showTag(genericPaymentMethod, genericFrontLayout);
+        showTag(genericPaymentMethod, genericTagText, genericFrontLayout);
 
         genericPaymentMethod.setPaymentMethodImage(paymentMethodImage);
         genericTitle.setText(genericPaymentMethod.getTitle().getText());
@@ -300,11 +304,11 @@ public class CardDrawerView extends FrameLayout implements Observer {
      * @param layout Used to find the card tag views
      */
     @SuppressWarnings("VariableNotUsedInsideIf")
-    private void showTag(@NonNull final CardDrawerSource source, @NonNull final ViewGroup layout) {
+    private void showTag(@NonNull final CardDrawerSource source, @NonNull final AppCompatTextView tagText,
+        @NonNull final ViewGroup layout) {
         final CardDrawerSource.Tag tag = source.getTag();
-        final ViewGroup tagContainer = layout.findViewById(R.id.card_drawer_tag);
-        if (tag != null){
-            final AppCompatTextView tagText = layout.findViewById(R.id.card_tag);
+        final ViewGroup tagContainer = layout.findViewById(R.id.card_tag_container);
+        if (tag != null) {
             tagText.getBackground().setColorFilter(tag.getBackgroundColor(), PorterDuff.Mode.SRC_ATOP);
             // This is because andes font-configurator is not initialized and therefore TypefaceHelper.set doesn't work
             tagText.setTypeface(tagText.getTypeface(), CardDrawerFont.from(tag.getWeight()).getStyle());
@@ -716,8 +720,8 @@ public class CardDrawerView extends FrameLayout implements Observer {
         super.onSizeChanged(w, h, oldW, oldH);
 
         final Resources resources = getResources();
-        final float cardSizeMultiplier =
-            getCurrentFrontView().getMeasuredWidth() / resources.getDimension(R.dimen.card_drawer_card_width);
+        final float cardSizeMultiplier = getCardSizeMultiplier();
+
         final float newTextSize = resources.getDimension(R.dimen.card_drawer_font_size) * cardSizeMultiplier;
 
         setTextPixelSize(cardName, newTextSize);
@@ -725,6 +729,11 @@ public class CardDrawerView extends FrameLayout implements Observer {
         setTextPixelSize(cardNumber, newTextSize);
         setTextPixelSize(genericTitle, resources.getDimension(R.dimen.card_drawer_font_generic_title) * cardSizeMultiplier);
         setTextPixelSize(genericSubtitle, resources.getDimension(R.dimen.card_drawer_font_generic_subtitle) * cardSizeMultiplier);
+        final float tagTextSize = resources.getDimension(R.dimen.card_drawer_font_tag) * cardSizeMultiplier;
+        final int paddingHorizontal = Math.round(resources.getDimension(R.dimen.andes_tag_medium_margin) * cardSizeMultiplier);
+        final int paddingVertical = Math.round(resources.getDimension(R.dimen.card_drawer_tag_vertical_padding) * cardSizeMultiplier);
+        setTextPixelSize(genericTagText, tagTextSize, paddingHorizontal, paddingVertical);
+        setTextPixelSize(cardTagText, tagTextSize, paddingHorizontal, paddingVertical);
         if (cardDate != null) {
             setTextPixelSize(cardDate, newTextSize);
         }
@@ -733,8 +742,17 @@ public class CardDrawerView extends FrameLayout implements Observer {
         }
     }
 
+    protected void setTextPixelSize(@NonNull final TextView view,  final float size, final int paddingH, final int paddingV) {
+        view.setPadding(paddingH, paddingV, paddingH, paddingV);
+        setTextPixelSize(view, size);
+    }
+
     protected void setTextPixelSize(@NonNull final TextView view, final float size) {
         view.post(() -> view.setTextSize(TypedValue.COMPLEX_UNIT_PX, size));
+    }
+
+    protected float getCardSizeMultiplier() {
+        return getCurrentFrontView().getMeasuredWidth() / getResources().getDimension(R.dimen.card_drawer_card_width);
     }
 
     @Override
