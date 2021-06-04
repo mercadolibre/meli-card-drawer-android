@@ -17,7 +17,7 @@
     <dimen name="card_drawer_font_generic_title">14dp</dimen>
     <dimen name="card_drawer_font_generic_subtitle">12dp</dimen>
     <dimen name="card_drawer_font_tag">12dp</dimen>
-    <dimen name="card_drawer_small_font_tag">11dp</dimen>
+    <dimen name="card_drawer_font_tag_small">11dp</dimen>
 
     <!-- Card drawer switch -->
 
@@ -34,6 +34,6 @@
 
     <dimen name="card_drawer_thumb_switch_width_high_res">72dp</dimen>
     <dimen name="card_drawer_gradient_thumb_switch_width_high_res">68dp</dimen>
-    <dimen name="card_drawer_small_tag_vertical_padding">2dp</dimen>
+    <dimen name="card_drawer_tag_vertical_padding_small">2dp</dimen>
     <dimen name="card_drawer_tag_vertical_padding">6dp</dimen>
 </resources>

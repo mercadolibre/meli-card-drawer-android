@@ -63,9 +63,9 @@ public class CardDrawerViewLowres extends CardDrawerView {
     @Override
     protected TagDimensions getCardTagDimensions(final Resources resources, final float cardSizeMultiplier){
         return new TagDimensions(
-            resources.getDimension(R.dimen.card_drawer_small_font_tag) * cardSizeMultiplier,
+            resources.getDimension(R.dimen.card_drawer_font_tag_small) * cardSizeMultiplier,
             Math.round(resources.getDimension(R.dimen.andes_tag_medium_margin) * cardSizeMultiplier),
-            Math.round(resources.getDimension(R.dimen.card_drawer_small_tag_vertical_padding) * cardSizeMultiplier)
+            Math.round(resources.getDimension(R.dimen.card_drawer_tag_vertical_padding_small) * cardSizeMultiplier)
         );
     }
 }

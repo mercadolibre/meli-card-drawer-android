@@ -18,7 +18,7 @@
             android:maxLines="1"
             android:background="@drawable/card_tag_background"
             android:paddingHorizontal="@dimen/andes_tag_medium_margin"
-            android:paddingVertical="@dimen/card_drawer_small_tag_vertical_padding"
+            android:paddingVertical="@dimen/card_drawer_tag_vertical_padding_small"
             android:textAllCaps="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
