@@ -40,8 +40,10 @@ import com.meli.android.carddrawer.configuration.DefaultCardConfiguration;
 import com.meli.android.carddrawer.configuration.FieldPosition;
 import com.meli.android.carddrawer.configuration.FontType;
 import com.meli.android.carddrawer.configuration.SecurityCodeLocation;
+import com.meli.android.carddrawer.format.CardDrawerFont;
 import com.meli.android.carddrawer.format.TypefaceHelper;
 import com.meli.android.carddrawer.internal.BaseExtensionsKt;
+import com.meli.android.carddrawer.internal.TagDimensions;
 import com.meli.android.carddrawer.model.customview.CustomViewConfiguration;
 import com.mercadolibre.android.picassodiskcache.PicassoDiskLoader;
 import java.lang.annotation.Retention;
@@ -73,12 +75,14 @@ public class CardDrawerView extends FrameLayout implements Observer {
 
     protected CardDrawerSource source;
     protected Card card;
-    protected View cardFrontLayout;
-    protected View cardBackLayout;
-    private ViewGroup genericFrontLayout;
+    protected ViewGroup cardFrontLayout;
+    protected ViewGroup cardBackLayout;
+    protected ViewGroup genericFrontLayout;
     private ViewGroup genericBackLayout;
     private AppCompatTextView genericTitle;
     private AppCompatTextView genericSubtitle;
+    protected AppCompatTextView genericTagText;
+    protected AppCompatTextView cardTagText;
     protected ImageView cardFrontGradient;
     protected ImageView cardBackGradient;
     private ImageView overlayImage;
@@ -185,8 +189,11 @@ public class CardDrawerView extends FrameLayout implements Observer {
         cardBackLayout = findViewById(R.id.card_header_back);
         genericFrontLayout = findViewById(R.id.card_drawer_generic_front);
         genericBackLayout = findViewById(R.id.card_drawer_generic_back);
+
         genericTitle = genericFrontLayout.findViewById(R.id.generic_title);
         genericSubtitle = genericFrontLayout.findViewById(R.id.generic_subtitle);
+        genericTagText = genericFrontLayout.findViewById(R.id.card_tag);
+        cardTagText = cardFrontLayout.findViewById(R.id.card_tag);
 
         overlayImage = cardFrontLayout.findViewById(R.id.cho_card_overlay);
         issuerLogoView = cardFrontLayout.findViewById(R.id.cho_card_issuer);
@@ -219,28 +226,44 @@ public class CardDrawerView extends FrameLayout implements Observer {
      * Paints the front card with animation
      *
      * @param cardUI has the card style and animation type. Use NONE for show without animation.
+     *
+     * Preserved so we don't break integrators
      */
+    // TODO: Maybe we can deprecate this in favor of new show that allows
+    //  CardDrawerSource with new tag functionality
+    @SuppressWarnings("unused")
     public void show(@NonNull final CardUI cardUI) {
-        source = new PaymentCard(cardUI);
+        show(new PaymentCard(cardUI));
+    }
+
+    /**
+     * Paints the front card with animation
+     *
+     * @param paymentCard has the CardUI.
+     * CardUI has the card style and animation type. Use NONE for show without animation.
+     */
+    private void show(@NonNull final PaymentCard paymentCard) {
+        source = paymentCard;
         cardFrontLayout.setVisibility(VISIBLE);
         cardBackLayout.setVisibility(VISIBLE);
         genericFrontLayout.setVisibility(GONE);
         genericBackLayout.setVisibility(GONE);
-        cardConfiguration.updateSource(cardUI);
+        cardConfiguration.updateSource(paymentCard.getCardUI());
+        showTag(source, cardTagText, cardFrontLayout);
         hideSecCircle();
         updateCardInformation();
         if (codeFront != null && cardConfiguration.canShow(codeFront)) {
             codeFront.setVisibility(View.VISIBLE);
         }
-        update(cardUI);
+        update(paymentCard.getCardUI());
     }
 
     public void show(@NonNull final CardDrawerSource source) {
         BaseExtensionsKt.process(source, genericPaymentMethod -> {
             show(genericPaymentMethod);
             return Unit.INSTANCE;
-        }, cardUI -> {
-            show(cardUI);
+        }, paymentCard -> {
+            show(paymentCard);
             return Unit.INSTANCE;
         });
     }
@@ -258,6 +281,9 @@ public class CardDrawerView extends FrameLayout implements Observer {
         if (!TextUtils.isEmpty(genericPaymentMethod.getImageUrl())) {
             PicassoDiskLoader.get(getContext()).load(genericPaymentMethod.getImageUrl()).into(paymentMethodImage);
         }
+
+        showTag(genericPaymentMethod, genericTagText, genericFrontLayout);
+
         genericPaymentMethod.setPaymentMethodImage(paymentMethodImage);
         genericTitle.setText(genericPaymentMethod.getTitle().getText());
         genericTitle.setTextColor(genericPaymentMethod.getTitle().getColor());
@@ -274,6 +300,26 @@ public class CardDrawerView extends FrameLayout implements Observer {
     }
 
     /**
+     * Shows the card tag if it's assigned.
+     * @param source The source to get the tag from
+     * @param layout Used to find the card tag views
+     */
+    @SuppressWarnings("VariableNotUsedInsideIf")
+    private void showTag(@NonNull final CardDrawerSource source, @NonNull final AppCompatTextView tagText,
+        @NonNull final ViewGroup layout) {
+        final CardDrawerSource.Tag tag = source.getTag();
+        final ViewGroup tagContainer = layout.findViewById(R.id.card_tag_container);
+        if (tag != null) {
+            tagText.getBackground().setColorFilter(tag.getBackgroundColor(), PorterDuff.Mode.SRC_ATOP);
+            // This is because andes font-configurator is not initialized and therefore TypefaceHelper.set doesn't work
+            tagText.setTypeface(tagText.getTypeface(), CardDrawerFont.from(tag.getWeight()).getStyle());
+            tagText.setText(tag.getText());
+            tagText.setTextColor(tag.getTextColor());
+        }
+        tagContainer.setVisibility(tag != null ? VISIBLE : GONE);
+    }
+
+    /**
      * Shows the front card without animation. Uses the saved card style or default
      */
     public void show() {
@@ -285,9 +331,9 @@ public class CardDrawerView extends FrameLayout implements Observer {
      * Updates the header to match the position of the security code. Flip the card.
      */
     public void showSecurityCode() {
-        BaseExtensionsKt.processPaymentCard(source, cardUI -> {
+        BaseExtensionsKt.processPaymentCard(source, paymentCard -> {
             final int securityCodeFieldPosition =
-                cardUI.getSecurityCodeLocation().equals(SecurityCodeLocation.FRONT)
+                paymentCard.getCardUI().getSecurityCodeLocation().equals(SecurityCodeLocation.FRONT)
                 ? FieldPosition.POSITION_FRONT : FieldPosition.POSITION_BACK;
             cardAnimator.switchView(securityCodeFieldPosition);
             showSecCircle();
@@ -398,8 +444,8 @@ public class CardDrawerView extends FrameLayout implements Observer {
         BaseExtensionsKt.process(source, genericPaymentMethod -> {
             setUpCustomViewConfiguration(null);
             return Unit.INSTANCE;
-        }, cardUI -> {
-            setUpCustomViewConfiguration(cardUI);
+        }, paymentCard -> {
+            setUpCustomViewConfiguration(paymentCard.getCardUI());
             return Unit.INSTANCE;
         });
     }
@@ -467,8 +513,8 @@ public class CardDrawerView extends FrameLayout implements Observer {
      **/
     @Deprecated
     public void setCardTextColor(@NonNull @FontType final String fontType, @ColorInt final int fontColor) {
-        BaseExtensionsKt.processPaymentCard(source, cardUI -> {
-            setCardTextColor(cardUI, fontType, fontColor);
+        BaseExtensionsKt.processPaymentCard(source, paymentCard -> {
+            setCardTextColor(paymentCard.getCardUI(), fontType, fontColor);
             return Unit.INSTANCE;
         });
     }
@@ -515,7 +561,8 @@ public class CardDrawerView extends FrameLayout implements Observer {
 
     @VisibleForTesting
     protected void updateCardInformation() {
-        BaseExtensionsKt.processPaymentCard(source, cardUI -> {
+        BaseExtensionsKt.processPaymentCard(source, paymentCard -> {
+            final CardUI cardUI = paymentCard.getCardUI();
             updateNumber(cardUI);
             updateName(cardUI);
             updateDate(cardUI);
@@ -576,9 +623,9 @@ public class CardDrawerView extends FrameLayout implements Observer {
      * Hides the security code circle
      */
     public void hideSecCircle() {
-        BaseExtensionsKt.processPaymentCard(source, cardUI -> {
+        BaseExtensionsKt.processPaymentCard(source, paymentCard -> {
             codeFrontRedCircle.setVisibility(INVISIBLE);
-            if (cardUI.getSecurityCodeLocation().equals(SecurityCodeLocation.BACK)) {
+            if (paymentCard.getCardUI().getSecurityCodeLocation().equals(SecurityCodeLocation.BACK)) {
                 codeFront.setVisibility(View.GONE);
             }
             return Unit.INSTANCE;
@@ -643,16 +690,23 @@ public class CardDrawerView extends FrameLayout implements Observer {
         genericBackLayout.setLayoutParams(genericBackParams);
     }
 
-    public void setStyle(@NonNull final CardDrawerStyle style) {
+    /**
+     * Sets card from style with tag
+     */
+    public void setStyle(@NonNull final CardDrawerStyle style, @Nullable final CardDrawerSource.Tag tag) {
         this.style = style;
-        updateCardConfigurationByStyle();
+        updateCardConfigurationByStyle(tag);
     }
 
-    private void updateCardConfigurationByStyle() {
+    public void setStyle(@NonNull final CardDrawerStyle style) {
+        setStyle(style, null);
+    }
+
+    private void updateCardConfigurationByStyle(@Nullable final CardDrawerSource.Tag tag) {
         if (style == CardDrawerStyle.ACCOUNT_MONEY_DEFAULT) {
-            show(new AccountMoneyDefaultConfiguration());
+            show(new PaymentCard(new AccountMoneyDefaultConfiguration(), tag));
         } else if (style == CardDrawerStyle.ACCOUNT_MONEY_HYBRID) {
-            show(new AccountMoneyHybridConfiguration());
+            show(new PaymentCard(new AccountMoneyHybridConfiguration(), tag));
         }
     }
 
@@ -667,15 +721,18 @@ public class CardDrawerView extends FrameLayout implements Observer {
         super.onSizeChanged(w, h, oldW, oldH);
 
         final Resources resources = getResources();
-        final float cardSizeMultiplier =
-            getCurrentFrontView().getMeasuredWidth() / resources.getDimension(R.dimen.card_drawer_card_width);
+        final float cardSizeMultiplier = getCardSizeMultiplier();
         final float newTextSize = resources.getDimension(R.dimen.card_drawer_font_size) * cardSizeMultiplier;
 
         setTextPixelSize(cardName, newTextSize);
         setTextPixelSize(codeBack, newTextSize);
         setTextPixelSize(cardNumber, newTextSize);
+
         setTextPixelSize(genericTitle, resources.getDimension(R.dimen.card_drawer_font_generic_title) * cardSizeMultiplier);
         setTextPixelSize(genericSubtitle, resources.getDimension(R.dimen.card_drawer_font_generic_subtitle) * cardSizeMultiplier);
+
+        setCardTagTextPixelSize(resources, cardSizeMultiplier);
+
         if (cardDate != null) {
             setTextPixelSize(cardDate, newTextSize);
         }
@@ -684,8 +741,32 @@ public class CardDrawerView extends FrameLayout implements Observer {
         }
     }
 
+    private void setCardTagTextPixelSize(final Resources resources, final float cardSizeMultiplier) {
+        final TagDimensions cardTagDimensions = getCardTagDimensions(resources, cardSizeMultiplier);
+        setTextPixelSize(genericTagText, cardTagDimensions.getFontSize(), cardTagDimensions.getPaddingH(),
+            cardTagDimensions.getPaddingV());
+        setTextPixelSize(cardTagText, cardTagDimensions.getFontSize(), cardTagDimensions.getPaddingH(),
+            cardTagDimensions.getPaddingV());
+    }
+
+    protected TagDimensions getCardTagDimensions(final Resources resources, final float cardSizeMultiplier){
+        return new TagDimensions(resources.getDimension(R.dimen.card_drawer_font_tag) * cardSizeMultiplier,
+            Math.round(resources.getDimension(R.dimen.andes_tag_medium_margin) * cardSizeMultiplier),
+            Math.round(resources.getDimension(R.dimen.card_drawer_tag_vertical_padding) * cardSizeMultiplier)
+        );
+    }
+
+    protected void setTextPixelSize(@NonNull final TextView view,  final float size, final int paddingH, final int paddingV) {
+        view.post(() -> view.setPadding(paddingH, paddingV, paddingH, paddingV));
+        setTextPixelSize(view, size);
+    }
+
     protected void setTextPixelSize(@NonNull final TextView view, final float size) {
         view.post(() -> view.setTextSize(TypedValue.COMPLEX_UNIT_PX, size));
+    }
+
+    protected float getCardSizeMultiplier() {
+        return getCurrentFrontView().getMeasuredWidth() / getResources().getDimension(R.dimen.card_drawer_card_width);
     }
 
     @Override

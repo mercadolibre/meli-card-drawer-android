@@ -49,12 +49,12 @@
         android:src="@drawable/card_drawer_generic_method_ring"
         android:tint="@color/card_drawer_generic_method_ring"
         app:layout_constraintBottom_toTopOf="@id/image_guideline"
-        app:layout_constraintWidth_percent="0.25"
         app:layout_constraintDimensionRatio="H,1:1"
-        app:layout_constraintVertical_bias="1"
         app:layout_constraintEnd_toEndOf="@id/generic_front_background"
         app:layout_constraintStart_toStartOf="@id/generic_front_background"
-        app:layout_constraintTop_toTopOf="@id/generic_front_background" />
+        app:layout_constraintTop_toTopOf="@id/generic_front_background"
+        app:layout_constraintVertical_bias="1"
+        app:layout_constraintWidth_percent="0.25" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/generic_image"
@@ -92,5 +92,22 @@
         app:layout_constraintTop_toBottomOf="@id/generic_title"
         app:layout_constraintBottom_toBottomOf="parent"
         tools:text="dfsdfds dsfdsfdsf dsfsdfsd fdsdffsf dsfsdfds dsfsdfds dsfsdf sdfdsfds" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/tag_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.65" />
+
+    <include
+        android:id="@+id/card_tag_container"
+        layout="@layout/card_drawer_tag"
+        android:visibility="gone"
+        tools:visibility="visible"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tag_guideline" />
 
 </com.meli.android.carddrawer.model.ConstraintLayoutWithDisabledSupport>

@@ -1,11 +1,15 @@
 package com.meli.android.carddrawer.model;
 
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ImageSwitcher;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.appcompat.widget.AppCompatTextView;
 import com.meli.android.carddrawer.BasicRobolectricTest;
 import com.meli.android.carddrawer.R;
 import com.meli.android.carddrawer.TestUtils;
@@ -46,6 +50,13 @@ public class CardDrawerViewTest extends BasicRobolectricTest {
     public void doBefore() {
         TestUtils.initTypefaceSetter();
         header = new CardDrawerView(getContext());
+    }
+
+    public CardDrawerSource.Tag getTestTag(){
+        return new CardDrawerSource.Tag("Novo",
+            Color.parseColor("#CCCCCC"),
+            Color.parseColor("#FFFFFF"),
+            "regular");
     }
 
     @Test
@@ -147,6 +158,7 @@ public class CardDrawerViewTest extends BasicRobolectricTest {
     public void showSecurityCode_withFrontLocation_showsSecCodeCircleAndCallsAnimator() {
         final CardUI cardUI = mock(CardUI.class);
         when(cardUI.getSecurityCodeLocation()).thenReturn(SecurityCodeLocation.FRONT);
+        when(cardUI.getAnimationType()).thenReturn(CardAnimationType.NONE);
         final CardAnimator cardAnimatorMock = mock(CardAnimator.class);
         final View codeFront = ReflectionHelpers.getField(header, "codeFront");
         final View codeFrontRedCircle = ReflectionHelpers.getField(header, "codeFrontRedCircle");
@@ -165,6 +177,7 @@ public class CardDrawerViewTest extends BasicRobolectricTest {
     public void showSecurityCode_withBackLocation_showsSecCodeCircleAndCallsAnimator() {
         final CardUI cardUI = mock(CardUI.class);
         when(cardUI.getSecurityCodeLocation()).thenReturn(SecurityCodeLocation.BACK);
+        when(cardUI.getAnimationType()).thenReturn(CardAnimationType.NONE);
         final CardAnimator cardAnimatorMock = mock(CardAnimator.class);
         final View codeBack = ReflectionHelpers.getField(header, "codeBack");
         ReflectionHelpers.setField(header, "cardAnimator", cardAnimatorMock);
@@ -243,6 +256,7 @@ public class CardDrawerViewTest extends BasicRobolectricTest {
     public void hideSecCircle_withFrontPosition_hidesSecCode() {
         final CardUI cardUI = mock(CardUI.class);
         when(cardUI.getSecurityCodeLocation()).thenReturn(SecurityCodeLocation.FRONT);
+        when(cardUI.getAnimationType()).thenReturn(CardAnimationType.NONE);
         final View codeFront = ReflectionHelpers.getField(header, "codeFront");
         final View codeFrontRedCircle = ReflectionHelpers.getField(header, "codeFrontRedCircle");
         ReflectionHelpers.setField(header, "source", new PaymentCard(cardUI));
@@ -261,6 +275,7 @@ public class CardDrawerViewTest extends BasicRobolectricTest {
         codeFront.setVisibility(View.VISIBLE);
         CardUI cardUI = mock(CardUI.class);
         when(cardUI.getSecurityCodeLocation()).thenReturn(SecurityCodeLocation.BACK);
+        when(cardUI.getAnimationType()).thenReturn(CardAnimationType.NONE);
 
         ReflectionHelpers.setField(spyHeader, "source", new PaymentCard(cardUI));
         ReflectionHelpers.setField(spyHeader, "cardAnimator", cardAnimatorMock);
@@ -341,5 +356,64 @@ public class CardDrawerViewTest extends BasicRobolectricTest {
         verify(source).setOverlayImage(overlayImageView);
         verifyNoMoreInteractions(source);
         verifyNoMoreInteractions(overlayImageView);
+    }
+
+    @Test
+    public void showTagShouldNotShowTagWhenGenericPaymentMethodHasNoTag(){
+        final CardDrawerView spyHeader = spy(header);
+        final GenericPaymentMethod genericMethod = new GenericPaymentMethod(0,
+            new GenericPaymentMethod.Text("Test", Color.parseColor("#000000")),
+            null, null, null);
+        spyHeader.show(genericMethod);
+        assertEquals(View.GONE, spyHeader.genericFrontLayout.findViewById(R.id.card_tag_container).getVisibility());
+    }
+
+    @Test
+    public void showTagShouldShowTagWhenGenericPaymentMethodHasTag() {
+        final CardDrawerSource.Tag tag = getTestTag();
+        final CardDrawerView spyHeader = spy(header);
+        final GenericPaymentMethod genericMethod = new GenericPaymentMethod(0,
+            new GenericPaymentMethod.Text("Test", Color.parseColor("#000000")),
+            null,
+            null,
+            tag);
+        spyHeader.show(genericMethod);
+        assertEquals(View.VISIBLE, spyHeader.genericFrontLayout.findViewById(R.id.card_tag_container).getVisibility());
+    }
+
+    @Test
+    public void showShouldShowTagWhenPaymentCardHasTag() {
+        final CardDrawerSource.Tag tag = getTestTag();
+        final CardDrawerView spyHeader = spy(header);
+        final CardUI cardUI = new DefaultCardConfiguration(getContext());
+        final PaymentCard paymentCard = new PaymentCard(cardUI ,tag);
+        spyHeader.show(paymentCard);
+        assertEquals(View.VISIBLE, spyHeader.cardFrontLayout.findViewById(R.id.card_tag_container).getVisibility());
+    }
+
+    @Test
+    public void showShouldNotShowTagWhenPaymentCardHasNoTag() {
+        final CardDrawerView spyHeader = spy(header);
+        final CardUI cardUI = new DefaultCardConfiguration(getContext());
+        final PaymentCard paymentCard = new PaymentCard(cardUI);
+        spyHeader.show(paymentCard);
+        assertEquals(View.GONE, spyHeader.cardFrontLayout.findViewById(R.id.card_tag_container).getVisibility());
+    }
+
+    @Test
+    public void showShouldSetTestAndColorsFromTagForGenericPaymentMethod() {
+        final CardDrawerSource.Tag tag = getTestTag();
+        final CardDrawerView spyHeader = spy(header);
+        final GenericPaymentMethod genericMethod = new GenericPaymentMethod(0,
+            new GenericPaymentMethod.Text("Test", Color.parseColor("#000000")),
+            null,
+            null,
+            tag);
+        spyHeader.show(genericMethod);
+        final AppCompatTextView textView = spyHeader.genericFrontLayout.findViewById(R.id.card_tag);
+        assertEquals(tag.getText(), textView.getText());
+        assertEquals(tag.getTextColor(), textView.getCurrentTextColor());
+        assertEquals(new PorterDuffColorFilter(tag.getBackgroundColor(), PorterDuff.Mode.SRC_ATOP),
+            textView.getBackground().getColorFilter());
     }
 }
