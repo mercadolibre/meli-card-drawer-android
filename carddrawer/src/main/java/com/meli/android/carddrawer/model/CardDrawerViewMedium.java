@@ -58,6 +58,12 @@ public class CardDrawerViewMedium extends CardDrawerViewLowres {
         //Nothing to do here
     }
 
+    @NonNull
+    @Override
+    protected CardConfiguration buildCardConfiguration() {
+        return new CardMediumConfiguration(source);
+    }
+
     @Override
     public void setCardTextColor(@NonNull @FontType final String fontType, @ColorInt final int fontColor) {
         super.setCardTextColor(fontType, fontColor);

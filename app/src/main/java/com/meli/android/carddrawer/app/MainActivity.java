@@ -327,10 +327,17 @@ public class MainActivity extends AppCompatActivity {
                     viewMediumRes.setSwitchModel(model);
                     viewMediumRes.setConfiguration(cardDrawerViewMediumRes.buildCustomViewConfiguration());
                     cardDrawerViewMediumRes.setCustomView(viewMediumRes);
+
+                    final CardDrawerSwitch viewMedium = new CardDrawerSwitch(MainActivity.this);
+                    viewMedium.setSwitchListener(optionId -> Log.i("CARD_DRAWER", "ID: "+ optionId));
+                    viewMedium.setSwitchModel(model);
+                    viewMedium.setConfiguration(cardDrawerViewMedium.buildCustomViewConfiguration());
+                    cardDrawerViewMedium.setCustomView(viewMedium);
                 } else {
                     cardDrawerView.setCustomView(null);
                     cardDrawerViewLowRes.setCustomView(null);
                     cardDrawerViewMediumRes.setCustomView(null);
+                    cardDrawerViewMedium.setCustomView(null);
                 }
             }
 
