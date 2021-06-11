@@ -25,6 +25,7 @@
         layout="@layout/card_drawer_generic_back_medium"
         android:layout_width="@dimen/card_drawer_card_width"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         android:layout_gravity="center_horizontal" />
 
     <include
@@ -32,6 +33,7 @@
         layout="@layout/card_drawer_generic_front_medium"
         android:layout_width="@dimen/card_drawer_card_width"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         android:layout_gravity="center_horizontal" />
 
 </merge>
