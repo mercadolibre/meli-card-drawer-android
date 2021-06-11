@@ -16,6 +16,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:clipChildren="false"
+            android:clipToPadding="false"
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
             android:paddingTop="20dp">
@@ -210,6 +212,27 @@
 
                 <androidx.appcompat.widget.SwitchCompat
                     android:id="@+id/card_header_disabled_switch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|end"/>
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:textSize="16dp"
+                    android:text="Show Tag"/>
+
+                <androidx.appcompat.widget.SwitchCompat
+                    android:checked="true"
+                    android:id="@+id/card_header_show_tag_switch"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical|end"/>

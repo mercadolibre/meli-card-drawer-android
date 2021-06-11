@@ -151,18 +151,19 @@
         app:layout_constraintBottom_toBottomOf="@+id/card_header_front_guideline_number"
         tools:text="6666 6666 6666 6666" />
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/cho_card_code_front_red_circle"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:adjustViewBounds="true"
-        android:src="@drawable/card_drawer_red_circle"
+        android:src="@drawable/card_drawer_cvv_ring"
+        android:tint="@color/card_drawer_cvv_circle"
         app:layout_constraintBottom_toBottomOf="@id/cho_card_code_front"
         app:layout_constraintEnd_toEndOf="@id/cho_card_code_front"
         app:layout_constraintStart_toStartOf="@id/cho_card_code_front"
         app:layout_constraintTop_toTopOf="@id/cho_card_code_front"
         app:layout_constraintWidth_percent="0.13"
-        app:layout_constraintHeight_percent="0.26" />
+        app:layout_constraintDimensionRatio="1:1" />
 
     <com.meli.android.carddrawer.model.GradientTextView
         android:id="@+id/cho_card_code_front"
@@ -186,5 +187,22 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/card_header_front_guideline_safezone"
         app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/tag_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.65" />
+
+    <include
+        android:id="@+id/card_tag_container"
+        layout="@layout/card_drawer_tag"
+        android:visibility="gone"
+        tools:visibility="visible"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tag_guideline" />
 
 </com.meli.android.carddrawer.model.ConstraintLayoutWithDisabledSupport>

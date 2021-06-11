@@ -1,5 +1,6 @@
 package com.meli.android.carddrawer.app;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -16,6 +17,7 @@ import com.meli.android.carddrawer.app.model.CardComposite;
 import com.meli.android.carddrawer.app.model.CustomAccountMoneyConfiguration;
 import com.meli.android.carddrawer.app.model.HybridCreditConfiguration;
 import com.meli.android.carddrawer.app.model.MasterCardConfiguration;
+import com.meli.android.carddrawer.app.model.PixConfiguration;
 import com.meli.android.carddrawer.app.model.UrlTestConfiguration;
 import com.meli.android.carddrawer.app.model.VisaCardBlueConfiguration;
 import com.meli.android.carddrawer.app.model.VisaCardGrayConfiguration;
@@ -24,11 +26,12 @@ import com.meli.android.carddrawer.app.model.VisaCardRedConfiguration;
 import com.meli.android.carddrawer.app.model.VisaCardYellowConfiguration;
 import com.meli.android.carddrawer.configuration.CardDrawerStyle;
 import com.meli.android.carddrawer.configuration.DefaultCardConfiguration;
+import com.meli.android.carddrawer.model.CardDrawerSource;
 import com.meli.android.carddrawer.model.CardDrawerView;
-import com.meli.android.carddrawer.model.CardUI;
 import com.meli.android.carddrawer.model.customview.CardDrawerSwitch;
 import com.meli.android.carddrawer.model.customview.SwitchModel;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -145,6 +148,23 @@ public class MainActivity extends AppCompatActivity {
             cardDrawerViewLowRes.setEnabled(!isChecked);
             cardDrawerViewMedium.setEnabled(!isChecked);
             cardDrawerViewMediumRes.setEnabled(!isChecked);
+        });
+
+        final SwitchCompat switchShowTag = findViewById(R.id.card_header_show_tag_switch);
+        switchShowTag.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            final List<View> frontViews = Arrays.asList(
+                cardDrawerView.findViewById(R.id.card_header_front).findViewById(R.id.card_tag_container),
+                cardDrawerViewLowRes.findViewById(R.id.card_header_front).findViewById(R.id.card_tag_container),
+                cardDrawerViewMedium.findViewById(R.id.card_header_front).findViewById(R.id.card_tag_container),
+                cardDrawerViewMediumRes.findViewById(R.id.card_header_front).findViewById(R.id.card_tag_container),
+                cardDrawerView.findViewById(R.id.card_drawer_generic_front).findViewById(R.id.card_tag_container),
+                cardDrawerViewLowRes.findViewById(R.id.card_drawer_generic_front).findViewById(R.id.card_tag_container),
+                cardDrawerViewMedium.findViewById(R.id.card_drawer_generic_front).findViewById(R.id.card_tag_container),
+                cardDrawerViewMediumRes.findViewById(R.id.card_drawer_generic_front).findViewById(R.id.card_tag_container)
+            );
+            for (final View v: frontViews){
+                v.setVisibility(isChecked ? View.VISIBLE : View.GONE);
+            }
         });
 
         initCardConfigurationOptions();
@@ -264,19 +284,21 @@ public class MainActivity extends AppCompatActivity {
         final Spinner cardsSpinner = findViewById(R.id.spinner_cards);
 
         final List<CardConfigurationOption> cardOptions = new ArrayList<>();
-
-        cardOptions.add(new CardConfigurationOption("Default", new DefaultCardConfiguration(this)));
-        cardOptions.add(new CardConfigurationOption("Visa blue", new VisaCardBlueConfiguration(this)));
-        cardOptions.add(new CardConfigurationOption("Visa green", new VisaCardGreenConfiguration(this)));
-        cardOptions.add(new CardConfigurationOption("Visa red", new VisaCardRedConfiguration(this)));
-        cardOptions.add(new CardConfigurationOption("Visa gray", new VisaCardGrayConfiguration(this)));
-        cardOptions.add(new CardConfigurationOption("Visa yellow", new VisaCardYellowConfiguration(this)));
-        cardOptions.add(new CardConfigurationOption("Master", new MasterCardConfiguration(this)));
-        cardOptions.add(new CardConfigurationOption("Url Test", new UrlTestConfiguration(this)));
-        cardOptions.add(new CardConfigurationOption("Hybrid Account Money", CardDrawerStyle.ACCOUNT_MONEY_HYBRID));
-        cardOptions.add(new CardConfigurationOption("Hybrid Credit", new HybridCreditConfiguration()));
-        cardOptions.add(new CardConfigurationOption("Default Account Money", CardDrawerStyle.ACCOUNT_MONEY_DEFAULT));
-        cardOptions.add(new CardConfigurationOption("Custom account money", new CustomAccountMoneyConfiguration()));
+        final CardDrawerSource.Tag tag = new CardDrawerSource.Tag("Novo",
+            Color.parseColor("#1A4189E6"), Color.parseColor("#009EE3"), "regular");
+        cardOptions.add(new CardConfigurationOption("Default", new DefaultCardConfiguration(this), tag));
+        cardOptions.add(new CardConfigurationOption("Visa blue", new VisaCardBlueConfiguration(this), tag));
+        cardOptions.add(new CardConfigurationOption("Visa green", new VisaCardGreenConfiguration(this), tag));
+        cardOptions.add(new CardConfigurationOption("Visa red", new VisaCardRedConfiguration(this), tag));
+        cardOptions.add(new CardConfigurationOption("Visa gray", new VisaCardGrayConfiguration(this), tag));
+        cardOptions.add(new CardConfigurationOption("Visa yellow", new VisaCardYellowConfiguration(this), tag));
+        cardOptions.add(new CardConfigurationOption("Master", new MasterCardConfiguration(this), tag));
+        cardOptions.add(new CardConfigurationOption("Url Test", new UrlTestConfiguration(this), tag));
+        cardOptions.add(new CardConfigurationOption("Hybrid Account Money", CardDrawerStyle.ACCOUNT_MONEY_HYBRID, tag));
+        cardOptions.add(new CardConfigurationOption("Hybrid Credit", new HybridCreditConfiguration(), tag));
+        cardOptions.add(new CardConfigurationOption("Default Account Money", CardDrawerStyle.ACCOUNT_MONEY_DEFAULT, tag));
+        cardOptions.add(new CardConfigurationOption("Custom account money", new CustomAccountMoneyConfiguration(), tag));
+        cardOptions.add(new CardConfigurationOption("PIX", new PixConfiguration(this)));
 
         final ArrayAdapter<CardConfigurationOption> cardAdapter =
             new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, cardOptions);
@@ -286,19 +308,19 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(final AdapterView<?> parent, final View view, final int position, final long id) {
                 final CardConfigurationOption selection = cardOptions.get(position);
-                final CardUI configuration = selection.getCardConfiguration();
+                final CardDrawerSource source = selection.getCardConfiguration();
                 final CardDrawerStyle style = selection.getCardStyle();
-                if (configuration != null) {
-                    cardDrawerView.show(configuration);
-                    cardDrawerViewLowRes.show(configuration);
-                    cardDrawerViewMedium.show(configuration);
-                    cardDrawerViewMediumRes.show(configuration);
-
+                final CardDrawerSource.Tag tag = selection.getStyledCardTag();
+                if (source != null) {
+                    cardDrawerView.show(source);
+                    cardDrawerViewLowRes.show(source);
+                    cardDrawerViewMedium.show(source);
+                    cardDrawerViewMediumRes.show(source);
                 } else if (style != null) {
-                    cardDrawerView.setStyle(style);
-                    cardDrawerViewLowRes.setStyle(style);
-                    cardDrawerViewMedium.setStyle(style);
-                    cardDrawerViewMediumRes.setStyle(style);
+                    cardDrawerView.setStyle(style, tag);
+                    cardDrawerViewLowRes.setStyle(style, tag);
+                    cardDrawerViewMedium.setStyle(style, tag);
+                    cardDrawerViewMediumRes.setStyle(style, tag);
                 }
 
                 setUpCustomView(style, switchCustomView.isChecked());

@@ -1,3 +1,7 @@
+## Release 2.15.0
+* Added generic payment method layout.
+* Added card tag.
+
 ## Release 2.14.0
 * Added medium res card.
 

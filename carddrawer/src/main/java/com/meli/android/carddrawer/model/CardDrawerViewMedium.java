@@ -1,14 +1,14 @@
 package com.meli.android.carddrawer.model;
 
 import android.content.Context;
+import android.util.AttributeSet;
+import android.view.View;
+import android.widget.ImageView;
 import androidx.annotation.ColorInt;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
-import android.util.AttributeSet;
-import android.view.View;
-import android.widget.ImageView;
 import com.meli.android.carddrawer.R;
 import com.meli.android.carddrawer.configuration.FontType;
 
@@ -65,8 +65,9 @@ public class CardDrawerViewMedium extends CardDrawerViewLowres {
     }
 
     @Override
-    public void setCardTextColor(@NonNull @FontType final String fontType, @ColorInt final int fontColor) {
-        super.setCardTextColor(fontType, fontColor);
+    protected void setCardTextColor(@NonNull final CardUI cardUI, @NonNull @FontType final String fontType,
+        final int fontColor) {
+        super.setCardTextColor(cardUI, fontType, fontColor);
         arrow.setColorFilter(getArrowColor(fontType, fontColor));
     }
 
