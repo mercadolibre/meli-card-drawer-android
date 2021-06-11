@@ -1,3 +1,6 @@
+## Release 2.16.0
+* Added safezone for medium card.
+
 ## Release 2.15.0
 * Added generic payment method layout.
 * Added card tag.
