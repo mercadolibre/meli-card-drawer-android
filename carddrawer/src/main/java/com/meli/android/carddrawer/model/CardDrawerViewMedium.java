@@ -60,8 +60,8 @@ public class CardDrawerViewMedium extends CardDrawerViewLowres {
 
     @NonNull
     @Override
-    protected CardConfiguration buildCardConfiguration() {
-        return new CardMediumConfiguration(source);
+    protected CardConfiguration buildCardConfiguration(@NonNull final CardUI cardUI) {
+        return new CardMediumConfiguration(cardUI);
     }
 
     @Override
