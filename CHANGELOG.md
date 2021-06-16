@@ -1,3 +1,6 @@
+## Release 2.15.1
+* Fix default card visibility.
+
 ## Release 2.16.0
 * Added safezone for medium card.
 
