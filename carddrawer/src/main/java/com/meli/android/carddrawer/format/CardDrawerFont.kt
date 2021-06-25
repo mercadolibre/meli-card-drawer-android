@@ -25,5 +25,8 @@ internal enum class CardDrawerFont(val index: Int, val font: Font, val style: In
             }
             return REGULAR
         }
+
+        @JvmStatic
+        fun from(id: Int): CardDrawerFont = values().find { it.index == id } ?: REGULAR
     }
 }

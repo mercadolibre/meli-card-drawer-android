@@ -24,7 +24,7 @@
         android:layout_weight="4"
         android:background="@color/card_drawer_color_highlight">
 
-        <TextView
+        <com.meli.android.carddrawer.internal.CardDrawerTextView
             android:id="@+id/bottom_description"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -35,6 +35,7 @@
             android:textSize="@dimen/card_drawer_xxxs_text"
             android:ellipsize="end"
             android:maxLines="1"
+            app:customStyle="semi_bold"
             tools:text="Ahorro con tu banco" />
     </FrameLayout>
 </LinearLayout>

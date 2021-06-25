@@ -20,4 +20,17 @@
         <attr name="bottom_left_corner_radius" format="dimension"/>
         <attr name="bottom_right_corner_radius" format="dimension"/>
     </declare-styleable>
+    <declare-styleable name="CardDrawerTextView">
+        <attr name="customStyle" format="enum">
+            <enum name="black" value="0" />
+            <enum name="bold" value="1" />
+            <enum name="extra_bold" value="2" />
+            <enum name="light" value="3" />
+            <enum name="regular" value="4" />
+            <enum name="semi_bold" value="5" />
+            <enum name="medium" value="6" />
+            <enum name="thin" value="7" />
+            <enum name="monospace" value="8" />
+        </attr>
+    </declare-styleable>
 </resources>
