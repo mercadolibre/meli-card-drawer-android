@@ -43,8 +43,10 @@ import com.meli.android.carddrawer.configuration.SecurityCodeLocation;
 import com.meli.android.carddrawer.format.CardDrawerFont;
 import com.meli.android.carddrawer.format.TypefaceHelper;
 import com.meli.android.carddrawer.internal.BaseExtensionsKt;
+import com.meli.android.carddrawer.internal.CardDrawerTextView;
 import com.meli.android.carddrawer.internal.TagDimensions;
 import com.meli.android.carddrawer.model.customview.CustomViewConfiguration;
+import com.meli.android.carddrawer.utils.ViewUtils;
 import com.mercadolibre.android.picassodiskcache.PicassoDiskLoader;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -92,6 +94,9 @@ public class CardDrawerView extends FrameLayout implements Observer {
     private View customView;
     protected CardConfiguration cardConfiguration;
     protected CardDrawerStyle style;
+    protected ViewGroup hightlightTextContainer;
+    protected ViewGroup bottomDescriptionBackground;
+    protected CardDrawerTextView bottomDescription;
 
     public CardDrawerView(@NonNull final Context context) {
         this(context, null);
@@ -211,6 +216,10 @@ public class CardDrawerView extends FrameLayout implements Observer {
         cardBackGradient = cardBackLayout.findViewById(R.id.cho_card_gradient_back);
 
         safeZone = cardFrontLayout.findViewById(R.id.safe_zone);
+
+        hightlightTextContainer = cardFrontLayout.findViewById(R.id.card_drawer_hightlight_text_container);
+        bottomDescriptionBackground = hightlightTextContainer.findViewById(R.id.bottom_description_background);
+        bottomDescription = hightlightTextContainer.findViewById(R.id.bottom_description);
     }
 
     @NonNull

@@ -206,7 +206,7 @@
         app:layout_constraintStart_toEndOf="@+id/tag_guideline" />
 
     <include
-        android:id="@+id/card_drawer_hightlight_text"
+        android:id="@+id/card_drawer_hightlight_text_container"
         layout="@layout/card_drawer_highlight_text_medium_res"
         tools:visibility="visible"
         android:visibility="gone"

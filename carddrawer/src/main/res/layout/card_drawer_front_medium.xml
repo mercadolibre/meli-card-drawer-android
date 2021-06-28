@@ -148,4 +148,13 @@
         app:layout_constraintTop_toBottomOf="@+id/card_header_front_guideline_safezone"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
+    <include
+        android:id="@+id/card_drawer_hightlight_text_container"
+        layout="@layout/card_drawer_highlight_text_low_res"
+        tools:visibility="visible"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
 </com.meli.android.carddrawer.model.ConstraintLayoutWithDisabledSupport>

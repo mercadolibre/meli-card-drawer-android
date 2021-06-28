@@ -12,13 +12,14 @@ import com.meli.android.carddrawer.format.TypefaceHelper
 import com.meli.android.carddrawer.utils.TextUtil
 import com.meli.android.carddrawer.utils.ViewUtils
 
-internal class CardDrawerTextView(
+internal class CardDrawerTextView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
 ) : AppCompatTextView(context, attrs, defStyleAttr) {
 
     init {
+
         val typedArray: TypedArray = context.obtainStyledAttributes(attrs, R.styleable.CardDrawerTextView)
         val font: CardDrawerFont =
             CardDrawerFont.from(typedArray.getInt(R.styleable.CardDrawerTextView_customStyle,
