@@ -1,7 +1,8 @@
-package com.meli.android.carddrawer.internal
+package com.meli.android.carddrawer.model
 
 import android.content.Context
 import android.content.res.TypedArray
+import android.graphics.Color
 import android.text.TextUtils
 import android.util.AttributeSet
 import android.view.ViewTreeObserver.OnGlobalLayoutListener
@@ -9,8 +10,6 @@ import androidx.appcompat.widget.AppCompatTextView
 import com.meli.android.carddrawer.R
 import com.meli.android.carddrawer.format.CardDrawerFont
 import com.meli.android.carddrawer.format.TypefaceHelper
-import com.meli.android.carddrawer.utils.TextUtil
-import com.meli.android.carddrawer.utils.ViewUtils
 
 internal class CardDrawerTextView @JvmOverloads constructor(
     context: Context,
@@ -39,11 +38,11 @@ internal class CardDrawerTextView @JvmOverloads constructor(
         })
     }
 
-    fun setText(text: Text) {
-        setText(text.message)
-        ViewUtils.setTextColor(this, text.textColor)
-        if (TextUtil.isNotEmpty(text.weigth)) {
-            TypefaceHelper.set(this, TypefaceHelper.get(context,  CardDrawerFont.from(text.weigth)))
+    fun setText(text: Label.Text) {
+        setText(text.text)
+        setTextColor(Color.parseColor(text.color))
+        if (text.weight.isNotEmpty()) {
+            TypefaceHelper.set(this, TypefaceHelper.get(context,  CardDrawerFont.from(text.weight)))
         }
     }
 

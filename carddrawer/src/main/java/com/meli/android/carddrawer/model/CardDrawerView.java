@@ -43,10 +43,8 @@ import com.meli.android.carddrawer.configuration.SecurityCodeLocation;
 import com.meli.android.carddrawer.format.CardDrawerFont;
 import com.meli.android.carddrawer.format.TypefaceHelper;
 import com.meli.android.carddrawer.internal.BaseExtensionsKt;
-import com.meli.android.carddrawer.internal.CardDrawerTextView;
 import com.meli.android.carddrawer.internal.TagDimensions;
 import com.meli.android.carddrawer.model.customview.CustomViewConfiguration;
-import com.meli.android.carddrawer.utils.ViewUtils;
 import com.mercadolibre.android.picassodiskcache.PicassoDiskLoader;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -382,6 +380,16 @@ public class CardDrawerView extends FrameLayout implements Observer {
      */
     public void showFront() {
         cardAnimator.switchViewWithoutAnimation(FieldPosition.POSITION_FRONT);
+    }
+
+    /**
+     * Shows highlight text
+     */
+    public void showLabel(Label label) {
+        bottomDescription.setText(label.getText());
+        bottomDescription.setVisibility(VISIBLE);
+        bottomDescriptionBackground.setBackgroundColor(Color.parseColor(label.getBackgroundColor()));
+        bottomDescriptionBackground.setVisibility(VISIBLE);
     }
 
     protected void setupImageSwitcher(final ImageSwitcher imageSwitcher, final Animation fadeIn,
@@ -841,4 +849,5 @@ public class CardDrawerView extends FrameLayout implements Observer {
             return genericFrontLayout;
         }
     }
+
 }

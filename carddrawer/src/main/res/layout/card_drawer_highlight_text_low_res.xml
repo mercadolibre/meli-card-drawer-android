@@ -24,7 +24,7 @@
         android:layout_weight="15"
         android:background="@color/card_drawer_color_highlight">
 
-        <com.meli.android.carddrawer.internal.CardDrawerTextView
+        <com.meli.android.carddrawer.model.CardDrawerTextView
             android:id="@+id/bottom_description"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
