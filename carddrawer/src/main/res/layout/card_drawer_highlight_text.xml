@@ -35,7 +35,7 @@
             android:textSize="@dimen/card_drawer_xxxs_text"
             android:ellipsize="end"
             android:maxLines="1"
-            app:customStyle="semi_bold"
+            app:style="semi_bold"
             tools:text="Ahorro con tu banco" />
 
     </FrameLayout>

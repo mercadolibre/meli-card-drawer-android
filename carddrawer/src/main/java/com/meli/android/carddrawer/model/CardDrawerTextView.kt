@@ -11,7 +11,7 @@ import com.meli.android.carddrawer.R
 import com.meli.android.carddrawer.format.CardDrawerFont
 import com.meli.android.carddrawer.format.TypefaceHelper
 
-internal class CardDrawerTextView @JvmOverloads constructor(
+class CardDrawerTextView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
@@ -21,7 +21,7 @@ internal class CardDrawerTextView @JvmOverloads constructor(
 
         val typedArray: TypedArray = context.obtainStyledAttributes(attrs, R.styleable.CardDrawerTextView)
         val font: CardDrawerFont =
-            CardDrawerFont.from(typedArray.getInt(R.styleable.CardDrawerTextView_customStyle,
+            CardDrawerFont.from(typedArray.getInt(R.styleable.CardDrawerTextView_style,
                 CardDrawerFont.REGULAR.index))
 
         typedArray.recycle()
