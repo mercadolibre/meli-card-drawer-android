@@ -1,6 +1,7 @@
 package com.meli.android.carddrawer
 
 import android.content.Context
+import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
 import android.view.View
 import androidx.core.content.ContextCompat
@@ -18,11 +19,11 @@ internal object ViewHelper {
             val gradientCopy = gradientDrawable.mutate().constantState!!.newDrawable() as GradientDrawable
             val colorsAmount = gradientColors.size.coerceAtMost(3)
             if (colorsAmount == 1) {
-                gradientCopy.setColor(safeParcelColor(gradientColors[0]))
+                gradientCopy.setColor(safeParcelColor(gradientColors[0], Color.BLACK))
             } else {
                 val parsedColors = IntArray(colorsAmount)
                 for (i in 0 until colorsAmount) {
-                    parsedColors[i] = safeParcelColor(gradientColors[i])
+                    parsedColors[i] = safeParcelColor(gradientColors[i], Color.BLACK)
                 }
                 gradientCopy.colors = parsedColors
             }

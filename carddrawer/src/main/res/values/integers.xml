@@ -6,5 +6,6 @@
     <integer name="card_drawer_card_flip_time_half">400</integer>
     <integer name="card_drawer_default_animation_offset">100</integer>
     <integer name="card_drawer_long_animation_time" tools:ignore="UnusedResources">500</integer>
+    <integer name="card_drawer_short_animation_time">200</integer>
 
 </resources>
