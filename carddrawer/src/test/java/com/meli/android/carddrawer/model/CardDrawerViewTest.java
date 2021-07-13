@@ -17,6 +17,7 @@ import com.meli.android.carddrawer.configuration.DefaultCardConfiguration;
 import com.meli.android.carddrawer.configuration.FieldPosition;
 import com.meli.android.carddrawer.configuration.FontType;
 import com.meli.android.carddrawer.configuration.SecurityCodeLocation;
+import com.meli.android.carddrawer.model.animation.BottomLabelAnimation;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -415,5 +416,28 @@ public class CardDrawerViewTest extends BasicRobolectricTest {
         assertEquals(tag.getTextColor(), textView.getCurrentTextColor());
         assertEquals(new PorterDuffColorFilter(tag.getBackgroundColor(), PorterDuff.Mode.SRC_ATOP),
             textView.getBackground().getColorFilter());
+    }
+
+    @Test
+    public void showBottomLabel() {
+        final CardDrawerView spyHeader = spy(header);
+        final BottomLabel bottomLabel = ReflectionHelpers.getField(header, "bottomLabel");
+        final Label label = mock(Label.class);
+
+        spyHeader.showCustomLabel(label);
+
+        verify(spyHeader).showCustomLabel(label);
+        assertEquals(View.VISIBLE, bottomLabel.getVisibility());
+    }
+
+    @Test
+    public void hideBottomLabel() {
+        final CardDrawerView spyHeader = spy(header);
+        final BottomLabel bottomLabel = ReflectionHelpers.getField(header, "bottomLabel");
+
+        spyHeader.hideCustomLabel();
+
+        verify(spyHeader).hideCustomLabel();
+        assertEquals(View.INVISIBLE, bottomLabel.getVisibility());
     }
 }

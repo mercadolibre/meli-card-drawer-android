@@ -390,7 +390,6 @@ public class CardDrawerView extends FrameLayout implements Observer {
      * Shows highlight text
      */
     public void showCustomLabel(Label label) {
-          bottomLabel.setVisibility(VISIBLE);
           bottomLabel.setLabel(label);
           showBottomLabelAnimation();
     }
