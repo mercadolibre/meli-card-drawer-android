@@ -10,8 +10,6 @@ import com.meli.android.carddrawer.format.CardDrawerFont
 import com.meli.android.carddrawer.format.TypefaceHelper
 import com.meli.android.carddrawer.ColorUtils.safeParcelColor
 
-private const val WHITE_COLOR = "#FFFFFF"
-
 class BottomLabel @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
@@ -26,12 +24,12 @@ class BottomLabel @JvmOverloads constructor(
     }
 
     fun setLabel(label: Label) {
-        bottomDescription.also {
-            it.text = label.text ?: WHITE_COLOR
-            it.setTextColor(safeParcelColor(label.color, Color.WHITE))
+        with(bottomDescription) {
+            text = label.text
+            setTextColor(safeParcelColor(label.color, Color.WHITE))
         }
         setWeight(label.weight)
-        setBackgroundColor(label.color)
+        setBackgroundColor(label.backgroundColor)
     }
 
     private fun setWeight(weight: String?) {

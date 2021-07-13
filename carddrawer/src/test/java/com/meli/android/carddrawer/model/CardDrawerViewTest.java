@@ -17,7 +17,6 @@ import com.meli.android.carddrawer.configuration.DefaultCardConfiguration;
 import com.meli.android.carddrawer.configuration.FieldPosition;
 import com.meli.android.carddrawer.configuration.FontType;
 import com.meli.android.carddrawer.configuration.SecurityCodeLocation;
-import com.meli.android.carddrawer.model.animation.BottomLabelAnimation;
 
 import org.junit.Before;
 import org.junit.Test;
