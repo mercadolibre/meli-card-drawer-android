@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="0dp"
     android:orientation="vertical"
-    tools:background="@color/card_drawer_color_highlight"
+    tools:background="@color/card_drawer_color_bottom_label"
     tools:showIn="@layout/card_drawer_front">
 
     <View

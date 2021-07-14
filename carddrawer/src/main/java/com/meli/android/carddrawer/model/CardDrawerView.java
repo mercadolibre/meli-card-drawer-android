@@ -50,6 +50,8 @@ import com.meli.android.carddrawer.model.animation.BottomLabelAnimation;
 import com.meli.android.carddrawer.model.customview.CustomViewConfiguration;
 import com.mercadolibre.android.picassodiskcache.PicassoDiskLoader;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.List;
@@ -98,7 +100,6 @@ public class CardDrawerView extends FrameLayout implements Observer {
     protected CardConfiguration cardConfiguration;
     protected CardDrawerStyle style;
     private BottomLabel bottomLabel;
-    private BottomLabelAnimation bottomLabelAnimation;
 
     public CardDrawerView(@NonNull final Context context) {
         this(context, null);
@@ -179,7 +180,6 @@ public class CardDrawerView extends FrameLayout implements Observer {
             setStyle(style);
         }
 
-        bottomLabelAnimation = new BottomLabelAnimation(bottomLabel);
     }
 
     @Override
@@ -386,27 +386,16 @@ public class CardDrawerView extends FrameLayout implements Observer {
         cardAnimator.switchViewWithoutAnimation(FieldPosition.POSITION_FRONT);
     }
 
-    /**
-     * Shows highlight text
-     */
-    public void showCustomLabel(Label label) {
-          bottomLabel.setLabel(label);
-          showBottomLabelAnimation();
+    public void setBottomLabel(@NotNull final Label label) {
+        bottomLabel.setLabel(label);
     }
 
-    /**
-     * Hide highlight text
-     */
-    public void hideCustomLabel() {
-        hideBottomLabelAnimation();
+    public void showBottomLabel() {
+        bottomLabel.showAnimation();
     }
 
-    private void showBottomLabelAnimation() {
-        bottomLabelAnimation.slideUp();
-    }
-
-    private void hideBottomLabelAnimation() {
-        bottomLabelAnimation.slideDown();
+    public void hideBottomLabel() {
+        bottomLabel.hideAnimation();
     }
 
     protected void setupImageSwitcher(final ImageSwitcher imageSwitcher, final Animation fadeIn,

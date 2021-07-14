@@ -9,17 +9,19 @@ import com.meli.android.carddrawer.R
 import com.meli.android.carddrawer.format.CardDrawerFont
 import com.meli.android.carddrawer.format.TypefaceHelper
 import com.meli.android.carddrawer.ColorUtils.safeParcelColor
+import com.meli.android.carddrawer.model.animation.BottomLabelAnimation
 
-class BottomLabel @JvmOverloads constructor(
+internal class BottomLabel @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
 ) : ConstraintLayout(context, attrs, defStyleAttr) {
 
     private var bottomDescription: AppCompatTextView
+    private val animation: BottomLabelAnimation = BottomLabelAnimation(this)
 
     init {
-          inflate(context, R.layout.card_drawer_highlight_text, this)
+          inflate(context, R.layout.card_drawer_bottom_label, this)
           bottomDescription = findViewById(R.id.bottom_description)
     }
 
@@ -30,6 +32,14 @@ class BottomLabel @JvmOverloads constructor(
         }
         setWeight(label.weight)
         setBackgroundColor(label.backgroundColor)
+    }
+
+    fun showAnimation() {
+        animation.slideUp()
+    }
+
+    fun hideAnimation() {
+        animation.slideDown()
     }
 
     private fun setWeight(weight: String?) {
@@ -44,7 +54,7 @@ class BottomLabel @JvmOverloads constructor(
         runCatching {
             setBackgroundColor(Color.parseColor(color))
         }.getOrElse {
-            setBackgroundResource(R.color.card_drawer_color_highlight)
+            setBackgroundResource(R.color.card_drawer_color_bottom_label)
         }
     }
 }
