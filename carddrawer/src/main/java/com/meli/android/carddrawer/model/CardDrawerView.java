@@ -179,7 +179,6 @@ public class CardDrawerView extends FrameLayout implements Observer {
         if (style != CardDrawerStyle.REGULAR) {
             setStyle(style);
         }
-
     }
 
     @Override
@@ -390,12 +389,12 @@ public class CardDrawerView extends FrameLayout implements Observer {
         bottomLabel.setLabel(label);
     }
 
-    public void showBottomLabel() {
-        bottomLabel.showAnimation();
+    public void showBottomLabel(final Boolean animate) {
+        bottomLabel.showAnimation(animate);
     }
 
-    public void hideBottomLabel() {
-        bottomLabel.hideAnimation();
+    public void hideBottomLabel(final Boolean animate) {
+        bottomLabel.hideAnimation(animate);
     }
 
     protected void setupImageSwitcher(final ImageSwitcher imageSwitcher, final Animation fadeIn,

@@ -8,7 +8,8 @@ import android.view.animation.AnimationUtils
 import com.meli.android.carddrawer.R
 
 internal class BottomLabelAnimation(
-    private val targetView: View
+    private val targetView: View,
+    nextAnimation: BottomLabelAnimation?
 ) {
 
     private val slideUp: Animation =
@@ -16,19 +17,33 @@ internal class BottomLabelAnimation(
     private val slideDown: Animation =
         AnimationUtils.loadAnimation(targetView.context, R.anim.card_drawer_slide_down_out)
 
+    init {
+        slideUp.setAnimationListener(
+            InOutAnimationListener(
+                targetView,
+                VISIBLE
+            ) { nextAnimation?.slideUp() }
+        )
+        slideDown.setAnimationListener(
+            InOutAnimationListener(
+                targetView,
+                INVISIBLE
+            ) { nextAnimation?.slideDown() }
+        )
+    }
+
     fun slideUp() {
-        initAnimation(targetView, slideUp, VISIBLE)
+        initAnimation(targetView, slideUp)
     }
 
     fun slideDown() {
-        initAnimation(targetView, slideDown, INVISIBLE)
+        initAnimation(targetView, slideDown)
     }
 
-    private fun initAnimation(targetView: View, animation: Animation, visibility: Int) {
-        targetView.also {
-            it.clearAnimation()
-            it.startAnimation(animation)
-            it.visibility = visibility
+    private fun initAnimation(targetView: View, animation: Animation) {
+        with(targetView) {
+            clearAnimation()
+            startAnimation(animation)
         }
     }
 }

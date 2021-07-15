@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/bottom_label_container"
     android:layout_width="match_parent"
     android:layout_height="0dp"
     android:orientation="vertical"
@@ -22,6 +21,8 @@
         android:layout_marginStart="@dimen/card_drawer_s_alternative_1_margin"
         android:layout_marginEnd="@dimen/card_drawer_s_alternative_1_margin"
         android:gravity="center"
+        android:visibility="invisible"
+        tools:visibility="visible"
         android:textColor="@color/card_drawer_ui_white"
         android:textSize="@dimen/card_drawer_xxxs_text"
         android:ellipsize="end"

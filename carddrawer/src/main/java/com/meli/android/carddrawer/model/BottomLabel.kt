@@ -9,20 +9,21 @@ import com.meli.android.carddrawer.R
 import com.meli.android.carddrawer.format.CardDrawerFont
 import com.meli.android.carddrawer.format.TypefaceHelper
 import com.meli.android.carddrawer.ColorUtils.safeParcelColor
-import com.meli.android.carddrawer.model.animation.BottomLabelAnimation
+import com.meli.android.carddrawer.model.ConstraintLayoutWithDisabledSupport.Child
 
 internal class BottomLabel @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
-) : ConstraintLayout(context, attrs, defStyleAttr) {
+) : ConstraintLayout(context, attrs, defStyleAttr), Child {
 
     private var bottomDescription: AppCompatTextView
-    private val animation: BottomLabelAnimation = BottomLabelAnimation(this)
+    private var animation: BottomLabelAnimationSet
 
     init {
           inflate(context, R.layout.card_drawer_bottom_label, this)
           bottomDescription = findViewById(R.id.bottom_description)
+          animation = BottomLabelAnimationSet(this, bottomDescription)
     }
 
     fun setLabel(label: Label) {
@@ -34,12 +35,21 @@ internal class BottomLabel @JvmOverloads constructor(
         setBackgroundColor(label.backgroundColor)
     }
 
-    fun showAnimation() {
-        animation.slideUp()
+    fun showAnimation(animate: Boolean) {
+        shouldAnimate(animate, VISIBLE) { animation.slideUp() }
     }
 
-    fun hideAnimation() {
-        animation.slideDown()
+    fun hideAnimation(animate: Boolean) {
+        shouldAnimate(animate, INVISIBLE) { animation.slideDown() }
+    }
+
+    private fun shouldAnimate(animate: Boolean, visibility: Int, function: () -> Unit) {
+        if (animate) {
+            function.invoke()
+        } else {
+            this.visibility = visibility
+            bottomDescription.visibility = visibility
+        }
     }
 
     private fun setWeight(weight: String?) {
@@ -57,4 +67,6 @@ internal class BottomLabel @JvmOverloads constructor(
             setBackgroundResource(R.color.card_drawer_color_bottom_label)
         }
     }
+
+    override fun shouldBeGreyedOut() = false
 }
