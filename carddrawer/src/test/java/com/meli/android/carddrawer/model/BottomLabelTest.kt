@@ -26,9 +26,6 @@ class BottomLabelTest : BasicRobolectricTest() {
         val bottomDescription = ReflectionHelpers.getField<AppCompatTextView>(header, "bottomDescription")
         val label = mock(Label::class.java)
         `when`(label.text).thenReturn("Mensaje destacado")
-        `when`(label.backgroundColor).thenReturn(null)
-        `when`(label.color).thenReturn(null)
-        `when`(label.weight).thenReturn(null)
 
         spyHeader.setLabel(label)
 

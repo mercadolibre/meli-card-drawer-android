@@ -5,4 +5,6 @@ data class Label(
     val backgroundColor: String?,
     val color: String?,
     val weight: String?
-)
+) {
+    constructor(text: String) : this(text, null, null, null)
+}
