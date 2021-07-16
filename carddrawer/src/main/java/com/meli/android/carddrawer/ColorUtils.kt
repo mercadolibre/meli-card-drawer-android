@@ -5,5 +5,7 @@ import android.graphics.Color
 internal object ColorUtils {
 
     @JvmStatic
-    fun safeParcelColor(color: String?) = runCatching { Color.parseColor(color) }.getOrDefault(Color.BLACK)
+    fun safeParcelColor(color: String?, defaultColor: Int) = runCatching {
+        Color.parseColor(color)
+    }.getOrDefault(defaultColor)
 }

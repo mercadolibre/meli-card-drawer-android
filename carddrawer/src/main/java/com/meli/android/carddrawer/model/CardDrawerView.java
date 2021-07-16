@@ -21,6 +21,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageSwitcher;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.IntDef;
@@ -31,6 +32,7 @@ import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.constraintlayout.widget.ConstraintLayout;
+
 import com.meli.android.carddrawer.R;
 import com.meli.android.carddrawer.ViewHelper;
 import com.meli.android.carddrawer.configuration.AccountMoneyDefaultConfiguration;
@@ -44,17 +46,22 @@ import com.meli.android.carddrawer.format.CardDrawerFont;
 import com.meli.android.carddrawer.format.TypefaceHelper;
 import com.meli.android.carddrawer.internal.BaseExtensionsKt;
 import com.meli.android.carddrawer.internal.TagDimensions;
+import com.meli.android.carddrawer.model.animation.BottomLabelAnimation;
 import com.meli.android.carddrawer.model.customview.CustomViewConfiguration;
 import com.mercadolibre.android.picassodiskcache.PicassoDiskLoader;
+
+import org.jetbrains.annotations.NotNull;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
+
 import kotlin.Pair;
 import kotlin.Unit;
 
-@SuppressWarnings({ "PMD.ConstructorCallsOverridableMethod", "PMD.TooManyFields", "PMD.GodClass" })
+@SuppressWarnings({"PMD.ConstructorCallsOverridableMethod", "PMD.TooManyFields", "PMD.GodClass"})
 public class CardDrawerView extends FrameLayout implements Observer {
     private static final String STATE_CARD = "state_card";
     private static final String STATE_SUPER = "state_super";
@@ -92,6 +99,7 @@ public class CardDrawerView extends FrameLayout implements Observer {
     private View customView;
     protected CardConfiguration cardConfiguration;
     protected CardDrawerStyle style;
+    private BottomLabel bottomLabel;
 
     public CardDrawerView(@NonNull final Context context) {
         this(context, null);
@@ -133,12 +141,11 @@ public class CardDrawerView extends FrameLayout implements Observer {
 
         final TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.CardDrawerView);
         final int internalPadding = typedArray.getDimensionPixelSize(
-            R.styleable.CardDrawerView_card_header_internal_padding,
-            getResources().getDimensionPixelSize(R.dimen.card_drawer_layout_padding));
-        @Behaviour
-        final int behaviour = typedArray.getInt(R.styleable.CardDrawerView_card_header_behaviour, Behaviour.REGULAR);
+                R.styleable.CardDrawerView_card_header_internal_padding,
+                getResources().getDimensionPixelSize(R.dimen.card_drawer_layout_padding));
+        @Behaviour final int behaviour = typedArray.getInt(R.styleable.CardDrawerView_card_header_behaviour, Behaviour.REGULAR);
         final int styleIndex =
-            typedArray.getInt(R.styleable.CardDrawerView_card_header_style, CardDrawerStyle.REGULAR.getValue());
+                typedArray.getInt(R.styleable.CardDrawerView_card_header_style, CardDrawerStyle.REGULAR.getValue());
 
         typedArray.recycle();
 
@@ -211,6 +218,8 @@ public class CardDrawerView extends FrameLayout implements Observer {
         cardBackGradient = cardBackLayout.findViewById(R.id.cho_card_gradient_back);
 
         safeZone = cardFrontLayout.findViewById(R.id.safe_zone);
+
+        bottomLabel = cardFrontLayout.findViewById(R.id.card_drawer_bottom_label);
     }
 
     @NonNull
@@ -226,8 +235,8 @@ public class CardDrawerView extends FrameLayout implements Observer {
      * Paints the front card with animation
      *
      * @param cardUI has the card style and animation type. Use NONE for show without animation.
-     *
-     * Preserved so we don't break integrators
+     *               <p>
+     *               Preserved so we don't break integrators
      */
     // TODO: Maybe we can deprecate this in favor of new show that allows
     //  CardDrawerSource with new tag functionality
@@ -240,7 +249,7 @@ public class CardDrawerView extends FrameLayout implements Observer {
      * Paints the front card with animation
      *
      * @param paymentCard has the CardUI.
-     * CardUI has the card style and animation type. Use NONE for show without animation.
+     *                    CardUI has the card style and animation type. Use NONE for show without animation.
      */
     private void show(@NonNull final PaymentCard paymentCard) {
         source = paymentCard;
@@ -301,12 +310,13 @@ public class CardDrawerView extends FrameLayout implements Observer {
 
     /**
      * Shows the card tag if it's assigned.
+     *
      * @param source The source to get the tag from
      * @param layout Used to find the card tag views
      */
     @SuppressWarnings("VariableNotUsedInsideIf")
     private void showTag(@NonNull final CardDrawerSource source, @NonNull final AppCompatTextView tagText,
-        @NonNull final ViewGroup layout) {
+                         @NonNull final ViewGroup layout) {
         final CardDrawerSource.Tag tag = source.getTag();
         final ViewGroup tagContainer = layout.findViewById(R.id.card_tag_container);
         if (tag != null) {
@@ -333,8 +343,8 @@ public class CardDrawerView extends FrameLayout implements Observer {
     public void showSecurityCode() {
         BaseExtensionsKt.processPaymentCard(source, paymentCard -> {
             final int securityCodeFieldPosition =
-                paymentCard.getCardUI().getSecurityCodeLocation().equals(SecurityCodeLocation.FRONT)
-                ? FieldPosition.POSITION_FRONT : FieldPosition.POSITION_BACK;
+                    paymentCard.getCardUI().getSecurityCodeLocation().equals(SecurityCodeLocation.FRONT)
+                            ? FieldPosition.POSITION_FRONT : FieldPosition.POSITION_BACK;
             cardAnimator.switchView(securityCodeFieldPosition);
             showSecCircle();
             return Unit.INSTANCE;
@@ -375,8 +385,20 @@ public class CardDrawerView extends FrameLayout implements Observer {
         cardAnimator.switchViewWithoutAnimation(FieldPosition.POSITION_FRONT);
     }
 
+    public void setBottomLabel(@NotNull final Label label) {
+        bottomLabel.setLabel(label);
+    }
+
+    public void showBottomLabel(final Boolean animate) {
+        bottomLabel.showAnimation(animate);
+    }
+
+    public void hideBottomLabel(final Boolean animate) {
+        bottomLabel.hideAnimation(animate);
+    }
+
     protected void setupImageSwitcher(final ImageSwitcher imageSwitcher, final Animation fadeIn,
-        final Animation fadeOut) {
+                                      final Animation fadeOut) {
         imageSwitcher.setInAnimation(fadeIn);
         imageSwitcher.setOutAnimation(fadeOut);
     }
@@ -477,7 +499,7 @@ public class CardDrawerView extends FrameLayout implements Observer {
 
     @VisibleForTesting
     protected void updateIssuerLogo(final ImageSwitcher issuerLogoView, @NonNull final CardUI source,
-        final boolean animate) {
+                                    final boolean animate) {
         issuerLogoView.setAnimateFirstView(animate);
         final ImageView bankImageView = (ImageView) issuerLogoView.getNextView();
         //CardUI implementation can define the bank image in getBankImageRes or setBankImage method
@@ -492,7 +514,7 @@ public class CardDrawerView extends FrameLayout implements Observer {
 
     @VisibleForTesting
     protected void updateCardLogo(final ImageSwitcher cardLogoView, @NonNull final CardUI source,
-        final boolean animate) {
+                                  final boolean animate) {
         cardLogoView.setAnimateFirstView(animate);
         final ImageView cardImageView = (ImageView) cardLogoView.getNextView();
         //CardUI implementation can define the card logo in getCardLogoRes or setCardLogo method
@@ -524,7 +546,7 @@ public class CardDrawerView extends FrameLayout implements Observer {
     }
 
     protected void setCardTextColor(@NonNull final CardUI cardUI, @NonNull @FontType final String fontType,
-        @ColorInt final int fontColor) {
+                                    @ColorInt final int fontColor) {
         cardNumber.init(resolveFontType(fontType, true), getCardNumberPlaceHolder(cardUI), fontColor);
         cardName.init(resolveFontType(fontType, false), cardUI.getNamePlaceHolder(), fontColor);
         if (cardDate != null) {
@@ -538,14 +560,14 @@ public class CardDrawerView extends FrameLayout implements Observer {
     protected String resolveFontType(@NonNull @FontType final String type, final boolean showShadow) {
         if (!showShadow) {
             switch (type) {
-            case FontType.DARK_TYPE: {
-                return FontType.DARK_NO_SHADOW_TYPE;
-            }
-            case FontType.LIGHT_TYPE: {
-                return FontType.LIGHT_NO_SHADOW_TYPE;
-            }
-            default:
-                return type;
+                case FontType.DARK_TYPE: {
+                    return FontType.DARK_NO_SHADOW_TYPE;
+                }
+                case FontType.LIGHT_TYPE: {
+                    return FontType.LIGHT_NO_SHADOW_TYPE;
+                }
+                default:
+                    return type;
             }
         }
         return type;
@@ -573,7 +595,7 @@ public class CardDrawerView extends FrameLayout implements Observer {
 
     private void updateColor(@NonNull final CardDrawerSource source) {
         final int disabledColor =
-            source.getDisabledBackgroundColor() != null ? source.getDisabledBackgroundColor() : Color.GRAY;
+                source.getDisabledBackgroundColor() != null ? source.getDisabledBackgroundColor() : Color.GRAY;
         final int backgroundColor = isEnabled() ? source.getBackgroundColor() : disabledColor;
         cardAnimator.colorCard(backgroundColor, source.getAnimationType());
     }
@@ -744,19 +766,19 @@ public class CardDrawerView extends FrameLayout implements Observer {
     private void setCardTagTextPixelSize(final Resources resources, final float cardSizeMultiplier) {
         final TagDimensions cardTagDimensions = getCardTagDimensions(resources, cardSizeMultiplier);
         setTextPixelSize(genericTagText, cardTagDimensions.getFontSize(), cardTagDimensions.getPaddingH(),
-            cardTagDimensions.getPaddingV());
+                cardTagDimensions.getPaddingV());
         setTextPixelSize(cardTagText, cardTagDimensions.getFontSize(), cardTagDimensions.getPaddingH(),
-            cardTagDimensions.getPaddingV());
+                cardTagDimensions.getPaddingV());
     }
 
-    protected TagDimensions getCardTagDimensions(final Resources resources, final float cardSizeMultiplier){
+    protected TagDimensions getCardTagDimensions(final Resources resources, final float cardSizeMultiplier) {
         return new TagDimensions(resources.getDimension(R.dimen.card_drawer_font_tag) * cardSizeMultiplier,
-            Math.round(resources.getDimension(R.dimen.andes_tag_medium_margin) * cardSizeMultiplier),
-            Math.round(resources.getDimension(R.dimen.card_drawer_tag_vertical_padding) * cardSizeMultiplier)
+                Math.round(resources.getDimension(R.dimen.andes_tag_medium_margin) * cardSizeMultiplier),
+                Math.round(resources.getDimension(R.dimen.card_drawer_tag_vertical_padding) * cardSizeMultiplier)
         );
     }
 
-    protected void setTextPixelSize(@NonNull final TextView view,  final float size, final int paddingH, final int paddingV) {
+    protected void setTextPixelSize(@NonNull final TextView view, final float size, final int paddingH, final int paddingV) {
         view.post(() -> view.setPadding(paddingH, paddingV, paddingH, paddingV));
         setTextPixelSize(view, size);
     }
@@ -800,14 +822,14 @@ public class CardDrawerView extends FrameLayout implements Observer {
     }
 
     @Retention(RetentionPolicy.SOURCE)
-    @IntDef({ Behaviour.REGULAR, Behaviour.RESPONSIVE })
+    @IntDef({Behaviour.REGULAR, Behaviour.RESPONSIVE})
     public @interface Behaviour {
         int REGULAR = 0;
         int RESPONSIVE = 1;
     }
 
     @Retention(RetentionPolicy.SOURCE)
-    @IntDef({ Type.HIGH, Type.MEDIUM, Type.LOW })
+    @IntDef({Type.HIGH, Type.MEDIUM, Type.LOW})
     public @interface Type {
         int HIGH = 0;
         int MEDIUM = 1;
@@ -832,4 +854,5 @@ public class CardDrawerView extends FrameLayout implements Observer {
             return genericFrontLayout;
         }
     }
+
 }

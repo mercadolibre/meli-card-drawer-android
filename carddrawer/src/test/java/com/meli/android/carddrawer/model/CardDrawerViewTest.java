@@ -416,4 +416,26 @@ public class CardDrawerViewTest extends BasicRobolectricTest {
         assertEquals(new PorterDuffColorFilter(tag.getBackgroundColor(), PorterDuff.Mode.SRC_ATOP),
             textView.getBackground().getColorFilter());
     }
+
+    @Test
+    public void showBottomLabel() {
+        final CardDrawerView spyHeader = spy(header);
+        final BottomLabel bottomLabel = ReflectionHelpers.getField(header, "bottomLabel");
+
+        spyHeader.showBottomLabel(false);
+
+        verify(spyHeader).showBottomLabel(false);
+        assertEquals(View.VISIBLE, bottomLabel.getVisibility());
+    }
+
+    @Test
+    public void hideBottomLabel() {
+        final CardDrawerView spyHeader = spy(header);
+        final BottomLabel bottomLabel = ReflectionHelpers.getField(header, "bottomLabel");
+
+        spyHeader.hideBottomLabel(false);
+
+        verify(spyHeader).hideBottomLabel(false);
+        assertEquals(View.INVISIBLE, bottomLabel.getVisibility());
+    }
 }

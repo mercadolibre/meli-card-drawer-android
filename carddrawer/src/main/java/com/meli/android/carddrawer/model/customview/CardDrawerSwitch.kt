@@ -67,7 +67,7 @@ class CardDrawerSwitch @JvmOverloads constructor(
     private fun setUpConfiguration() {
         setUpSwitchCurrentSelection()
         setUpDescription()
-        setBackgroundColor(safeParcelColor(switchModel.safeZoneBackgroundColor))
+        setBackgroundColor(safeParcelColor(switchModel.safeZoneBackgroundColor, Color.BLACK))
     }
 
     private fun setUpSwitchCurrentSelection() {
@@ -78,7 +78,7 @@ class CardDrawerSwitch @JvmOverloads constructor(
     private fun setUpDescription() {
         with(switchModel.description) {
             description.text = text
-            description.setTextColor(safeParcelColor(textColor))
+            description.setTextColor(safeParcelColor(textColor, Color.BLACK))
             set(description, CardDrawerFont.from(weight))
         }
     }
@@ -132,8 +132,8 @@ class CardDrawerSwitch @JvmOverloads constructor(
             switchCompatContainer.addView(switchCompat)
 
             post {
-                setThumbTextColor(safeParcelColor(thumbTextColor))
-                setTrackTextColor(safeParcelColor(trackTextColor))
+                setThumbTextColor(safeParcelColor(thumbTextColor, Color.BLACK))
+                setTrackTextColor(safeParcelColor(trackTextColor, Color.BLACK))
                 setThumbTypeface(get(context, CardDrawerFont.from(thumbTextWeight)))
                 setTrackTypeface(get(context, CardDrawerFont.from(trackTextWeight)))
                 setTrackTextSize(switchTextSize * cardSizeMultiplier)
@@ -287,7 +287,7 @@ class CardDrawerSwitch @JvmOverloads constructor(
     fun getSwitchSelection() = switchSelection
 
     private fun makeColorFilter(color: String): ColorFilter {
-        return PorterDuffColorFilter(safeParcelColor(color), PorterDuff.Mode.SRC_IN)
+        return PorterDuffColorFilter(safeParcelColor(color, Color.BLACK), PorterDuff.Mode.SRC_IN)
     }
 
     private fun getDimension(@DimenRes dimenRes: Int): Int {
