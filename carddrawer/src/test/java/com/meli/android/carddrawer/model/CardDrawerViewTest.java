@@ -422,9 +422,9 @@ public class CardDrawerViewTest extends BasicRobolectricTest {
         final CardDrawerView spyHeader = spy(header);
         final BottomLabel bottomLabel = ReflectionHelpers.getField(header, "bottomLabel");
 
-        spyHeader.showBottomLabel(false);
+        spyHeader.showBottomLabelWithoutAnimation();
 
-        verify(spyHeader).showBottomLabel(false);
+        verify(spyHeader).showBottomLabelWithoutAnimation();
         assertEquals(View.VISIBLE, bottomLabel.getVisibility());
     }
 
@@ -433,9 +433,9 @@ public class CardDrawerViewTest extends BasicRobolectricTest {
         final CardDrawerView spyHeader = spy(header);
         final BottomLabel bottomLabel = ReflectionHelpers.getField(header, "bottomLabel");
 
-        spyHeader.hideBottomLabel(false);
+        spyHeader.hideBottomLabelWithoutAnimation();
 
-        verify(spyHeader).hideBottomLabel(false);
+        verify(spyHeader).hideBottomLabelWithoutAnimation();
         assertEquals(View.INVISIBLE, bottomLabel.getVisibility());
     }
 }

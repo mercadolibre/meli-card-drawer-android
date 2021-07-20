@@ -10,6 +10,7 @@ import com.meli.android.carddrawer.format.CardDrawerFont
 import com.meli.android.carddrawer.format.TypefaceHelper
 import com.meli.android.carddrawer.ColorUtils.safeParcelColor
 import com.meli.android.carddrawer.model.ConstraintLayoutWithDisabledSupport.Child
+import com.meli.android.carddrawer.model.animation.BottomLabelAnimation
 
 internal class BottomLabel @JvmOverloads constructor(
     context: Context,
@@ -18,12 +19,12 @@ internal class BottomLabel @JvmOverloads constructor(
 ) : ConstraintLayout(context, attrs, defStyleAttr), Child {
 
     private var bottomDescription: AppCompatTextView
-    private var animation: BottomLabelAnimationSet
+    private var animation: BottomLabelAnimation
 
     init {
           inflate(context, R.layout.card_drawer_bottom_label, this)
           bottomDescription = findViewById(R.id.bottom_description)
-          animation = BottomLabelAnimationSet(this, bottomDescription)
+          animation = BottomLabelAnimation(this, BottomLabelAnimation(bottomDescription, null))
     }
 
     fun setLabel(label: Label) {
@@ -35,21 +36,22 @@ internal class BottomLabel @JvmOverloads constructor(
         setBackgroundColor(label.backgroundColor)
     }
 
-    fun showAnimation(animate: Boolean) {
-        shouldAnimate(animate, VISIBLE) { animation.slideUp() }
+    fun showWithAnimation() {
+        animation.slideUp()
     }
 
-    fun hideAnimation(animate: Boolean) {
-        shouldAnimate(animate, INVISIBLE) { animation.slideDown() }
+    fun showWithoutAnimation() {
+        visibility = VISIBLE
+        bottomDescription.visibility = VISIBLE
     }
 
-    private fun shouldAnimate(animate: Boolean, visibility: Int, animation: () -> Unit) {
-        if (animate) {
-            animation()
-        } else {
-            this.visibility = visibility
-            bottomDescription.visibility = visibility
-        }
+    fun hideWithAnimation() {
+        animation.slideDown()
+    }
+
+    fun hideWithoutAnimation() {
+        visibility = INVISIBLE
+        bottomDescription.visibility = INVISIBLE
     }
 
     private fun setWeight(weight: String?) {
