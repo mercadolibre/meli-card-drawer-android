@@ -43,9 +43,9 @@ internal class BottomLabel @JvmOverloads constructor(
         shouldAnimate(animate, INVISIBLE) { animation.slideDown() }
     }
 
-    private fun shouldAnimate(animate: Boolean, visibility: Int, function: () -> Unit) {
+    private fun shouldAnimate(animate: Boolean, visibility: Int, animation: () -> Unit) {
         if (animate) {
-            function.invoke()
+            animation()
         } else {
             this.visibility = visibility
             bottomDescription.visibility = visibility

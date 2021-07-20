@@ -13,7 +13,7 @@ internal class InOutAnimationListener(
 
     override fun onAnimationEnd(animation: Animation?) {
         targetView.visibility = visibility
-        nextAnimation.invoke()
+        nextAnimation()
     }
 
     override fun onAnimationRepeat(animation: Animation?) {}

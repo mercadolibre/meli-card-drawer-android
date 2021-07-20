@@ -13,9 +13,8 @@ internal class BottomLabelAnimationSet(
         firstAnimation = createAnimation(firstView, createAnimation(secondView, null))
     }
 
-    private fun createAnimation(view: View, nextAnimation: BottomLabelAnimation?): BottomLabelAnimation {
-        return BottomLabelAnimation(view, nextAnimation)
-    }
+    private fun createAnimation(view: View, nextAnimation: BottomLabelAnimation?) = BottomLabelAnimation(view, nextAnimation)
+
 
     fun slideUp() {
         firstAnimation.slideUp()
