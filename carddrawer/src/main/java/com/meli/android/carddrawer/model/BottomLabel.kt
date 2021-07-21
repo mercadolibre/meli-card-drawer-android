@@ -24,7 +24,7 @@ internal class BottomLabel @JvmOverloads constructor(
     init {
           inflate(context, R.layout.card_drawer_bottom_label, this)
           bottomDescription = findViewById(R.id.bottom_description)
-          animation = BottomLabelAnimation(this, BottomLabelAnimation(bottomDescription, null))
+          animation = BottomLabelAnimation(this, BottomLabelAnimation(bottomDescription))
     }
 
     fun setLabel(label: Label) {

@@ -9,7 +9,7 @@ import com.meli.android.carddrawer.R
 
 internal class BottomLabelAnimation(
     private val targetView: View,
-    nextAnimation: BottomLabelAnimation?
+    nextAnimation: BottomLabelAnimation? = null
 ) {
 
     private val slideUp: Animation =
