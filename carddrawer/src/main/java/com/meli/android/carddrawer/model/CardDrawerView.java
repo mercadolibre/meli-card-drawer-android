@@ -387,20 +387,12 @@ public class CardDrawerView extends FrameLayout implements Observer {
         bottomLabel.setLabel(label);
     }
 
-    public void showBottomLabelWithAnimation() {
-        bottomLabel.showWithAnimation();
+    public void showBottomLabel() {
+        bottomLabel.show();
     }
 
-    public void showBottomLabelWithoutAnimation() {
-        bottomLabel.showWithoutAnimation();
-    }
-
-    public void hideBottomLabelWithAnimation() {
-        bottomLabel.hideWithAnimation();
-    }
-
-    public void hideBottomLabelWithoutAnimation() {
-        bottomLabel.hideWithoutAnimation();
+    public void hideBottomLabel() {
+        bottomLabel.hide();
     }
 
     protected void setupImageSwitcher(final ImageSwitcher imageSwitcher, final Animation fadeIn,

@@ -19,15 +19,15 @@ internal class BottomLabel @JvmOverloads constructor(
 ) : ConstraintLayout(context, attrs, defStyleAttr), Child {
 
     private var bottomDescription: AppCompatTextView
-    private var animation: BottomLabelAnimation
+    private var animation: BottomLabelAnimation? = null
 
     init {
           inflate(context, R.layout.card_drawer_bottom_label, this)
           bottomDescription = findViewById(R.id.bottom_description)
-          animation = BottomLabelAnimation(this, BottomLabelAnimation(bottomDescription))
     }
 
     fun setLabel(label: Label) {
+        if (label.animate) animation = BottomLabelAnimation(this, BottomLabelAnimation(bottomDescription))
         with(bottomDescription) {
             text = label.text
             setTextColor(safeParcelColor(label.color, Color.WHITE))
@@ -36,20 +36,20 @@ internal class BottomLabel @JvmOverloads constructor(
         setBackgroundColor(label.backgroundColor)
     }
 
-    fun showWithAnimation() {
-        animation.slideUp()
+    fun show() {
+        animation?.slideUp() ?: showWithoutAnimation()
     }
 
-    fun showWithoutAnimation() {
+    fun hide() {
+        animation?.slideDown() ?: hideWithoutAnimation()
+    }
+
+    private fun showWithoutAnimation() {
         visibility = VISIBLE
         bottomDescription.visibility = VISIBLE
     }
 
-    fun hideWithAnimation() {
-        animation.slideDown()
-    }
-
-    fun hideWithoutAnimation() {
+    private fun hideWithoutAnimation() {
         visibility = INVISIBLE
         bottomDescription.visibility = INVISIBLE
     }
