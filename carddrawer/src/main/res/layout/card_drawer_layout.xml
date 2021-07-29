@@ -36,4 +36,11 @@
         android:visibility="gone"
         android:layout_gravity="center_horizontal" />
 
+    <include
+        android:id="@+id/card_drawer_container_bottom_label"
+        layout="@layout/card_drawer_container_bottom_label"
+        android:layout_width="@dimen/card_drawer_card_width"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|bottom" />
+
 </merge>

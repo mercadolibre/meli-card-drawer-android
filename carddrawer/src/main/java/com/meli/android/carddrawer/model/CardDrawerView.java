@@ -98,6 +98,7 @@ public class CardDrawerView extends FrameLayout implements Observer {
     private View customView;
     protected CardConfiguration cardConfiguration;
     protected CardDrawerStyle style;
+    private ViewGroup containerBottomLabel;
     private BottomLabel bottomLabel;
 
     public CardDrawerView(@NonNull final Context context) {
@@ -195,6 +196,7 @@ public class CardDrawerView extends FrameLayout implements Observer {
         cardBackLayout = findViewById(R.id.card_header_back);
         genericFrontLayout = findViewById(R.id.card_drawer_generic_front);
         genericBackLayout = findViewById(R.id.card_drawer_generic_back);
+        containerBottomLabel = findViewById(R.id.card_drawer_container_bottom_label);
 
         genericTitle = genericFrontLayout.findViewById(R.id.generic_title);
         genericSubtitle = genericFrontLayout.findViewById(R.id.generic_subtitle);
@@ -218,7 +220,7 @@ public class CardDrawerView extends FrameLayout implements Observer {
 
         safeZone = cardFrontLayout.findViewById(R.id.safe_zone);
 
-        bottomLabel = cardFrontLayout.findViewById(R.id.card_drawer_bottom_label);
+        bottomLabel = containerBottomLabel.findViewById(R.id.card_drawer_bottom_label);
     }
 
     @NonNull
@@ -690,24 +692,28 @@ public class CardDrawerView extends FrameLayout implements Observer {
         final LayoutParams backParams = (LayoutParams) cardBackLayout.getLayoutParams();
         final LayoutParams genericFrontParams = (LayoutParams) genericFrontLayout.getLayoutParams();
         final LayoutParams genericBackParams = (LayoutParams) genericBackLayout.getLayoutParams();
+        final LayoutParams containerBottomLabelParams = (LayoutParams) containerBottomLabel.getLayoutParams();
 
         if (behaviour == Behaviour.RESPONSIVE) {
             frontParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
             backParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
             genericFrontParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
             genericBackParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
+            containerBottomLabelParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
         } else {
             final int width = getResources().getDimensionPixelSize(R.dimen.card_drawer_card_width);
             frontParams.width = width;
             backParams.width = width;
             genericFrontParams.width = width;
             genericBackParams.width = width;
+            containerBottomLabelParams.width = width;
         }
 
         cardFrontLayout.setLayoutParams(frontParams);
         cardBackLayout.setLayoutParams(backParams);
         genericFrontLayout.setLayoutParams(genericFrontParams);
         genericBackLayout.setLayoutParams(genericBackParams);
+        containerBottomLabel.setLayoutParams(containerBottomLabelParams);
     }
 
     /**

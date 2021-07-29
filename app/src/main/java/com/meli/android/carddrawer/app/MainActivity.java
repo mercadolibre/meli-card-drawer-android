@@ -28,6 +28,7 @@ import com.meli.android.carddrawer.configuration.CardDrawerStyle;
 import com.meli.android.carddrawer.configuration.DefaultCardConfiguration;
 import com.meli.android.carddrawer.model.CardDrawerSource;
 import com.meli.android.carddrawer.model.CardDrawerView;
+import com.meli.android.carddrawer.model.Label;
 import com.meli.android.carddrawer.model.customview.CardDrawerSwitch;
 import com.meli.android.carddrawer.model.customview.SwitchModel;
 import java.util.ArrayList;
@@ -72,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
         final SwitchCompat switchLowres = findViewById(R.id.card_header_lowres_switch);
         final SwitchCompat switchMedium = findViewById(R.id.card_header_medium_switch);
         final SwitchCompat switchMediumRes = findViewById(R.id.card_header_mediumres_switch);
+        final SwitchCompat switchBottomLabel = findViewById(R.id.card_header_show_bottom_label_switch);
 
         switchLowres.setOnCheckedChangeListener(
             (buttonView, isChecked) -> {
@@ -167,11 +169,48 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        switchBottomLabel.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                if (switchLowres.isChecked()) {
+                    showBottomLabel(cardDrawerViewLowRes);
+                } else {
+                    if (switchMediumRes.isChecked()) {
+                        showBottomLabel(cardDrawerViewMediumRes);
+                    } else {
+                        if (switchMedium.isChecked()) {
+                            showBottomLabel(cardDrawerViewMedium);
+                        } else {
+                            showBottomLabel(cardDrawerView);
+                        }
+                    }
+                }
+            } else {
+                if (switchLowres.isChecked()) {
+                    cardDrawerViewLowRes.hideBottomLabel();
+                } else {
+                    if (switchMediumRes.isChecked()) {
+                        cardDrawerViewMediumRes.hideBottomLabel();
+                    } else {
+                        if (switchMedium.isChecked()) {
+                            cardDrawerViewMedium.hideBottomLabel();
+                        } else {
+                            cardDrawerView.hideBottomLabel();
+                        }
+                    }
+                }
+            }
+        });
+
         initCardConfigurationOptions();
         initCardNumber();
         initCardName();
         initExpirationDate();
         initSecurityCode();
+    }
+
+    private void showBottomLabel(CardDrawerView cardDrawerView) {
+        cardDrawerView.setBottomLabel(new Label("mensaje destacado"));
+        cardDrawerView.showBottomLabel();
     }
 
     private void initSecurityCode() {

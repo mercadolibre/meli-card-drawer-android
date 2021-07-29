@@ -205,15 +205,4 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tag_guideline" />
 
-    <com.meli.android.carddrawer.model.BottomLabel
-        android:id="@+id/card_drawer_bottom_label"
-        android:layout_height="0dp"
-        android:layout_width="match_parent"
-        android:visibility="invisible"
-        tools:visibility="visible"
-        app:layout_constraintHeight_percent="0.08"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
-
 </com.meli.android.carddrawer.model.ConstraintLayoutWithDisabledSupport>
