@@ -19,5 +19,6 @@
         <attr name="top_right_corner_radius" format="dimension"/>
         <attr name="bottom_left_corner_radius" format="dimension"/>
         <attr name="bottom_right_corner_radius" format="dimension"/>
+        <attr name="shouldBeGreyedOut" format="boolean"/>
     </declare-styleable>
 </resources>

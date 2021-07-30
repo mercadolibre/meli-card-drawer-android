@@ -20,10 +20,10 @@ internal class CornerView @JvmOverloads constructor(
     private var bottomRightCornerRadius = 0f
     private var bottomLeftCornerRadius = 0f
     private val path = Path()
+    private var shouldBeGreyedOut = false
 
     init {
         val typedArray = context.obtainStyledAttributes(attrs, R.styleable.CornerView, 0, 0)
-
         typedArray.getDimension(R.styleable.CornerView_corner_radius, -1f).takeIf { it != -1f }?.let {
             topLeftCornerRadius = it
             topRightCornerRadius = it
@@ -35,6 +35,7 @@ internal class CornerView @JvmOverloads constructor(
             bottomLeftCornerRadius = typedArray.getDimension(R.styleable.CornerView_bottom_left_corner_radius, 0f)
             bottomRightCornerRadius = typedArray.getDimension(R.styleable.CornerView_bottom_right_corner_radius, 0f)
         }
+        shouldBeGreyedOut = typedArray.getBoolean(R.styleable.CornerView_shouldBeGreyedOut, shouldBeGreyedOut)
         typedArray.recycle()
         setLayerType(View.LAYER_TYPE_SOFTWARE, null)
     }
@@ -67,6 +68,6 @@ internal class CornerView @JvmOverloads constructor(
     }
 
     override fun shouldBeGreyedOut(): Boolean {
-        return false
+        return shouldBeGreyedOut
     }
 }
