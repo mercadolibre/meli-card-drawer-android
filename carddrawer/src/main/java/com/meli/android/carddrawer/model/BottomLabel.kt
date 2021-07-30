@@ -10,7 +10,6 @@ import com.meli.android.carddrawer.ColorUtils.safeParcelColor
 import com.meli.android.carddrawer.R
 import com.meli.android.carddrawer.format.CardDrawerFont
 import com.meli.android.carddrawer.format.TypefaceHelper
-import com.meli.android.carddrawer.model.ConstraintLayoutWithDisabledSupport.Child
 import com.meli.android.carddrawer.model.animation.BottomLabelAnimation
 import kotlin.math.roundToInt
 
@@ -18,11 +17,12 @@ internal class BottomLabel @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
-) : LinearLayout(context, attrs, defStyleAttr), Child {
+) : LinearLayout(context, attrs, defStyleAttr) {
 
     private var bottomDescription: AppCompatTextView
     private var animation: BottomLabelAnimation? = null
     private var defaultBottomLabelWidth = resources.getDimension(R.dimen.card_drawer_card_width)
+    private var color: String? = null
 
     init {
         inflate(context, R.layout.card_drawer_bottom_label, this)
@@ -37,7 +37,8 @@ internal class BottomLabel @JvmOverloads constructor(
             setTextColor(safeParcelColor(label.color, Color.WHITE))
         }
         setWeight(label.weight)
-        setBackgroundColor(label.backgroundColor)
+        color = label.backgroundColor
+        setBackgroundColor(color)
     }
 
     fun show() {
@@ -61,6 +62,15 @@ internal class BottomLabel @JvmOverloads constructor(
             TypefaceHelper.also { typefaceHelper ->
                 typefaceHelper.set(bottomDescription, typefaceHelper.get(context, CardDrawerFont.from(weight)))
             }
+        }
+    }
+
+    override fun setEnabled(enabled: Boolean) {
+        super.setEnabled(enabled)
+        if (enabled) {
+            setBackgroundColor(color)
+        } else {
+            setBackgroundResource(R.color.card_drawer_bottom_label_disabled)
         }
     }
 
@@ -89,6 +99,4 @@ internal class BottomLabel @JvmOverloads constructor(
     }
 
     private fun getTextPixelSize(multiplier: Float) = resources.getDimension(R.dimen.card_drawer_font_size) * multiplier
-
-    override fun shouldBeGreyedOut() = false
 }

@@ -25,5 +25,6 @@
 
     <color name="card_drawer_color_bottom_label">#00a650</color>
     <color name="card_drawer_ui_white">#FFFFFF</color>
+    <color name="card_drawer_bottom_label_disabled">#888888</color>
 
 </resources>

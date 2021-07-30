@@ -184,6 +184,7 @@ public class CardDrawerView extends FrameLayout implements Observer {
         cardBackLayout.setEnabled(enabled);
         genericFrontLayout.setEnabled(enabled);
         genericBackLayout.setEnabled(enabled);
+        bottomLabel.setEnabled(enabled);
         updateColor(source);
     }
 
