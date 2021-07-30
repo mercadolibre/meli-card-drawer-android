@@ -65,15 +65,6 @@ internal class BottomLabel @JvmOverloads constructor(
         }
     }
 
-    override fun setEnabled(enabled: Boolean) {
-        super.setEnabled(enabled)
-        if (enabled) {
-            setBackgroundColor(color)
-        } else {
-            setBackgroundResource(R.color.card_drawer_bottom_label_disabled)
-        }
-    }
-
     private fun setBackgroundColor(color: String?) {
         runCatching {
             setBackgroundColor(Color.parseColor(color))
