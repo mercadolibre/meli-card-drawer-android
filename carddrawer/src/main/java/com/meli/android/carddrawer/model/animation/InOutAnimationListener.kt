@@ -5,16 +5,24 @@ import android.view.animation.Animation
 
 internal class InOutAnimationListener(
     private val targetView: View,
-    private val visibility: Int,
+    private val newVisibility: Int,
     private val nextAnimation: () -> Unit?
 ) : Animation.AnimationListener {
 
-    override fun onAnimationStart(animation: Animation?) {}
-
-    override fun onAnimationEnd(animation: Animation?) {
-        targetView.visibility = visibility
-        nextAnimation()
+    init {
+        targetView.clearAnimation()
     }
 
-    override fun onAnimationRepeat(animation: Animation?) {}
+    override fun onAnimationStart(animation: Animation?) = Unit
+    override fun onAnimationRepeat(animation: Animation?) = Unit
+
+    override fun onAnimationEnd(animation: Animation?) {
+        with(targetView) {
+            visibility = newVisibility
+            postOnAnimation {
+                clearAnimation()
+            }
+        }
+        nextAnimation()
+    }
 }

@@ -4,8 +4,8 @@ import android.content.Context
 import android.graphics.Color
 import android.util.AttributeSet
 import android.util.TypedValue
+import android.widget.LinearLayout
 import androidx.appcompat.widget.AppCompatTextView
-import androidx.constraintlayout.widget.ConstraintLayout
 import com.meli.android.carddrawer.ColorUtils.safeParcelColor
 import com.meli.android.carddrawer.R
 import com.meli.android.carddrawer.format.CardDrawerFont
@@ -18,15 +18,16 @@ internal class BottomLabel @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
-) : ConstraintLayout(context, attrs, defStyleAttr), Child {
+) : LinearLayout(context, attrs, defStyleAttr), Child {
 
     private var bottomDescription: AppCompatTextView
     private var animation: BottomLabelAnimation? = null
     private var defaultBottomLabelWidth = resources.getDimension(R.dimen.card_drawer_card_width)
 
     init {
-          inflate(context, R.layout.card_drawer_bottom_label, this)
-          bottomDescription = findViewById(R.id.bottom_description)
+        inflate(context, R.layout.card_drawer_bottom_label, this)
+        orientation = VERTICAL
+        bottomDescription = findViewById(R.id.bottom_description)
     }
 
     fun setLabel(label: Label) {
@@ -49,18 +50,16 @@ internal class BottomLabel @JvmOverloads constructor(
 
     private fun showWithoutAnimation() {
         visibility = VISIBLE
-        bottomDescription.visibility = VISIBLE
     }
 
     private fun hideWithoutAnimation() {
         visibility = INVISIBLE
-        bottomDescription.visibility = INVISIBLE
     }
 
     private fun setWeight(weight: String?) {
         if (!weight.isNullOrBlank()) {
             TypefaceHelper.also { typefaceHelper ->
-                typefaceHelper.set(bottomDescription, typefaceHelper.get(context,  CardDrawerFont.from(weight)))
+                typefaceHelper.set(bottomDescription, typefaceHelper.get(context, CardDrawerFont.from(weight)))
             }
         }
     }
