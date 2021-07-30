@@ -1,8 +1,7 @@
 package com.meli.android.carddrawer.model.animation
 
 import android.view.View
-import android.view.View.INVISIBLE
-import android.view.View.VISIBLE
+import android.view.View.*
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import com.meli.android.carddrawer.R
@@ -22,28 +21,25 @@ internal class BottomLabelAnimation(
             InOutAnimationListener(
                 targetView,
                 VISIBLE
-            ) { nextAnimation?.slideUp() }
+            ) {
+                nextAnimation?.slideUp()
+            }
         )
         slideDown.setAnimationListener(
             InOutAnimationListener(
                 targetView,
                 INVISIBLE
-            ) { nextAnimation?.slideDown() }
+            ) {
+                nextAnimation?.slideDown()
+            }
         )
     }
 
     fun slideUp() {
-        initAnimation(targetView, slideUp)
+        targetView.startAnimation(slideUp)
     }
 
     fun slideDown() {
-        initAnimation(targetView, slideDown)
-    }
-
-    private fun initAnimation(targetView: View, animation: Animation) {
-        with(targetView) {
-            clearAnimation()
-            startAnimation(animation)
-        }
+        targetView.startAnimation(slideDown)
     }
 }
