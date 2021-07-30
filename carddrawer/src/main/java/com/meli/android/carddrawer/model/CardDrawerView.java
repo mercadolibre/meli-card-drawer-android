@@ -160,7 +160,7 @@ public class CardDrawerView extends FrameLayout implements Observer {
         cardFrontLayout.setCameraDistance(distance);
         cardBackLayout.setCameraDistance(distance);
 
-        cardAnimator = new CardAnimator(context, cardFrontLayout, cardBackLayout);
+        cardAnimator = new CardAnimator(context, findViewById(R.id.container), cardBackLayout);
         final CardUI defaultCardConfiguration = new DefaultCardConfiguration(context);
         source = new PaymentCard(defaultCardConfiguration);
         cardConfiguration = buildCardConfiguration(defaultCardConfiguration);
