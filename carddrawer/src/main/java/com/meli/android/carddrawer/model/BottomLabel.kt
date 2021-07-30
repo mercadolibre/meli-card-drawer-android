@@ -3,15 +3,16 @@ package com.meli.android.carddrawer.model
 import android.content.Context
 import android.graphics.Color
 import android.util.AttributeSet
-import android.view.ViewGroup
+import android.util.TypedValue
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import com.meli.android.carddrawer.ColorUtils.safeParcelColor
 import com.meli.android.carddrawer.R
 import com.meli.android.carddrawer.format.CardDrawerFont
 import com.meli.android.carddrawer.format.TypefaceHelper
-import com.meli.android.carddrawer.ColorUtils.safeParcelColor
 import com.meli.android.carddrawer.model.ConstraintLayoutWithDisabledSupport.Child
 import com.meli.android.carddrawer.model.animation.BottomLabelAnimation
+import kotlin.math.roundToInt
 
 internal class BottomLabel @JvmOverloads constructor(
     context: Context,
@@ -21,6 +22,7 @@ internal class BottomLabel @JvmOverloads constructor(
 
     private var bottomDescription: AppCompatTextView
     private var animation: BottomLabelAnimation? = null
+    private var defaultBottomLabelWidth = resources.getDimension(R.dimen.card_drawer_card_width)
 
     init {
           inflate(context, R.layout.card_drawer_bottom_label, this)
@@ -70,6 +72,24 @@ internal class BottomLabel @JvmOverloads constructor(
             setBackgroundResource(R.color.card_drawer_color_bottom_label)
         }
     }
+
+    override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
+        super.onSizeChanged(w, h, oldw, oldh)
+        val cardSizeMultiplier = measuredWidth / defaultBottomLabelWidth
+        val bottomLabelHeightMultiplier = (if (oldh > 0) ((h * 100f) / oldh) / 100f else cardSizeMultiplier)
+
+        setUpBottomDescriptionTextSize(cardSizeMultiplier)
+        val containerBottomLabelParams = layoutParams
+        val height = (containerBottomLabelParams.height * bottomLabelHeightMultiplier).roundToInt()
+        containerBottomLabelParams.height = height
+        layoutParams = containerBottomLabelParams
+    }
+
+    private fun setUpBottomDescriptionTextSize(multiplier: Float) {
+        bottomDescription.post { bottomDescription.setTextSize(TypedValue.COMPLEX_UNIT_PX, getTextPixelSize(multiplier)) }
+    }
+
+    private fun getTextPixelSize(multiplier: Float) = resources.getDimension(R.dimen.card_drawer_font_size) * multiplier
 
     override fun shouldBeGreyedOut() = false
 }
