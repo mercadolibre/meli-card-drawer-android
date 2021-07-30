@@ -21,7 +21,6 @@ import android.widget.FrameLayout;
 import android.widget.ImageSwitcher;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.IntDef;
@@ -32,7 +31,6 @@ import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.constraintlayout.widget.ConstraintLayout;
-
 import com.meli.android.carddrawer.R;
 import com.meli.android.carddrawer.ViewHelper;
 import com.meli.android.carddrawer.configuration.AccountMoneyDefaultConfiguration;
@@ -48,15 +46,11 @@ import com.meli.android.carddrawer.internal.BaseExtensionsKt;
 import com.meli.android.carddrawer.internal.TagDimensions;
 import com.meli.android.carddrawer.model.customview.CustomViewConfiguration;
 import com.mercadolibre.android.picassodiskcache.PicassoDiskLoader;
-
-import org.jetbrains.annotations.NotNull;
-
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
-
 import kotlin.Pair;
 import kotlin.Unit;
 
@@ -81,6 +75,8 @@ public class CardDrawerView extends FrameLayout implements Observer {
 
     protected CardDrawerSource source;
     protected Card card;
+    private View frontContainer;
+    private View backContainer;
     protected ViewGroup cardFrontLayout;
     protected ViewGroup cardBackLayout;
     protected ViewGroup genericFrontLayout;
@@ -157,10 +153,10 @@ public class CardDrawerView extends FrameLayout implements Observer {
         setBehaviour(behaviour);
 
         final float distance = getResources().getDimension(R.dimen.card_drawer_camera_distance);
-        cardFrontLayout.setCameraDistance(distance);
-        cardBackLayout.setCameraDistance(distance);
+        frontContainer.setCameraDistance(distance);
+        backContainer.setCameraDistance(distance);
 
-        cardAnimator = new CardAnimator(context, findViewById(R.id.container), cardBackLayout);
+        cardAnimator = new CardAnimator(context, frontContainer, backContainer);
         final CardUI defaultCardConfiguration = new DefaultCardConfiguration(context);
         source = new PaymentCard(defaultCardConfiguration);
         cardConfiguration = buildCardConfiguration(defaultCardConfiguration);
@@ -192,6 +188,8 @@ public class CardDrawerView extends FrameLayout implements Observer {
     }
 
     private void bindViews() {
+        frontContainer = findViewById(R.id.card_drawer_front_container);
+        backContainer = findViewById(R.id.card_drawer_back_container);
         cardFrontLayout = findViewById(R.id.card_header_front);
         cardBackLayout = findViewById(R.id.card_header_back);
         genericFrontLayout = findViewById(R.id.card_drawer_generic_front);
@@ -385,7 +383,7 @@ public class CardDrawerView extends FrameLayout implements Observer {
         cardAnimator.switchViewWithoutAnimation(FieldPosition.POSITION_FRONT);
     }
 
-    public void setBottomLabel(@NotNull final Label label) {
+    public void setBottomLabel(@NonNull final Label label) {
         bottomLabel.setLabel(label);
     }
 
@@ -688,32 +686,20 @@ public class CardDrawerView extends FrameLayout implements Observer {
      * @param behaviour behaviour to set
      */
     public void setBehaviour(@Behaviour final int behaviour) {
-        final LayoutParams frontParams = (LayoutParams) cardFrontLayout.getLayoutParams();
-        final LayoutParams backParams = (LayoutParams) cardBackLayout.getLayoutParams();
-        final LayoutParams genericFrontParams = (LayoutParams) genericFrontLayout.getLayoutParams();
-        final LayoutParams genericBackParams = (LayoutParams) genericBackLayout.getLayoutParams();
-        final LayoutParams containerBottomLabelParams = (LayoutParams) containerBottomLabel.getLayoutParams();
+        final LayoutParams frontParams = (LayoutParams) frontContainer.getLayoutParams();
+        final LayoutParams backParams = (LayoutParams) backContainer.getLayoutParams();
 
         if (behaviour == Behaviour.RESPONSIVE) {
             frontParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
             backParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
-            genericFrontParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
-            genericBackParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
-            containerBottomLabelParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
         } else {
             final int width = getResources().getDimensionPixelSize(R.dimen.card_drawer_card_width);
             frontParams.width = width;
             backParams.width = width;
-            genericFrontParams.width = width;
-            genericBackParams.width = width;
-            containerBottomLabelParams.width = width;
         }
 
-        cardFrontLayout.setLayoutParams(frontParams);
-        cardBackLayout.setLayoutParams(backParams);
-        genericFrontLayout.setLayoutParams(genericFrontParams);
-        genericBackLayout.setLayoutParams(genericBackParams);
-        containerBottomLabel.setLayoutParams(containerBottomLabelParams);
+        frontContainer.setLayoutParams(frontParams);
+        backContainer.setLayoutParams(backParams);
     }
 
     /**
