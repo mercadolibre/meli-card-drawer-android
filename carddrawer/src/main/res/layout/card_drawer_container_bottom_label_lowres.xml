@@ -12,7 +12,6 @@
         android:layout_height="0dp"
         app:bottom_left_corner_radius="8dp"
         app:bottom_right_corner_radius="8dp"
-        app:shouldBeGreyedOut="true"
         app:layout_constraintDimensionRatio="H,256:12.6"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
