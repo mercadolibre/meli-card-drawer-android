@@ -54,7 +54,7 @@ import java.util.Observer;
 import kotlin.Pair;
 import kotlin.Unit;
 
-@SuppressWarnings({ "PMD.ConstructorCallsOverridableMethod", "PMD.TooManyFields", "PMD.GodClass" })
+@SuppressWarnings({"PMD.ConstructorCallsOverridableMethod", "PMD.TooManyFields", "PMD.GodClass"})
 public class CardDrawerView extends FrameLayout implements Observer {
     private static final String STATE_CARD = "state_card";
     private static final String STATE_SUPER = "state_super";
@@ -75,6 +75,8 @@ public class CardDrawerView extends FrameLayout implements Observer {
 
     protected CardDrawerSource source;
     protected Card card;
+    private View frontContainer;
+    private View backContainer;
     protected ViewGroup cardFrontLayout;
     protected ViewGroup cardBackLayout;
     protected ViewGroup genericFrontLayout;
@@ -92,6 +94,8 @@ public class CardDrawerView extends FrameLayout implements Observer {
     private View customView;
     protected CardConfiguration cardConfiguration;
     protected CardDrawerStyle style;
+    private ViewGroup containerBottomLabel;
+    private BottomLabel bottomLabel;
 
     public CardDrawerView(@NonNull final Context context) {
         this(context, null);
@@ -133,10 +137,9 @@ public class CardDrawerView extends FrameLayout implements Observer {
 
         final TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.CardDrawerView);
         final int internalPadding = typedArray.getDimensionPixelSize(
-            R.styleable.CardDrawerView_card_header_internal_padding,
-            getResources().getDimensionPixelSize(R.dimen.card_drawer_layout_padding));
-        @Behaviour
-        final int behaviour = typedArray.getInt(R.styleable.CardDrawerView_card_header_behaviour, Behaviour.REGULAR);
+                R.styleable.CardDrawerView_card_header_internal_padding,
+                getResources().getDimensionPixelSize(R.dimen.card_drawer_layout_padding));
+        @Behaviour final int behaviour = typedArray.getInt(R.styleable.CardDrawerView_card_header_behaviour, Behaviour.REGULAR);
         final int styleIndex =
             typedArray.getInt(R.styleable.CardDrawerView_card_header_style, CardDrawerStyle.REGULAR.getValue());
 
@@ -150,10 +153,10 @@ public class CardDrawerView extends FrameLayout implements Observer {
         setBehaviour(behaviour);
 
         final float distance = getResources().getDimension(R.dimen.card_drawer_camera_distance);
-        cardFrontLayout.setCameraDistance(distance);
-        cardBackLayout.setCameraDistance(distance);
+        frontContainer.setCameraDistance(distance);
+        backContainer.setCameraDistance(distance);
 
-        cardAnimator = new CardAnimator(context, cardFrontLayout, cardBackLayout);
+        cardAnimator = new CardAnimator(context, frontContainer, backContainer);
         final CardUI defaultCardConfiguration = new DefaultCardConfiguration(context);
         source = new PaymentCard(defaultCardConfiguration);
         cardConfiguration = buildCardConfiguration(defaultCardConfiguration);
@@ -181,14 +184,18 @@ public class CardDrawerView extends FrameLayout implements Observer {
         cardBackLayout.setEnabled(enabled);
         genericFrontLayout.setEnabled(enabled);
         genericBackLayout.setEnabled(enabled);
+        containerBottomLabel.setEnabled(enabled);
         updateColor(source);
     }
 
     private void bindViews() {
+        frontContainer = findViewById(R.id.card_drawer_front_container);
+        backContainer = findViewById(R.id.card_drawer_back_container);
         cardFrontLayout = findViewById(R.id.card_header_front);
         cardBackLayout = findViewById(R.id.card_header_back);
         genericFrontLayout = findViewById(R.id.card_drawer_generic_front);
         genericBackLayout = findViewById(R.id.card_drawer_generic_back);
+        containerBottomLabel = findViewById(R.id.card_drawer_container_bottom_label);
 
         genericTitle = genericFrontLayout.findViewById(R.id.generic_title);
         genericSubtitle = genericFrontLayout.findViewById(R.id.generic_subtitle);
@@ -211,6 +218,8 @@ public class CardDrawerView extends FrameLayout implements Observer {
         cardBackGradient = cardBackLayout.findViewById(R.id.cho_card_gradient_back);
 
         safeZone = cardFrontLayout.findViewById(R.id.safe_zone);
+
+        bottomLabel = containerBottomLabel.findViewById(R.id.card_drawer_bottom_label);
     }
 
     @NonNull
@@ -226,7 +235,7 @@ public class CardDrawerView extends FrameLayout implements Observer {
      * Paints the front card with animation
      *
      * @param cardUI has the card style and animation type. Use NONE for show without animation.
-     *
+     * <p>
      * Preserved so we don't break integrators
      */
     // TODO: Maybe we can deprecate this in favor of new show that allows
@@ -373,6 +382,18 @@ public class CardDrawerView extends FrameLayout implements Observer {
      */
     public void showFront() {
         cardAnimator.switchViewWithoutAnimation(FieldPosition.POSITION_FRONT);
+    }
+
+    public void setBottomLabel(@NonNull final Label label) {
+        bottomLabel.setLabel(label);
+    }
+
+    public void showBottomLabel() {
+        bottomLabel.show();
+    }
+
+    public void hideBottomLabel() {
+        bottomLabel.hide();
     }
 
     protected void setupImageSwitcher(final ImageSwitcher imageSwitcher, final Animation fadeIn,
@@ -666,28 +687,20 @@ public class CardDrawerView extends FrameLayout implements Observer {
      * @param behaviour behaviour to set
      */
     public void setBehaviour(@Behaviour final int behaviour) {
-        final LayoutParams frontParams = (LayoutParams) cardFrontLayout.getLayoutParams();
-        final LayoutParams backParams = (LayoutParams) cardBackLayout.getLayoutParams();
-        final LayoutParams genericFrontParams = (LayoutParams) genericFrontLayout.getLayoutParams();
-        final LayoutParams genericBackParams = (LayoutParams) genericBackLayout.getLayoutParams();
+        final LayoutParams frontParams = (LayoutParams) frontContainer.getLayoutParams();
+        final LayoutParams backParams = (LayoutParams) backContainer.getLayoutParams();
 
         if (behaviour == Behaviour.RESPONSIVE) {
             frontParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
             backParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
-            genericFrontParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
-            genericBackParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
         } else {
             final int width = getResources().getDimensionPixelSize(R.dimen.card_drawer_card_width);
             frontParams.width = width;
             backParams.width = width;
-            genericFrontParams.width = width;
-            genericBackParams.width = width;
         }
 
-        cardFrontLayout.setLayoutParams(frontParams);
-        cardBackLayout.setLayoutParams(backParams);
-        genericFrontLayout.setLayoutParams(genericFrontParams);
-        genericBackLayout.setLayoutParams(genericBackParams);
+        frontContainer.setLayoutParams(frontParams);
+        backContainer.setLayoutParams(backParams);
     }
 
     /**
@@ -749,14 +762,14 @@ public class CardDrawerView extends FrameLayout implements Observer {
             cardTagDimensions.getPaddingV());
     }
 
-    protected TagDimensions getCardTagDimensions(final Resources resources, final float cardSizeMultiplier){
+    protected TagDimensions getCardTagDimensions(final Resources resources, final float cardSizeMultiplier) {
         return new TagDimensions(resources.getDimension(R.dimen.card_drawer_font_tag) * cardSizeMultiplier,
             Math.round(resources.getDimension(R.dimen.andes_tag_medium_margin) * cardSizeMultiplier),
             Math.round(resources.getDimension(R.dimen.card_drawer_tag_vertical_padding) * cardSizeMultiplier)
         );
     }
 
-    protected void setTextPixelSize(@NonNull final TextView view,  final float size, final int paddingH, final int paddingV) {
+    protected void setTextPixelSize(@NonNull final TextView view, final float size, final int paddingH, final int paddingV) {
         view.post(() -> view.setPadding(paddingH, paddingV, paddingH, paddingV));
         setTextPixelSize(view, size);
     }

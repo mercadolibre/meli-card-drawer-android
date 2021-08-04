@@ -1,38 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <merge xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:parentTag="android.widget.FrameLayout"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    tools:parentTag="android.widget.FrameLayout">
 
-    <include
-        android:id="@+id/card_header_back"
-        layout="@layout/card_drawer_back_mediumres"
+    <FrameLayout
+        android:id="@+id/card_drawer_back_container"
         android:layout_width="@dimen/card_drawer_card_width"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal">
 
-    <include
-        android:id="@+id/card_header_front"
-        layout="@layout/card_drawer_front_mediumres"
+        <include
+            android:id="@+id/card_header_back"
+            layout="@layout/card_drawer_back_mediumres"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <include
+            android:id="@+id/card_drawer_generic_back"
+            layout="@layout/card_drawer_generic_back_mediumres"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/card_drawer_front_container"
         android:layout_width="@dimen/card_drawer_card_width"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal">
 
-    <include
-        android:id="@+id/card_drawer_generic_back"
-        layout="@layout/card_drawer_generic_back_mediumres"
-        android:layout_width="@dimen/card_drawer_card_width"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        android:layout_gravity="center_horizontal" />
+        <include
+            android:id="@+id/card_header_front"
+            layout="@layout/card_drawer_front_mediumres"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
-    <include
-        android:id="@+id/card_drawer_generic_front"
-        layout="@layout/card_drawer_generic_front_mediumres"
-        android:layout_width="@dimen/card_drawer_card_width"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        android:layout_gravity="center_horizontal" />
+        <include
+            android:id="@+id/card_drawer_generic_front"
+            layout="@layout/card_drawer_generic_front_mediumres"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
+
+        <include
+            android:id="@+id/card_drawer_container_bottom_label"
+            layout="@layout/card_drawer_container_bottom_label_mediumres"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom" />
+
+    </FrameLayout>
 
 </merge>
