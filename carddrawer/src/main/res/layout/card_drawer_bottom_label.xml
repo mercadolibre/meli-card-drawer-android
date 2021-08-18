@@ -8,7 +8,7 @@
     tools:background="@color/card_drawer_color_bottom_label">
 
     <View
-        android:id="@+id/bottom_description_shadow"
+        android:id="@+id/card_drawer_bottom_description_shadow"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"

@@ -1,5 +1,5 @@
 ## Release 2.17.1
-* Fix bottom label.
+* Fix bottom label id.
 
 ## Release 2.17.0
 * Added bottom label.
