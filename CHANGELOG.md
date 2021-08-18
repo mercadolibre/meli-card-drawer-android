@@ -1,3 +1,6 @@
+## Release 2.17.0
+* Added bottom label.
+
 ## Release 2.16.1
 * Fix default card visibility.
 
