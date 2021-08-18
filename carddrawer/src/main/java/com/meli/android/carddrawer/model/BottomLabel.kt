@@ -27,7 +27,7 @@ internal class BottomLabel @JvmOverloads constructor(
     init {
         inflate(context, R.layout.card_drawer_bottom_label, this)
         orientation = VERTICAL
-        bottomDescription = findViewById(R.id.bottom_description)
+        bottomDescription = findViewById(R.id.card_drawer_bottom_description)
     }
 
     fun setLabel(label: Label) {
