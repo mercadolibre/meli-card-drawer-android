@@ -87,7 +87,7 @@ public class CardDrawerView extends FrameLayout implements Observer {
     protected AppCompatTextView cardTagText;
     protected ImageView cardFrontGradient;
     protected ImageView cardBackGradient;
-    private ImageView overlayImage;
+    protected ImageView overlayImage;
     private View accountMoneyDefaultOverlay;
     private View accountMoneyHybridOverlay;
     protected CornerView safeZone;
@@ -145,7 +145,7 @@ public class CardDrawerView extends FrameLayout implements Observer {
 
         typedArray.recycle();
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP && cardNumber != null) {
             cardNumber.setLetterSpacing(NUMBER_LETTER_SPACING);
         }
 
@@ -184,7 +184,9 @@ public class CardDrawerView extends FrameLayout implements Observer {
         cardBackLayout.setEnabled(enabled);
         genericFrontLayout.setEnabled(enabled);
         genericBackLayout.setEnabled(enabled);
-        containerBottomLabel.setEnabled(enabled);
+        if (containerBottomLabel != null) {
+            containerBottomLabel.setEnabled(enabled);
+        }
         updateColor(source);
     }
 
@@ -219,7 +221,9 @@ public class CardDrawerView extends FrameLayout implements Observer {
 
         safeZone = cardFrontLayout.findViewById(R.id.safe_zone);
 
-        bottomLabel = containerBottomLabel.findViewById(R.id.card_drawer_bottom_label);
+        if (containerBottomLabel != null) {
+            bottomLabel = containerBottomLabel.findViewById(R.id.card_drawer_bottom_label);
+        }
     }
 
     @NonNull
@@ -296,16 +300,19 @@ public class CardDrawerView extends FrameLayout implements Observer {
         genericPaymentMethod.setPaymentMethodImage(paymentMethodImage);
         genericTitle.setText(genericPaymentMethod.getTitle().getText());
         genericTitle.setTextColor(genericPaymentMethod.getTitle().getColor());
-        final GenericPaymentMethod.Text subtitle;
-        if ((subtitle = genericPaymentMethod.getSubtitle()) != null) {
+        showGenericPaymentSubtitle(genericPaymentMethod.getSubtitle());
+        frontBackground.setColorFilter(genericPaymentMethod.getBackgroundColor(), PorterDuff.Mode.SRC_ATOP);
+        backBackground.setColorFilter(genericPaymentMethod.getBackgroundColor(), PorterDuff.Mode.SRC_ATOP);
+    }
+
+    protected void showGenericPaymentSubtitle(@Nullable final GenericPaymentMethod.Text subtitle) {
+        if (subtitle != null) {
             genericSubtitle.setText(subtitle.getText());
             genericSubtitle.setTextColor(subtitle.getColor());
             genericSubtitle.setVisibility(VISIBLE);
         } else {
             genericSubtitle.setVisibility(GONE);
         }
-        frontBackground.setColorFilter(genericPaymentMethod.getBackgroundColor(), PorterDuff.Mode.SRC_ATOP);
-        backBackground.setColorFilter(genericPaymentMethod.getBackgroundColor(), PorterDuff.Mode.SRC_ATOP);
     }
 
     /**
@@ -438,12 +445,13 @@ public class CardDrawerView extends FrameLayout implements Observer {
             updateFont(source.getCustomFont());
         }
         updateOverlay(overlayImage, source);
-        setUpVisibilityOverlay();
+        updateOverlayVisibility();
         setCardTextColor(source);
         if (animate) {
             fadeInAnimateView(cardNumber);
-            fadeInAnimateView(cardName);
-
+            if (cardName != null) {
+                fadeInAnimateView(cardName);
+            }
             if (cardDate != null) {
                 fadeInAnimateView(cardDate);
             }
@@ -547,7 +555,9 @@ public class CardDrawerView extends FrameLayout implements Observer {
     protected void setCardTextColor(@NonNull final CardUI cardUI, @NonNull @FontType final String fontType,
         @ColorInt final int fontColor) {
         cardNumber.init(resolveFontType(fontType, true), getCardNumberPlaceHolder(cardUI), fontColor);
-        cardName.init(resolveFontType(fontType, false), cardUI.getNamePlaceHolder(), fontColor);
+        if (cardName != null) {
+            cardName.init(resolveFontType(fontType, false), cardUI.getNamePlaceHolder(), fontColor);
+        }
         if (cardDate != null) {
             cardDate.init(resolveFontType(fontType, false), cardUI.getExpirationPlaceHolder(), fontColor);
         }
@@ -723,7 +733,7 @@ public class CardDrawerView extends FrameLayout implements Observer {
         }
     }
 
-    private void setUpVisibilityOverlay() {
+    protected void updateOverlayVisibility() {
         accountMoneyDefaultOverlay.setVisibility(style == CardDrawerStyle.ACCOUNT_MONEY_DEFAULT ? VISIBLE : GONE);
         accountMoneyHybridOverlay.setVisibility(style == CardDrawerStyle.ACCOUNT_MONEY_HYBRID ? VISIBLE : GONE);
         overlayImage.setVisibility(style == CardDrawerStyle.REGULAR ? VISIBLE : GONE);
@@ -737,15 +747,19 @@ public class CardDrawerView extends FrameLayout implements Observer {
         final float cardSizeMultiplier = getCardSizeMultiplier();
         final float newTextSize = resources.getDimension(R.dimen.card_drawer_font_size) * cardSizeMultiplier;
 
-        setTextPixelSize(cardName, newTextSize);
         setTextPixelSize(codeBack, newTextSize);
         setTextPixelSize(cardNumber, newTextSize);
 
         setTextPixelSize(genericTitle, resources.getDimension(R.dimen.card_drawer_font_generic_title) * cardSizeMultiplier);
-        setTextPixelSize(genericSubtitle, resources.getDimension(R.dimen.card_drawer_font_generic_subtitle) * cardSizeMultiplier);
 
         setCardTagTextPixelSize(resources, cardSizeMultiplier);
 
+        if (genericSubtitle != null) {
+            setTextPixelSize(genericSubtitle, resources.getDimension(R.dimen.card_drawer_font_generic_subtitle) * cardSizeMultiplier);
+        }
+        if (cardName != null) {
+            setTextPixelSize(cardName, newTextSize);
+        }
         if (cardDate != null) {
             setTextPixelSize(cardDate, newTextSize);
         }

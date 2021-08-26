@@ -6,7 +6,11 @@ import androidx.annotation.LayoutRes
 import com.meli.android.carddrawer.R
 import com.meli.android.carddrawer.model.customview.CustomViewConfiguration
 
-class CardDrawerViewMediumres @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : CardDrawerView(context, attrs, defStyleAttr) {
+class CardDrawerViewMediumres @JvmOverloads constructor(
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0
+) : CardDrawerView(context, attrs, defStyleAttr) {
     override fun buildCustomViewConfiguration(): CustomViewConfiguration {
         return CustomViewConfiguration(Type.MEDIUM, style)
     }

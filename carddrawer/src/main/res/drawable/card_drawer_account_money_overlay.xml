@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/card_drawer_account_money_pattern"
+        android:left="112dp" />
+    <item android:drawable="@drawable/card_drawer_account_money_sign"
+        android:left="205dp"
+        android:bottom="68dp" />
+</layer-list>
