@@ -20,7 +20,7 @@
         android:layout_height="match_parent"
         android:scaleType="fitXY"
         android:src="@drawable/card_drawer_background"
-        tools:tint="@color/card_drawer_gray_light"/>
+        tools:tint="@color/andes_red_800" />
 
     <ImageView
         android:id="@+id/cho_card_gradient_front"
@@ -33,23 +33,24 @@
         android:id="@+id/cho_card_overlay"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleType="fitXY"
+        android:scaleType="centerCrop"
+        tools:visibility="visible"
         android:src="@drawable/card_drawer_overlay" />
 
-    <include
+    <ImageView
         android:id="@+id/cho_am_default_overlay"
-        layout="@layout/card_drawer_am_overlay"
-        android:layout_gravity="end"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:visibility="gone"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent" />
+        android:scaleType="centerCrop"
+        android:src="@drawable/card_drawer_account_money_overlay" />
 
     <ImageView
         android:id="@+id/cho_am_hybrid_overlay"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="gone"
-        android:scaleType="fitEnd"
-        android:src="@drawable/card_drawer_hybrid_overlay" />
+        android:scaleType="centerCrop"
+        android:src="@drawable/card_drawer_hybrid_overlay_container" />
 
 </FrameLayout>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.meli.android.carddrawer.app.MainActivity"
@@ -7,266 +7,226 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp">
+
+        <com.meli.android.carddrawer.model.CardDrawerView
+            android:id="@+id/card_header_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <com.meli.android.carddrawer.model.CardDrawerViewLowres
+            android:id="@+id/card_header_lowres_container"
+            android:layout_width="match_parent"
+            android:visibility="gone"
+            android:layout_height="wrap_content"/>
+
+        <com.meli.android.carddrawer.model.CardDrawerViewMedium
+            android:id="@+id/card_header_medium_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"/>
+
+        <com.meli.android.carddrawer.model.CardDrawerViewMediumres
+            android:id="@+id/card_header_mediumres_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"/>
+
+        <com.meli.android.carddrawer.model.CardDrawerViewSmall
+            android:id="@+id/card_header_small_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:clipChildren="false"
-            android:clipToPadding="false"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp"
-            android:paddingTop="20dp">
+            android:layout_marginBottom="10dp">
 
-            <com.meli.android.carddrawer.model.CardDrawerView
-                android:id="@+id/card_header_container"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
-            <com.meli.android.carddrawer.model.CardDrawerViewLowres
-                android:id="@+id/card_header_lowres_container"
-                android:layout_width="match_parent"
-                android:visibility="gone"
-                android:layout_height="wrap_content"/>
-
-            <com.meli.android.carddrawer.model.CardDrawerViewMedium
-                android:id="@+id/card_header_medium_container"
-                android:layout_width="match_parent"
+            <EditText
+                android:id="@+id/card_number"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:visibility="gone"/>
+                android:layout_weight="6"
+                android:hint="@string/card_drawer_app_card_number_hint"
+                android:maxLines="1"
+                android:layout_marginRight="8dp"
+                android:inputType="numberSigned"/>
 
-            <com.meli.android.carddrawer.model.CardDrawerViewMediumres
-                android:id="@+id/card_header_mediumres_container"
-                android:layout_width="match_parent"
+            <EditText
+                android:id="@+id/security_code"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:visibility="gone"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp">
-
-                <EditText
-                    android:id="@+id/card_number"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="6"
-                    android:hint="@string/card_drawer_app_card_number_hint"
-                    android:maxLines="1"
-                    android:layout_marginRight="8dp"
-                    android:inputType="numberSigned"/>
-
-                <EditText
-                    android:id="@+id/security_code"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="4"
-                    android:maxLines="1"
-                    android:layout_marginRight="8dp"
-                    android:hint="@string/card_drawer_app_card_sec_code_hint"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp">
-
-                <EditText
-                    android:id="@+id/card_name"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="6"
-                    android:maxLines="1"
-                    android:layout_marginRight="8dp"
-                    android:hint="@string/card_drawer_app_card_name_hint"/>
-
-                <EditText
-                    android:id="@+id/expiration_date"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="4"
-                    android:maxLines="1"
-                    android:layout_marginRight="8dp"
-                    android:inputType="date"
-                    android:maxLength="5"
-                    android:hint="@string/card_drawer_app_card_expiration_hint"/>
-
-            </LinearLayout>
-
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="4dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:textSize="16dp"
-                    android:text="@string/card_drawer_app_responsive"/>
-
-                <androidx.appcompat.widget.SwitchCompat
-                    android:id="@+id/card_header_switch_responsive"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical|end"/>
-
-            </FrameLayout>
-
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="4dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:textSize="16dp"
-                    android:text="@string/card_drawer_app_custom_view"/>
-
-                <androidx.appcompat.widget.SwitchCompat
-                    android:id="@+id/card_drawer_custom_view_switch"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical|end"/>
-
-            </FrameLayout>
-
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="4dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:textSize="16dp"
-                    android:text="@string/card_drawer_app_low_res"/>
-
-                <androidx.appcompat.widget.SwitchCompat
-                    android:id="@+id/card_header_lowres_switch"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical|end"/>
-
-            </FrameLayout>
-
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="4dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:textSize="16dp"
-                    android:text="@string/card_drawer_app_medium_res"/>
-
-                <androidx.appcompat.widget.SwitchCompat
-                    android:id="@+id/card_header_medium_switch"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical|end"/>
-
-            </FrameLayout>
-
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="4dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:textSize="16dp"
-                    android:text="New Medium Res"/>
-
-                <androidx.appcompat.widget.SwitchCompat
-                    android:id="@+id/card_header_mediumres_switch"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical|end"/>
-
-            </FrameLayout>
-
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="4dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:textSize="16dp"
-                    android:text="Disabled"/>
-
-                <androidx.appcompat.widget.SwitchCompat
-                    android:id="@+id/card_header_disabled_switch"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical|end"/>
-
-            </FrameLayout>
-
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="4dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:textSize="16dp"
-                    android:text="Show Tag"/>
-
-                <androidx.appcompat.widget.SwitchCompat
-                    android:checked="true"
-                    android:id="@+id/card_header_show_tag_switch"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical|end"/>
-
-            </FrameLayout>
-
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="4dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:textSize="16dp"
-                    android:text="Show Bottom Label"/>
-
-                <androidx.appcompat.widget.SwitchCompat
-                    android:id="@+id/card_header_show_bottom_label_switch"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical|end"/>
-
-            </FrameLayout>
+                android:layout_weight="4"
+                android:maxLines="1"
+                android:layout_marginRight="8dp"
+                android:hint="@string/card_drawer_app_card_sec_code_hint"/>
 
         </LinearLayout>
 
-    </ScrollView>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp">
 
-    <Spinner
-        android:id="@+id/spinner_cards"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"/>
+            <EditText
+                android:id="@+id/card_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="6"
+                android:maxLines="1"
+                android:layout_marginRight="8dp"
+                android:hint="@string/card_drawer_app_card_name_hint"/>
 
-</LinearLayout>
+            <EditText
+                android:id="@+id/expiration_date"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="4"
+                android:maxLines="1"
+                android:layout_marginRight="8dp"
+                android:inputType="date"
+                android:maxLength="5"
+                android:hint="@string/card_drawer_app_card_expiration_hint"/>
+
+        </LinearLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <AutoCompleteTextView
+                android:id="@+id/sizes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="none"
+                tools:text="Choose your destiny" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <AutoCompleteTextView
+                android:id="@+id/configurations"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="none"
+                tools:text="Choose your destiny 2" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:textSize="16dp"
+                android:text="@string/card_drawer_app_responsive"/>
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/card_header_switch_responsive"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|end"/>
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:textSize="16dp"
+                android:text="@string/card_drawer_app_custom_view"/>
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/card_drawer_custom_view_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|end"/>
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:textSize="16dp"
+                android:text="Disabled"/>
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/card_header_disabled_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|end"/>
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:textSize="16dp"
+                android:text="Show Tag"/>
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:checked="true"
+                android:id="@+id/card_header_show_tag_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|end"/>
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:textSize="16dp"
+                android:text="Show Bottom Label"/>
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/card_header_show_bottom_label_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|end"/>
+
+        </FrameLayout>
+
+    </LinearLayout>
+
+</ScrollView>
