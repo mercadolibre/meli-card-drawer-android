@@ -1,3 +1,7 @@
+## Release 2.18.0
+* Added small card.
+* Fix bottom label visibility when there is no animation.
+
 ## Release 2.17.1
 * Fix bottom label id.
 
