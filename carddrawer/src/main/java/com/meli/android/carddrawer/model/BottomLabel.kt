@@ -51,10 +51,12 @@ internal class BottomLabel @JvmOverloads constructor(
 
     private fun showWithoutAnimation() {
         visibility = VISIBLE
+        bottomDescription.visibility = VISIBLE
     }
 
     private fun hideWithoutAnimation() {
         visibility = INVISIBLE
+        bottomDescription.visibility = INVISIBLE
     }
 
     private fun setWeight(weight: String?) {
