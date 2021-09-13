@@ -1,3 +1,6 @@
+## Release 3.0.0
+* Migrates to min api 21 and target 30.
+
 ## Release 2.18.0
 * Added small card.
 * Fix bottom label visibility when there is no animation.
