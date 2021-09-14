@@ -10,8 +10,6 @@ android {
     defaultConfig {
         minSdkVersion androidMinSdk as int
         targetSdkVersion androidTarget as int
-        versionCode 1
-        versionName "1.0"
 
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
     }
@@ -51,6 +49,6 @@ dependencies {
         force = true // Workaround until Robolectric issue is solved https://github.com/robolectric/robolectric/issues/5921
     }
     testImplementation "org.mockito:mockito-core:$mockito"
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin"
     implementation "com.mercadolibre.android.andesui:components:$andesVersion"
 }
