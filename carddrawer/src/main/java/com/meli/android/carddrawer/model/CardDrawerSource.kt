@@ -21,7 +21,8 @@ open class GenericPaymentMethod(
     val title: Text,
     val imageUrl: String? = null,
     val subtitle: Text? = null,
-    override val tag : Tag? = null
+    override val tag : Tag? = null,
+    val description: Text? = null
 ) : CardDrawerSource(), Parcelable {
 
     @Parcelize

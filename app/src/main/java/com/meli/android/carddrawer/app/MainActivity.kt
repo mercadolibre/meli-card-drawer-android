@@ -24,6 +24,7 @@ import com.meli.android.carddrawer.app.model.VisaCardGrayConfiguration
 import com.meli.android.carddrawer.app.model.VisaCardGreenConfiguration
 import com.meli.android.carddrawer.app.model.VisaCardRedConfiguration
 import com.meli.android.carddrawer.app.model.VisaCardYellowConfiguration
+import com.meli.android.carddrawer.app.model.DebinConfiguration
 import com.meli.android.carddrawer.configuration.CardDrawerStyle
 import com.meli.android.carddrawer.configuration.DefaultCardConfiguration
 import com.meli.android.carddrawer.model.CardDrawerSource
@@ -171,6 +172,7 @@ class MainActivity : AppCompatActivity() {
         cardOptions.add(CardConfigurationOption("Default Account Money", CardDrawerStyle.ACCOUNT_MONEY_DEFAULT, tag))
         cardOptions.add(CardConfigurationOption("Custom account money", CustomAccountMoneyConfiguration(), tag))
         cardOptions.add(CardConfigurationOption("PIX", PixConfiguration(this)))
+        cardOptions.add(CardConfigurationOption("Debin", DebinConfiguration(this)))
         val cardAdapter = ArrayAdapter(this, R.layout.card_drawer_list_item, cardOptions)
         cardConfigurations.setAdapter(cardAdapter)
         cardConfigurations.setOnItemClickListener { _, _, position, _ ->

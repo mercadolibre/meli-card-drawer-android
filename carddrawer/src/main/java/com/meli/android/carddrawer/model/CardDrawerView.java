@@ -87,6 +87,7 @@ public class CardDrawerView extends FrameLayout implements Observer {
     private ViewGroup genericBackLayout;
     private AppCompatTextView genericTitle;
     private AppCompatTextView genericSubtitle;
+    private AppCompatTextView genericDescription;
     protected AppCompatTextView genericTagText;
     protected AppCompatTextView cardTagText;
     protected ImageView cardFrontGradient;
@@ -205,6 +206,7 @@ public class CardDrawerView extends FrameLayout implements Observer {
 
         genericTitle = genericFrontLayout.findViewById(R.id.generic_title);
         genericSubtitle = genericFrontLayout.findViewById(R.id.generic_subtitle);
+        genericDescription = genericFrontLayout.findViewById(R.id.generic_description);
         genericTagText = genericFrontLayout.findViewById(R.id.card_tag);
         cardTagText = cardFrontLayout.findViewById(R.id.card_tag);
 
@@ -305,8 +307,19 @@ public class CardDrawerView extends FrameLayout implements Observer {
         genericTitle.setText(genericPaymentMethod.getTitle().getText());
         genericTitle.setTextColor(genericPaymentMethod.getTitle().getColor());
         showGenericPaymentSubtitle(genericPaymentMethod.getSubtitle());
+        showGenericPaymentDescription(genericPaymentMethod.getDescription());
         frontBackground.getBackground().setColorFilter(genericPaymentMethod.getBackgroundColor(), PorterDuff.Mode.SRC_ATOP);
         backBackground.getBackground().setColorFilter(genericPaymentMethod.getBackgroundColor(), PorterDuff.Mode.SRC_ATOP);
+    }
+
+    private void showGenericPaymentDescription(GenericPaymentMethod.Text description) {
+        if (description != null) {
+            genericDescription.setText(description.getText());
+            genericDescription.setTextColor(description.getColor());
+            genericDescription.setVisibility(VISIBLE);
+        } else {
+            genericDescription.setVisibility(GONE);
+        }
     }
 
     protected void showGenericPaymentSubtitle(@Nullable final GenericPaymentMethod.Text subtitle) {

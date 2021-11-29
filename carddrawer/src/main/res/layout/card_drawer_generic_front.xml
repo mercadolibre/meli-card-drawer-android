@@ -33,7 +33,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.4683" />
+        app:layout_constraintGuide_percent="0.4746" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/title_guideline"
