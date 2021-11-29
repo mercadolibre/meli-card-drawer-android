@@ -40,7 +40,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.5949" />
+        app:layout_constraintGuide_percent="0.5379" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/image_ring_right_guideline"
@@ -125,6 +125,20 @@
         app:layout_constraintBottom_toBottomOf="parent"
         tools:text="dfsdfds dsfdsfdsf dsfsdfsd fdsdffsf dsfsdfds dsfsdfds dsfsdf sdfdsfds" />
 
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/generic_description"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:importantForAccessibility="yes"
+        android:layout_marginTop="4dp"
+        android:gravity="center"
+        app:layout_constraintVertical_bias="0"
+        app:layout_constraintEnd_toEndOf="@id/end_guideline"
+        app:layout_constraintStart_toStartOf="@id/start_guideline"
+        app:layout_constraintTop_toBottomOf="@id/generic_subtitle"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:text="dfsdfds dsfdsfdsf dsfsdfsd fdsdffsf dsfsdfds dsfsdfds dsfsdf sdfdsfds" />
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/tag_guideline"
         android:layout_width="wrap_content"
@@ -137,7 +151,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.1518" />
+        app:layout_constraintGuide_percent="0.1582" />
 
     <include
         android:id="@+id/card_tag_container"
