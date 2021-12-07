@@ -68,28 +68,35 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.5859" />
+        app:layout_constraintGuide_percent="0.5820" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/tag_horizontal_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.1548" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/generic_ring"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:src="@drawable/meli_card_drawer_generic_payment_method_background"
-        app:layout_constraintBottom_toTopOf="@id/image_guideline"
         app:layout_constraintDimensionRatio="H,1:1"
+        app:layout_constraintVertical_bias="1"
+        app:layout_constraintBottom_toTopOf="@id/image_guideline"
         app:layout_constraintEnd_toEndOf="@id/image_ring_left_guideline"
         app:layout_constraintStart_toStartOf="@id/image_ring_right_guideline"
-        app:layout_constraintTop_toTopOf="@id/tag_horizontal_guideline"
-        app:layout_constraintVertical_bias="1" />
+        app:layout_constraintTop_toTopOf="@id/tag_horizontal_guideline" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card_view_generic_image"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:cardCornerRadius="50dp"
+        app:layout_constraintDimensionRatio="H,1:1"
         app:layout_constraintStart_toStartOf="@id/image_right_guideline"
         app:layout_constraintEnd_toEndOf="@id/image_left_guideline"
-        app:layout_constraintDimensionRatio="H,1:1"
         app:layout_constraintTop_toTopOf="@id/generic_ring"
         app:layout_constraintBottom_toBottomOf="@id/generic_ring">
 
@@ -122,7 +129,6 @@
         app:layout_constraintEnd_toEndOf="@id/end_guideline"
         app:layout_constraintStart_toStartOf="@id/start_guideline"
         app:layout_constraintTop_toBottomOf="@id/generic_title"
-        app:layout_constraintBottom_toBottomOf="parent"
         tools:text="dfsdfds dsfdsfdsf dsfsdfsd fdsdffsf dsfsdfds dsfsdfds dsfsdf sdfdsfds" />
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -136,7 +142,7 @@
         app:layout_constraintEnd_toEndOf="@id/end_guideline"
         app:layout_constraintStart_toStartOf="@id/start_guideline"
         app:layout_constraintTop_toBottomOf="@id/generic_subtitle"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/generic_front_background"
         tools:text="dfsdfds dsfdsfdsf dsfsdfsd fdsdffsf dsfsdfds dsfsdfds dsfsdf sdfdsfds" />
 
     <androidx.constraintlayout.widget.Guideline
@@ -145,13 +151,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.65" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/tag_horizontal_guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.1582" />
 
     <include
         android:id="@+id/card_tag_container"
