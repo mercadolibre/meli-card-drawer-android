@@ -792,6 +792,9 @@ public class CardDrawerView extends FrameLayout implements Observer {
         if (codeFront != null) {
             setTextPixelSize(codeFront, newTextSize);
         }
+        if (genericDescription != null) {
+            setTextPixelSize(genericDescription, resources.getDimension(R.dimen.card_drawer_font_generic_description) * cardSizeMultiplier);
+        }
     }
 
     private void setCardTagTextPixelSize(final Resources resources, final float cardSizeMultiplier) {
