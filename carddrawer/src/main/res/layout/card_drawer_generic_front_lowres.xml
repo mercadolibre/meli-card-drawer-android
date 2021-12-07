@@ -19,7 +19,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.1666" />
+        app:layout_constraintGuide_percent="0.1904" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/top_image_horizontal_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.2381" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/bottom_horizontal_guideline"
@@ -85,7 +92,7 @@
         app:layout_constraintDimensionRatio="H,1:1"
         app:layout_constraintEnd_toEndOf="@id/image_ring_left_guideline"
         app:layout_constraintStart_toStartOf="@id/image_ring_right_guideline"
-        app:layout_constraintTop_toTopOf="@id/top_horizontal_guideline" />
+        app:layout_constraintTop_toTopOf="@id/top_image_horizontal_guideline" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card_view_generic_image"
@@ -112,12 +119,9 @@
         android:gravity="center_vertical"
         android:importantForAccessibility="yes"
         android:textSize="14dp"
-        app:layout_constraintBottom_toTopOf="@+id/generic_subtitle"
         app:layout_constraintEnd_toEndOf="@id/end_guideline"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@id/title_guideline"
         app:layout_constraintTop_toTopOf="@id/top_horizontal_guideline"
-        app:layout_constraintVertical_chainStyle="spread_inside"
         tools:text="Banco Galicia" />
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -127,11 +131,10 @@
         android:gravity="center_vertical"
         android:importantForAccessibility="yes"
         android:textSize="14dp"
-        app:layout_constraintBottom_toTopOf="@+id/generic_description"
+        app:layout_constraintBottom_toTopOf="@id/generic_description"
         app:layout_constraintEnd_toEndOf="@id/end_guideline"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@id/title_guideline"
-        app:layout_constraintTop_toBottomOf="@+id/generic_title"
+        app:layout_constraintTop_toBottomOf="@id/generic_title"
         tools:text="Cuenta corriente" />
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -143,9 +146,7 @@
         android:textSize="12dp"
         app:layout_constraintBottom_toTopOf="@id/bottom_horizontal_guideline"
         app:layout_constraintEnd_toEndOf="@id/end_guideline"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@id/title_guideline"
-        app:layout_constraintTop_toBottomOf="@+id/generic_subtitle"
         tools:text="CBU: ***1234" />
 
     <androidx.constraintlayout.widget.Guideline
