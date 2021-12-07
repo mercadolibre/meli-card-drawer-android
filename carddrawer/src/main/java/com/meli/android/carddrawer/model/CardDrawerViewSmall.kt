@@ -37,4 +37,6 @@ class CardDrawerViewSmall @JvmOverloads constructor(
     override fun updateOverlayVisibility() {
         overlayImage.visibility = GONE
     }
+
+    override fun showGenericPaymentDescription(description: GenericPaymentMethod.Text?) = Unit
 }

@@ -321,7 +321,7 @@ public class CardDrawerView extends FrameLayout implements Observer {
         backBackground.getBackground().setColorFilter(genericPaymentMethod.getBackgroundColor(), PorterDuff.Mode.SRC_ATOP);
     }
 
-    private void showGenericPaymentDescription(GenericPaymentMethod.Text description) {
+    protected void showGenericPaymentDescription(GenericPaymentMethod.Text description) {
         if (description != null) {
             genericDescription.setText(description.getText());
             genericDescription.setTextColor(description.getColor());

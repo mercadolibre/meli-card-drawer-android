@@ -81,4 +81,9 @@ public class CardDrawerViewMedium extends CardDrawerViewLowres {
                 return fontColor;
         }
     }
+
+    @Override
+    protected void showGenericPaymentSubtitle(@Nullable GenericPaymentMethod.Text subtitle) {
+        //Nothing to do here
+    }
 }
