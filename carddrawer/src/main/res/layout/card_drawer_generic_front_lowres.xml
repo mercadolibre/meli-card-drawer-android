@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.meli.android.carddrawer.model.ConstraintLayoutWithDisabledSupport
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -15,11 +15,18 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/tag_horizontal_guideline"
+        android:id="@+id/top_horizontal_guideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.1904" />
+        app:layout_constraintGuide_percent="0.1666" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/bottom_horizontal_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.8333" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/image_ring_right_guideline"
@@ -76,27 +83,25 @@
         android:layout_height="0dp"
         android:src="@drawable/meli_card_drawer_generic_payment_method_background"
         app:layout_constraintDimensionRatio="H,1:1"
-        app:layout_constraintHorizontal_bias="1"
-        app:layout_constraintBottom_toTopOf="@id/image_guideline"
         app:layout_constraintEnd_toEndOf="@id/image_ring_left_guideline"
         app:layout_constraintStart_toStartOf="@id/image_ring_right_guideline"
-        app:layout_constraintTop_toTopOf="@id/tag_horizontal_guideline" />
+        app:layout_constraintTop_toTopOf="@id/top_horizontal_guideline" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card_view_generic_image"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:cardCornerRadius="50dp"
+        app:layout_constraintBottom_toBottomOf="@id/generic_ring"
         app:layout_constraintDimensionRatio="H,1:1"
-        app:layout_constraintStart_toStartOf="@id/image_right_guideline"
         app:layout_constraintEnd_toEndOf="@id/image_left_guideline"
-        app:layout_constraintTop_toTopOf="@id/generic_ring"
-        app:layout_constraintBottom_toBottomOf="@id/generic_ring">
+        app:layout_constraintStart_toStartOf="@id/image_right_guideline"
+        app:layout_constraintTop_toTopOf="@id/generic_ring">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/generic_image"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent" />
 
     </androidx.cardview.widget.CardView>
 
@@ -104,41 +109,44 @@
         android:id="@+id/generic_title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:importantForAccessibility="yes"
         android:gravity="center_vertical"
-        app:layout_constraintVertical_chainStyle="packed"
+        android:importantForAccessibility="yes"
+        android:textSize="14dp"
+        app:layout_constraintBottom_toTopOf="@+id/generic_subtitle"
         app:layout_constraintEnd_toEndOf="@id/end_guideline"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@id/title_guideline"
-        app:layout_constraintTop_toTopOf="@id/tag_horizontal_guideline"
-        tools:text="dsdfsdf sdfdsfdsf sdfdsfdsf dsfdsfdsf sdfdsfds sdfdsfds sdfdsfds sdfdsf" />
+        app:layout_constraintTop_toTopOf="@id/top_horizontal_guideline"
+        app:layout_constraintVertical_chainStyle="spread_inside"
+        tools:text="Banco Galicia" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/generic_subtitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:importantForAccessibility="yes"
-        android:layout_marginTop="4dp"
         android:gravity="center_vertical"
-        app:layout_constraintVertical_bias="0"
+        android:importantForAccessibility="yes"
+        android:textSize="14dp"
+        app:layout_constraintBottom_toTopOf="@+id/generic_description"
         app:layout_constraintEnd_toEndOf="@id/end_guideline"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@id/title_guideline"
-        app:layout_constraintTop_toBottomOf="@id/generic_title"
-        app:layout_constraintBottom_toBottomOf="@id/generic_front_background"
-        tools:text="dfsdfds dsfdsfdsf dsfsdfsd fdsdffsf dsfsdfds dsfsdfds dsfsdf sdfdsfds" />
+        app:layout_constraintTop_toBottomOf="@+id/generic_title"
+        tools:text="Cuenta corriente" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/generic_description"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:importantForAccessibility="yes"
-        android:layout_marginTop="4dp"
         android:gravity="center_vertical"
-        app:layout_constraintVertical_bias="0"
+        android:importantForAccessibility="yes"
+        android:textSize="12dp"
+        app:layout_constraintBottom_toTopOf="@id/bottom_horizontal_guideline"
         app:layout_constraintEnd_toEndOf="@id/end_guideline"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@id/title_guideline"
-        app:layout_constraintTop_toBottomOf="@id/generic_subtitle"
-        app:layout_constraintBottom_toBottomOf="@id/generic_front_background"
-        tools:text="dfsdfds dsfdsfdsf dsfsdfsd fdsdffsf dsfsdfds dsfsdfds dsfsdf sdfdsfds" />
+        app:layout_constraintTop_toBottomOf="@+id/generic_subtitle"
+        tools:text="CBU: ***1234" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/tag_guideline"
@@ -150,11 +158,11 @@
     <include
         android:id="@+id/card_tag_container"
         layout="@layout/card_drawer_small_tag"
-        android:visibility="gone"
-        tools:visibility="visible"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/tag_guideline" />
+        app:layout_constraintStart_toEndOf="@+id/tag_guideline"
+        tools:visibility="visible" />
 
 </com.meli.android.carddrawer.model.ConstraintLayoutWithDisabledSupport>

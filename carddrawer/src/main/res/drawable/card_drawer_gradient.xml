@@ -9,5 +9,4 @@
 
     <corners android:radius="@dimen/card_drawer_corner_radius"/>
 
-    <size android:height="158dp" android:width="256dp" />
 </shape>
