@@ -22,6 +22,13 @@
         app:layout_constraintGuide_percent="0.1" />
 
     <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/bottom_horizontal_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.8797" />
+
+    <androidx.constraintlayout.widget.Guideline
         android:id="@+id/end_guideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -113,37 +120,37 @@
         android:layout_height="wrap_content"
         android:importantForAccessibility="yes"
         android:gravity="center"
+        android:textSize="@dimen/card_drawer_font_generic_title"
         app:layout_constraintEnd_toEndOf="@id/end_guideline"
         app:layout_constraintStart_toStartOf="@id/start_guideline"
         app:layout_constraintTop_toBottomOf="@id/title_guideline"
-        tools:text="dsdfsdf sdfdsfdsf sdfdsfdsf dsfdsfdsf sdfdsfds sdfdsfds sdfdsfds sdfdsf" />
+        tools:text="Banco Galicia" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/generic_subtitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:importantForAccessibility="yes"
-        android:layout_marginTop="4dp"
         android:gravity="center"
-        app:layout_constraintVertical_bias="0"
+        android:textSize="@dimen/card_drawer_font_generic_subtitle"
         app:layout_constraintEnd_toEndOf="@id/end_guideline"
         app:layout_constraintStart_toStartOf="@id/start_guideline"
         app:layout_constraintTop_toBottomOf="@id/generic_title"
-        tools:text="dfsdfds dsfdsfdsf dsfsdfsd fdsdffsf dsfsdfds dsfsdfds dsfsdf sdfdsfds" />
+        app:layout_constraintBottom_toTopOf="@id/generic_description"
+        tools:text="Cuenta corriente" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/generic_description"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:importantForAccessibility="yes"
-        android:layout_marginTop="4dp"
         android:gravity="center"
-        app:layout_constraintVertical_bias="0"
+        android:textSize="@dimen/card_drawer_font_generic_description"
         app:layout_constraintEnd_toEndOf="@id/end_guideline"
         app:layout_constraintStart_toStartOf="@id/start_guideline"
         app:layout_constraintTop_toBottomOf="@id/generic_subtitle"
-        app:layout_constraintBottom_toBottomOf="@id/generic_front_background"
-        tools:text="dfsdfds dsfdsfdsf dsfsdfsd fdsdffsf dsfsdfds dsfsdfds dsfsdf sdfdsfds" />
+        app:layout_constraintBottom_toBottomOf="@id/bottom_horizontal_guideline"
+        tools:text="CBU: ***1234" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/tag_guideline"
