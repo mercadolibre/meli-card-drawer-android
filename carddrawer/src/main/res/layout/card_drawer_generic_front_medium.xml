@@ -130,11 +130,9 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:importantForAccessibility="yes"
-        android:layout_marginTop="4dp"
         android:gravity="center_vertical"
         app:layout_constraintEnd_toEndOf="@id/end_guideline"
         app:layout_constraintStart_toStartOf="@id/title_guideline"
-        app:layout_constraintTop_toBottomOf="@id/generic_title"
         app:layout_constraintBottom_toBottomOf="@id/bottom_horizontal_guideline"
         tools:text="Cuenta corriente" />
 

@@ -82,7 +82,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.4603" />
+        app:layout_constraintGuide_percent="0.4444" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/generic_ring"
@@ -90,7 +90,6 @@
         android:layout_height="0dp"
         android:src="@drawable/meli_card_drawer_generic_payment_method_background"
         app:layout_constraintDimensionRatio="H,1:1"
-        app:layout_constraintVertical_bias="1"
         app:layout_constraintBottom_toTopOf="@id/image_guideline"
         app:layout_constraintEnd_toEndOf="@id/image_ring_left_guideline"
         app:layout_constraintStart_toStartOf="@id/image_ring_right_guideline"
@@ -98,19 +97,19 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card_view_generic_image"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="47dp"
+        android:layout_height="47dp"
         app:cardCornerRadius="50dp"
+        app:layout_constraintBottom_toBottomOf="@id/generic_ring"
         app:layout_constraintDimensionRatio="H,1:1"
-        app:layout_constraintStart_toStartOf="@id/image_right_guideline"
         app:layout_constraintEnd_toEndOf="@id/image_left_guideline"
-        app:layout_constraintTop_toTopOf="@id/generic_ring"
-        app:layout_constraintBottom_toBottomOf="@id/generic_ring">
+        app:layout_constraintStart_toStartOf="@id/image_right_guideline"
+        app:layout_constraintTop_toTopOf="@id/generic_ring">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/generic_image"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_width="48dp"
+            android:layout_height="46dp" />
 
     </androidx.cardview.widget.CardView>
 
@@ -148,7 +147,6 @@
         android:textSize="@dimen/card_drawer_font_generic_description"
         app:layout_constraintEnd_toEndOf="@id/end_guideline"
         app:layout_constraintStart_toStartOf="@id/start_guideline"
-        app:layout_constraintTop_toBottomOf="@id/generic_subtitle"
         app:layout_constraintBottom_toTopOf="@id/bottom_horizontal_guideline"
         tools:text="CBU: ***1234" />
 

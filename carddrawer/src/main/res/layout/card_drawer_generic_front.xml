@@ -148,7 +148,6 @@
         android:textSize="@dimen/card_drawer_font_generic_description"
         app:layout_constraintEnd_toEndOf="@id/end_guideline"
         app:layout_constraintStart_toStartOf="@id/start_guideline"
-        app:layout_constraintTop_toBottomOf="@id/generic_subtitle"
         app:layout_constraintBottom_toBottomOf="@id/bottom_horizontal_guideline"
         tools:text="CBU: ***1234" />
 
