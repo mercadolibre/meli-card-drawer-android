@@ -16,7 +16,7 @@ sealed class CardDrawerSource {
 }
 
 @Parcelize
-open class GenericPaymentMethod(
+open class GenericPaymentMethod @JvmOverloads constructor(
     override val backgroundColor: Int,
     val title: Text,
     val imageUrl: String? = null,

@@ -26,7 +26,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.7936" />
+        app:layout_constraintGuide_percent="0.8412" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/image_ring_right_guideline"
@@ -147,7 +147,7 @@
         android:textSize="@dimen/card_drawer_font_generic_description"
         app:layout_constraintEnd_toEndOf="@id/end_guideline"
         app:layout_constraintStart_toStartOf="@id/start_guideline"
-        app:layout_constraintBottom_toTopOf="@id/bottom_horizontal_guideline"
+        app:layout_constraintBottom_toBottomOf="@id/bottom_horizontal_guideline"
         tools:text="CBU: ***1234" />
 
     <androidx.constraintlayout.widget.Guideline
