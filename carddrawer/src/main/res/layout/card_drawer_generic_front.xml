@@ -82,7 +82,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.1518" />
+        app:layout_constraintGuide_percent="0.1582" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/generic_ring"
@@ -90,7 +90,6 @@
         android:layout_height="0dp"
         android:src="@drawable/meli_card_drawer_generic_payment_method_background"
         app:layout_constraintDimensionRatio="H,1:1"
-        app:layout_constraintVertical_bias="1"
         app:layout_constraintBottom_toTopOf="@id/image_guideline"
         app:layout_constraintEnd_toEndOf="@id/image_ring_left_guideline"
         app:layout_constraintStart_toStartOf="@id/image_ring_right_guideline"
@@ -110,7 +109,7 @@
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/generic_image"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent" />
 
     </androidx.cardview.widget.CardView>
 

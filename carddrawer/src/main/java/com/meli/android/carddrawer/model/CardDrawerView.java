@@ -313,6 +313,7 @@ public class CardDrawerView extends FrameLayout implements Observer {
         if (genericPaymentMethod.getGradientColors() != null) {
             final GradientDrawable gradientDrawable = ViewHelper.getGradientDrawable(getContext(), genericPaymentMethod.getGradientColors());
             frontBackground.setImageDrawable(gradientDrawable);
+            backBackground.setImageDrawable(gradientDrawable);
         } else {
             frontBackground.getBackground().setColorFilter(genericPaymentMethod.getBackgroundColor(), PorterDuff.Mode.SRC_ATOP);
         }
