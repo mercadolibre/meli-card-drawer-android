@@ -122,6 +122,8 @@
         app:layout_constraintEnd_toEndOf="@id/end_guideline"
         app:layout_constraintStart_toStartOf="@id/title_guideline"
         app:layout_constraintTop_toTopOf="@id/top_horizontal_guideline"
+        android:maxLines="1"
+        android:ellipsize="end"
         tools:text="Banco Galicia" />
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -135,6 +137,8 @@
         app:layout_constraintEnd_toEndOf="@id/end_guideline"
         app:layout_constraintStart_toStartOf="@id/title_guideline"
         app:layout_constraintTop_toBottomOf="@id/generic_title"
+        android:maxLines="1"
+        android:ellipsize="end"
         tools:text="Cuenta corriente" />
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -147,6 +151,8 @@
         app:layout_constraintBottom_toTopOf="@id/bottom_horizontal_guideline"
         app:layout_constraintEnd_toEndOf="@id/end_guideline"
         app:layout_constraintStart_toStartOf="@id/title_guideline"
+        android:maxLines="1"
+        android:ellipsize="end"
         tools:text="CBU: ***1234" />
 
     <androidx.constraintlayout.widget.Guideline
