@@ -12,9 +12,7 @@ import androidx.appcompat.widget.AppCompatTextView;
 import androidx.core.content.ContextCompat;
 import com.meli.android.carddrawer.R;
 import com.meli.android.carddrawer.configuration.FontType;
-
 import org.jetbrains.annotations.NotNull;
-
 import java.util.Objects;
 
 public class CardDrawerViewMedium extends CardDrawerViewLowres {
@@ -90,7 +88,7 @@ public class CardDrawerViewMedium extends CardDrawerViewLowres {
     }
 
     @Override
-    protected void showGenericText(@NonNull GenericPaymentMethod genericPaymentMethod) {
+    protected void showGenericText(@NonNull final GenericPaymentMethod genericPaymentMethod) {
         if (genericPaymentMethod.getSubtitle() != null && genericPaymentMethod.getDescription() == null) {
             showText(genericPaymentMethod.getSubtitle());
         } else {
@@ -99,9 +97,13 @@ public class CardDrawerViewMedium extends CardDrawerViewLowres {
     }
 
     private void showText(@NotNull final GenericPaymentMethod.Text text) {
-        genericText.setText(text.getText());
-        genericText.setTextColor(text.getColor());
-        genericText.setVisibility(VISIBLE);
+        if (genericText != null) {
+            genericText.setText(text.getText());
+            genericText.setTextColor(text.getColor());
+            genericText.setVisibility(VISIBLE);
+        } else {
+            genericText.setVisibility(View.GONE);
+        }
     }
 
     @Override

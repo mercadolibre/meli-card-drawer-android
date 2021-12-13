@@ -38,6 +38,8 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
+import java.util.Objects;
+
 
 /**
  * Test for the card header.. many visual and animations changes can't be tested with just junit :(
@@ -437,5 +439,56 @@ public class CardDrawerViewTest extends BasicRobolectricTest {
 
         verify(spyHeader).hideBottomLabel();
         assertEquals(View.INVISIBLE, bottomLabel.getVisibility());
+    }
+
+    @Test
+    public void givenGenericPaymentMethodWhenSetTitleSubtitleAndDescriptionThenCheckValues() {
+        final CardDrawerView spyHeader = spy(header);
+        final GenericPaymentMethod genericPaymentMethod = new GenericPaymentMethod(
+                Color.BLUE,
+                new GenericPaymentMethod.Text("Banco BBVA", Color.parseColor("#FFFFFF")),
+                "https://http2.mlstatic.com/storage/logos-api-admin/227062e0-ae66-11eb-9123-2107040a9cba-xl@2x.png",
+                new GenericPaymentMethod.Text("Cuenta corriente", Color.parseColor("#FFFFFF")),
+                new CardDrawerSource.Tag("Novo", Color.parseColor("#1A4189E6"), Color.parseColor("#009EE3"), "semi_bold"),
+                null,
+                new GenericPaymentMethod.Text("CBU: ***1234", Color.parseColor("#FFFFFF"))
+        );
+
+        spyHeader.show(genericPaymentMethod);
+
+        final AppCompatTextView genericTitle = spyHeader.genericFrontLayout.findViewById(R.id.generic_title);
+        final AppCompatTextView genericSubtitle = spyHeader.genericFrontLayout.findViewById(R.id.generic_subtitle);
+        final AppCompatTextView genericDescription = spyHeader.genericFrontLayout.findViewById(R.id.generic_description);
+
+        assertEquals("Banco BBVA", genericTitle.getText());
+        assertEquals("Cuenta corriente", genericSubtitle.getText());
+        assertEquals("CBU: ***1234", genericDescription.getText());
+        assertEquals(genericPaymentMethod.getTitle().getColor(), genericTitle.getCurrentTextColor());
+        assertEquals(Objects.requireNonNull(genericPaymentMethod.getSubtitle()).getColor(), genericSubtitle.getCurrentTextColor());
+        assertEquals(Objects.requireNonNull(genericPaymentMethod.getDescription()).getColor(), genericDescription.getCurrentTextColor());
+    }
+
+    @Test
+    public void givenGenericPaymentMethodWhenSetTitleSubtitleAndDescriptionThenShowViews() {
+        final CardDrawerView spyHeader = spy(header);
+        final GenericPaymentMethod genericPaymentMethod = new GenericPaymentMethod(
+                Color.BLUE,
+                new GenericPaymentMethod.Text("Banco BBVA", Color.parseColor("#FFFFFF")),
+                "https://http2.mlstatic.com/storage/logos-api-admin/227062e0-ae66-11eb-9123-2107040a9cba-xl@2x.png",
+                new GenericPaymentMethod.Text("Cuenta corriente", Color.parseColor("#FFFFFF")),
+                new CardDrawerSource.Tag("Novo", Color.parseColor("#1A4189E6"), Color.parseColor("#009EE3"), "semi_bold"),
+                null,
+                new GenericPaymentMethod.Text("CBU: ***1234", Color.parseColor("#FFFFFF"))
+        );
+
+        spyHeader.show(genericPaymentMethod);
+
+        final AppCompatTextView genericTitle = spyHeader.genericFrontLayout.findViewById(R.id.generic_title);
+        final AppCompatTextView genericSubtitle = spyHeader.genericFrontLayout.findViewById(R.id.generic_subtitle);
+        final AppCompatTextView genericDescription = spyHeader.genericFrontLayout.findViewById(R.id.generic_description);
+
+        assertEquals(View.VISIBLE, genericTitle.getVisibility());
+        assertEquals(View.VISIBLE, genericSubtitle.getVisibility());
+        assertEquals(View.VISIBLE, genericDescription.getVisibility());
     }
 }
