@@ -47,6 +47,9 @@ import com.meli.android.carddrawer.internal.BaseExtensionsKt;
 import com.meli.android.carddrawer.internal.TagDimensions;
 import com.meli.android.carddrawer.model.customview.CustomViewConfiguration;
 import com.mercadolibre.android.picassodiskcache.PicassoDiskLoader;
+
+import org.jetbrains.annotations.NotNull;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -305,10 +308,12 @@ public class CardDrawerView extends FrameLayout implements Observer {
         showTag(genericPaymentMethod, genericTagText, genericFrontLayout);
 
         genericPaymentMethod.setPaymentMethodImage(paymentMethodImage);
+
         genericTitle.setText(genericPaymentMethod.getTitle().getText());
         genericTitle.setTextColor(genericPaymentMethod.getTitle().getColor());
         showGenericPaymentSubtitle(genericPaymentMethod.getSubtitle());
         showGenericPaymentDescription(genericPaymentMethod.getDescription());
+        showGenericText(genericPaymentMethod);
 
         if (genericPaymentMethod.getGradientColors() != null) {
             final GradientDrawable gradientDrawable = ViewHelper.getGradientDrawable(getContext(), genericPaymentMethod.getGradientColors());
@@ -316,12 +321,13 @@ public class CardDrawerView extends FrameLayout implements Observer {
             backBackground.setImageDrawable(gradientDrawable);
         } else {
             frontBackground.getBackground().setColorFilter(genericPaymentMethod.getBackgroundColor(), PorterDuff.Mode.SRC_ATOP);
+            backBackground.getBackground().setColorFilter(genericPaymentMethod.getBackgroundColor(), PorterDuff.Mode.SRC_ATOP);
         }
-
-        backBackground.getBackground().setColorFilter(genericPaymentMethod.getBackgroundColor(), PorterDuff.Mode.SRC_ATOP);
     }
 
-    protected void showGenericPaymentDescription(GenericPaymentMethod.Text description) {
+    protected void showGenericText(@NotNull final GenericPaymentMethod genericPaymentMethod) { }
+
+    protected void showGenericPaymentDescription(@Nullable final GenericPaymentMethod.Text description) {
         if (description != null) {
             genericDescription.setText(description.getText());
             genericDescription.setTextColor(description.getColor());

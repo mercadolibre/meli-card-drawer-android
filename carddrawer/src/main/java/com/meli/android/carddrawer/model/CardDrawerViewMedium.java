@@ -8,13 +8,19 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatTextView;
 import androidx.core.content.ContextCompat;
 import com.meli.android.carddrawer.R;
 import com.meli.android.carddrawer.configuration.FontType;
 
+import org.jetbrains.annotations.NotNull;
+
+import java.util.Objects;
+
 public class CardDrawerViewMedium extends CardDrawerViewLowres {
 
     private ImageView arrow;
+    private AppCompatTextView genericText;
 
     public CardDrawerViewMedium(@NonNull final Context context) {
         this(context, null);
@@ -32,6 +38,7 @@ public class CardDrawerViewMedium extends CardDrawerViewLowres {
     protected void init(@NonNull final Context context, @Nullable final AttributeSet attrs) {
         super.init(context, attrs);
         arrow = findViewById(R.id.cho_card_arrow);
+        genericText = findViewById(R.id.generic_text);
     }
 
     @Override
@@ -80,5 +87,36 @@ public class CardDrawerViewMedium extends CardDrawerViewLowres {
             default:
                 return fontColor;
         }
+    }
+
+    @Override
+    protected void showGenericText(@NonNull GenericPaymentMethod genericPaymentMethod) {
+        if (genericPaymentMethod.getSubtitle() != null && genericPaymentMethod.getDescription() == null) {
+            showText(genericPaymentMethod.getSubtitle());
+        } else {
+            showText(Objects.requireNonNull(genericPaymentMethod.getDescription()));
+        }
+    }
+
+    private void showText(@NotNull final GenericPaymentMethod.Text text) {
+        genericText.setText(text.getText());
+        genericText.setTextColor(text.getColor());
+        genericText.setVisibility(VISIBLE);
+    }
+
+    @Override
+    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+        super.onSizeChanged(w, h, oldw, oldh);
+        setTextPixelSize(genericText, getResources().getDimension(R.dimen.card_drawer_font_generic_text) * getCardSizeMultiplier());
+    }
+
+    @Override
+    protected void showGenericPaymentSubtitle(@Nullable GenericPaymentMethod.Text subtitle) {
+        //Nothing to do here
+    }
+
+    @Override
+    protected void showGenericPaymentDescription(@Nullable GenericPaymentMethod.Text description) {
+        //Nothing to do here
     }
 }

@@ -16,6 +16,7 @@
     <dimen name="card_drawer_font_size_small">8dp</dimen>
     <dimen name="card_drawer_font_generic_title">14dp</dimen>
     <dimen name="card_drawer_font_generic_subtitle">14dp</dimen>
+    <dimen name="card_drawer_font_generic_text">14dp</dimen>
     <dimen name="card_drawer_font_generic_description">12dp</dimen>
     <dimen name="card_drawer_font_tag">12dp</dimen>
     <dimen name="card_drawer_font_tag_small">11dp</dimen>
