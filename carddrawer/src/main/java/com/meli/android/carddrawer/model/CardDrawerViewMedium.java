@@ -92,12 +92,12 @@ public class CardDrawerViewMedium extends CardDrawerViewLowres {
         if (genericPaymentMethod.getSubtitle() != null && genericPaymentMethod.getDescription() == null) {
             showText(genericPaymentMethod.getSubtitle());
         } else {
-            showText(Objects.requireNonNull(genericPaymentMethod.getDescription()));
+            showText(genericPaymentMethod.getDescription());
         }
     }
 
-    private void showText(@NotNull final GenericPaymentMethod.Text text) {
-        if (genericText != null) {
+    private void showText(@Nullable final GenericPaymentMethod.Text text) {
+        if (text != null) {
             genericText.setText(text.getText());
             genericText.setTextColor(text.getColor());
             genericText.setVisibility(VISIBLE);
