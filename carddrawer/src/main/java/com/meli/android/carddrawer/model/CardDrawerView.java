@@ -333,7 +333,7 @@ public class CardDrawerView extends FrameLayout implements Observer {
             genericDescription.setTextColor(description.getColor());
             genericDescription.setVisibility(VISIBLE);
         } else {
-            genericDescription.setVisibility(GONE);
+            genericDescription.setVisibility(INVISIBLE);
         }
     }
 
