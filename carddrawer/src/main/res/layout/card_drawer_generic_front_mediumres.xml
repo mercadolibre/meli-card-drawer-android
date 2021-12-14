@@ -151,7 +151,8 @@
         android:textSize="@dimen/card_drawer_font_generic_description"
         app:layout_constraintEnd_toEndOf="@id/end_guideline"
         app:layout_constraintStart_toStartOf="@id/start_guideline"
-        app:layout_constraintBottom_toBottomOf="@id/bottom_horizontal_guideline"
+        app:layout_constraintBottom_toTopOf="@id/bottom_horizontal_guideline"
+        app:layout_constraintTop_toBottomOf="@id/top_generic_description_guideline"
         android:maxLines="1"
         android:ellipsize="end"
         tools:text="CBU: ***1234" />
@@ -162,6 +163,13 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.65" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/top_generic_description_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.7580" />
 
     <include
         android:id="@+id/card_tag_container"
