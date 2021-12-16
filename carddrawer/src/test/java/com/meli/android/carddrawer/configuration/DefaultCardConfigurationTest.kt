@@ -1,72 +1,89 @@
-package com.meli.android.carddrawer.configuration;
+package com.meli.android.carddrawer.configuration
 
-import androidx.core.content.ContextCompat;
+import androidx.core.content.ContextCompat
+import com.meli.android.carddrawer.R
+import com.meli.android.carddrawer.configuration.base.ConfigurationTestBase
+import com.meli.android.carddrawer.model.CardAnimationType
+import org.junit.Assert.assertEquals
+import org.junit.Before
+import org.junit.Test
+import org.junit.runner.RunWith
+import org.mockito.Mockito
+import org.mockito.junit.MockitoJUnitRunner
 
-import com.meli.android.carddrawer.BasicRobolectricTest;
-import com.meli.android.carddrawer.R;
+@RunWith(MockitoJUnitRunner::class)
+class DefaultCardConfigurationTest: ConfigurationTestBase() {
 
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.robolectric.RobolectricTestRunner;
-
-import static org.junit.Assert.assertEquals;
-
-@RunWith(RobolectricTestRunner.class)
-public class DefaultCardConfigurationTest extends BasicRobolectricTest {
-
-    private DefaultCardConfiguration configuration;
+    private lateinit var defaultCardConfiguration: DefaultCardConfiguration
 
     @Before
-    public void doBefore() throws Exception {
-        configuration = new DefaultCardConfiguration(getContext());
+    override fun init() {
+        super.init()
+        Mockito.`when`(contextMock.applicationContext).thenReturn(contextMock)
+        defaultCardConfiguration = DefaultCardConfiguration(contextMock)
     }
 
     @Test
-    public void getCardNumberPattern_returnsFourGroups() {
-        assertEquals(4, configuration.getCardNumberPattern().length);
-
+    fun `should return size pattern card number`() {
+        assertEquals(defaultCardConfiguration.cardNumberPattern.size.toLong(), 4)
     }
 
     @Test
-    public void getNamePlaceHolder_returnsWordingOk() {
-        assertEquals("Nombre y Apellido", configuration.getNamePlaceHolder());
+    fun `should return placeholder name`() {
+        val text = "Nombre y Apellido"
+        Mockito.`when`(contextMock.getString(R.string.card_drawer_card_hint_name)).thenReturn(text)
+        assertEquals(defaultCardConfiguration.namePlaceHolder, text)
     }
 
     @Test
-    public void getExpirationPlaceHolder_returnsWordingOk() {
-        assertEquals("MM/AA", configuration.getExpirationPlaceHolder());
+    fun `should return placeholder date expired`() {
+        val text = "MM/AA"
+        Mockito.`when`(contextMock.getString(R.string.card_drawer_card_hint_date)).thenReturn(text)
+        assertEquals(defaultCardConfiguration.expirationPlaceHolder, text)
     }
 
     @Test
-    public void getSecurityCodeLocation_returnsBack() {
-        assertEquals(SecurityCodeLocation.BACK, configuration.getSecurityCodeLocation());
+    fun `should return FontType`() {
+        assertEquals(defaultCardConfiguration.fontType, FontType.DARK_TYPE)
     }
 
     @Test
-    public void getCardBackgroundColor_returnsColorOk() {
-        int expectedColor = ContextCompat.getColor(getContext(), R.color.card_drawer_card_default_color);
-        assertEquals(expectedColor, configuration.getCardBackgroundColor());
+    fun `should return CardAnimationType`() {
+        assertEquals(defaultCardConfiguration.animationType, CardAnimationType.RIGHT_BOTTOM)
     }
 
     @Test
-    public void getCardFontColor_returnsColorOk() {
-        int expectedColor = ContextCompat.getColor(getContext(), R.color.card_drawer_card_default_font_color);
-        assertEquals(expectedColor, configuration.getCardFontColor());
+    fun `should return BankImageRes`() {
+        assertEquals(defaultCardConfiguration.bankImageRes, 0)
     }
 
     @Test
-    public void getBankImageRes_returnsImageOk() {
-        assertEquals(0, configuration.getBankImageRes());
+    fun `should return CardLogoImageRes`() {
+        assertEquals(defaultCardConfiguration.cardLogoImageRes, 0)
     }
 
     @Test
-    public void getCardLogoImageRes_returnsImageOk() {
-        assertEquals(0, configuration.getBankImageRes());
+    fun `should return SecurityCodeLocation`() {
+        assertEquals(defaultCardConfiguration.securityCodeLocation, SecurityCodeLocation.BACK)
     }
 
     @Test
-    public void getSecurityCodePattern_returnsFourNumbers() {
-        assertEquals(4, configuration.getSecurityCodePattern());
+    fun `should return CardFontColor`() {
+        Mockito.`when`(ContextCompat.getColor(contextMock, R.color.card_drawer_card_default_font_color)).thenReturn(-2763307)
+        val fontColor = ContextCompat.getColor(contextMock, R.color.card_drawer_card_default_font_color)
+        assertEquals(defaultCardConfiguration.cardFontColor, fontColor)
     }
+
+    @Test
+    fun `should return CardBackgroundColor`() {
+        Mockito.`when`(ContextCompat.getColor(contextMock, R.color.card_drawer_card_default_color)).thenReturn(-10066330)
+        val backgroundColor = ContextCompat.getColor(contextMock, R.color.card_drawer_card_default_color)
+        assertEquals(defaultCardConfiguration.cardBackgroundColor, backgroundColor)
+    }
+
+    @Test
+    fun `should return SecurityCodePattern`() {
+        assertEquals(defaultCardConfiguration.securityCodePattern, 4)
+    }
+
 }

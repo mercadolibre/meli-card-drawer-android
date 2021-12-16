@@ -1,60 +1,81 @@
-package com.meli.android.carddrawer.configuration;
+package com.meli.android.carddrawer.configuration
 
-import androidx.core.content.ContextCompat;
-import android.text.TextPaint;
+import android.text.TextPaint
+import android.util.DisplayMetrics
+import androidx.core.content.ContextCompat
+import com.meli.android.carddrawer.R
+import com.meli.android.carddrawer.configuration.base.ConfigurationTestBase
+import com.meli.android.carddrawer.configuration.shadow.ShadowConfiguration
+import com.meli.android.carddrawer.configuration.shadow.ShadowFontConfiguration
+import org.junit.Before
+import org.junit.Test
+import org.junit.runner.RunWith
+import org.mockito.ArgumentMatchers
+import org.mockito.Mock
+import org.mockito.Mockito
+import org.mockito.junit.MockitoJUnitRunner
 
-import com.meli.android.carddrawer.BasicRobolectricTest;
-import com.meli.android.carddrawer.R;
+@RunWith(MockitoJUnitRunner::class)
+class LightFontConfigurationTest: ConfigurationTestBase() {
 
-import com.meli.android.carddrawer.configuration.shadow.ShadowConfiguration;
-import com.meli.android.carddrawer.configuration.shadow.ShadowFontConfiguration;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+    @Mock
+    private lateinit var displayMock: DisplayMetrics
 
-import org.robolectric.RobolectricTestRunner;
-
-import static org.junit.Assert.assertEquals;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyFloat;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.verify;
-
-@RunWith(RobolectricTestRunner.class)
-public class LightFontConfigurationTest extends BasicRobolectricTest {
-    private LightFontConfiguration lightFontConfiguration;
+    private lateinit var lightFontConfiguration: LightFontConfiguration
 
     @Before
-    public void doBefore() {
-        ShadowConfiguration shadowFontConfiguration = new ShadowFontConfiguration(getContext());
-        lightFontConfiguration = new LightFontConfiguration(getContext(), shadowFontConfiguration);
+    override fun init() {
+        super.init()
+        Mockito.`when`(contextMock.resources.displayMetrics).thenReturn(displayMock)
+        Mockito.`when`(contextMock.resources.getDimensionPixelSize(R.dimen.card_drawer_shadow_radius)).thenReturn(2)
+        Mockito.`when`(ContextCompat.getColor(contextMock, R.color.card_drawer_number_shadow_color)).thenReturn(1929379840)
+        Mockito.`when`(ContextCompat.getColor(contextMock, R.color.card_drawer_dark_font_empty_color)).thenReturn(-872415232)
+    }
+
+    private fun initWithShadow() {
+        val shadowFontConfiguration: ShadowConfiguration = ShadowFontConfiguration(contextMock)
+        lightFontConfiguration = LightFontConfiguration(contextMock, shadowFontConfiguration)
     }
 
     @Test
-    public void getColor_returnsValidColor() {
-        int validColor = ContextCompat.getColor(getContext(), R.color.card_drawer_light_font_empty_color);
-
-        assertEquals(validColor, lightFontConfiguration.getColor());
+    fun `should test getColor`() {
+        initWithShadow()
+        val validColor =
+            ContextCompat.getColor(contextMock, R.color.card_drawer_light_font_empty_color)
+        assert(lightFontConfiguration.color == validColor)
     }
 
     @Test
-    public void setShadow_callSetShadow() {
-        TextPaint textPaint = mock(TextPaint.class);
-
-        lightFontConfiguration.setShadow(textPaint);
-
-        verify(textPaint).setShadowLayer(anyFloat(), anyFloat(), anyFloat(), anyInt());
+    fun `should test setShadow`() {
+        initWithShadow()
+        val textPaint = Mockito.mock(TextPaint::class.java)
+        lightFontConfiguration.setShadow(textPaint)
+        Mockito.verify(textPaint).setShadowLayer(
+            ArgumentMatchers.anyFloat(),
+            ArgumentMatchers.anyFloat(),
+            ArgumentMatchers.anyFloat(),
+            ArgumentMatchers.anyInt()
+        )
     }
 
     @Test
-    public void setShadow_DoesNotCallSetShadow() {
-        LightFontConfiguration lightNotShadowFontConfiguration = new LightFontConfiguration(getContext());
-        TextPaint textPaint = mock(TextPaint.class);
+    fun`should test getColor without pass shadow by parameter`() {
+        lightFontConfiguration = LightFontConfiguration(contextMock)
+        val validColor =
+            ContextCompat.getColor(contextMock, R.color.card_drawer_light_font_empty_color)
+        assert(lightFontConfiguration.color == validColor)
+    }
 
-        lightNotShadowFontConfiguration.setShadow(textPaint);
-
-        verify(textPaint, never()).setShadowLayer(anyFloat(), anyFloat(), anyFloat(), anyInt());
+    @Test
+    fun`should test setShadow without pass shadow by parameter`() {
+        val textPaint = Mockito.mock(TextPaint::class.java)
+        lightFontConfiguration = LightFontConfiguration(contextMock)
+        lightFontConfiguration.setShadow(textPaint)
+        Mockito.verify(textPaint, Mockito.never()).setShadowLayer(
+            ArgumentMatchers.anyFloat(),
+            ArgumentMatchers.anyFloat(),
+            ArgumentMatchers.anyFloat(),
+            ArgumentMatchers.anyInt()
+        )
     }
 }

@@ -1,13 +1,18 @@
-package com.meli.android.carddrawer.configuration;
+package com.meli.android.carddrawer.configuration
 
-import org.junit.Test;
+import org.junit.Assert.assertEquals
+import org.junit.Test
 
-import static org.junit.Assert.assertEquals;
+class FieldPositionTest {
 
-public class FieldPositionTest {
     @Test
-    public void verifyPositionValues() {
-        assertEquals(1, FieldPosition.POSITION_FRONT);
-        assertEquals(2, FieldPosition.POSITION_BACK);
+    fun `should return values FieldPosition front`() {
+        assertEquals(FieldPosition.POSITION_FRONT, 1)
     }
+
+    @Test
+    fun `should return values FieldPosition back`() {
+        assertEquals(FieldPosition.POSITION_BACK, 2)
+    }
+
 }

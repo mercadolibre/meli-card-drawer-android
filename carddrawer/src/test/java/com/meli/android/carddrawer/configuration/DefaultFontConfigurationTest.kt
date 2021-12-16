@@ -1,41 +1,42 @@
-package com.meli.android.carddrawer.configuration;
+package com.meli.android.carddrawer.configuration
 
-import android.graphics.LinearGradient;
-import android.text.TextPaint;
+import android.text.TextPaint
+import org.junit.Assert
+import org.junit.Before
+import org.junit.Test
+import org.junit.runner.RunWith
+import org.mockito.ArgumentMatchers
+import org.mockito.Mockito
+import org.mockito.MockitoAnnotations
+import org.mockito.junit.MockitoJUnitRunner
 
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.robolectric.RobolectricTestRunner;
+@RunWith(MockitoJUnitRunner::class)
+class DefaultFontConfigurationTest {
 
-import static org.junit.Assert.assertEquals;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyFloat;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.verify;
-
-@RunWith(RobolectricTestRunner.class)
-public class DefaultFontConfigurationTest {
-    private DefaultFontConfiguration defaultFontConfiguration;
+    private lateinit var defaultFontConfiguration: DefaultFontConfiguration
+    private val color = 2
 
     @Before
-    public void doBefore() {
-        defaultFontConfiguration = new DefaultFontConfiguration(2);
+    fun init() {
+        MockitoAnnotations.initMocks(this)
+        defaultFontConfiguration = DefaultFontConfiguration(2)
     }
 
     @Test
-    public void getColor_returnsValidColor() {
-        assertEquals(2, defaultFontConfiguration.getColor());
+    fun `should return color`() {
+        Assert.assertEquals(defaultFontConfiguration.color, color)
     }
 
     @Test
-    public void setShadow_doesntCallSetShadow() {
-        TextPaint textPaint = mock(TextPaint.class);
-
-        defaultFontConfiguration.setShadow(textPaint);
-
-        verify(textPaint, never()).setShadowLayer(anyFloat(), anyFloat(), anyFloat(), anyInt());
+    fun `should test function setShadow`() {
+        val textPaint = Mockito.mock(TextPaint::class.java)
+        defaultFontConfiguration.setShadow(textPaint)
+        Mockito.verify(textPaint, Mockito.never()).setShadowLayer(
+            ArgumentMatchers.anyFloat(),
+            ArgumentMatchers.anyFloat(),
+            ArgumentMatchers.anyFloat(),
+            ArgumentMatchers.anyInt()
+        )
     }
+
 }
