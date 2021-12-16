@@ -89,10 +89,10 @@ public class CardDrawerViewMedium extends CardDrawerViewLowres {
 
     @Override
     protected void showGenericText(@NonNull final GenericPaymentMethod genericPaymentMethod) {
-        if (genericPaymentMethod.getSubtitle() != null && genericPaymentMethod.getDescription() == null) {
-            showText(genericPaymentMethod.getSubtitle());
-        } else {
+        if (genericPaymentMethod.getDescription() != null) {
             showText(genericPaymentMethod.getDescription());
+        } else {
+            showText(genericPaymentMethod.getSubtitle());
         }
     }
 
@@ -110,15 +110,5 @@ public class CardDrawerViewMedium extends CardDrawerViewLowres {
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
         setTextPixelSize(genericText, getResources().getDimension(R.dimen.card_drawer_font_generic_text) * getCardSizeMultiplier());
-    }
-
-    @Override
-    protected void showGenericPaymentSubtitle(@Nullable GenericPaymentMethod.Text subtitle) {
-        //Nothing to do here
-    }
-
-    @Override
-    protected void showGenericPaymentDescription(@Nullable GenericPaymentMethod.Text description) {
-        //Nothing to do here
     }
 }

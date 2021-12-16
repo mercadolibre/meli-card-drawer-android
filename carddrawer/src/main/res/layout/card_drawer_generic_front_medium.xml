@@ -133,6 +133,7 @@
         android:layout_height="wrap_content"
         android:importantForAccessibility="yes"
         android:gravity="center_vertical"
+        android:textSize="@dimen/card_drawer_font_generic_text"
         app:layout_constraintEnd_toEndOf="@id/end_guideline"
         app:layout_constraintStart_toStartOf="@id/title_guideline"
         app:layout_constraintBottom_toBottomOf="@id/bottom_horizontal_guideline"

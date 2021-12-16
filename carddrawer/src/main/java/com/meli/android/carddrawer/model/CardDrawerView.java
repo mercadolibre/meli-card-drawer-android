@@ -311,8 +311,6 @@ public class CardDrawerView extends FrameLayout implements Observer {
 
         genericTitle.setText(genericPaymentMethod.getTitle().getText());
         genericTitle.setTextColor(genericPaymentMethod.getTitle().getColor());
-        showGenericPaymentSubtitle(genericPaymentMethod.getSubtitle());
-        showGenericPaymentDescription(genericPaymentMethod.getDescription());
         showGenericText(genericPaymentMethod);
 
         if (genericPaymentMethod.getGradientColors() != null) {
@@ -325,9 +323,9 @@ public class CardDrawerView extends FrameLayout implements Observer {
         }
     }
 
-    protected void showGenericText(@NotNull final GenericPaymentMethod genericPaymentMethod) { }
-
-    protected void showGenericPaymentDescription(@Nullable final GenericPaymentMethod.Text description) {
+    protected void showGenericText(@NotNull final GenericPaymentMethod genericPaymentMethod) {
+        final GenericPaymentMethod.Text description = genericPaymentMethod.getDescription();
+        final GenericPaymentMethod.Text subtitle = genericPaymentMethod.getSubtitle();
         if (description != null) {
             genericDescription.setText(description.getText());
             genericDescription.setTextColor(description.getColor());
@@ -335,15 +333,13 @@ public class CardDrawerView extends FrameLayout implements Observer {
         } else {
             genericDescription.setVisibility(INVISIBLE);
         }
-    }
 
-    protected void showGenericPaymentSubtitle(@Nullable final GenericPaymentMethod.Text subtitle) {
         if (subtitle != null) {
             genericSubtitle.setText(subtitle.getText());
             genericSubtitle.setTextColor(subtitle.getColor());
             genericSubtitle.setVisibility(VISIBLE);
         } else {
-            genericSubtitle.setVisibility(GONE);
+            genericSubtitle.setVisibility(INVISIBLE);
         }
     }
 
