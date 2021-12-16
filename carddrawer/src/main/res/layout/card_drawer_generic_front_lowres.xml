@@ -133,10 +133,10 @@
         android:gravity="center_vertical"
         android:importantForAccessibility="yes"
         android:textSize="@dimen/card_drawer_font_generic_subtitle"
-        app:layout_constraintBottom_toTopOf="@id/generic_description"
+        app:layout_constraintBottom_toTopOf="@id/bottom_horizontal_guideline"
         app:layout_constraintEnd_toEndOf="@id/end_guideline"
         app:layout_constraintStart_toStartOf="@id/title_guideline"
-        app:layout_constraintTop_toBottomOf="@id/generic_title"
+        app:layout_constraintTop_toBottomOf="@id/top_horizontal_guideline"
         android:maxLines="1"
         android:ellipsize="end"
         tools:text="Cuenta corriente" />
