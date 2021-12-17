@@ -1,48 +1,75 @@
-package com.meli.android.carddrawer.format;
+package com.meli.android.carddrawer.format
 
-import android.graphics.Typeface;
-import android.widget.TextView;
-import com.meli.android.carddrawer.TestUtils;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
-import org.robolectric.util.ReflectionHelpers;
+import android.content.Context
+import android.graphics.Paint
+import android.graphics.Typeface
+import android.widget.TextView
+import com.meli.android.carddrawer.BasicRobolectricTest
+import com.meli.android.carddrawer.TestUtils
+import com.mercadolibre.android.andesui.font.TypefaceHelper as TypefaceHelperFont
+import org.junit.Assert.assertEquals
+import org.junit.Before
+import org.junit.Test
+import org.junit.runner.RunWith
+import org.mockito.Mock
+import org.mockito.MockitoAnnotations
+import org.mockito.junit.MockitoJUnitRunner
+import org.mockito.kotlin.mock
 
-import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.mock;
+@RunWith(MockitoJUnitRunner::class)
+class TypefaceHelperTest: BasicRobolectricTest() {
 
-@RunWith(RobolectricTestRunner.class)
-public class TypefaceHelperTest {
+    @Mock
+    private lateinit var contextMock: Context
 
     @Before
-    public void setUp() {
-        TestUtils.initTypefaceSetter();
+    fun init() {
+        MockitoAnnotations.initMocks(this)
+        TestUtils.initTypefaceSetter()
     }
 
     @Test
-    public void typefaceSetter_SetsCustomTypeface() {
-        // Prepare test environment
-        final TextView textView = new TextView(RuntimeEnvironment.application);
-        final Typeface typeface = mock(Typeface.class);
-
-        // Perform op
-        TypefaceHelper.INSTANCE.set(textView, typeface);
-
-        // Assert the test performed as expected
-        assertEquals(typeface, textView.getTypeface());
+    fun `should test function set with TextView and Typeface per parameter`() {
+        val typeface = mock<Typeface>()
+        val textView = mock<TextView> {
+            on { this.typeface }.thenReturn(typeface)
+        }
+        TypefaceHelper.set(textView, typeface)
+        assertEquals(typeface, textView.typeface)
     }
 
     @Test
-    public void typefaceSetter_SetsDefaultTypeface() {
-        // Prepare test environment
-        final TextView textView = new TextView(RuntimeEnvironment.application);
-
-        // Perform op
-        TypefaceHelper.INSTANCE.set(textView, (Typeface) null);
-
-        // Assert the test performed as expected
-        assertEquals(ReflectionHelpers.getStaticField(TypefaceHelper.class, "robotoMono"), textView.getTypeface());
+    fun `should test function set with pass TextView per parameter`() {
+        val typeface = null
+        val textView = mock<TextView>()
+        TypefaceHelper.set(textView, typeface)
+        assertEquals(typeface, textView.typeface)
     }
+
+    @Test
+    fun `should test function set with pass TextView and CardDrawerFont per parameter`() {
+        val cardDrawerFont = CardDrawerFont.BLACK
+        val type = TypefaceHelperFont.getFontTypeface(contextMock, cardDrawerFont.font)
+        val textView = mock<TextView>()
+        TypefaceHelper.set(textView, cardDrawerFont)
+        assertEquals(type, textView.typeface)
+    }
+
+    @Test
+    fun `should test function set with pass Context, Paint and CardDrawerFont per parameter`() {
+        val cardDrawerFont = CardDrawerFont.BLACK
+        val type = TypefaceHelperFont.getFontTypeface(contextMock, cardDrawerFont.font)
+        val paint = mock<Paint>()
+        TypefaceHelper.set(contextMock, paint, cardDrawerFont)
+        assertEquals(type, paint.typeface)
+    }
+
+    @Test
+    fun `should test function get with pass Context and CardDrawerFont per parameter`() {
+        TestUtils.initTypefaceSetter()
+        val cardDrawerFont = CardDrawerFont.BLACK
+        val type = TypefaceHelper.get(contextMock, cardDrawerFont)
+        assertEquals(type,null)
+    }
+
 }

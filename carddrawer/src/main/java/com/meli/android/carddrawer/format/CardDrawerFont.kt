@@ -12,7 +12,7 @@ internal enum class CardDrawerFont(val index: Int, val font: Font, val style: In
     SEMI_BOLD(5, Font.SEMI_BOLD, Typeface.BOLD),
     MEDIUM(6, Font.MEDIUM, Typeface.BOLD),
     THIN(7, Font.THIN, Typeface.NORMAL),
-    MONOSPACE(8, Font.REGULAR, Typeface.MONOSPACE.style);
+    MONOSPACE(8, Font.REGULAR, Typeface.NORMAL);
 
     companion object {
 
