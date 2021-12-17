@@ -10,5 +10,5 @@ class PixConfiguration(context: Context) : GenericPaymentMethod(
     "https://http2.mlstatic.com/storage/logos-api-admin/227062e0-ae66-11eb-9123-2107040a9cba-xl@2x.png",
     Text("Aprovação Imediata", Color.parseColor("#FFFFFF")),
     Tag("Novo", Color.parseColor("#1A4189E6"), Color.parseColor("#009EE3"), "semi_bold"),
-    arrayListOf("#132F3B", "#132F3B", "#3688AB")
+    arrayListOf("#132F3B", "#255E76", "#3688AB")
 )
