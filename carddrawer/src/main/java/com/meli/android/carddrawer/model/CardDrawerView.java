@@ -313,13 +313,23 @@ public class CardDrawerView extends FrameLayout implements Observer {
         genericTitle.setTextColor(genericPaymentMethod.getTitle().getColor());
         showGenericText(genericPaymentMethod);
 
-        if (genericPaymentMethod.getGradientColors() != null) {
-            final GradientDrawable gradientDrawable = ViewHelper.getGradientDrawable(getContext(), genericPaymentMethod.getGradientColors());
+        applyBackground(frontBackground, backBackground, genericPaymentMethod);
+    }
+
+    private void applyBackground(@NotNull final AppCompatImageView frontBackground,
+                                 @NotNull final AppCompatImageView backBackground,
+                                 @NotNull final GenericPaymentMethod genericPaymentMethod
+    ) {
+        final List<String> gradientColors = genericPaymentMethod.getGradientColors();
+        final int backgroundColor = genericPaymentMethod.getBackgroundColor();
+
+        if (gradientColors != null) {
+            final GradientDrawable gradientDrawable = ViewHelper.getGradientDrawable(getContext(), gradientColors);
             frontBackground.setImageDrawable(gradientDrawable);
             backBackground.setImageDrawable(gradientDrawable);
         } else {
-            frontBackground.getBackground().setColorFilter(genericPaymentMethod.getBackgroundColor(), PorterDuff.Mode.SRC_ATOP);
-            backBackground.getBackground().setColorFilter(genericPaymentMethod.getBackgroundColor(), PorterDuff.Mode.SRC_ATOP);
+            frontBackground.getBackground().setColorFilter(backgroundColor, PorterDuff.Mode.SRC_ATOP);
+            backBackground.getBackground().setColorFilter(backgroundColor, PorterDuff.Mode.SRC_ATOP);
         }
     }
 
