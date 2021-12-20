@@ -364,7 +364,7 @@ public class CardDrawerViewTest extends BasicRobolectricTest {
     public void showTagShouldNotShowTagWhenGenericPaymentMethodHasNoTag(){
         final CardDrawerView spyHeader = spy(header);
         final GenericPaymentMethod genericMethod = new GenericPaymentMethod(0,
-            new GenericPaymentMethod.Text("Test", Color.parseColor("#000000")),
+            new GenericPaymentMethod.Text("Test", Color.parseColor("#000000"), "regular"),
             null, null, null);
         spyHeader.show(genericMethod);
         assertEquals(View.GONE, spyHeader.genericFrontLayout.findViewById(R.id.card_tag_container).getVisibility());
@@ -375,7 +375,7 @@ public class CardDrawerViewTest extends BasicRobolectricTest {
         final CardDrawerSource.Tag tag = getTestTag();
         final CardDrawerView spyHeader = spy(header);
         final GenericPaymentMethod genericMethod = new GenericPaymentMethod(0,
-            new GenericPaymentMethod.Text("Test", Color.parseColor("#000000")),
+            new GenericPaymentMethod.Text("Test", Color.parseColor("#000000"), "regular"),
             null,
             null,
             tag);
@@ -407,7 +407,7 @@ public class CardDrawerViewTest extends BasicRobolectricTest {
         final CardDrawerSource.Tag tag = getTestTag();
         final CardDrawerView spyHeader = spy(header);
         final GenericPaymentMethod genericMethod = new GenericPaymentMethod(0,
-            new GenericPaymentMethod.Text("Test", Color.parseColor("#000000")),
+            new GenericPaymentMethod.Text("Test", Color.parseColor("#000000"),"regular"),
             null,
             null,
             tag);
@@ -446,12 +446,12 @@ public class CardDrawerViewTest extends BasicRobolectricTest {
         final CardDrawerView spyHeader = spy(header);
         final GenericPaymentMethod genericPaymentMethod = new GenericPaymentMethod(
                 Color.BLUE,
-                new GenericPaymentMethod.Text("Banco BBVA", Color.parseColor("#FFFFFF")),
+                new GenericPaymentMethod.Text("Banco BBVA", Color.parseColor("#FFFFFF"), "regular"),
                 "https://http2.mlstatic.com/storage/logos-api-admin/227062e0-ae66-11eb-9123-2107040a9cba-xl@2x.png",
-                new GenericPaymentMethod.Text("Cuenta corriente", Color.parseColor("#FFFFFF")),
+                new GenericPaymentMethod.Text("Cuenta corriente", Color.parseColor("#FFFFFF"), "regular"),
                 new CardDrawerSource.Tag("Novo", Color.parseColor("#1A4189E6"), Color.parseColor("#009EE3"), "semi_bold"),
                 null,
-                new GenericPaymentMethod.Text("CBU: ***1234", Color.parseColor("#FFFFFF"))
+                new GenericPaymentMethod.Text("CBU: ***1234", Color.parseColor("#FFFFFF"), "regular")
         );
 
         spyHeader.show(genericPaymentMethod);
@@ -473,12 +473,12 @@ public class CardDrawerViewTest extends BasicRobolectricTest {
         final CardDrawerView spyHeader = spy(header);
         final GenericPaymentMethod genericPaymentMethod = new GenericPaymentMethod(
                 Color.BLUE,
-                new GenericPaymentMethod.Text("Banco BBVA", Color.parseColor("#FFFFFF")),
+                new GenericPaymentMethod.Text("Banco BBVA", Color.parseColor("#FFFFFF"), "regular"),
                 "https://http2.mlstatic.com/storage/logos-api-admin/227062e0-ae66-11eb-9123-2107040a9cba-xl@2x.png",
-                new GenericPaymentMethod.Text("Cuenta corriente", Color.parseColor("#FFFFFF")),
+                new GenericPaymentMethod.Text("Cuenta corriente", Color.parseColor("#FFFFFF"), "regular"),
                 new CardDrawerSource.Tag("Novo", Color.parseColor("#1A4189E6"), Color.parseColor("#009EE3"), "semi_bold"),
                 null,
-                new GenericPaymentMethod.Text("CBU: ***1234", Color.parseColor("#FFFFFF"))
+                new GenericPaymentMethod.Text("CBU: ***1234", Color.parseColor("#FFFFFF"), "regular")
         );
 
         spyHeader.show(genericPaymentMethod);

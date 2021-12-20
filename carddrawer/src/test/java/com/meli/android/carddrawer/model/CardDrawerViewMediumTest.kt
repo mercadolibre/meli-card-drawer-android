@@ -30,9 +30,9 @@ class CardDrawerViewMediumTest : BasicRobolectricTest() {
         val spyHeader = spy<CardDrawerViewMedium>(header)
         val genericPaymentMethod = GenericPaymentMethod(
             Color.BLUE,
-            GenericPaymentMethod.Text("Banco BBVA", Color.parseColor("#FFFFFF")),
+            GenericPaymentMethod.Text("Banco BBVA", Color.parseColor("#FFFFFF"), "semi_bold"),
             "https://http2.mlstatic.com/storage/logos-api-admin/227062e0-ae66-11eb-9123-2107040a9cba-xl@2x.png",
-            GenericPaymentMethod.Text("Cuenta corriente", Color.parseColor("#FFFFFF")),
+            GenericPaymentMethod.Text("Cuenta corriente", Color.parseColor("#FFFFFF"), "regular"),
             CardDrawerSource.Tag(
                 "Novo",
                 Color.parseColor("#1A4189E6"),
@@ -59,9 +59,9 @@ class CardDrawerViewMediumTest : BasicRobolectricTest() {
         val spyHeader = spy<CardDrawerViewMedium>(header)
         val genericPaymentMethod = GenericPaymentMethod(
             Color.BLUE,
-            GenericPaymentMethod.Text("Banco BBVA", Color.parseColor("#FFFFFF")),
+            GenericPaymentMethod.Text("Banco BBVA", Color.parseColor("#FFFFFF"), "semi_bold"),
             "https://http2.mlstatic.com/storage/logos-api-admin/227062e0-ae66-11eb-9123-2107040a9cba-xl@2x.png",
-            GenericPaymentMethod.Text("Cuenta corriente", Color.parseColor("#FFFFFF")),
+            GenericPaymentMethod.Text("Cuenta corriente", Color.parseColor("#FFFFFF"), "regular"),
             CardDrawerSource.Tag(
                 "Novo",
                 Color.parseColor("#1A4189E6"),
@@ -69,7 +69,7 @@ class CardDrawerViewMediumTest : BasicRobolectricTest() {
                 "semi_bold"
             ),
             null,
-            GenericPaymentMethod.Text("CBU: ***1234", Color.parseColor("#FFFFFF"))
+            GenericPaymentMethod.Text("CBU: ***1234", Color.parseColor("#FFFFFF"), "regular")
         )
 
         spyHeader.show(genericPaymentMethod)
