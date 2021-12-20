@@ -11,7 +11,7 @@ import org.mockito.junit.MockitoJUnitRunner
 class NumberFormatterTest {
 
     @Test
-    fun formatTextForVisualFeedback_withSeparatedFilledTextProcessor_andAmexPattern_withFullNumber_shouldReturnGroupedString() {
+    fun `Should return grouped String when format text with SeparatedFilledTextProcessor and AmexPattern`() {
         val pattern = intArrayOf(4, 6, 5)
         val input = "123412345612345"
         val expected = "1234  123456  12345"
@@ -23,7 +23,7 @@ class NumberFormatterTest {
     }
 
     @Test
-    fun formatTextForVisualFeedback_withPatternsWithZeroValue_shouldReturnGroupedString() {
+    fun `Should return grouped String with value zero`() {
         val pattern = intArrayOf(0, 0, 4, 4)
         val input = "12345678"
         val expected = "1234  5678"
@@ -35,7 +35,7 @@ class NumberFormatterTest {
     }
 
     @Test
-    fun formatTextForVisualFeedback_withEmptyPattern_shouldReturnEmptyString() {
+    fun `Should return empty String with EmptyPattern`() {
         val pattern = intArrayOf()
         val input = "12345678"
         val expected = ""
@@ -46,7 +46,7 @@ class NumberFormatterTest {
     }
 
     @Test
-    fun formatTextForVisualFeedback_withSeparatedFilledTextProcessor_andVisaPattern_withFullNumber_shouldReturnGroupedString() {
+    fun `Should return GroupedString with SeparatedFilledTextProcessor and VisaPattern with FullNumber`() {
         val pattern = intArrayOf(4, 4, 4, 4)
         val input = "1234123412341234"
         val expected = "1234  1234  1234  1234"
@@ -58,7 +58,7 @@ class NumberFormatterTest {
     }
 
     @Test
-    fun formatTextForVisualFeedback_withSeparatedFilledTextProcessor_andVisaPattern_withHalfFilledNumber_shouldReturnGroupedStringWithFillers() {
+    fun `Should return GroupedStringWithFillers with SeparatedFilledTextProcessor and VisaPattern with HalfFilledNumber`() {
         val pattern = intArrayOf(4, 4, 4, 4)
         val input = "12341234123"
         val expected = "1234  1234  123*  ****"
@@ -70,7 +70,7 @@ class NumberFormatterTest {
     }
 
     @Test
-    fun formatTextForVisualFeedback_withSeparatedFilledTextProcessor_andVisaPattern_withEmptyNumber_shouldReturnGroupedFillerString() {
+    fun `Should return GroupedFillerString with SeparatedFilledTextProcessor and VisaPattern with EmptyNumber`() {
         val pattern = intArrayOf(4, 4, 4, 4)
         val input = ""
         val expected = "****  ****  ****  ****"
