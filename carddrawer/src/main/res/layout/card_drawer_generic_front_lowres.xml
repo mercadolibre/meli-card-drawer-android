@@ -19,7 +19,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.1904" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintGuide_percent="0.1904"
+        app:layout_constraintBottom_toTopOf="@id/generic_title"/>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/top_image_horizontal_guideline"
@@ -33,7 +35,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.8333" />
+        app:layout_constraintGuide_percent="0.8452"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/generic_description" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/image_ring_right_guideline"
@@ -122,7 +126,7 @@
         android:textSize="@dimen/card_drawer_font_generic_title"
         app:layout_constraintEnd_toEndOf="@id/end_guideline"
         app:layout_constraintStart_toStartOf="@id/title_guideline"
-        app:layout_constraintTop_toTopOf="@id/top_horizontal_guideline"
+        app:layout_constraintTop_toBottomOf="@id/top_horizontal_guideline"
         android:maxLines="1"
         android:ellipsize="end"
         tools:text="Banco Galicia" />
@@ -134,10 +138,10 @@
         android:gravity="center_vertical"
         android:importantForAccessibility="yes"
         android:textSize="@dimen/card_drawer_font_generic_subtitle"
-        app:layout_constraintBottom_toTopOf="@id/bottom_horizontal_guideline"
+        app:layout_constraintBottom_toTopOf="@id/generic_description"
         app:layout_constraintEnd_toEndOf="@id/end_guideline"
         app:layout_constraintStart_toStartOf="@id/title_guideline"
-        app:layout_constraintTop_toBottomOf="@id/top_horizontal_guideline"
+        app:layout_constraintTop_toBottomOf="@id/generic_title"
         android:maxLines="1"
         android:ellipsize="end"
         tools:text="Cuenta corriente" />
