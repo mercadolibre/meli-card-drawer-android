@@ -26,7 +26,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.2381" />
+        app:layout_constraintGuide_percent="0.2380" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/bottom_horizontal_guideline"
@@ -92,7 +92,8 @@
         app:layout_constraintDimensionRatio="H,1:1"
         app:layout_constraintEnd_toEndOf="@id/image_ring_left_guideline"
         app:layout_constraintStart_toStartOf="@id/image_ring_right_guideline"
-        app:layout_constraintTop_toTopOf="@id/top_image_horizontal_guideline" />
+        app:layout_constraintTop_toTopOf="@id/top_image_horizontal_guideline"
+        app:layout_constraintBottom_toTopOf="@id/image_guideline" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card_view_generic_image"
