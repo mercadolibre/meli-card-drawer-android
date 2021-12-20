@@ -12,8 +12,7 @@ import androidx.appcompat.widget.AppCompatTextView;
 import androidx.core.content.ContextCompat;
 import com.meli.android.carddrawer.R;
 import com.meli.android.carddrawer.configuration.FontType;
-import org.jetbrains.annotations.NotNull;
-import java.util.Objects;
+import com.meli.android.carddrawer.format.CardDrawerFont;
 
 public class CardDrawerViewMedium extends CardDrawerViewLowres {
 
@@ -100,6 +99,7 @@ public class CardDrawerViewMedium extends CardDrawerViewLowres {
         if (text != null) {
             genericText.setText(text.getText());
             genericText.setTextColor(text.getColor());
+            genericText.setTypeface(genericText.getTypeface(), CardDrawerFont.from(text.getWeight()).getStyle());
             genericText.setVisibility(VISIBLE);
         } else {
             genericText.setVisibility(View.GONE);
