@@ -1,14 +1,14 @@
-package com.meli.android.carddrawer.model;
+package com.meli.android.carddrawer.model
 
-import org.junit.Test;
+import org.junit.Assert
+import org.junit.Test
 
-import static junit.framework.Assert.assertEquals;
+class CardAnimationTypeTest {
 
-public class CardAnimationTypeTest {
     @Test
-    public void verifyTypesValues() {
-        assertEquals("right_bottom", CardAnimationType.RIGHT_BOTTOM);
-        assertEquals("left_top", CardAnimationType.LEFT_TOP);
-        assertEquals("none", CardAnimationType.NONE);
+    fun verifyTypesValues() {
+        Assert.assertEquals("right_bottom", CardAnimationType.RIGHT_BOTTOM)
+        Assert.assertEquals("left_top", CardAnimationType.LEFT_TOP)
+        Assert.assertEquals("none", CardAnimationType.NONE)
     }
 }

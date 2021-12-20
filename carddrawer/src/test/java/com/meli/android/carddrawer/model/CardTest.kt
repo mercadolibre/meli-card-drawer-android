@@ -1,60 +1,88 @@
-package com.meli.android.carddrawer.model;
+package com.meli.android.carddrawer.model
 
-import com.meli.android.carddrawer.TestUtils;
+import android.os.Parcel
+import org.junit.Assert
+import org.junit.Before
+import org.junit.Test
+import org.junit.runner.RunWith
+import org.mockito.junit.MockitoJUnitRunner
+import org.mockito.kotlin.mock
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
+@RunWith(MockitoJUnitRunner::class)
+class CardTest {
 
-import org.robolectric.RobolectricTestRunner;
+    private lateinit var card: Card
+    private val cardName by lazy { "test" }
+    private val cardExpiration by lazy { "10/22" }
+    private val cardSecCode by lazy { "888" }
+    private val cardNumber by lazy { "1234567891" }
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+    @Before
+    fun init() {
+        card = returnCard()
+    }
 
-@RunWith(RobolectricTestRunner.class)
-public class CardTest {
-    @Test
-    public void newCard_worksOk() {
-        Card card = new Card();
-        card.setName("Test Test");
-        card.setExpiration("10/19");
-        card.setSecCode("888");
-        card.setNumber("777777777");
-
-        assertEquals("Test Test", card.getName());
-        assertEquals("777777777", card.getNumber());
-        assertEquals("10/19", card.getExpiration());
-        assertEquals(card.getSecCode(), card.getSecCode());
+    private fun returnCard(): Card {
+         return Card().apply {
+            this.name = cardName
+            this.expiration = cardExpiration
+            this.secCode = cardSecCode
+            this.number = cardNumber
+        }
     }
 
     @Test
-    public void newParcelable_worksOK() {
-        Card card = new Card();
-        card.setNumber("123456789");
-        card.setName("Visa");
-        card.setSecCode("444");
-        card.setExpiration("10/19");
-        Card cardClone = TestUtils.cloneParcelable(card, Card.CREATOR);
-        assertNotNull(cardClone);
-        assertEquals(card.getNumber(), cardClone.getNumber());
-        assertEquals(card.getName(), cardClone.getName());
-        assertEquals(card.getSecCode(), cardClone.getSecCode());
-        assertEquals(card.getExpiration(), cardClone.getExpiration());
+    fun `Should test get and set functions`() {
+        Assert.assertEquals(card.name, cardName)
+        Assert.assertEquals(card.expiration, cardExpiration)
+        Assert.assertEquals(card.secCode, cardSecCode)
+        Assert.assertEquals(card.number, cardNumber)
     }
 
     @Test
-    public void fillCard_setsValues() {
-        Card card = new Card();
-        card.setNumber("123456789");
-        card.setName("Visa");
-        card.setSecCode("444");
-        card.setExpiration("10/19");
-
-        Card anotherCard = new Card();
-        anotherCard.fillCard(card);
-
-        assertEquals(card.getNumber(), anotherCard.getNumber());
-        assertEquals(card.getName(), anotherCard.getName());
-        assertEquals(card.getSecCode(), anotherCard.getSecCode());
-        assertEquals(card.getExpiration(), anotherCard.getExpiration());
+    fun `Should test functions fillCard`() {
+        val cardFill = Card()
+        cardFill.fillCard(card)
+        Assert.assertEquals(cardFill.name, cardName)
+        Assert.assertEquals(cardFill.expiration, cardExpiration)
+        Assert.assertEquals(cardFill.secCode, cardSecCode)
+        Assert.assertEquals(cardFill.number, cardNumber)
     }
+
+    @Test
+    fun `Should return describeContents`(){
+        val card = Card()
+        Assert.assertEquals(card.describeContents(), 0)
+    }
+
+    @Test
+    fun `Should test constructor with Parcel`() {
+        val parcelMock = mock<Parcel>()
+        val card = Card(parcelMock)
+        Assert.assertNotNull(card)
+    }
+
+    @Test
+    fun `Should test writeToPercel`() {
+        val parcelMock = mock<Parcel>()
+        card.writeToParcel(parcelMock, 0)
+        Assert.assertEquals(card.name, cardName)
+        Assert.assertEquals(card.expiration, cardExpiration)
+        Assert.assertEquals(card.secCode, cardSecCode)
+        Assert.assertEquals(card.number, cardNumber)
+    }
+
+    @Test
+    fun `Should test function createFromParcel`() {
+        val parcelMock = mock<Parcel>()
+        val card = Card.CREATOR.createFromParcel(parcelMock)
+        assert(card is Card)
+    }
+
+    @Test
+    fun `Should test function newArray`() {
+        val card = Card.CREATOR.newArray(3)
+        assert(card is Array<Card>)
+    }
+
 }
