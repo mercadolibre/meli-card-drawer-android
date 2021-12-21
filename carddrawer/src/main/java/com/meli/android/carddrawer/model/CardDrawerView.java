@@ -322,7 +322,7 @@ public class CardDrawerView extends FrameLayout implements Observer {
                                  @NotNull final AppCompatImageView backBackground,
                                  @NotNull final GenericPaymentMethod genericPaymentMethod
     ) {
-        final List<String> gradientColors = genericPaymentMethod.getGradientColors();
+        final List<String> gradientColors = genericPaymentMethod.getGradientColor();
         final int backgroundColor = genericPaymentMethod.getBackgroundColor();
 
         if (gradientColors != null) {

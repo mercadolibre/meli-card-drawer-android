@@ -22,12 +22,12 @@ open class GenericPaymentMethod @JvmOverloads constructor(
     val imageUrl: String? = null,
     val subtitle: Text? = null,
     override val tag : Tag? = null,
-    val gradientColors: List<String>? = null,
+    val gradientColor: List<String>? = null,
     val description: Text? = null
 ) : CardDrawerSource(), Parcelable {
 
     @Parcelize
-    data class Text(val text: String, val color: Int, val weight: String): Parcelable
+    data class Text(val text: String, val color: Int, val weight: String? = null): Parcelable
 }
 
 class PaymentCard(val cardUI: CardUI, override val tag: Tag? = null) : CardDrawerSource() {
