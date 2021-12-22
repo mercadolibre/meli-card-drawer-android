@@ -31,7 +31,7 @@ import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.core.content.ContextCompat;
+
 import com.meli.android.carddrawer.R;
 import com.meli.android.carddrawer.ViewHelper;
 import com.meli.android.carddrawer.configuration.AccountMoneyDefaultConfiguration;
@@ -52,11 +52,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 import java.util.Observable;
 import java.util.Observer;
 import kotlin.Pair;
@@ -309,9 +305,7 @@ public class CardDrawerView extends FrameLayout implements Observer {
 
         genericPaymentMethod.setPaymentMethodImage(paymentMethodImage);
 
-        genericTitle.setText(genericPaymentMethod.getTitle().getText());
-        genericTitle.setTextColor(genericPaymentMethod.getTitle().getColor());
-        genericTitle.setTypeface(genericTitle.getTypeface(), CardDrawerFont.from(genericPaymentMethod.getTitle().getWeight()).getStyle());
+        setGenericText(genericTitle, genericPaymentMethod.getTitle());
 
         showGenericText(genericPaymentMethod);
 
@@ -338,11 +332,11 @@ public class CardDrawerView extends FrameLayout implements Observer {
     protected void showGenericText(@NotNull final GenericPaymentMethod genericPaymentMethod) {
         final GenericPaymentMethod.Text description = genericPaymentMethod.getDescription();
         final GenericPaymentMethod.Text subtitle = genericPaymentMethod.getSubtitle();
-        setText(genericDescription, description);
-        setText(genericSubtitle, subtitle);
+        setGenericText(genericDescription, description);
+        setGenericText(genericSubtitle, subtitle);
     }
 
-    protected void setText(@NotNull final AppCompatTextView genericText, @Nullable final GenericPaymentMethod.Text text) {
+    protected void setGenericText(@NotNull final AppCompatTextView genericText, @Nullable final GenericPaymentMethod.Text text) {
         if (text != null) {
             genericText.setText(text.getText());
             genericText.setTextColor(text.getColor());
