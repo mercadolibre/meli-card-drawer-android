@@ -323,13 +323,13 @@ public class CardDrawerView extends FrameLayout implements Observer {
                                  @NotNull final GenericPaymentMethod genericPaymentMethod
     ) {
         final List<String> gradientColors = genericPaymentMethod.getGradientColor();
-        final int backgroundColor = genericPaymentMethod.getBackgroundColor();
 
         if (gradientColors != null) {
             final GradientDrawable gradientDrawable = ViewHelper.getGradientDrawable(getContext(), gradientColors);
             frontBackground.setImageDrawable(gradientDrawable);
             backBackground.setImageDrawable(gradientDrawable);
         } else {
+            final int backgroundColor = genericPaymentMethod.getBackgroundColor();
             frontBackground.getBackground().setColorFilter(backgroundColor, PorterDuff.Mode.SRC_ATOP);
             backBackground.getBackground().setColorFilter(backgroundColor, PorterDuff.Mode.SRC_ATOP);
         }
@@ -338,23 +338,18 @@ public class CardDrawerView extends FrameLayout implements Observer {
     protected void showGenericText(@NotNull final GenericPaymentMethod genericPaymentMethod) {
         final GenericPaymentMethod.Text description = genericPaymentMethod.getDescription();
         final GenericPaymentMethod.Text subtitle = genericPaymentMethod.getSubtitle();
+        setText(genericDescription, description);
+        setText(genericSubtitle, subtitle);
+    }
 
-        if (description != null) {
-            genericDescription.setText(description.getText());
-            genericDescription.setTextColor(description.getColor());
-            genericDescription.setTypeface(genericDescription.getTypeface(), CardDrawerFont.from(genericPaymentMethod.getDescription().getWeight()).getStyle());
-            genericDescription.setVisibility(VISIBLE);
+    protected void setText(@NotNull final AppCompatTextView genericText, @Nullable final GenericPaymentMethod.Text text) {
+        if (text != null) {
+            genericText.setText(text.getText());
+            genericText.setTextColor(text.getColor());
+            genericText.setTypeface(genericText.getTypeface(), CardDrawerFont.from(text.getWeight()).getStyle());
+            genericText.setVisibility(VISIBLE);
         } else {
-            genericDescription.setVisibility(INVISIBLE);
-        }
-
-        if (subtitle != null) {
-            genericSubtitle.setText(subtitle.getText());
-            genericSubtitle.setTextColor(subtitle.getColor());
-            genericSubtitle.setTypeface(genericSubtitle.getTypeface(), CardDrawerFont.from(genericPaymentMethod.getSubtitle().getWeight()).getStyle());
-            genericSubtitle.setVisibility(VISIBLE);
-        } else {
-            genericSubtitle.setVisibility(INVISIBLE);
+            genericText.setVisibility(INVISIBLE);
         }
     }
 
