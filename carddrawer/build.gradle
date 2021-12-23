@@ -51,6 +51,7 @@ dependencies {
     }
     testImplementation "org.mockito:mockito-core:$mockito"
     testImplementation "org.mockito.kotlin:mockito-kotlin:$mockitoKotlin"
+    testImplementation "io.mockk:mockk:$mockk"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin"
     implementation "com.mercadolibre.android.andesui:components:$andesVersion"
 }
