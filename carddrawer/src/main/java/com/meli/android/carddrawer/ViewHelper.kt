@@ -2,10 +2,13 @@ package com.meli.android.carddrawer
 
 import android.content.Context
 import android.graphics.Color
+import android.graphics.PorterDuff
 import android.graphics.drawable.GradientDrawable
 import android.view.View
+import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.content.ContextCompat
 import com.meli.android.carddrawer.ColorUtils.safeParcelColor
+import com.meli.android.carddrawer.model.GenericPaymentMethod
 
 internal object ViewHelper {
 
@@ -44,6 +47,25 @@ internal object ViewHelper {
 
                 override fun onViewDetachedFromWindow(v: View) {}
             })
+        }
+    }
+
+    @JvmStatic
+    fun applyBackground(
+        context: Context,
+        frontBackground: AppCompatImageView,
+        backBackground: AppCompatImageView,
+        genericPaymentMethod: GenericPaymentMethod
+    ) {
+        val gradientColors = genericPaymentMethod.gradientColor
+        if (gradientColors != null) {
+            val gradientDrawable = getGradientDrawable(context, gradientColors)
+            frontBackground.setImageDrawable(gradientDrawable)
+            backBackground.setImageDrawable(gradientDrawable)
+        } else {
+            val backgroundColor = genericPaymentMethod.backgroundColor
+            frontBackground.background.setColorFilter(backgroundColor, PorterDuff.Mode.SRC_ATOP)
+            backBackground.background.setColorFilter(backgroundColor, PorterDuff.Mode.SRC_ATOP)
         }
     }
 }

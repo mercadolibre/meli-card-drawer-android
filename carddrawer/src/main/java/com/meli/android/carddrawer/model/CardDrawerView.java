@@ -31,7 +31,6 @@ import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.constraintlayout.widget.ConstraintLayout;
-
 import com.meli.android.carddrawer.R;
 import com.meli.android.carddrawer.ViewHelper;
 import com.meli.android.carddrawer.configuration.AccountMoneyDefaultConfiguration;
@@ -47,9 +46,7 @@ import com.meli.android.carddrawer.internal.BaseExtensionsKt;
 import com.meli.android.carddrawer.internal.TagDimensions;
 import com.meli.android.carddrawer.model.customview.CustomViewConfiguration;
 import com.mercadolibre.android.picassodiskcache.PicassoDiskLoader;
-
 import org.jetbrains.annotations.NotNull;
-
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.List;
@@ -309,24 +306,7 @@ public class CardDrawerView extends FrameLayout implements Observer {
 
         showGenericText(genericPaymentMethod);
 
-        applyBackground(frontBackground, backBackground, genericPaymentMethod);
-    }
-
-    private void applyBackground(@NotNull final AppCompatImageView frontBackground,
-                                 @NotNull final AppCompatImageView backBackground,
-                                 @NotNull final GenericPaymentMethod genericPaymentMethod
-    ) {
-        final List<String> gradientColors = genericPaymentMethod.getGradientColor();
-
-        if (gradientColors != null) {
-            final GradientDrawable gradientDrawable = ViewHelper.getGradientDrawable(getContext(), gradientColors);
-            frontBackground.setImageDrawable(gradientDrawable);
-            backBackground.setImageDrawable(gradientDrawable);
-        } else {
-            final int backgroundColor = genericPaymentMethod.getBackgroundColor();
-            frontBackground.getBackground().setColorFilter(backgroundColor, PorterDuff.Mode.SRC_ATOP);
-            backBackground.getBackground().setColorFilter(backgroundColor, PorterDuff.Mode.SRC_ATOP);
-        }
+        ViewHelper.applyBackground(getContext(), frontBackground, backBackground, genericPaymentMethod);
     }
 
     protected void showGenericText(@NotNull final GenericPaymentMethod genericPaymentMethod) {
