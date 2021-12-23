@@ -7,6 +7,7 @@ import android.graphics.Typeface
 import android.widget.TextView
 import com.meli.android.carddrawer.R
 import com.meli.android.carddrawer.TestUtils
+import io.mockk.mockk
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
@@ -30,6 +31,8 @@ class TypefaceHelperTest {
     @Before
     open fun init() {
         MockitoAnnotations.initMocks(this)
+        val typeface = mockk<Typeface>(relaxed = true)
+        TestUtils.setFinalStatic(Typeface::class.java.getField("MONOSPACE"), typeface)
     }
 
     @Test

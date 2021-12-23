@@ -1,76 +1,69 @@
 package com.meli.android.carddrawer.utils
 
 import android.content.Context
-import android.content.res.Resources
 import android.util.DisplayMetrics
+import io.mockk.MockKAnnotations
+import io.mockk.every
+import io.mockk.impl.annotations.MockK
+import io.mockk.mockk
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
-import org.junit.runner.RunWith
-import org.mockito.Mock
-import org.mockito.Mockito
-import org.mockito.MockitoAnnotations
-import org.mockito.junit.MockitoJUnitRunner
-import org.mockito.Mockito.mock
 
-
-@RunWith(MockitoJUnitRunner::class)
 class DensityHelperTest {
 
-    @Mock
+    @MockK(relaxed = true)
     private lateinit var contextMock: Context
 
     @Before
-    fun init() {
-        MockitoAnnotations.initMocks(this)
-        val resourcesMock: Resources = mock(Resources::class.java)
-        Mockito.`when`(contextMock.resources).thenReturn(resourcesMock)
+    fun setUp() {
+        MockKAnnotations.init(this, relaxUnitFun = true)
     }
 
     private fun mockDensity(density: Float) {
-        val metrics: DisplayMetrics = mock(DisplayMetrics::class.java).apply {
+        val metrics: DisplayMetrics = mockk<DisplayMetrics>().apply {
             this.density = density
         }
-        Mockito.`when`(contextMock.resources.displayMetrics).thenReturn(metrics)
+        every { contextMock.resources.displayMetrics } returns metrics
     }
 
     @Test
-    fun `should return name of Density 'xxxhdpi'`() {
+    fun `when getting name of density then it should 'xxxhdpi'`() {
         mockDensity(5F)
         val name = DensityHelper.getName(contextMock)
         assertEquals(name, "xxxhdpi")
     }
 
     @Test
-    fun `should return name of Density 'xxhdpi'`() {
+    fun `when getting name of density then it should 'xxhdpi'`() {
         mockDensity(3.5F)
         val name = DensityHelper.getName(contextMock)
         assertEquals(name, "xxhdpi")
     }
 
     @Test
-    fun `should return name of Density 'xhdpi'`() {
+    fun `when getting name of density then it should 'xhdpi'`() {
         mockDensity(2.5F)
         val name = DensityHelper.getName(contextMock)
         assertEquals(name, "xhdpi")
     }
 
     @Test
-    fun `should return name of Density 'hdpi'`() {
+    fun `when getting name of density then it should 'hdpi'`() {
         mockDensity(1.5F)
         val name = DensityHelper.getName(contextMock)
         assertEquals(name, "hdpi")
     }
 
     @Test
-    fun `should return name of Density 'ldpi'`() {
+    fun `when getting name of density then it should 'ldpi'`() {
         mockDensity(0.5F)
         val name = DensityHelper.getName(contextMock)
         assertEquals(name, "ldpi")
     }
 
     @Test
-    fun `should return name of Density 'mdpi'`() {
+    fun `when getting name of density then it should 'mdpi'`() {
         mockDensity(1.0F)
         val name = DensityHelper.getName(contextMock)
         assertEquals(name, "mdpi")
