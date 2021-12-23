@@ -4,85 +4,82 @@ import androidx.core.content.ContextCompat
 import com.meli.android.carddrawer.R
 import com.meli.android.carddrawer.configuration.base.ConfigurationTestBase
 import com.meli.android.carddrawer.model.CardAnimationType
+import io.mockk.every
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
-import org.junit.runner.RunWith
-import org.mockito.Mockito
-import org.mockito.junit.MockitoJUnitRunner
 
-@RunWith(MockitoJUnitRunner::class)
 class DefaultCardConfigurationTest: ConfigurationTestBase() {
 
     private lateinit var defaultCardConfiguration: DefaultCardConfiguration
 
     @Before
-    override fun init() {
-        super.init()
-        Mockito.`when`(contextMock.applicationContext).thenReturn(contextMock)
+    override fun setUp() {
+        super.setUp()
+        every { contextMock.applicationContext } returns contextMock
         defaultCardConfiguration = DefaultCardConfiguration(contextMock)
     }
 
     @Test
-    fun `should return size pattern card number`() {
+    fun `when getting card number pattern size then it should return 4`() {
         assertEquals(defaultCardConfiguration.cardNumberPattern.size.toLong(), 4)
     }
 
     @Test
-    fun `should return placeholder name`() {
+    fun `when getting placeholder name then it should return 'Nombre y Apellido'`() {
         val text = "Nombre y Apellido"
-        Mockito.`when`(contextMock.getString(R.string.card_drawer_card_hint_name)).thenReturn(text)
-        assertEquals(defaultCardConfiguration.namePlaceHolder, text)
+        every { contextMock.getString(R.string.card_drawer_card_hint_name) } returns text
+        assertEquals(defaultCardConfiguration.namePlaceHolder, contextMock.getString(R.string.card_drawer_card_hint_name))
     }
 
     @Test
-    fun `should return placeholder date expired`() {
+    fun `when getting expiration placeholder then it should return 'MM-AA'`() {
         val text = "MM/AA"
-        Mockito.`when`(contextMock.getString(R.string.card_drawer_card_hint_date)).thenReturn(text)
+        every { contextMock.getString(R.string.card_drawer_card_hint_date) } returns text
         assertEquals(defaultCardConfiguration.expirationPlaceHolder, text)
     }
 
     @Test
-    fun `should return FontType`() {
+    fun `when getting fontType then it should return FontType DARK_TYPE`() {
         assertEquals(defaultCardConfiguration.fontType, FontType.DARK_TYPE)
     }
 
     @Test
-    fun `should return CardAnimationType`() {
+    fun `when getting animationType then it should return CardAnimationType RIGHT_BOTTOM`() {
         assertEquals(defaultCardConfiguration.animationType, CardAnimationType.RIGHT_BOTTOM)
     }
 
     @Test
-    fun `should return BankImageRes`() {
+    fun `when getting bank image res then it should return 0`() {
         assertEquals(defaultCardConfiguration.bankImageRes, 0)
     }
 
     @Test
-    fun `should return CardLogoImageRes`() {
+    fun `when getting card logo image res then it should return 0`() {
         assertEquals(defaultCardConfiguration.cardLogoImageRes, 0)
     }
 
     @Test
-    fun `should return SecurityCodeLocation`() {
+    fun `when getting securityCodeLocation then it should return SecurityCodeLocation BLACK`() {
         assertEquals(defaultCardConfiguration.securityCodeLocation, SecurityCodeLocation.BACK)
     }
 
     @Test
-    fun `should return CardFontColor`() {
-        Mockito.`when`(ContextCompat.getColor(contextMock, R.color.card_drawer_card_default_font_color)).thenReturn(-2763307)
+    fun `when getting card font color then it should return card_drawer_card_default_font_color`() {
+        every { contextMock.getColor(R.color.card_drawer_card_default_font_color) } returns -2763307
         val fontColor = ContextCompat.getColor(contextMock, R.color.card_drawer_card_default_font_color)
         assertEquals(defaultCardConfiguration.cardFontColor, fontColor)
     }
 
     @Test
-    fun `should return CardBackgroundColor`() {
-        Mockito.`when`(ContextCompat.getColor(contextMock, R.color.card_drawer_card_default_color)).thenReturn(-10066330)
+    fun `when getting default card configuration then it should return card_drawer_card_default_color`() {
+        every { contextMock.getColor(R.color.card_drawer_card_default_color) } returns -10066330
         val backgroundColor = ContextCompat.getColor(contextMock, R.color.card_drawer_card_default_color)
         assertEquals(defaultCardConfiguration.cardBackgroundColor, backgroundColor)
     }
 
     @Test
-    fun `should return SecurityCodePattern`() {
+    fun `when getting security code pattern then it should return 4`() {
         assertEquals(defaultCardConfiguration.securityCodePattern, 4)
     }
 

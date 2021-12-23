@@ -1,52 +1,36 @@
 package com.meli.android.carddrawer.configuration
 
-import android.util.DisplayMetrics
 import com.meli.android.carddrawer.configuration.base.ConfigurationTestBase
-import org.junit.Before
 import org.junit.Test
-import org.junit.runner.RunWith
-import org.mockito.Mock
-import org.mockito.Mockito
-import org.mockito.junit.MockitoJUnitRunner
 
-@RunWith(MockitoJUnitRunner::class)
 class CardFontConfigurationFactoryTest : ConfigurationTestBase() {
 
-    @Mock
-    private lateinit var displayMock: DisplayMetrics
-
-    @Before
-    override fun init() {
-        super.init()
-        Mockito.`when`(contextMock.resources.displayMetrics).thenReturn(displayMock)
-    }
-
     @Test
-    fun `should test when getConfiguration with DARK_TYPE returns DarkFontConfiguration`() {
+    fun `when call function getConfiguration of CardFontConfigurationFactory with FontType DARK_TYPE per parameter then it should return DarkFontConfiguration`() {
         val configuration = CardFontConfigurationFactory.getConfiguration(FontType.DARK_TYPE, 0, contextMock)
         assert(configuration is DarkFontConfiguration)
     }
 
     @Test
-    fun `should test when getConfiguration with LIGHT_TYPE returns LightFontConfiguration`() {
+    fun `when call function getConfiguration of CardFontConfigurationFactory with FontType LIGHT_TYPE per parameter then it should return LightFontConfiguration`() {
         val configuration = CardFontConfigurationFactory.getConfiguration(FontType.LIGHT_TYPE, 0, contextMock)
         assert(configuration is LightFontConfiguration)
     }
 
     @Test
-    fun `should test when getConfiguration with DARK_NO_SHADOW_TYPE returns DarkFontConfiguration`() {
+    fun `when call function getConfiguration of CardFontConfigurationFactory with FontType DARK_NO_SHADOW_TYPE per parameter then it should return DarkFontConfiguration`() {
         val configuration = CardFontConfigurationFactory.getConfiguration(FontType.DARK_NO_SHADOW_TYPE, 0, contextMock)
         assert(configuration is DarkFontConfiguration)
     }
 
     @Test
-    fun `should test when getConfiguration with LIGHT_NO_SHADOW_TYPE returns LightFontConfiguration`() {
+    fun `when call function getConfiguration of CardFontConfigurationFactory with FontType LIGHT_NO_SHADOW_TYPE per parameter then it should return LightFontConfiguration`() {
         val configuration = CardFontConfigurationFactory.getConfiguration(FontType.LIGHT_NO_SHADOW_TYPE, 0, contextMock)
         assert(configuration is LightFontConfiguration)
     }
 
     @Test
-    fun `should test when getConfiguration with NONE returns DefaultFontConfiguration`() {
+    fun `when call function getConfiguration of CardFontConfigurationFactory with FontType NONE per parameter then it should return DefaultFontConfiguration`() {
         val configuration = CardFontConfigurationFactory.getConfiguration(FontType.NONE, 0, contextMock)
         assert(configuration is DefaultFontConfiguration)
     }

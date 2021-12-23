@@ -66,7 +66,7 @@ class NumberFormatterTest {
         Assert.assertEquals("Text was not properly filled", expectedShort, resultShort)
     }
     @Test
-    fun `when format text with separated filled text processor and visa pattern with empty number thwn it should return grouped filler string`() {
+    fun `when format text with separated filled text processor and visa pattern with empty number then it should return grouped filler string`() {
         val pattern = intArrayOf(4, 4, 4, 4)
         val input = ""
         val expected = "****  ****  ****  ****"

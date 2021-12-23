@@ -5,83 +5,78 @@ import com.meli.android.carddrawer.model.CardAnimationType
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
-import org.junit.runner.RunWith
-import org.mockito.MockitoAnnotations
-import org.mockito.junit.MockitoJUnitRunner
 
-@RunWith(MockitoJUnitRunner::class)
 class AccountMoneyHybridConfigurationTest {
 
     private lateinit var accountMoneyHybridConfiguration: AccountMoneyHybridConfiguration
 
     @Before
-    fun init() {
-        MockitoAnnotations.initMocks(this)
+    fun setUp() {
         accountMoneyHybridConfiguration = AccountMoneyHybridConfiguration()
     }
 
     @Test
-    fun `should return BankImageRes`() {
+    fun `when getting bank image res then it should return 0`() {
         Assert.assertEquals(accountMoneyHybridConfiguration.bankImageRes, 0)
     }
 
     @Test
-    fun `should return CardLogoImageRes`() {
+    fun `when getting card logo image rest then it return drawable card_drawer_hybrid_logo`() {
         Assert.assertEquals(accountMoneyHybridConfiguration.cardLogoImageRes, R.drawable.card_drawer_hybrid_logo)
     }
 
     @Test
-    fun `should return SecurityCodeLocation`() {
+    fun `when getting security code location then it return SecurityCodeLocation NONE`() {
         Assert.assertEquals(accountMoneyHybridConfiguration.securityCodeLocation, SecurityCodeLocation.NONE)
     }
 
     @Test
-    fun `should return CardFontColor`() {
+    fun `when getting card font color then it return 0`() {
         Assert.assertEquals(accountMoneyHybridConfiguration.cardFontColor, 0)
     }
 
     @Test
-    fun `should return CardBackgroundColor`() {
+    fun `when getting card background color then it return 0`() {
         Assert.assertEquals(accountMoneyHybridConfiguration.cardBackgroundColor, 0)
     }
 
     @Test
-    fun `should return SecurityCodePattern`() {
+    fun `when getting security code pattern then it return 0`() {
         Assert.assertEquals(accountMoneyHybridConfiguration.securityCodePattern, 0)
     }
 
     @Test
-    fun `should return CardNumberPattern`() {
+    fun `when getting card number pattern then it return 0`() {
         Assert.assertEquals(accountMoneyHybridConfiguration.cardNumberPattern.size.toLong(), 0)
     }
 
     @Test
-    fun `should return NamePlaceHolder`() {
+    fun `when getting name placeholder then it return empty string`() {
         Assert.assertEquals(accountMoneyHybridConfiguration.namePlaceHolder, "")
     }
 
     @Test
-    fun `should return ExpirationPlaceHolder`() {
+    fun `when getting expiration placeholder then it return empty string`() {
         Assert.assertEquals(accountMoneyHybridConfiguration.expirationPlaceHolder, "")
     }
 
     @Test
-    fun `should return FontType`() {
+    fun `when getting fontType then it return FontType NONE`() {
         Assert.assertEquals(accountMoneyHybridConfiguration.fontType, FontType.NONE)
     }
 
     @Test
-    fun `should return AnimationType`() {
+    fun `when getting animationType then it return CardAnimation NONE`() {
         Assert.assertEquals(accountMoneyHybridConfiguration.animationType, CardAnimationType.NONE)
     }
 
     @Test
-    fun `should return CardGradientColors`() {
+    fun `when getting card gradient colors then it return listOf colors`() {
         Assert.assertEquals(accountMoneyHybridConfiguration.cardGradientColors, listOf("#00000000"))
     }
 
     @Test
-    fun `should return Style`() {
+    fun `when getting style then it return CardDrawerStyle ACCOUNT_MONEY_DEFAULT`() {
         Assert.assertEquals(accountMoneyHybridConfiguration.style, CardDrawerStyle.ACCOUNT_MONEY_HYBRID)
     }
 

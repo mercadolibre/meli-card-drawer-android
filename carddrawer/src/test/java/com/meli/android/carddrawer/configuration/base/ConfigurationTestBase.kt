@@ -1,24 +1,18 @@
 package com.meli.android.carddrawer.configuration.base
 
 import android.content.Context
-import android.content.res.Resources
+import io.mockk.MockKAnnotations
+import io.mockk.impl.annotations.MockK
 import org.junit.Before
-import org.mockito.Mock
-import org.mockito.Mockito
-import org.mockito.MockitoAnnotations
 
 open class ConfigurationTestBase {
 
-    @Mock
+    @MockK(relaxed = true)
     protected lateinit var contextMock: Context
 
-    @Mock
-    protected lateinit var resourcesMock: Resources
-
     @Before
-    open fun init() {
-        MockitoAnnotations.initMocks(this)
-        Mockito.`when`(contextMock.resources).thenReturn(resourcesMock)
+    open fun setUp() {
+        MockKAnnotations.init(this, relaxed = true)
     }
 
 }
