@@ -6,9 +6,9 @@ import com.meli.android.carddrawer.R
 import com.meli.android.carddrawer.configuration.base.ConfigurationTestBase
 import com.meli.android.carddrawer.configuration.shadow.ShadowConfiguration
 import com.meli.android.carddrawer.configuration.shadow.ShadowFontConfiguration
+import io.mockk.mockk
+import io.mockk.verify
 import org.junit.Test
-import org.mockito.ArgumentMatchers
-import org.mockito.Mockito
 
 class LightFontConfigurationTest: ConfigurationTestBase() {
 
@@ -20,7 +20,7 @@ class LightFontConfigurationTest: ConfigurationTestBase() {
     }
 
     @Test
-    fun `when getting color with shadow font per parameter then it should card_drawer_light_font_empty_color card_drawer_dark_font_empty_color`() {
+    fun `when getting color with shadow font per parameter then it should return card_drawer_dark_font_empty_color`() {
         initWithShadow()
         val validColor =
             ContextCompat.getColor(contextMock, R.color.card_drawer_light_font_empty_color)
@@ -30,14 +30,16 @@ class LightFontConfigurationTest: ConfigurationTestBase() {
     @Test
     fun `when call function setShadow then it should call setShadowLayer`() {
         initWithShadow()
-        val textPaint = Mockito.mock(TextPaint::class.java)
+        val textPaint = mockk<TextPaint>(relaxed = true)
         lightFontConfiguration.setShadow(textPaint)
-        Mockito.verify(textPaint).setShadowLayer(
-            ArgumentMatchers.anyFloat(),
-            ArgumentMatchers.anyFloat(),
-            ArgumentMatchers.anyFloat(),
-            ArgumentMatchers.anyInt()
-        )
+        verify() {
+            textPaint.setShadowLayer(
+                any(),
+                any(),
+                any(),
+                any()
+            )
+        }
     }
 
     @Test
@@ -50,14 +52,16 @@ class LightFontConfigurationTest: ConfigurationTestBase() {
 
     @Test
     fun`when call setShadow without shadow per parameter then it should call setShadowLayer`() {
-        val textPaint = Mockito.mock(TextPaint::class.java)
+        val textPaint = mockk<TextPaint>()
         lightFontConfiguration = LightFontConfiguration(contextMock)
         lightFontConfiguration.setShadow(textPaint)
-        Mockito.verify(textPaint, Mockito.never()).setShadowLayer(
-            ArgumentMatchers.anyFloat(),
-            ArgumentMatchers.anyFloat(),
-            ArgumentMatchers.anyFloat(),
-            ArgumentMatchers.anyInt()
-        )
+        verify(exactly = 0) {
+            textPaint.setShadowLayer(
+                any(),
+                any(),
+                any(),
+                any()
+            )
+        }
     }
 }

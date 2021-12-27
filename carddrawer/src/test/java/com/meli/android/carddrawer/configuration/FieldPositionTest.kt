@@ -6,12 +6,12 @@ import org.junit.Test
 class FieldPositionTest {
 
     @Test
-    fun `should return values FieldPosition front`() {
+    fun `when getting POSITION_FRONT of FieldPosition then it should return 1`() {
         assertEquals(FieldPosition.POSITION_FRONT, 1)
     }
 
     @Test
-    fun `should return values FieldPosition back`() {
+    fun `when getting POSITION_FRONT of POSITION_BACK then it should return 2`() {
         assertEquals(FieldPosition.POSITION_BACK, 2)
     }
 

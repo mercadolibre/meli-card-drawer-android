@@ -6,12 +6,12 @@ import org.junit.Test
 class FontTypeTest {
 
     @Test
-    fun `should return value FontType DARK_TYPE`() {
+    fun `when getting DARK_TYPE of FontType then it should return dark`() {
         assertEquals(FontType.DARK_TYPE, "dark")
     }
 
     @Test
-    fun `should return value FontType LIGHT_TYPE`() {
+    fun `when getting LIGHT_TYPE of FontType then it should return light`() {
         assertEquals(FontType.LIGHT_TYPE, "light")
     }
 
