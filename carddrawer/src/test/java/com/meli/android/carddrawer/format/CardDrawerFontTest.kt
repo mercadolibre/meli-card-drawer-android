@@ -97,7 +97,7 @@ class CardDrawerFontTest {
     }
 
     @Test
-    fun `when getting index from CardDrawerStyle REGULAR then ireturn 4`() {
+    fun `when getting index from CardDrawerStyle REGULAR then return 4`() {
         assertEquals(CardDrawerFont.REGULAR.index, 4)
     }
 

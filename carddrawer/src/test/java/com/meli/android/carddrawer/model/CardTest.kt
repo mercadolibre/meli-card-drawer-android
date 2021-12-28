@@ -1,14 +1,11 @@
 package com.meli.android.carddrawer.model
 
 import android.os.Parcel
+import io.mockk.mockk
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
-import org.junit.runner.RunWith
-import org.mockito.junit.MockitoJUnitRunner
-import org.mockito.kotlin.mock
 
-@RunWith(MockitoJUnitRunner::class)
 class CardTest {
 
     private lateinit var card: Card
@@ -18,7 +15,7 @@ class CardTest {
     private val cardNumber by lazy { "1234567891" }
 
     @Before
-    fun init() {
+    fun setUp() {
         card = returnCard()
     }
 
@@ -32,39 +29,72 @@ class CardTest {
     }
 
     @Test
-    fun `Should test get and set functions`() {
+    fun `when getting the value of the card name then return value that was set`() {
         Assert.assertEquals(card.name, cardName)
+    }
+
+    @Test
+    fun `when getting the value of the card expiration then return value that was set`() {
         Assert.assertEquals(card.expiration, cardExpiration)
+    }
+
+    @Test
+    fun `when getting the value of the card secCode then return value that was set`() {
         Assert.assertEquals(card.secCode, cardSecCode)
+    }
+
+    @Test
+    fun `when getting the value of the card number then return value that was set`() {
         Assert.assertEquals(card.number, cardNumber)
     }
 
     @Test
-    fun `Should test functions fillCard`() {
+    fun `when call function fillCard then return the card name`() {
         val cardFill = Card()
         cardFill.fillCard(card)
-        Assert.assertEquals(cardFill.name, cardName)
-        Assert.assertEquals(cardFill.expiration, cardExpiration)
-        Assert.assertEquals(cardFill.secCode, cardSecCode)
-        Assert.assertEquals(cardFill.number, cardNumber)
+        Assert.assertEquals(card.name, cardName)
     }
 
     @Test
-    fun `Should return describeContents`(){
+    fun `when call function fillCard then return the card expiration`() {
+        val cardFill = Card()
+        cardFill.fillCard(card)
+        Assert.assertEquals(card.expiration, cardExpiration)
+    }
+
+    @Test
+    fun `when call function fillCard then return the card secCode`() {
+        val cardFill = Card()
+        cardFill.fillCard(card)
+        Assert.assertEquals(card.secCode, cardSecCode)
+    }
+
+    @Test
+    fun `when call function fillCard then return the card number`() {
+        val cardFill = Card()
+        cardFill.fillCard(card)
+        Assert.assertEquals(card.number, cardNumber)
+    }
+
+    @Test
+    fun `when getting describeContents then return 0`() {
         val card = Card()
         Assert.assertEquals(card.describeContents(), 0)
     }
 
     @Test
-    fun `Should test constructor with Parcel`() {
-        val parcelMock = mock<Parcel>()
+    fun `when pass Parcel per parameter in constructor should return Card`() {
+        val parcelMock = mockk<Parcel>(relaxed = true)
         val card = Card(parcelMock)
-        Assert.assertNotNull(card)
+        Assert.assertEquals(card.name, "")
+        Assert.assertEquals(card.number, "")
+        Assert.assertEquals(card.expiration, "")
+        Assert.assertEquals(card.secCode, "")
     }
 
     @Test
-    fun `Should test writeToPercel`() {
-        val parcelMock = mock<Parcel>()
+    fun `when call function writeParcel then return object Card`() {
+        val parcelMock = mockk<Parcel>(relaxed = true)
         card.writeToParcel(parcelMock, 0)
         Assert.assertEquals(card.name, cardName)
         Assert.assertEquals(card.expiration, cardExpiration)
@@ -73,16 +103,17 @@ class CardTest {
     }
 
     @Test
-    fun `Should test function createFromParcel`() {
-        val parcelMock = mock<Parcel>()
+    fun `when call function createFromParcel then return object Card`() {
+        val parcelMock = mockk<Parcel>(relaxed = true)
         val card = Card.CREATOR.createFromParcel(parcelMock)
         assert(card is Card)
     }
 
     @Test
-    fun `Should test function newArray`() {
+    fun `when call function newArray then return an array object Card`() {
         val card = Card.CREATOR.newArray(3)
         assert(card is Array<Card>)
+        Assert.assertEquals(card.size, 3)
     }
 
 }
