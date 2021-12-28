@@ -83,7 +83,7 @@ class CardTest {
     }
 
     @Test
-    fun `when pass Parcel per parameter in constructor should return Card`() {
+    fun `when pass Parcel per parameter in constructor then return Card`() {
         val parcelMock = mockk<Parcel>(relaxed = true)
         val card = Card(parcelMock)
         Assert.assertEquals(card.name, "")
