@@ -6,17 +6,17 @@ import org.junit.Test
 class SecurityCodeLocationTest {
 
     @Test
-    fun `when getting FRONT of SecurityCodeLocation then it should return front`() {
+    fun `when getting FRONT of SecurityCodeLocation then return front`() {
         assertEquals(SecurityCodeLocation.FRONT, "front")
     }
 
     @Test
-    fun `when getting BACK, of SecurityCodeLocation then it should return back`() {
+    fun `when getting BACK of SecurityCodeLocation then return back`() {
         assertEquals(SecurityCodeLocation.BACK, "back")
     }
 
     @Test
-    fun `when getting NONE of SecurityCodeLocation then it should return none`() {
+    fun `when getting NONE of SecurityCodeLocation then return none`() {
         assertEquals(SecurityCodeLocation.NONE, "none")
     }
 

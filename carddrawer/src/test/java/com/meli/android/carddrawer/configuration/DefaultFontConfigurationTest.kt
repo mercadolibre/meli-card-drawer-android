@@ -18,12 +18,12 @@ class DefaultFontConfigurationTest: ConfigurationTestBase() {
     }
 
     @Test
-    fun `when getting color value then it should return the same value passed by parameter`() {
+    fun `when getting color value then return the same value passed by parameter`() {
         Assert.assertEquals(defaultFontConfiguration.color, color)
     }
 
     @Test
-    fun `when call setShadow then it should call setShadowLayer`() {
+    fun `when call setShadow then call setShadowLayer`() {
         val textPaint = mockk<TextPaint>(relaxed = true)
         defaultFontConfiguration.setShadow(textPaint)
         verify(exactly = 0) {

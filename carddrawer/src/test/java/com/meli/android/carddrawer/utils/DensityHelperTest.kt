@@ -28,42 +28,42 @@ class DensityHelperTest {
     }
 
     @Test
-    fun `when getting name of density then it should 'xxxhdpi'`() {
+    fun `when getting name of density then return 'xxxhdpi'`() {
         mockDensity(5F)
         val name = DensityHelper.getName(contextMock)
         assertEquals(name, "xxxhdpi")
     }
 
     @Test
-    fun `when getting name of density then it should 'xxhdpi'`() {
+    fun `when getting name of density then return 'xxhdpi'`() {
         mockDensity(3.5F)
         val name = DensityHelper.getName(contextMock)
         assertEquals(name, "xxhdpi")
     }
 
     @Test
-    fun `when getting name of density then it should 'xhdpi'`() {
+    fun `when getting name of density then return 'xhdpi'`() {
         mockDensity(2.5F)
         val name = DensityHelper.getName(contextMock)
         assertEquals(name, "xhdpi")
     }
 
     @Test
-    fun `when getting name of density then it should 'hdpi'`() {
+    fun `when getting name of density then return 'hdpi'`() {
         mockDensity(1.5F)
         val name = DensityHelper.getName(contextMock)
         assertEquals(name, "hdpi")
     }
 
     @Test
-    fun `when getting name of density then it should 'ldpi'`() {
+    fun `when getting name of density then return 'ldpi'`() {
         mockDensity(0.5F)
         val name = DensityHelper.getName(contextMock)
         assertEquals(name, "ldpi")
     }
 
     @Test
-    fun `when getting name of density then it should 'mdpi'`() {
+    fun `when getting name of density then return 'mdpi'`() {
         mockDensity(1.0F)
         val name = DensityHelper.getName(contextMock)
         assertEquals(name, "mdpi")

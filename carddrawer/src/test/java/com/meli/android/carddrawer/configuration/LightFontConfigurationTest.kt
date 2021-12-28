@@ -20,7 +20,7 @@ class LightFontConfigurationTest: ConfigurationTestBase() {
     }
 
     @Test
-    fun `when getting color with shadow font per parameter then it should return card_drawer_dark_font_empty_color`() {
+    fun `when getting color with shadow font per parameter then return card_drawer_dark_font_empty_color`() {
         initWithShadow()
         val validColor =
             ContextCompat.getColor(contextMock, R.color.card_drawer_light_font_empty_color)
@@ -28,7 +28,7 @@ class LightFontConfigurationTest: ConfigurationTestBase() {
     }
 
     @Test
-    fun `when call function setShadow then it should call setShadowLayer`() {
+    fun `when call function setShadow then call setShadowLayer`() {
         initWithShadow()
         val textPaint = mockk<TextPaint>(relaxed = true)
         lightFontConfiguration.setShadow(textPaint)
@@ -43,7 +43,7 @@ class LightFontConfigurationTest: ConfigurationTestBase() {
     }
 
     @Test
-    fun`when getting color without shadow per parameter then it should return card_drawer_light_font_empty_color`() {
+    fun`when getting color without shadow per parameter then return card_drawer_light_font_empty_color`() {
         lightFontConfiguration = LightFontConfiguration(contextMock)
         val validColor =
             ContextCompat.getColor(contextMock, R.color.card_drawer_light_font_empty_color)
@@ -51,7 +51,7 @@ class LightFontConfigurationTest: ConfigurationTestBase() {
     }
 
     @Test
-    fun`when call setShadow without shadow per parameter then it should call setShadowLayer`() {
+    fun`when call setShadow without shadow per parameter then call setShadowLayer`() {
         val textPaint = mockk<TextPaint>()
         lightFontConfiguration = LightFontConfiguration(contextMock)
         lightFontConfiguration.setShadow(textPaint)
