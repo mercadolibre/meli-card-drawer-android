@@ -2,59 +2,63 @@ package com.meli.android.carddrawer.model
 
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
+import io.mockk.MockKAnnotations
+import io.mockk.impl.annotations.MockK
+import io.mockk.mockk
+import io.mockk.verify
+import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
-import org.junit.runner.RunWith
-import org.mockito.Mock
-import org.mockito.MockitoAnnotations
-import org.mockito.junit.MockitoJUnitRunner
-import org.mockito.kotlin.mock
-import org.mockito.kotlin.times
-import org.mockito.kotlin.verify
 
-
-@RunWith(MockitoJUnitRunner::class)
 class CardConfigurationTest {
 
-    @Mock
+    @MockK
     private lateinit var cardConfiguration: CardConfiguration
 
     @Before
-    fun init() {
-        MockitoAnnotations.initMocks(this)
+    fun setUp() {
+        MockKAnnotations.init(this, relaxed = true)
     }
 
     @Test
-    fun `Should test function updateSource`() {
-        val cardUIMock = mock<CardUI>()
+    fun `when call function updateSource then if it call one time`() {
+        val cardUIMock = mockk<CardUI>()
         cardConfiguration.updateSource(cardUIMock)
-        verify(cardConfiguration, times(1)).updateSource(cardUIMock)
+        verify(exactly = 1) {
+            cardConfiguration.updateSource(cardUIMock)
+        }
     }
 
     @Test
-    fun `Should test function updateConfiguration`() {
-        val constraintLayoutMock = mock<ConstraintLayout>()
+    fun `when call function updateConfiguration then if it call one time`() {
+        val constraintLayoutMock = mockk<ConstraintLayout>()
         cardConfiguration.updateConfiguration(constraintLayoutMock)
-        verify(cardConfiguration, times(1)).updateConfiguration(constraintLayoutMock)
+        verify(exactly = 1) {
+            cardConfiguration.updateConfiguration(constraintLayoutMock)
+        }
     }
 
     @Test
-    fun `Should test function resetConfiguration`() {
-        val constraintLayoutMock = mock<ConstraintLayout>()
+    fun `when call function resetConfiguration then if it call one time`() {
+        val constraintLayoutMock = mockk<ConstraintLayout>()
         cardConfiguration.resetConfiguration(constraintLayoutMock)
-        verify(cardConfiguration, times(1)).resetConfiguration(constraintLayoutMock)
+        verify(exactly = 1) {
+            cardConfiguration.resetConfiguration(constraintLayoutMock)
+        }
     }
 
     @Test
-    fun `Should test function canShow`() {
-        val viewMock = mock<View>()
+    fun `when call function canShow then if it call one time`() {
+        val viewMock = mockk<View>()
         cardConfiguration.canShow(viewMock)
-        verify(cardConfiguration, times(1)).canShow(viewMock)
+        verify(exactly = 1) {
+            cardConfiguration.canShow(viewMock)
+        }
     }
 
     @Test
-    fun `Should test function canAnimate`() {
-        
+    fun `when call function getFormattedNumber with empty parameters then return empty string`() {
+        val format = cardConfiguration.getFormattedNumber("", 1)
+        Assert.assertEquals(format, "")
     }
-
 }
