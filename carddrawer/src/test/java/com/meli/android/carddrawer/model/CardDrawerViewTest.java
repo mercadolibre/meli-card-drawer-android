@@ -136,9 +136,9 @@ public class CardDrawerViewTest extends BasicRobolectricTest {
         CardAnimator cardAnimatorMock = mock(CardAnimator.class);
         doNothing().when(spyHeader).updateCardInformation();
         ReflectionHelpers.setField(spyHeader, "cardAnimator", cardAnimatorMock);
-//        spyHeader.show(cardUI);
-//        verify(cardAnimatorMock).colorCard(anyInt(), anyString());
- //       verify(spyHeader).updateCardInformation();
+        spyHeader.show(cardUI);
+        verify(cardAnimatorMock).colorCard(anyInt(), anyString());
+        verify(spyHeader).updateCardInformation();
     }
 
     @Test
@@ -387,8 +387,8 @@ public class CardDrawerViewTest extends BasicRobolectricTest {
         final CardDrawerView spyHeader = spy(header);
         final CardUI cardUI = new DefaultCardConfiguration(getContext());
         final PaymentCard paymentCard = new PaymentCard(cardUI ,tag);
-//        spyHeader.show(paymentCard);
-    //    assertEquals(View.VISIBLE, spyHeader.cardFrontLayout.findViewById(R.id.card_tag_container).getVisibility());
+        spyHeader.show(paymentCard);
+        assertEquals(View.VISIBLE, spyHeader.cardFrontLayout.findViewById(R.id.card_tag_container).getVisibility());
     }
 
     @Test
