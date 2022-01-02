@@ -53,19 +53,16 @@ internal object ViewHelper {
     @JvmStatic
     fun applyBackground(
         context: Context,
-        frontBackground: AppCompatImageView,
-        backBackground: AppCompatImageView,
+        appCompatImageView: AppCompatImageView,
         genericPaymentMethod: GenericPaymentMethod
     ) {
         val gradientColors = genericPaymentMethod.gradientColor
         if (gradientColors != null) {
             val gradientDrawable = getGradientDrawable(context, gradientColors)
-            frontBackground.setImageDrawable(gradientDrawable)
-            backBackground.setImageDrawable(gradientDrawable)
+            appCompatImageView.setImageDrawable(gradientDrawable)
         } else {
             val backgroundColor = genericPaymentMethod.backgroundColor
-            frontBackground.background.setColorFilter(backgroundColor, PorterDuff.Mode.SRC_ATOP)
-            backBackground.background.setColorFilter(backgroundColor, PorterDuff.Mode.SRC_ATOP)
+            appCompatImageView.background.setColorFilter(backgroundColor, PorterDuff.Mode.SRC_ATOP)
         }
     }
 }

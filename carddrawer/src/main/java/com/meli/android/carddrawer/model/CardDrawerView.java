@@ -306,7 +306,8 @@ public class CardDrawerView extends FrameLayout implements Observer {
 
         showGenericText(genericPaymentMethod);
 
-        ViewHelper.applyBackground(getContext(), frontBackground, backBackground, genericPaymentMethod);
+        ViewHelper.applyBackground(getContext(), frontBackground, genericPaymentMethod);
+        ViewHelper.applyBackground(getContext(), backBackground, genericPaymentMethod);
     }
 
     protected void showGenericText(@NotNull final GenericPaymentMethod genericPaymentMethod) {
