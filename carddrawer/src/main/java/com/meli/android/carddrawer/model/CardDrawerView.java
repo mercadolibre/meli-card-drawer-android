@@ -82,7 +82,7 @@ public class CardDrawerView extends FrameLayout implements Observer {
     protected ViewGroup cardBackLayout;
     protected ViewGroup genericFrontLayout;
     private ViewGroup genericBackLayout;
-    private AppCompatTextView genericTitle;
+    protected AppCompatTextView genericTitle;
     private AppCompatTextView genericSubtitle;
     private AppCompatTextView genericDescription;
     protected AppCompatTextView genericTagText;
@@ -302,8 +302,6 @@ public class CardDrawerView extends FrameLayout implements Observer {
 
         genericPaymentMethod.setPaymentMethodImage(paymentMethodImage);
 
-        setGenericText(genericTitle, genericPaymentMethod.getTitle());
-
         showGenericText(genericPaymentMethod);
 
         ViewHelper.applyBackground(getContext(), frontBackground, genericPaymentMethod);
@@ -311,10 +309,9 @@ public class CardDrawerView extends FrameLayout implements Observer {
     }
 
     protected void showGenericText(@NotNull final GenericPaymentMethod genericPaymentMethod) {
-        final GenericPaymentMethod.Text description = genericPaymentMethod.getDescription();
-        final GenericPaymentMethod.Text subtitle = genericPaymentMethod.getSubtitle();
-        setGenericText(genericDescription, description);
-        setGenericText(genericSubtitle, subtitle);
+        setGenericText(genericTitle, genericPaymentMethod.getTitle());
+        setGenericText(genericDescription, genericPaymentMethod.getDescription());
+        setGenericText(genericSubtitle, genericPaymentMethod.getSubtitle());
     }
 
     protected void setGenericText(@NotNull final AppCompatTextView genericText, @Nullable final GenericPaymentMethod.Text text) {

@@ -87,6 +87,7 @@ public class CardDrawerViewMedium extends CardDrawerViewLowres {
 
     @Override
     protected void showGenericText(@NonNull final GenericPaymentMethod genericPaymentMethod) {
+        setGenericText(genericTitle, genericPaymentMethod.getTitle());
         if (genericPaymentMethod.getDescription() != null) {
             setGenericText(genericText, genericPaymentMethod.getDescription());
         } else {
