@@ -24,6 +24,7 @@ android {
     testOptions {
         unitTests {
             includeAndroidResources = true
+            returnDefaultValues = true
         }
     }
 
@@ -49,6 +50,7 @@ dependencies {
         force = true // Workaround until Robolectric issue is solved https://github.com/robolectric/robolectric/issues/5921
     }
     testImplementation "org.mockito:mockito-core:$mockito"
+    testImplementation "io.mockk:mockk:$mockk"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin"
     implementation "com.mercadolibre.android.andesui:components:$andesVersion"
 }
