@@ -4,16 +4,40 @@ import android.graphics.Typeface
 import android.widget.ImageView
 import com.meli.android.carddrawer.BaseTest
 import com.meli.android.carddrawer.configuration.CardDrawerStyle
-import io.mockk.impl.annotations.MockK
+import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
 import org.junit.Assert
+import org.junit.Before
 import org.junit.Test
 
 class CardUITest: BaseTest() {
 
-    @MockK
     private lateinit var cardUI: CardUI
+
+    @Before
+    override fun setUp() {
+        super.setUp()
+        cardUI = mockk {
+            every { bankImageUrl } returns ""
+            every { cardLogoImageUrl } returns ""
+            every { bankImageRes } returns 0
+            every { cardLogoImageRes } returns 0
+            every { securityCodeLocation } returns ""
+            every { cardFontColor } returns 0
+            every { cardBackgroundColor } returns 0
+            every { cardGradientColors } returns mutableListOf()
+            every { securityCodePattern } returns 0
+            every { cardNumberPattern } returns intArrayOf()
+            every { namePlaceHolder } returns ""
+            every { expirationPlaceHolder } returns ""
+            every { fontType } returns ""
+            every { animationType } returns ""
+            every { customFont } returns mockk()
+            every { style } returns mockk()
+            every { disabledColor } returns 0
+        }
+    }
 
     @Test
     fun `when getting bank image url then return empty string`() {
@@ -38,6 +62,7 @@ class CardUITest: BaseTest() {
     @Test
     fun `when setting card logo image then call function setCardLogoImage one time`() {
         val imageView = mockk<ImageView>()
+        every { cardUI.setCardLogoImage(imageView) } answers { callOriginal() }
         cardUI.setCardLogoImage(imageView)
         verify (exactly = 1) {
             cardUI.setCardLogoImage(imageView)
@@ -47,6 +72,7 @@ class CardUITest: BaseTest() {
     @Test
     fun `when set ets bank image to the Imageview then call function setBankImage one time`() {
         val imageView = mockk<ImageView>()
+        every { cardUI.setBankImage(imageView) } answers { callOriginal() }
         cardUI.setBankImage(imageView)
         verify (exactly = 1) {
             cardUI.setBankImage(imageView)
@@ -56,6 +82,7 @@ class CardUITest: BaseTest() {
     @Test
     fun `when set overlay image to the Imageview then call function setOverlayImage one time`() {
         val imageView = mockk<ImageView>()
+        every { cardUI.setOverlayImage(imageView) } answers { callOriginal() }
         cardUI.setOverlayImage(imageView)
         verify (exactly = 1) {
             cardUI.setOverlayImage(imageView)
