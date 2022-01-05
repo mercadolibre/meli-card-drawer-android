@@ -2,6 +2,7 @@ package com.meli.android.carddrawer.model
 
 import android.widget.ImageView
 import com.meli.android.carddrawer.BaseTest
+import io.mockk.every
 import io.mockk.impl.annotations.MockK
 import io.mockk.mockk
 import io.mockk.verify
@@ -13,6 +14,9 @@ class CardDrawerSourceTest: BaseTest() {
 
     private lateinit var genericPaymentMethod: GenericPaymentMethod
     private lateinit var paymentCard: PaymentCard
+
+    @MockK
+    private lateinit var cardDrawerSource: CardDrawerSource
 
     @MockK
     private lateinit var mockText: GenericPaymentMethod.Text
@@ -31,6 +35,7 @@ class CardDrawerSourceTest: BaseTest() {
     override fun setUp() {
         super.setUp()
         genericPaymentMethod = returnGenericPaymentMethod()
+
     }
 
     private fun returnGenericPaymentMethod(): GenericPaymentMethod {
@@ -116,5 +121,28 @@ class CardDrawerSourceTest: BaseTest() {
             cardUI.setCardLogoImage(imageView)
         }
     }
+
+    @Test
+    fun `when getting disabled background color of CardDrawerSource then return null`() {
+        every { cardDrawerSource.disabledBackgroundColor } answers { callOriginal() }
+        Assert.assertEquals(cardDrawerSource.disabledBackgroundColor, null)
+    }
+
+    @Test
+    fun `when getting animation type of CardDrawerSource then return null`() {
+        every { cardDrawerSource.animationType } answers { callOriginal() }
+        Assert.assertEquals(cardDrawerSource.animationType, null)
+    }
+
+    @Test
+    fun `when setting payment method image of CardDrawerSource then setting Card Logo Image`() {
+        val imageView = mockk<ImageView>()
+        every { cardDrawerSource.setPaymentMethodImage(imageView) } answers { callOriginal() }
+        cardDrawerSource.setPaymentMethodImage(imageView)
+        verify(exactly = 1) {
+            cardDrawerSource.setPaymentMethodImage(imageView)
+        }
+    }
+
 
 }
