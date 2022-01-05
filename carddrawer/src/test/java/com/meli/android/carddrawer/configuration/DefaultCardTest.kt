@@ -2,14 +2,14 @@ package com.meli.android.carddrawer.configuration
 
 import androidx.core.content.ContextCompat
 import com.meli.android.carddrawer.R
-import com.meli.android.carddrawer.TestBase
+import com.meli.android.carddrawer.BaseTest
 import com.meli.android.carddrawer.model.CardAnimationType
 import io.mockk.every
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 
-class DefaultCardTest: TestBase() {
+class DefaultCardTest: BaseTest() {
 
     private lateinit var defaultCardConfiguration: DefaultCardConfiguration
 

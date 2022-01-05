@@ -3,7 +3,7 @@ package com.meli.android.carddrawer.format
 import android.graphics.Paint
 import android.graphics.Typeface
 import android.widget.TextView
-import com.meli.android.carddrawer.TestBase
+import com.meli.android.carddrawer.BaseTest
 import com.meli.android.carddrawer.TestUtils
 import io.mockk.every
 import io.mockk.mockk
@@ -12,7 +12,7 @@ import org.junit.Before
 import org.junit.Test
 import com.mercadolibre.android.andesui.font.TypefaceHelper as TypefaceHelperFont
 
-class TypefaceHelperTest: TestBase() {
+class TypefaceHelperTest: BaseTest() {
 
     @Before
     override fun setUp() {

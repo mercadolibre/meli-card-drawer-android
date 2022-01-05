@@ -2,32 +2,26 @@ package com.meli.android.carddrawer.model
 
 import android.graphics.Typeface
 import android.widget.ImageView
+import com.meli.android.carddrawer.BaseTest
 import com.meli.android.carddrawer.configuration.CardDrawerStyle
-import io.mockk.MockKAnnotations
 import io.mockk.impl.annotations.MockK
 import io.mockk.mockk
 import io.mockk.verify
 import org.junit.Assert
-import org.junit.Before
 import org.junit.Test
 
-class CardUITest {
+class CardUITest: BaseTest() {
 
     @MockK
     private lateinit var cardUI: CardUI
 
-    @Before
-    fun setUp() {
-        MockKAnnotations.init(this, relaxed = true)
-    }
-
     @Test
-    fun `when getting bank image url then return empty`() {
+    fun `when getting bank image url then return empty string`() {
         Assert.assertEquals(cardUI.bankImageUrl, "")
     }
 
     @Test
-    fun `when getting card logo image url then return empty`() {
+    fun `when getting card logo image url then return empty string`() {
         Assert.assertEquals(cardUI.cardLogoImageUrl, "")
     }
 
@@ -89,7 +83,7 @@ class CardUITest {
     }
 
     @Test
-    fun `when getting card gradient colors then return type list cardUI`() {
+    fun `when getting card gradient colors then return type list`() {
         assert(cardUI.cardGradientColors is List<*>)
     }
 
@@ -104,7 +98,7 @@ class CardUITest {
     }
 
     @Test
-    fun `when getting card number pattern then return IntArray`() {
+    fun `when getting card number pattern then return type IntArray`() {
         assert(cardUI.cardNumberPattern is IntArray)
     }
 

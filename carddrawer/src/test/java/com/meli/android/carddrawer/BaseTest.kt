@@ -5,7 +5,7 @@ import io.mockk.MockKAnnotations
 import io.mockk.impl.annotations.MockK
 import org.junit.Before
 
-open class TestBase {
+open class BaseTest {
 
     @MockK(relaxed = true)
     protected lateinit var contextMock: Context

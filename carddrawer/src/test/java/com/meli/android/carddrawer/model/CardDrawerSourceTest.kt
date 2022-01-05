@@ -1,7 +1,7 @@
 package com.meli.android.carddrawer.model
 
 import android.widget.ImageView
-import io.mockk.MockKAnnotations
+import com.meli.android.carddrawer.BaseTest
 import io.mockk.impl.annotations.MockK
 import io.mockk.mockk
 import io.mockk.verify
@@ -9,7 +9,7 @@ import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 
-class CardDrawerSourceTest {
+class CardDrawerSourceTest: BaseTest() {
 
     private lateinit var genericPaymentMethod: GenericPaymentMethod
     private lateinit var paymentCard: PaymentCard
@@ -28,8 +28,8 @@ class CardDrawerSourceTest {
     private val cardUI by lazy { mockk<CardUI>(relaxed = true) }
 
     @Before
-    fun setUp() {
-        MockKAnnotations.init(this, relaxed = true)
+    override fun setUp() {
+        super.setUp()
         genericPaymentMethod = returnGenericPaymentMethod()
     }
 

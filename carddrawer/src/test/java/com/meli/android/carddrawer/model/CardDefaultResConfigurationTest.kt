@@ -2,13 +2,13 @@ package com.meli.android.carddrawer.model
 
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
-import com.meli.android.carddrawer.TestBase
+import com.meli.android.carddrawer.BaseTest
 import io.mockk.impl.annotations.MockK
 import io.mockk.mockk
 import io.mockk.verify
 import org.junit.Test
 
-class CardDefaultResConfigurationTest: TestBase() {
+class CardDefaultResConfigurationTest: BaseTest() {
 
     @MockK
     private lateinit var cardDefaultResConfiguration: CardDefaultResConfiguration
