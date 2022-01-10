@@ -59,6 +59,30 @@ class CardDrawerViewTest {
         }
 
         @Nested
+        @DisplayName("When is rendered with bottom label")
+        inner class WhenIsRenderedWithBottomLabel {
+
+            private val expectedBottomLabel = "Sample bottom label"
+
+            @BeforeEach
+            fun setUp() {
+                val label = Label(
+                    text = expectedBottomLabel,
+                    color = "#000000",
+                    backgroundColor = "red"
+                )
+                subject.setBottomLabel(label)
+                subject.showBottomLabel()
+            }
+
+            @Test
+            @DisplayName("Then display tag with expected values")
+            fun thenDisplayTagWithExpectedValues() {
+                onView(withText(expectedBottomLabel)).check(matches(withId(R.id.card_drawer_bottom_description)))
+            }
+        }
+
+        @Nested
         @DisplayName("When is rendered without values")
         inner class WhenIsRenderedWithDefaultValues {
 
