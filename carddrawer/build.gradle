@@ -18,6 +18,9 @@ android {
     }
 
     buildTypes {
+        debug {
+            testCoverageEnabled true
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
@@ -48,7 +51,6 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin"
     implementation "com.mercadolibre.android.andesui:components:$andesVersion"
 
-    androidTestImplementation "io.mockk:mockk:$mockk"
     androidTestImplementation "io.mockk:mockk-android:$mockk"
     androidTestImplementation("androidx.test:runner:$testRunner")
     androidTestImplementation "androidx.test.ext:junit:$testRunner"
