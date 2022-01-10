@@ -16,16 +16,18 @@ sealed class CardDrawerSource {
 }
 
 @Parcelize
-open class GenericPaymentMethod(
+open class GenericPaymentMethod @JvmOverloads constructor(
     override val backgroundColor: Int,
     val title: Text,
     val imageUrl: String? = null,
     val subtitle: Text? = null,
-    override val tag : Tag? = null
+    override val tag : Tag? = null,
+    val gradientColor: List<String>? = null,
+    val description: Text? = null
 ) : CardDrawerSource(), Parcelable {
 
     @Parcelize
-    data class Text(val text: String, val color: Int): Parcelable
+    data class Text(val text: String, val color: Int, val weight: String): Parcelable
 }
 
 class PaymentCard(val cardUI: CardUI, override val tag: Tag? = null) : CardDrawerSource() {

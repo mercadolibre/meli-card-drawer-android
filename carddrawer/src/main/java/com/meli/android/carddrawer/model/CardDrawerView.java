@@ -46,6 +46,7 @@ import com.meli.android.carddrawer.internal.BaseExtensionsKt;
 import com.meli.android.carddrawer.internal.TagDimensions;
 import com.meli.android.carddrawer.model.customview.CustomViewConfiguration;
 import com.mercadolibre.android.picassodiskcache.PicassoDiskLoader;
+import org.jetbrains.annotations.NotNull;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.List;
@@ -81,8 +82,9 @@ public class CardDrawerView extends FrameLayout implements Observer {
     protected ViewGroup cardBackLayout;
     protected ViewGroup genericFrontLayout;
     private ViewGroup genericBackLayout;
-    private AppCompatTextView genericTitle;
+    protected AppCompatTextView genericTitle;
     private AppCompatTextView genericSubtitle;
+    private AppCompatTextView genericDescription;
     protected AppCompatTextView genericTagText;
     protected AppCompatTextView cardTagText;
     protected ImageView cardFrontGradient;
@@ -201,6 +203,7 @@ public class CardDrawerView extends FrameLayout implements Observer {
 
         genericTitle = genericFrontLayout.findViewById(R.id.generic_title);
         genericSubtitle = genericFrontLayout.findViewById(R.id.generic_subtitle);
+        genericDescription = genericFrontLayout.findViewById(R.id.generic_description);
         genericTagText = genericFrontLayout.findViewById(R.id.card_tag);
         cardTagText = cardFrontLayout.findViewById(R.id.card_tag);
 
@@ -298,20 +301,37 @@ public class CardDrawerView extends FrameLayout implements Observer {
         showTag(genericPaymentMethod, genericTagText, genericFrontLayout);
 
         genericPaymentMethod.setPaymentMethodImage(paymentMethodImage);
-        genericTitle.setText(genericPaymentMethod.getTitle().getText());
-        genericTitle.setTextColor(genericPaymentMethod.getTitle().getColor());
-        showGenericPaymentSubtitle(genericPaymentMethod.getSubtitle());
-        frontBackground.setColorFilter(genericPaymentMethod.getBackgroundColor(), PorterDuff.Mode.SRC_ATOP);
-        backBackground.setColorFilter(genericPaymentMethod.getBackgroundColor(), PorterDuff.Mode.SRC_ATOP);
+
+        showGenericText(genericPaymentMethod);
+
+        applyBackground(frontBackground, genericPaymentMethod);
+        applyBackground(backBackground, genericPaymentMethod);
     }
 
-    protected void showGenericPaymentSubtitle(@Nullable final GenericPaymentMethod.Text subtitle) {
-        if (subtitle != null) {
-            genericSubtitle.setText(subtitle.getText());
-            genericSubtitle.setTextColor(subtitle.getColor());
-            genericSubtitle.setVisibility(VISIBLE);
+    private void applyBackground(@NotNull final AppCompatImageView appCompatImageView, @NotNull final GenericPaymentMethod genericPaymentMethod) {
+        final List<String> gradientColors = genericPaymentMethod.getGradientColor();
+        if (gradientColors != null) {
+            final GradientDrawable gradientDrawable = ViewHelper.getGradientDrawable(getContext(), gradientColors);
+            appCompatImageView.setImageDrawable(gradientDrawable);
         } else {
-            genericSubtitle.setVisibility(GONE);
+            appCompatImageView.getBackground().setColorFilter(genericPaymentMethod.getBackgroundColor(), PorterDuff.Mode.SRC_ATOP);
+        }
+    }
+
+    protected void showGenericText(@NotNull final GenericPaymentMethod genericPaymentMethod) {
+        setGenericText(genericTitle, genericPaymentMethod.getTitle());
+        setGenericText(genericDescription, genericPaymentMethod.getDescription());
+        setGenericText(genericSubtitle, genericPaymentMethod.getSubtitle());
+    }
+
+    protected void setGenericText(@NotNull final AppCompatTextView genericText, @Nullable final GenericPaymentMethod.Text text) {
+        if (text != null) {
+            genericText.setText(text.getText());
+            genericText.setTextColor(text.getColor());
+            genericText.setTypeface(genericText.getTypeface(), CardDrawerFont.from(text.getWeight()).getStyle());
+            genericText.setVisibility(VISIBLE);
+        } else {
+            genericText.setVisibility(INVISIBLE);
         }
     }
 
@@ -765,6 +785,9 @@ public class CardDrawerView extends FrameLayout implements Observer {
         }
         if (codeFront != null) {
             setTextPixelSize(codeFront, newTextSize);
+        }
+        if (genericDescription != null) {
+            setTextPixelSize(genericDescription, resources.getDimension(R.dimen.card_drawer_font_generic_description) * cardSizeMultiplier);
         }
     }
 

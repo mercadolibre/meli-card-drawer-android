@@ -21,7 +21,7 @@
         <com.meli.android.carddrawer.model.BottomLabel
             android:id="@+id/card_drawer_bottom_label"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:visibility="invisible"
             tools:visibility="visible" />
 
