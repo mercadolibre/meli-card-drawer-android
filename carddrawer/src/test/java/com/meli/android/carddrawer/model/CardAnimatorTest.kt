@@ -52,7 +52,7 @@ class CardAnimatorTest : BaseTest() {
     }
 
     @Test
-    fun `when call function switchView with POSITION_FRON per parameter then fill showingLayout with the same value`() {
+    fun `when call function switchView with POSITION_FRONT per parameter then fill showingLayout with the same value`() {
         initialize()
         val showingLayout = cardAnimator.getDeclaredField("showingLayout")
         cardAnimator.switchView(FieldPosition.POSITION_FRONT)
@@ -123,7 +123,7 @@ class CardAnimatorTest : BaseTest() {
     }
 
     @Test
-    fun `when call function showFont then call flipCardFront`() {
+    fun `when call function showFront then call flipCardFront`() {
         val mock = mockk<CardAnimator>(relaxed = true)
         every { mock.switchView(FieldPosition.POSITION_BACK) } answers { callOriginal() }
         mock.switchView(FieldPosition.POSITION_BACK)

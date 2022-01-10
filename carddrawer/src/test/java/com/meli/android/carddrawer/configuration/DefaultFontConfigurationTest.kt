@@ -7,7 +7,7 @@ import io.mockk.verify
 import org.junit.Assert
 import org.junit.Test
 
-class DefaultFontTest: BaseTest() {
+class DefaultFontConfigurationTest: BaseTest() {
 
     private lateinit var defaultFontConfiguration: DefaultFontConfiguration
     private val color = 2

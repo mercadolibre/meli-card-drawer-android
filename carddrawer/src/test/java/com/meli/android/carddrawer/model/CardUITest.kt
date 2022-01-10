@@ -70,7 +70,7 @@ class CardUITest: BaseTest() {
     }
 
     @Test
-    fun `when set ets bank image to the Imageview then call function setBankImage one time`() {
+    fun `when setting bank image to the Imageview then call function setBankImage one time`() {
         val imageView = mockk<ImageView>()
         every { cardUI.setBankImage(imageView) } answers { callOriginal() }
         cardUI.setBankImage(imageView)

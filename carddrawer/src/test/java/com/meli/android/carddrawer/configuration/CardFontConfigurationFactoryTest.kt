@@ -3,7 +3,7 @@ package com.meli.android.carddrawer.configuration
 import com.meli.android.carddrawer.BaseTest
 import org.junit.Test
 
-class CardFontFactoryTest : BaseTest() {
+class CardFontConfigurationFactoryTest : BaseTest() {
 
     @Test
     fun `when call function getConfiguration of CardFontConfigurationFactory with FontType DARK_TYPE per parameter then return DarkFontConfiguration`() {
