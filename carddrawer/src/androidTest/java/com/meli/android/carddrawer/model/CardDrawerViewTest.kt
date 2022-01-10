@@ -1,13 +1,19 @@
 package com.meli.android.carddrawer.model
 
-import androidx.test.espresso.Espresso.*
-import androidx.test.espresso.assertion.ViewAssertions.*
-import androidx.test.espresso.matcher.ViewMatchers.*
+import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.assertion.ViewAssertions.matches
+import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
+import androidx.test.espresso.matcher.ViewMatchers.withClassName
+import androidx.test.espresso.matcher.ViewMatchers.withId
+import androidx.test.espresso.matcher.ViewMatchers.withText
 import com.meli.android.carddrawer.R
 import com.meli.android.carddrawer.ViewScenarioRule
-import org.hamcrest.Matchers.*
+import org.hamcrest.Matchers.endsWith
 import org.junit.Rule
-import org.junit.jupiter.api.*
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.DisplayName
+import org.junit.jupiter.api.Nested
+import org.junit.jupiter.api.Test
 
 class CardDrawerViewTest {
 
@@ -15,7 +21,7 @@ class CardDrawerViewTest {
     val viewScenario = ViewScenarioRule()
 
     @Nested
-    @DisplayName("When is rendered with default values")
+    @DisplayName("When is rendered without values")
     inner class WhenIsRenderedWithDefaultValues {
 
         @BeforeEach
