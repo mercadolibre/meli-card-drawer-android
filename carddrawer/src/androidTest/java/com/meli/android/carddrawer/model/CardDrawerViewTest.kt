@@ -78,7 +78,10 @@ class CardDrawerViewTest {
             @Test
             @DisplayName("Then display tag with expected values")
             fun thenDisplayTagWithExpectedValues() {
-                onView(withText(expectedBottomLabel)).check(matches(withId(R.id.card_drawer_bottom_description)))
+                onView(withText(expectedBottomLabel))
+                    .check(matches(isDisplayed()))
+                    .check(matches(withId(R.id.card_drawer_bottom_description))
+                )
             }
         }
 
