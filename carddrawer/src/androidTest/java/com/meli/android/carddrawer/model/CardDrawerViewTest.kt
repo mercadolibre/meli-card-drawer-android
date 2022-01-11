@@ -27,6 +27,10 @@ class CardDrawerViewTest {
     inner class GivenCardDrawerViewWithDefaultConfiguration {
 
         lateinit var subject: CardDrawerView
+        private val expectedCardName = "Nombre y Apellido"
+        private val expectedCardExpiration = "MM/AA"
+        private val expectedCardNumber = "****  ****  ****  ****"
+        private val expectedCVV = "****"
 
         @BeforeEach
         fun setUp() {
@@ -98,25 +102,25 @@ class CardDrawerViewTest {
             @Test
             @DisplayName("Then the card name placeholder is displayed")
             fun thenTheCardNamePlaceholderIsDisplayed() {
-                onView(withId(R.id.cho_card_name)).check(matches(withText("Nombre y Apellido")))
+                onView(withId(R.id.cho_card_name)).check(matches(withText(expectedCardName)))
             }
 
             @Test
             @DisplayName("Then the card expiration placeholder is displayed")
             fun thenTheCardExpirationPlaceholderIsDisplayed() {
-                onView(withId(R.id.cho_card_date)).check(matches(withText("MM/AA")))
+                onView(withId(R.id.cho_card_date)).check(matches(withText(expectedCardExpiration)))
             }
 
             @Test
             @DisplayName("Then the card number truncated is displayed")
             fun thenTheCardNumberTruncatedIsDisplayed() {
-                onView(withId(R.id.cho_card_number)).check(matches(withText("****  ****  ****  ****")))
+                onView(withId(R.id.cho_card_number)).check(matches(withText(expectedCardNumber)))
             }
 
             @Test
             @DisplayName("Then the card cvv truncated is displayed")
             fun thenTheCardCVVTruncatedIsDisplayed() {
-                onView(withId(R.id.cho_card_code_front)).check(matches(withText("****")))
+                onView(withId(R.id.cho_card_code_front)).check(matches(withText(expectedCVV)))
             }
         }
     }
