@@ -1,11 +1,11 @@
-package com.meli.android.carddrawer.configuration.base
+package com.meli.android.carddrawer
 
 import android.content.Context
 import io.mockk.MockKAnnotations
 import io.mockk.impl.annotations.MockK
 import org.junit.Before
 
-open class ConfigurationTestBase {
+open class BaseTest {
 
     @MockK(relaxed = true)
     protected lateinit var contextMock: Context

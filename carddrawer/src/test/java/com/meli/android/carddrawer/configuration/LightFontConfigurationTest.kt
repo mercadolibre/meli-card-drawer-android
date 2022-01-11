@@ -3,14 +3,14 @@ package com.meli.android.carddrawer.configuration
 import android.text.TextPaint
 import androidx.core.content.ContextCompat
 import com.meli.android.carddrawer.R
-import com.meli.android.carddrawer.configuration.base.ConfigurationTestBase
+import com.meli.android.carddrawer.BaseTest
 import com.meli.android.carddrawer.configuration.shadow.ShadowConfiguration
 import com.meli.android.carddrawer.configuration.shadow.ShadowFontConfiguration
 import io.mockk.mockk
 import io.mockk.verify
 import org.junit.Test
 
-class LightFontConfigurationTest: ConfigurationTestBase() {
+class LightFontConfigurationTest: BaseTest() {
 
     private lateinit var lightFontConfiguration: LightFontConfiguration
 

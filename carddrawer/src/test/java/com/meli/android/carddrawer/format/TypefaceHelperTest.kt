@@ -1,27 +1,22 @@
 package com.meli.android.carddrawer.format
 
-import android.content.Context
 import android.graphics.Paint
 import android.graphics.Typeface
 import android.widget.TextView
+import com.meli.android.carddrawer.BaseTest
 import com.meli.android.carddrawer.TestUtils
-import io.mockk.MockKAnnotations
 import io.mockk.every
-import io.mockk.impl.annotations.MockK
 import io.mockk.mockk
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import com.mercadolibre.android.andesui.font.TypefaceHelper as TypefaceHelperFont
 
-class TypefaceHelperTest {
-
-    @MockK(relaxed = true)
-    private lateinit var contextMock: Context
+class TypefaceHelperTest: BaseTest() {
 
     @Before
-    fun setUp() {
-        MockKAnnotations.init(this, relaxed = true)
+    override fun setUp() {
+        super.setUp()
         val typeface = mockk<Typeface>(relaxed = true)
         TestUtils.setFinalStatic(Typeface::class.java.getField("MONOSPACE"), typeface)
     }

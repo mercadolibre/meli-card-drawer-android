@@ -1,13 +1,13 @@
 package com.meli.android.carddrawer.configuration
 
 import android.text.TextPaint
-import com.meli.android.carddrawer.configuration.base.ConfigurationTestBase
+import com.meli.android.carddrawer.BaseTest
 import io.mockk.mockk
 import io.mockk.verify
 import org.junit.Assert
 import org.junit.Test
 
-class DefaultFontConfigurationTest: ConfigurationTestBase() {
+class DefaultFontConfigurationTest: BaseTest() {
 
     private lateinit var defaultFontConfiguration: DefaultFontConfiguration
     private val color = 2
