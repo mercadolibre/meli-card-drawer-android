@@ -121,6 +121,63 @@ class CardDrawerViewTest {
         }
     }
 
+    @Nested
+    @DisplayName("Given CardDrawerView with user data")
+    inner class GivenCardDrawerViewWithUserData {
+
+        private val expectedCardName = "Maria Alessandra Louise Figueiredo"
+        private val expectedCardExpiration = "12/12"
+        private val cardNumber = "5325  4816  4243  7098"
+        private val expectedCardNumber = "5325  4816  4243  7098"
+        private val cvv = "11"
+        private val expectedCVV = "11**"
+
+        @BeforeEach
+        fun setUp() {
+            viewScenario.launch(
+                viewFactory = { CardDrawerView(it) },
+                onView = {
+                    it.card = Card().apply {
+                        name = expectedCardName
+                        expiration = expectedCardExpiration
+                        number = cardNumber
+                        secCode = cvv
+                    }
+                    it.updateCardInformation()
+                }
+            )
+        }
+
+        @Nested
+        @DisplayName("When is rendered with values")
+        inner class WhenIsRenderedWithValues {
+
+            @Test
+            @DisplayName("Then the card name is displayed")
+            fun thenTheCardNamePlaceholderIsDisplayed() {
+                onView(withId(R.id.cho_card_name)).check(matches(withText(expectedCardName)))
+            }
+
+            @Test
+            @DisplayName("Then the card expiration is displayed")
+            fun thenTheCardExpirationPlaceholderIsDisplayed() {
+                onView(withId(R.id.cho_card_date)).check(matches(withText(expectedCardExpiration)))
+            }
+
+            @Test
+            @DisplayName("Then the card number is displayed")
+            fun thenTheCardNumberTruncatedIsDisplayed() {
+                onView(withId(R.id.cho_card_number)).check(matches(withText(expectedCardNumber)))
+            }
+
+            @Test
+            @DisplayName("Then the card cvv truncated is displayed")
+            fun thenTheCardCVVTruncatedIsDisplayed() {
+                onView(withId(R.id.cho_card_code_front)).check(matches(withText(expectedCVV)))
+            }
+        }
+    }
+
     private fun buildConfiguration(context: Context): DefaultCardConfiguration {
         return DefaultCardConfiguration(context)
     }
