@@ -25,17 +25,13 @@ class BottomLabelAnimationTest: BaseTest() {
     @MockK(relaxed = true)
     private lateinit var bottomLabelAnimationMock: BottomLabelAnimation
 
-
     @Before
     override fun setUp() {
         super.setUp()
-
         mockkStatic(AnimationUtils::class)
-
         every {
             AnimationUtils.loadAnimation(viewMock.context, R.anim.card_drawer_slide_up_in)
         } returns animationMock
-
         every {
             AnimationUtils.loadAnimation(viewMock.context, R.anim.card_drawer_slide_down_out)
         } returns animationMock
@@ -46,7 +42,6 @@ class BottomLabelAnimationTest: BaseTest() {
         bottomLabelAnimation = BottomLabelAnimation(viewMock, bottomLabelAnimationMock)
         val slideUp = bottomLabelAnimation.getDeclaredField("slideUp") as Animation
         bottomLabelAnimation.slideUp()
-
         verify {
             viewMock.startAnimation(slideUp)
         }
@@ -57,11 +52,49 @@ class BottomLabelAnimationTest: BaseTest() {
         bottomLabelAnimation = BottomLabelAnimation(viewMock, bottomLabelAnimationMock)
         val slideUp = bottomLabelAnimation.getDeclaredField("slideDown") as Animation
         bottomLabelAnimation.slideDown()
-
         verify {
             viewMock.startAnimation(slideUp)
         }
     }
+
+    @Test
+    fun `when instance BottomLabelAnimation without nextAnimation then call setAnimationListener of slideDown`() {
+        bottomLabelAnimation = BottomLabelAnimation(viewMock)
+        val slideDown = bottomLabelAnimation.getDeclaredField("slideDown") as Animation
+        verify {
+            slideDown.setAnimationListener(
+                any()
+            )
+        }
+    }
+
+    @Test
+    fun `when instance BottomLabelAnimation without nextAnimation then call setAnimationListener of slideUp`() {
+        bottomLabelAnimation = BottomLabelAnimation(viewMock)
+        val slideUp = bottomLabelAnimation.getDeclaredField("slideUp") as Animation
+        verify {
+            slideUp.setAnimationListener(
+                any()
+            )
+        }
+    }
+
+    @Test
+    fun `when instance BottomLabelAnimation without nextAnimation then don't call slideDown`() {
+        bottomLabelAnimation = BottomLabelAnimation(viewMock)
+        verify(inverse = true) {
+            bottomLabelAnimationMock.slideDown()
+        }
+    }
+
+    @Test
+    fun `when instance BottomLabelAnimation without nextAnimation then don't call slideUp`() {
+        bottomLabelAnimation = BottomLabelAnimation(viewMock)
+        verify(inverse = true) {
+            bottomLabelAnimationMock.slideUp()
+        }
+    }
+
 
     private fun BottomLabelAnimation.getDeclaredField(name: String): Any {
         return javaClass.getDeclaredField(name).let {
