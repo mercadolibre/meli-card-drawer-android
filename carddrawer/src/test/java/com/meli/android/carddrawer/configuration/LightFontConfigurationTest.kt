@@ -10,28 +10,29 @@ import io.mockk.mockk
 import io.mockk.verify
 import org.junit.Test
 
-class DarkFontTest : BaseTest() {
+class LightFontConfigurationTest: BaseTest() {
 
-    private lateinit var darkFontConfiguration: DarkFontConfiguration
+    private lateinit var lightFontConfiguration: LightFontConfiguration
 
     private fun initWithShadow() {
         val shadowFontConfiguration: ShadowConfiguration = ShadowFontConfiguration(contextMock)
-        darkFontConfiguration = DarkFontConfiguration(contextMock, shadowFontConfiguration)
+        lightFontConfiguration = LightFontConfiguration(contextMock, shadowFontConfiguration)
     }
 
     @Test
     fun `when getting color with shadow font per parameter then return card_drawer_dark_font_empty_color`() {
         initWithShadow()
-        val validColor = ContextCompat.getColor(contextMock, R.color.card_drawer_dark_font_empty_color)
-        assert(darkFontConfiguration.color == validColor)
+        val validColor =
+            ContextCompat.getColor(contextMock, R.color.card_drawer_light_font_empty_color)
+        assert(lightFontConfiguration.color == validColor)
     }
 
     @Test
     fun `when call function setShadow then call setShadowLayer`() {
         initWithShadow()
         val textPaint = mockk<TextPaint>(relaxed = true)
-        darkFontConfiguration.setShadow(textPaint)
-        verify {
+        lightFontConfiguration.setShadow(textPaint)
+        verify() {
             textPaint.setShadowLayer(
                 any(),
                 any(),
@@ -42,18 +43,18 @@ class DarkFontTest : BaseTest() {
     }
 
     @Test
-    fun`when getting color without shadow per parameter then return card_drawer_dark_font_empty_color`() {
-        darkFontConfiguration = DarkFontConfiguration(contextMock)
+    fun`when getting color without shadow per parameter then return card_drawer_light_font_empty_color`() {
+        lightFontConfiguration = LightFontConfiguration(contextMock)
         val validColor =
-            ContextCompat.getColor(contextMock, R.color.card_drawer_dark_font_empty_color)
-        assert(darkFontConfiguration.color == validColor)
+            ContextCompat.getColor(contextMock, R.color.card_drawer_light_font_empty_color)
+        assert(lightFontConfiguration.color == validColor)
     }
 
     @Test
     fun`when call setShadow without shadow per parameter then call setShadowLayer`() {
         val textPaint = mockk<TextPaint>()
-        darkFontConfiguration = DarkFontConfiguration(contextMock)
-        darkFontConfiguration.setShadow(textPaint)
+        lightFontConfiguration = LightFontConfiguration(contextMock)
+        lightFontConfiguration.setShadow(textPaint)
         verify(exactly = 0) {
             textPaint.setShadowLayer(
                 any(),
@@ -62,5 +63,5 @@ class DarkFontTest : BaseTest() {
                 any()
             )
         }
-   }
+    }
 }

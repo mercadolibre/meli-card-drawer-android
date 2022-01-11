@@ -84,7 +84,7 @@ class CardConfigurationTest: BaseTest() {
     }
 
     @Test
-    fun `when call function v then if it call one time`() {
+    fun `when call function resetConstraintLayoutConfiguration then if it call one time`() {
         val constraintLayout = mockk<ConstraintLayout>()
         every { cardConfiguration.resetConstraintLayoutConfiguration(constraintLayout) } answers { callOriginal() }
         cardConfiguration.resetConstraintLayoutConfiguration(constraintLayout)
