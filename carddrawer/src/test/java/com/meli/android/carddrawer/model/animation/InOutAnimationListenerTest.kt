@@ -8,7 +8,6 @@ import io.mockk.spyk
 import org.junit.Assert
 import org.junit.Test
 
-
 class InOutAnimationListenerTest: BaseTest() {
 
     private lateinit var inOutAnimationListener: InOutAnimationListener
@@ -27,13 +26,6 @@ class InOutAnimationListenerTest: BaseTest() {
         inOutAnimationListener = InOutAnimationListener(viewMock, View.GONE) {
             methodIsCalled()
         }
-    }
-
-    @Test
-    fun test() {
-        inOutAnimationListener.onAnimationEnd(animationMock)
-        val targetView = inOutAnimationListener.getDeclaredField2("targetView") as View
-        Assert.assertEquals(targetView.visibility, View.VISIBLE)
     }
 
     @Test
@@ -69,14 +61,5 @@ class InOutAnimationListenerTest: BaseTest() {
             it.get(this) as Any
         }
     }
-
-    private fun InOutAnimationListener.getDeclaredField2(name: String): Any {
-        return javaClass.getDeclaredField(name).let {
-            it.isAccessible = true
-            it.get(this) as Any
-        }
-    }
-
-
 
 }
