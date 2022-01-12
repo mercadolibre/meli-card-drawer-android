@@ -1,0 +1,22 @@
+apiVersion: v1alpha
+kind: espresso
+sauce:
+  region: us-west-1
+  concurrency: 10
+  metadata:
+    build: Release $CI_COMMIT_SHORT_SHA
+espresso:
+  app: ./carddrawer/build/outputs/apk/androidTest/debug/carddrawer-debug-androidTest.apk
+  testApp: ./carddrawer/build/outputs/apk/androidTest/debug/carddrawer-debug-androidTest.apk
+suites:
+  - name: "CardDrawer espresso suite"
+    emulators:
+      - name: "Android GoogleAPI Emulator"
+        platformVersions:
+          - "11"
+          - "10"
+          - "9"
+          - "8.1"
+          - "8"
+          - "7.1"
+          - "7"
