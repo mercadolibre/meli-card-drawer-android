@@ -50,10 +50,10 @@ class BottomLabelAnimationTest: BaseTest() {
     @Test
     fun `when call function slideDown then call startAnimation with slideDown`() {
         bottomLabelAnimation = BottomLabelAnimation(viewMock, bottomLabelAnimationMock)
-        val slideUp = bottomLabelAnimation.getDeclaredField("slideDown") as Animation
+        val slideDown = bottomLabelAnimation.getDeclaredField("slideDown") as Animation
         bottomLabelAnimation.slideDown()
         verify {
-            viewMock.startAnimation(slideUp)
+            viewMock.startAnimation(slideDown)
         }
     }
 
@@ -94,7 +94,6 @@ class BottomLabelAnimationTest: BaseTest() {
             bottomLabelAnimationMock.slideUp()
         }
     }
-
 
     private fun BottomLabelAnimation.getDeclaredField(name: String): Any {
         return javaClass.getDeclaredField(name).let {
