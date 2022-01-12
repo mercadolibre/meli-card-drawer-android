@@ -3,6 +3,7 @@ package com.meli.android.carddrawer
 import org.robolectric.util.ReflectionHelpers
 import org.mockito.Mockito
 import android.graphics.Typeface
+import android.os.Build
 import android.os.Parcelable
 import android.os.Parcel
 import com.meli.android.carddrawer.format.TypefaceHelper
@@ -52,6 +53,10 @@ object TestUtils {
         modifiersField.isAccessible = true
         modifiersField.setInt(field, field.modifiers and Modifier.FINAL.inv())
         field.set(null, newValue)
+    }
+
+    fun changeSDKVersion(value: Int) {
+        setFinalStatic(Build.VERSION::class.java.getField("SDK_INT"), value)
     }
 
 }
