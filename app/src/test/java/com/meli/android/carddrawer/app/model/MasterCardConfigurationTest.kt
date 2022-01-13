@@ -71,7 +71,7 @@ class MasterCardConfigurationTest: BaseTest() {
     @Test
     fun `when call function setBankImage then not set bankImageUrl`() {
         val imageView = mockk<ImageView>(relaxed = true)
-        masterCardConfiguration.setCardLogoImage(imageView)
+        masterCardConfiguration.setBankImage(imageView)
         Assert.assertEquals(masterCardConfiguration.bankImageUrl, null)
     }
 
@@ -91,7 +91,7 @@ class MasterCardConfigurationTest: BaseTest() {
     }
 
     @Test
-    fun `when getting security code pattern then return NUMBER_SEC_CODE`() {
+    fun `when getting security code pattern then return 4`() {
         Assert.assertEquals(masterCardConfiguration.securityCodePattern, 4)
     }
 
