@@ -1,5 +1,6 @@
 package com.meli.android.carddrawer.internal
 
+import com.meli.android.carddrawer.model.CardUI
 import com.meli.android.carddrawer.model.GenericPaymentMethod
 import com.meli.android.carddrawer.model.PaymentCard
 import io.mockk.mockk
@@ -56,11 +57,25 @@ class BaseExtensionsTest {
         Assert.assertFalse(paymentCardBlockIsCalled)
     }
 
-    fun callPaymentCardBlock() {
+    @Test
+    fun `when call either then return first CardUI and second null`() {
+        val paymentCard = paymentCard.either()
+        assert(paymentCard.first is CardUI)
+        Assert.assertEquals(paymentCard.second, null)
+    }
+
+    @Test
+    fun `when call either then return first null and second GenericPaymentMethod`() {
+        val genericPayment = genericPaymentMethod.either()
+        Assert.assertEquals(genericPayment.first, null)
+        assert(genericPayment.second is GenericPaymentMethod)
+    }
+
+    private fun callPaymentCardBlock() {
         paymentCardBlockIsCalled = true
     }
 
-    fun callGenericPaymentMethodIsCalled() {
+    private fun callGenericPaymentMethodIsCalled() {
         genericPaymentMethodIsCalled = true
     }
 
