@@ -80,7 +80,6 @@ class CustomSwitchHelperTest {
                     textPaint,
                     0)
         } returns mockk()
-
         every {
             StaticLayout
                 .Builder
