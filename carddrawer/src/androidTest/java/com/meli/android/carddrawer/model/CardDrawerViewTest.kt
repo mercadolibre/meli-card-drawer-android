@@ -8,8 +8,6 @@ import androidx.test.espresso.matcher.ViewMatchers.*
 import com.meli.android.carddrawer.R
 import com.meli.android.carddrawer.ViewScenarioRule
 import com.meli.android.carddrawer.configuration.DefaultCardConfiguration
-import io.mockk.every
-import io.mockk.mockk
 import org.hamcrest.Matchers.endsWith
 import org.junit.Before
 import org.junit.Rule
