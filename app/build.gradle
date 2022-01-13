@@ -32,6 +32,7 @@ dependencies {
     implementation "androidx.appcompat:appcompat:$appCompat"
     implementation "androidx.constraintlayout:constraintlayout:$constraintLayout"
     testImplementation "junit:junit:$junit"
+
     androidTestImplementation "androidx.test.ext:junit:$testRunner"
     androidTestImplementation "androidx.test.espresso:espresso-core:$espresso"
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin"

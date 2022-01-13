@@ -1,6 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+
 apply from: rootProject.file('gradle/jacoco.gradle')
 
 android {
@@ -15,6 +16,9 @@ android {
     }
 
     buildTypes {
+        debug {
+            testCoverageEnabled true
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
@@ -42,15 +46,20 @@ dependencies {
     implementation "com.mercadolibre.android:picasso-disk-cache:$picassoDiskCache"
     implementation "androidx.appcompat:appcompat:$appCompat"
     implementation "androidx.constraintlayout:constraintlayout:$constraintLayout"
-    testImplementation "junit:junit:$junit"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin"
+    implementation "com.mercadolibre.android.andesui:components:$andesVersion"
+
+    androidTestImplementation "junit:junit:$junit"
+    androidTestImplementation "io.mockk:mockk-android:$mockk"
+    androidTestImplementation "androidx.test:runner:$testRunner"
     androidTestImplementation "androidx.test.ext:junit:$testRunner"
     androidTestImplementation "androidx.test.espresso:espresso-core:$espresso"
+
+    testImplementation "junit:junit:$junit"
     testImplementation "org.robolectric:robolectric:$robolectric"
     testImplementation ('org.bouncycastle:bcprov-jdk15on:1.64') {
         force = true // Workaround until Robolectric issue is solved https://github.com/robolectric/robolectric/issues/5921
     }
     testImplementation "org.mockito:mockito-core:$mockito"
     testImplementation "io.mockk:mockk:$mockk"
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin"
-    implementation "com.mercadolibre.android.andesui:components:$andesVersion"
 }
