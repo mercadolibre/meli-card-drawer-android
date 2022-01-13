@@ -35,7 +35,6 @@ class CardDrawerSourceTest: BaseTest() {
     override fun setUp() {
         super.setUp()
         genericPaymentMethod = returnGenericPaymentMethod()
-
     }
 
     private fun returnGenericPaymentMethod(): GenericPaymentMethod {
