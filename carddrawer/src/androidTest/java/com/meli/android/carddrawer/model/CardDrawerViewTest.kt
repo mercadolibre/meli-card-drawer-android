@@ -40,11 +40,12 @@ class CardDrawerViewTest {
     fun when_is_rendered_with_tag_then_display_tag_with_expected_values() {
 
         val expectedTagText = "Sample Tag"
-        val cardDrawerSource = mockk<PaymentCard>(relaxed = true)
         val tag = buildTag(expectedTagText, "regular")
+        val cardDrawerSource = PaymentCard(
+            cardUI = buildConfiguration(viewScenario.activity),
+            tag = tag
+        )
 
-        every { cardDrawerSource.cardUI } returns buildConfiguration(viewScenario.activity)
-        every { cardDrawerSource.tag } returns tag
         viewScenario.activity.runOnUiThread { subject.show(cardDrawerSource) }
 
         onView(withText(expectedTagText.toUpperCase())).check(matches(withId(R.id.card_tag)))
