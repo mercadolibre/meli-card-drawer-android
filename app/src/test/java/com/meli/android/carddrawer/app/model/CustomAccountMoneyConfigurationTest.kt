@@ -22,8 +22,9 @@ class CustomAccountMoneyConfigurationTest {
     fun `when getting bank image res then return 0`() {
         Assert.assertEquals(customAccountMoneyConfiguration.bankImageRes, 0)
     }
+
     @Test
-    fun `when getting card logo image rest then return drawable card_drawer_account_money_logo`() {
+    fun `when getting card logo image res then return drawable card_drawer_account_money_logo`() {
         Assert.assertEquals(
             customAccountMoneyConfiguration.cardLogoImageRes,
             R.drawable.card_drawer_account_money_logo

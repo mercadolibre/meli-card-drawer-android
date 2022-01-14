@@ -25,7 +25,7 @@ class HybridCreditConfigurationTest {
     }
 
     @Test
-    fun `when getting card logo image rest then return drawable card_drawer_mla_pm_visa_white`() {
+    fun `when getting card logo image res then return drawable card_drawer_mla_pm_visa_white`() {
         Assert.assertEquals(
             hybridCreditConfiguration.cardLogoImageRes,
             R2.drawable.card_drawer_mla_pm_visa_white
@@ -56,7 +56,7 @@ class HybridCreditConfigurationTest {
     }
 
     @Test
-    fun `when getting card number pattern then return 4`() {
+    fun `when getting card number pattern size then return 4`() {
         Assert.assertEquals(hybridCreditConfiguration.cardNumberPattern.size.toLong(), 4)
     }
 

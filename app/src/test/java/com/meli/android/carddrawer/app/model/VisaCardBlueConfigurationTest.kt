@@ -102,13 +102,13 @@ class VisaCardBlueConfigurationTest: BaseTest() {
     }
 
     @Test
-    fun `when getting card gradient colors should return size 3`() {
+    fun `when getting card gradient colors then return size 3`() {
         val result = visaCardBlueConfiguration.cardGradientColors
         Assert.assertEquals(result?.size, 3)
     }
 
     @Test
-    fun `when getting card gradient colors should return colors`() {
+    fun `when getting card gradient colors then return list of colors`() {
         val result: MutableList<String>? = visaCardBlueConfiguration.cardGradientColors
         result?.let { list ->
             Assert.assertTrue(list.contains("#50ffffff"))
