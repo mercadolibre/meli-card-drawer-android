@@ -21,7 +21,7 @@ class CardDrawerViewLowresTest : CardDrawerViewUnitTest() {
         cardDrawerView = CardDrawerViewLowres(context)
     }
 
-    override fun setCardTextColor_initViews() {
+    override fun `when initialize the card then should check if the fields are filled`() {
         val spyCardDrawerView = spyk(cardDrawerView)
         val cardNumber = mockk<GradientTextView>(relaxed = true)
         val cardName = mockk<GradientTextView>(relaxed = true)
@@ -35,7 +35,7 @@ class CardDrawerViewLowresTest : CardDrawerViewUnitTest() {
         ReflectionHelpers.setField(spyCardDrawerView, "source", PaymentCard(cardUI))
         val fontType = FontType.LIGHT_TYPE
         val color = 2
-        spyCardDrawerView.setCardTextColor(fontType, color)
+        spyCardDrawerView.setCardTextColor(cardUI, fontType, color)
         verify {
             cardNumber.init(
                 any(),
@@ -66,7 +66,7 @@ class CardDrawerViewLowresTest : CardDrawerViewUnitTest() {
         }
     }
 
-    override fun updateCardInformation_cardWithoutValuesSetsDefaultValues() {
+    override fun `when update card information without values then set default values`() {
         val card = mockk<Card>(relaxed = true)
         every { card.name } returns ""
         every { card.number } returns ""
@@ -84,7 +84,7 @@ class CardDrawerViewLowresTest : CardDrawerViewUnitTest() {
         Assert.assertEquals("****", codeBack.text.toString())
     }
 
-    override fun updateCardInformation_setsNumbersWithFormat() {
+    override fun `when update card information then set numbers with format`() {
         val card = mockk<Card>(relaxed = true)
         every { card.name } returns "Juan Perez"
         every { card.number } returns "000012346666"
@@ -101,7 +101,7 @@ class CardDrawerViewLowresTest : CardDrawerViewUnitTest() {
         Assert.assertEquals("555*", codeBack.text.toString())
     }
 
-    override fun init_setsPaddingFromAttributes() {
+    override fun `when set padding from attributes then shoud fill paddingTop and paddingBottom`() {
         val expectedPadding = 23
         val attr = Robolectric.buildAttributeSet()
             .addAttribute(R.attr.card_header_internal_padding, "23dp")
@@ -111,7 +111,7 @@ class CardDrawerViewLowresTest : CardDrawerViewUnitTest() {
         Assert.assertEquals(expectedPadding, cardDrawerView.paddingBottom)
     }
 
-    override fun init_loadsViews() {
+    override fun `when init view then initialize fields with values`() {
         Assert.assertNotNull(ReflectionHelpers.getField(cardDrawerView, "cardLogoView"))
         Assert.assertNotNull(ReflectionHelpers.getField(cardDrawerView, "codeFront"))
         Assert.assertNotNull(ReflectionHelpers.getField(cardDrawerView, "codeBack"))

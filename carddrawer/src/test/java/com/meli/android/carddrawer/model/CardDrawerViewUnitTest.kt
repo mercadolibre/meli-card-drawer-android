@@ -45,7 +45,7 @@ open class CardDrawerViewUnitTest : BasicRobolectricTest() {
     }
 
     @Test
-    open fun init_setsPaddingFromAttributes() {
+    open fun `when set padding from attributes then shoud fill paddingTop and paddingBottom`() {
         val expectedPadding = 23
         val attr = Robolectric.buildAttributeSet()
             .addAttribute(R.attr.card_header_internal_padding, "23dp")
@@ -56,7 +56,7 @@ open class CardDrawerViewUnitTest : BasicRobolectricTest() {
     }
 
     @Test
-    open fun init_loadsViews() {
+    open fun `when init view then initialize fields with values`() {
         Assert.assertNotNull(ReflectionHelpers.getField(cardDrawerView, "issuerLogoView"))
         Assert.assertNotNull(ReflectionHelpers.getField(cardDrawerView, "cardLogoView"))
         Assert.assertNotNull(ReflectionHelpers.getField(cardDrawerView, "codeFront"))
@@ -70,7 +70,7 @@ open class CardDrawerViewUnitTest : BasicRobolectricTest() {
     }
 
     @Test
-    open fun updateCardInformation_setsNumbersWithFormat() {
+    open fun `when update card information then set numbers with format`() {
         val card = mockk<Card>(relaxed = true)
         every { card.name } returns "Juan Perez"
         every { card.number } returns "12346666"
@@ -91,7 +91,7 @@ open class CardDrawerViewUnitTest : BasicRobolectricTest() {
     }
 
     @Test
-    open fun updateCardInformation_cardWithoutValuesSetsDefaultValues() {
+    open fun `when update card information without values then set default values`() {
         val card = mockk<Card>(relaxed = true)
         every { card.name } returns ""
         every { card.number } returns ""
@@ -112,7 +112,7 @@ open class CardDrawerViewUnitTest : BasicRobolectricTest() {
     }
 
     @Test
-    fun show_updatesInformationAndSetsColorsAndCallsAnimator() {
+    fun `when call function show then updates information, set colors and call animator`() {
         val spyCardDrawerView = spyk(cardDrawerView, recordPrivateCalls = true)
         val cardUI: CardUI = DefaultCardConfiguration(context)
         val cardAnimatorMock = mockk<CardAnimator>(relaxed = true)
@@ -128,7 +128,7 @@ open class CardDrawerViewUnitTest : BasicRobolectricTest() {
     }
 
     @Test
-    fun show_callsAnimator() {
+    fun `when call function show then call animator`() {
         val spuCardDrawerView = spyk(cardDrawerView, recordPrivateCalls = true)
         val cardUI: CardUI = DefaultCardConfiguration(context)
         val cardAnimatorMock = mockk<CardAnimator>(relaxed = true)
@@ -144,7 +144,7 @@ open class CardDrawerViewUnitTest : BasicRobolectricTest() {
     }
 
     @Test
-    fun showSecurityCode_withFrontLocation_showsSecCodeCircleAndCallsAnimator() {
+    fun `when call function securityCode with front location then show sec code circle and call animator`() {
         val cardUI = mockk<CardUI>(relaxed = true)
         every { cardUI.securityCodeLocation } returns SecurityCodeLocation.FRONT
         every { cardUI.animationType } returns SecurityCodeLocation.NONE
@@ -162,7 +162,7 @@ open class CardDrawerViewUnitTest : BasicRobolectricTest() {
     }
 
     @Test
-    fun showSecurityCode_withBackLocation_showsSecCodeCircleAndCallsAnimator() {
+    fun `when call function securityCode with back location then show sec code circle and call animator`() {
         val cardUI = mockk<CardUI>(relaxed = true)
         every { cardUI.securityCodeLocation } returns SecurityCodeLocation.BACK
         every { cardUI.animationType } returns CardAnimationType.NONE
@@ -178,7 +178,7 @@ open class CardDrawerViewUnitTest : BasicRobolectricTest() {
     }
 
     @Test
-    fun showSecCode_withFrontPosition_callsSwitchViewWithFrontPosition() {
+    fun `when call function secCode with front position then call SwitchView with front position`() {
         val spyCardDrawerView = spyk(cardDrawerView)
         val codeFront = GradientTextView(context)
         codeFront.visibility = View.INVISIBLE
@@ -208,7 +208,7 @@ open class CardDrawerViewUnitTest : BasicRobolectricTest() {
     }
 
     @Test
-    fun showSecCode_withBackPosition_callsSwitchViewWithBackPosition() {
+    fun `when call function secCode with back position then call SwitchView with back position`() {
         val spyCardDrawerView = spyk(cardDrawerView)
         val cardUI = mockk<CardUI>(relaxed = true)
         every { cardUI.securityCodeLocation } returns SecurityCodeLocation.BACK
@@ -225,7 +225,7 @@ open class CardDrawerViewUnitTest : BasicRobolectricTest() {
     }
 
     @Test
-    fun showBack_callsSwitchViewWithoutAnimationUsesBackPosition() {
+    fun `when call function showBack then calls SwitchView without animation with back position`() {
         val spyCardDrawerView = spyk(cardDrawerView)
         val codeFront = GradientTextView(context)
         codeFront.visibility = View.INVISIBLE
@@ -242,7 +242,7 @@ open class CardDrawerViewUnitTest : BasicRobolectricTest() {
     }
 
     @Test
-    fun hideSecCircle_withFrontPosition_hidesSecCode() {
+    fun `when call function hideSecCircle with front position then hide sec code`() {
         val cardUI = mockk<CardUI>(relaxed = true)
         every { cardUI.securityCodeLocation } returns SecurityCodeLocation.FRONT
         every { cardUI.animationType } returns CardAnimationType.NONE
@@ -255,7 +255,7 @@ open class CardDrawerViewUnitTest : BasicRobolectricTest() {
     }
 
     @Test
-    fun hideSecCircle_withBackPosition_hidesSecCode() {
+    fun `when call function hideSecCircle with back position then hide sec code`() {
         val spyCardDrawerView = spyk(cardDrawerView)
         val cardAnimatorMock = mockk<CardAnimator>(relaxed = true)
         val codeFront = GradientTextView(context)
@@ -271,7 +271,7 @@ open class CardDrawerViewUnitTest : BasicRobolectricTest() {
     }
 
     @Test
-    open fun setCardTextColor_initViews() {
+    open fun `when initialize the card then should check if the fields are filled`() {
         val spyCardDrawerView = spyk(cardDrawerView, recordPrivateCalls = true)
         val cardNumber = mockk<GradientTextView>(relaxed = true)
         val cardName = mockk<GradientTextView>(relaxed = true)
@@ -285,7 +285,7 @@ open class CardDrawerViewUnitTest : BasicRobolectricTest() {
         ReflectionHelpers.setField(spyCardDrawerView, "source", PaymentCard(cardUI))
         val fontType = FontType.LIGHT_TYPE
         val color = 2
-        spyCardDrawerView.setCardTextColor(fontType, color)
+        spyCardDrawerView.setCardTextColor(cardUI, fontType, color)
         verify {
             cardNumber.init(
                 any(),
@@ -317,7 +317,7 @@ open class CardDrawerViewUnitTest : BasicRobolectricTest() {
     }
 
     @Test
-    fun updateIssuerLogo_setsLogo() {
+    fun `when update issuer logo then set image logo`() {
         val issuerLogoView = mockk<ImageSwitcher>(relaxed = true)
         val bankImageView = mockk<ImageView>(relaxed = true)
         val cardUI = mockk<CardUI>(relaxed = true)
@@ -334,7 +334,7 @@ open class CardDrawerViewUnitTest : BasicRobolectricTest() {
     }
 
     @Test
-    fun updateCardImage_setsLogo() {
+    fun `when update card image then sets logo`() {
         val cardImageSwitcher = mockk<ImageSwitcher>(relaxed = true)
         val cardImageView = mockk<ImageView>(relaxed = true)
         val cardUI = mockk<CardUI>(relaxed = true)
@@ -351,7 +351,7 @@ open class CardDrawerViewUnitTest : BasicRobolectricTest() {
     }
 
     @Test
-    fun updateOverlay() {
+    fun `when call function updateOverlay then call setOverlayImage`() {
         val overlayImageView = mockk<ImageView>(relaxed = true)
         val source = mockk<CardUI>(relaxed = true)
         val spyHeader = spyk(cardDrawerView)
@@ -365,7 +365,7 @@ open class CardDrawerViewUnitTest : BasicRobolectricTest() {
     }
 
     @Test
-    fun showTagShouldNotShowTagWhenGenericPaymentMethodHasNoTag() {
+    fun `when call function show when GenericPaymentMethod has no tag then not show tag`() {
         val spyCardDrawerView = spyk(cardDrawerView)
         val genericMethod = GenericPaymentMethod(
             0,
@@ -380,7 +380,7 @@ open class CardDrawerViewUnitTest : BasicRobolectricTest() {
     }
 
     @Test
-    fun showTagShouldShowTagWhenGenericPaymentMethodHasTag() {
+    fun `when call function show tag when GenericPagmentMethod has tag then show tag`() {
         val tag: CardDrawerSource.Tag = getTestTag()
         val spyCardDrawerView = spyk(cardDrawerView)
         val genericMethod = GenericPaymentMethod(
@@ -398,7 +398,7 @@ open class CardDrawerViewUnitTest : BasicRobolectricTest() {
     }
 
     @Test
-    fun showShouldShowTagWhenPaymentCardHasTag() {
+    fun `when call function show when PaymentCard has tag then show tag`() {
         val tag: CardDrawerSource.Tag = getTestTag()
         val spyCardDrawerView = spyk(cardDrawerView)
         val cardUI: CardUI = DefaultCardConfiguration(context)
@@ -411,7 +411,7 @@ open class CardDrawerViewUnitTest : BasicRobolectricTest() {
     }
 
     @Test
-    fun showShouldNotShowTagWhenPaymentCardHasNoTag() {
+    fun `when call function show when PaymentCard has no tag then not show tag`() {
         val spyCardDrawerView = spyk(cardDrawerView)
         val cardUI: CardUI = DefaultCardConfiguration(context)
         val paymentCard = PaymentCard(cardUI)
@@ -423,7 +423,7 @@ open class CardDrawerViewUnitTest : BasicRobolectricTest() {
     }
 
     @Test
-    fun showShouldSetTestAndColorsFromTagForGenericPaymentMethod() {
+    fun `when call show then set test and colors from tag for GenericPaymentMethod`() {
         val tag: CardDrawerSource.Tag = getTestTag()
         val spyCardDrawerView = spyk(cardDrawerView)
         val genericMethod = GenericPaymentMethod(
@@ -444,7 +444,7 @@ open class CardDrawerViewUnitTest : BasicRobolectricTest() {
     }
 
     @Test
-    fun showBottomLabel() {
+    fun `when call function showBottomLabel then change visibility to VISIBLE`() {
         val spyCardDrawerView = spyk(cardDrawerView)
         val bottomLabel = ReflectionHelpers.getField<BottomLabel>(spyCardDrawerView, "bottomLabel")
         spyCardDrawerView.showBottomLabel()
@@ -455,7 +455,7 @@ open class CardDrawerViewUnitTest : BasicRobolectricTest() {
     }
 
     @Test
-    fun hideBottomLabel() {
+    fun `when call function hideBottomLabel then change visibility to INVISIBLE`() {
         val spyCardDrawerView = spyk(cardDrawerView)
         val bottomLabel = ReflectionHelpers.getField<BottomLabel>(spyCardDrawerView, "bottomLabel")
         spyCardDrawerView.hideBottomLabel()

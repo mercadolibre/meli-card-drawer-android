@@ -17,7 +17,7 @@ import org.robolectric.util.ReflectionHelpers
 class GradientTextViewTest : BasicRobolectricTest() {
 
     @Test
-    fun init_loadsViews() {
+    fun `when init view then initialize fields with values`() {
         val gradientTextView = GradientTextView(context)
         Assert.assertNotNull(ReflectionHelpers.getField(gradientTextView, "fontType"))
         Assert.assertNotNull(ReflectionHelpers.getField(gradientTextView, "placeHolder"))
@@ -25,12 +25,13 @@ class GradientTextViewTest : BasicRobolectricTest() {
     }
 
     @Test
-    fun onDraw_setConfigurationGradient() {
+    fun `when call function onDraw with text 'anotherCardNumber' then call setShadow`() {
         val gradientTextView = mockk<GradientTextView>(relaxed = true)
         val configurator = mockk<CardFontConfiguration>(relaxed = true)
         val canvas = mockk<Canvas>(relaxed = true)
         every { gradientTextView.onDraw(canvas) } answers { callOriginal() }
         every { gradientTextView.configuration } returns configurator
+        every { gradientTextView.text } returns "anotherCardNumber"
         ReflectionHelpers.setField(gradientTextView, "placeHolder", "cardNumber")
         gradientTextView.onDraw(canvas)
         verify {
@@ -41,11 +42,13 @@ class GradientTextViewTest : BasicRobolectricTest() {
     }
 
     @Test
-    fun onDraw_doesntSetConfigurationGradient() {
+    fun `when call function onDraw with text 'cardNumber' then shouldn't call setShadow`() {
         val gradientTextView = mockk<GradientTextView>(relaxed = true)
         val configurator = mockk<CardFontConfiguration>(relaxed = true)
         val canvas = mockk<Canvas>(relaxed = true)
+        every { gradientTextView.onDraw(canvas) } answers { callOriginal() }
         every { gradientTextView.configuration } returns configurator
+        every { gradientTextView.text } returns "cardNumber"
         ReflectionHelpers.setField(gradientTextView, "placeHolder", "cardNumber")
         gradientTextView.onDraw(canvas)
         verify(inverse = true) {
@@ -56,7 +59,7 @@ class GradientTextViewTest : BasicRobolectricTest() {
     }
 
     @Test
-    fun init_setsValues() {
+    fun `when call function init then initialize fields with values`() {
         val gradientTextView = GradientTextView(context)
         gradientTextView.init(FontType.LIGHT_TYPE, "MM/YY", 2)
         Assert.assertEquals(
