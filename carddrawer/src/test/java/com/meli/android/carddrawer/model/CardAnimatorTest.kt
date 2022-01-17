@@ -3,6 +3,7 @@ package com.meli.android.carddrawer.model
 import android.os.Bundle
 import android.view.View
 import com.meli.android.carddrawer.BaseTest
+import com.meli.android.carddrawer.TestUtils.getDeclaredField
 import com.meli.android.carddrawer.configuration.FieldPosition
 import io.mockk.every
 import io.mockk.impl.annotations.MockK
@@ -162,13 +163,6 @@ class CardAnimatorTest : BaseTest() {
         cardAnimator.colorCard(0, "")
         verify(inverse = true) {
             cardAnimator.doColorCard(0, "")
-        }
-    }
-
-    private fun CardAnimator.getDeclaredField(name: String): Any {
-        return javaClass.getDeclaredField(name).let {
-            it.isAccessible = true
-            it.get(this) as Any
         }
     }
 
