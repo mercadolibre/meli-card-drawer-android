@@ -1,88 +1,97 @@
-package com.meli.android.carddrawer.model;
+package com.meli.android.carddrawer.model
 
-import android.graphics.Canvas;
-import android.text.TextPaint;
+import android.graphics.Canvas
+import android.text.TextPaint
+import com.meli.android.carddrawer.BasicRobolectricTest
+import com.meli.android.carddrawer.configuration.CardFontConfiguration
+import com.meli.android.carddrawer.configuration.FontType
+import io.mockk.every
+import io.mockk.mockk
+import io.mockk.verify
+import org.junit.Assert
+import org.junit.Test
+import org.junit.runner.RunWith
+import org.mockito.ArgumentMatchers
+import org.mockito.Mockito
+import org.robolectric.RobolectricTestRunner
+import org.robolectric.util.ReflectionHelpers
 
-import com.meli.android.carddrawer.BasicRobolectricTest;
-import com.meli.android.carddrawer.configuration.CardFontConfiguration;
-import com.meli.android.carddrawer.configuration.DarkFontConfiguration;
-import com.meli.android.carddrawer.configuration.FontType;
-
-import org.junit.Test;
-import org.junit.runner.RunWith;
-
-import org.robolectric.RobolectricTestRunner;
-import org.robolectric.util.ReflectionHelpers;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
-
-@RunWith(RobolectricTestRunner.class)
-public class GradientTextViewTest extends BasicRobolectricTest {
+@RunWith(RobolectricTestRunner::class)
+class GradientTextViewTest : BasicRobolectricTest() {
 
     @Test
-    public void init_loadsViews() {
-        GradientTextView gradientTextView = new GradientTextView(getContext());
-
-        assertNotNull(ReflectionHelpers.getField(gradientTextView, "fontType"));
-        assertNotNull(ReflectionHelpers.getField(gradientTextView, "placeHolder"));
-        assertNotNull(ReflectionHelpers.getField(gradientTextView, "fontColor"));
+    fun init_loadsViews() {
+        val gradientTextView = GradientTextView(context)
+        Assert.assertNotNull(ReflectionHelpers.getField(gradientTextView, "fontType"))
+        Assert.assertNotNull(ReflectionHelpers.getField(gradientTextView, "placeHolder"))
+        Assert.assertNotNull(ReflectionHelpers.getField(gradientTextView, "fontColor"))
     }
 
     @Test
-    public void onDraw_setConfigurationGradient() {
-        GradientTextView gradientTextViewSpy = spy(new GradientTextView(getContext()));
-        CardFontConfiguration configurator = mock(CardFontConfiguration.class);
-        doReturn(configurator).when(gradientTextViewSpy).getConfiguration();
-        doReturn("anotherCardNumber").when(gradientTextViewSpy).getText();
-        ReflectionHelpers.setField(gradientTextViewSpy, "placeHolder", "cardNumber");
-
-        Canvas canvas = mock(Canvas.class);
-
-        gradientTextViewSpy.onDraw(canvas);
-        verify(configurator).setShadow(any(TextPaint.class));
+    fun onDraw_doesntSetConfigurationGradient2() {
+        val gradientTextViewSpy = Mockito.spy(
+            GradientTextView(
+                context
+            )
+        )
+        val configurator = Mockito.mock(
+            CardFontConfiguration::class.java
+        )
+        Mockito.doReturn(configurator).`when`(gradientTextViewSpy).configuration
+        Mockito.doReturn("cardNumber").`when`(gradientTextViewSpy).text
+        ReflectionHelpers.setField(gradientTextViewSpy, "placeHolder", "cardNumber")
+        val canvas = Mockito.mock(Canvas::class.java)
+        gradientTextViewSpy.onDraw(canvas)
+        Mockito.verify(configurator, Mockito.never()).setShadow(
+            ArgumentMatchers.any(
+                TextPaint::class.java
+            )
+        )
     }
 
     @Test
-    public void onDraw_doesntSetConfigurationGradient() {
-        GradientTextView gradientTextViewSpy = spy(new GradientTextView(getContext()));
-        CardFontConfiguration configurator = mock(CardFontConfiguration.class);
-        doReturn(configurator).when(gradientTextViewSpy).getConfiguration();
-        doReturn("cardNumber").when(gradientTextViewSpy).getText();
-        ReflectionHelpers.setField(gradientTextViewSpy, "placeHolder", "cardNumber");
-
-        Canvas canvas = mock(Canvas.class);
-
-        gradientTextViewSpy.onDraw(canvas);
-
-        verify(configurator, never()).setShadow(any(TextPaint.class));
+    fun onDraw_setConfigurationGradient() {
+        val gradientTextView = mockk<GradientTextView>(relaxed = true)
+        val configurator = mockk<CardFontConfiguration>(relaxed = true)
+        val canvas = mockk<Canvas>(relaxed = true)
+        every { gradientTextView.onDraw(canvas) } answers { callOriginal() }
+        every { gradientTextView.configuration } returns configurator
+        ReflectionHelpers.setField(gradientTextView, "placeHolder", "cardNumber")
+        gradientTextView.onDraw(canvas)
+        verify {
+            configurator.setShadow(
+                any()
+            )
+        }
     }
 
     @Test
-    public void init_setsValues() {
-        GradientTextView gradientTextView = new GradientTextView(getContext());
-        gradientTextView.init(FontType.LIGHT_TYPE, "MM/YY", 2);
-
-        assertEquals(FontType.LIGHT_TYPE, ReflectionHelpers.getField(gradientTextView, "fontType"));
-        assertEquals("MM/YY", ReflectionHelpers.getField(gradientTextView, "placeHolder"));
-        assertEquals(2, (int) ReflectionHelpers.getField(gradientTextView, "fontColor"));
+    fun onDraw_doesntSetConfigurationGradient() {
+        val gradientTextView = mockk<GradientTextView>(relaxed = true)
+        val configurator = mockk<CardFontConfiguration>(relaxed = true)
+        val canvas = mockk<Canvas>(relaxed = true)
+        every { gradientTextView.configuration } returns configurator
+        ReflectionHelpers.setField(gradientTextView, "placeHolder", "cardNumber")
+        gradientTextView.onDraw(canvas)
+        verify(inverse = true) {
+            configurator.setShadow(
+                any()
+            )
+        }
     }
 
     @Test
-    public void getConfiguration_lalal() {
-        GradientTextView gradientTextViewSpy = spy(new GradientTextView(getContext()));
-        ReflectionHelpers.setField(gradientTextViewSpy, "fontType", FontType.DARK_TYPE);
-        ReflectionHelpers.setField(gradientTextViewSpy, "fontColor", 2);
-
-        assertTrue(gradientTextViewSpy.getConfiguration() instanceof DarkFontConfiguration);
+    fun init_setsValues() {
+        val gradientTextView = GradientTextView(context)
+        gradientTextView.init(FontType.LIGHT_TYPE, "MM/YY", 2)
+        Assert.assertEquals(
+            FontType.LIGHT_TYPE,
+            ReflectionHelpers.getField(gradientTextView, "fontType")
+        )
+        Assert.assertEquals("MM/YY", ReflectionHelpers.getField(gradientTextView, "placeHolder"))
+        Assert.assertEquals(
+            2,
+            ReflectionHelpers.getField<Any>(gradientTextView, "fontColor") as Int
+        )
     }
-
 }

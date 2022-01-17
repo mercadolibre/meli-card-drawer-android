@@ -3,29 +3,33 @@ package com.meli.android.carddrawer.model
 import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.widget.AppCompatTextView
 import com.meli.android.carddrawer.BasicRobolectricTest
+import io.mockk.every
+import io.mockk.mockk
+import io.mockk.spyk
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.Mockito.*
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.util.ReflectionHelpers
 
 @RunWith(RobolectricTestRunner::class)
 class BottomLabelTest : BasicRobolectricTest() {
-    private lateinit var header: BottomLabel
+
+    private lateinit var bottomLabel: BottomLabel
 
     @Before
-    fun doBefore() {
-        header = BottomLabel(context)
+    fun setUp() {
+        bottomLabel = BottomLabel(context)
     }
 
     @Test
-    fun setLabelWithText() {
-        val spyHeader = spy(header)
-        val bottomDescription = ReflectionHelpers.getField<AppCompatTextView>(header, "bottomDescription")
-        val label = mock(Label::class.java)
-        `when`(label.text).thenReturn("Mensaje destacado")
+    fun `when set label then return bottom description, background and text color with the values`() {
+        val spyHeader = spyk(bottomLabel)
+        val bottomDescription = ReflectionHelpers.getField<AppCompatTextView>(bottomLabel, "bottomDescription")
+        val label = mockk<Label>(relaxed = true)
+
+        every { label.text } returns "Mensaje destacado"
 
         spyHeader.setLabel(label)
 
@@ -35,14 +39,15 @@ class BottomLabelTest : BasicRobolectricTest() {
     }
 
     @Test
-    fun setLabelWithAllValues() {
-        val spyHeader = spy(header)
-        val bottomDescription = ReflectionHelpers.getField<AppCompatTextView>(header, "bottomDescription")
-        val label = mock(Label::class.java)
-        `when`(label.text).thenReturn("Sin recargo")
-        `when`(label.backgroundColor).thenReturn("#0E0A09")
-        `when`(label.color).thenReturn("#000000")
-        `when`(label.weight).thenReturn("BLACK")
+    fun `when set label with all values then fill text, background and textColor`() {
+        val spyHeader = spyk(bottomLabel)
+        val bottomDescription = ReflectionHelpers.getField<AppCompatTextView>(bottomLabel, "bottomDescription")
+        val label = mockk<Label>(relaxed = true)
+
+        every { label.text } returns "Sin recargo"
+        every { label.backgroundColor } returns "#0E0A09"
+        every { label.color } returns "#000000"
+        every { label.weight } returns "BLACK"
 
         spyHeader.setLabel(label)
 

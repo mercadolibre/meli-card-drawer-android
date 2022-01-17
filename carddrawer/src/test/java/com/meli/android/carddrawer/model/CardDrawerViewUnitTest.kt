@@ -1,441 +1,468 @@
-package com.meli.android.carddrawer.model;
+package com.meli.android.carddrawer.model
 
-import android.graphics.Color;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffColorFilter;
-import android.util.AttributeSet;
-import android.view.View;
-import android.widget.ImageSwitcher;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.graphics.Color
+import android.graphics.PorterDuff
+import android.graphics.PorterDuffColorFilter
+import android.view.View
+import android.widget.ImageSwitcher
+import android.widget.ImageView
+import android.widget.TextView
+import androidx.appcompat.widget.AppCompatTextView
+import com.meli.android.carddrawer.BasicRobolectricTest
+import com.meli.android.carddrawer.R
+import com.meli.android.carddrawer.TestUtils.initTypefaceSetter
+import com.meli.android.carddrawer.configuration.DefaultCardConfiguration
+import com.meli.android.carddrawer.configuration.FieldPosition
+import com.meli.android.carddrawer.configuration.FontType
+import com.meli.android.carddrawer.configuration.SecurityCodeLocation
+import io.mockk.*
+import org.junit.Assert
+import org.junit.Before
+import org.junit.Test
+import org.junit.runner.RunWith
+import org.robolectric.Robolectric
+import org.robolectric.RobolectricTestRunner
+import org.robolectric.util.ReflectionHelpers
 
-import androidx.appcompat.widget.AppCompatTextView;
-import com.meli.android.carddrawer.BasicRobolectricTest;
-import com.meli.android.carddrawer.R;
-import com.meli.android.carddrawer.TestUtils;
-import com.meli.android.carddrawer.configuration.DefaultCardConfiguration;
-import com.meli.android.carddrawer.configuration.FieldPosition;
-import com.meli.android.carddrawer.configuration.FontType;
-import com.meli.android.carddrawer.configuration.SecurityCodeLocation;
+@RunWith(RobolectricTestRunner::class)
+open class CardDrawerViewUnitTest : BasicRobolectricTest() {
 
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-
-import org.robolectric.Robolectric;
-import org.robolectric.RobolectricTestRunner;
-import org.robolectric.util.ReflectionHelpers;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyNoMoreInteractions;
-import static org.mockito.Mockito.when;
-
-
-/**
- * Test for the card header.. many visual and animations changes can't be tested with just junit :(
- */
-@RunWith(RobolectricTestRunner.class)
-public class CardDrawerViewTest extends BasicRobolectricTest {
-    public CardDrawerView header;
+    protected lateinit var cardDrawerView: CardDrawerView
 
     @Before
-    public void doBefore() {
-        TestUtils.initTypefaceSetter();
-        header = new CardDrawerView(getContext());
+    open fun setUp() {
+        initTypefaceSetter()
+        cardDrawerView = CardDrawerView(context)
     }
 
-    public CardDrawerSource.Tag getTestTag(){
-        return new CardDrawerSource.Tag("Novo",
+    private fun getTestTag(): CardDrawerSource.Tag {
+        return CardDrawerSource.Tag(
+            "Novo",
             Color.parseColor("#CCCCCC"),
             Color.parseColor("#FFFFFF"),
-            "regular");
+            "regular"
+        )
     }
 
     @Test
-    public void init_setsPaddingFromAttributes() {
-        final int expectedPadding = 23;
-        final AttributeSet attr = Robolectric.buildAttributeSet()
+    open fun init_setsPaddingFromAttributes() {
+        val expectedPadding = 23
+        val attr = Robolectric.buildAttributeSet()
             .addAttribute(R.attr.card_header_internal_padding, "23dp")
-            .build();
-        header = new CardDrawerView(getContext(), attr);
-
-        assertEquals(expectedPadding, header.getPaddingTop());
-        assertEquals(expectedPadding, header.getPaddingBottom());
+            .build()
+        cardDrawerView = CardDrawerView(context, attr)
+        Assert.assertEquals(expectedPadding.toLong(), cardDrawerView.paddingTop.toLong())
+        Assert.assertEquals(expectedPadding.toLong(), cardDrawerView.paddingBottom.toLong())
     }
 
     @Test
-    public void init_loadsViews() {
-        assertNotNull(ReflectionHelpers.getField(header, "issuerLogoView"));
-        assertNotNull(ReflectionHelpers.getField(header, "cardLogoView"));
-        assertNotNull(ReflectionHelpers.getField(header, "codeFront"));
-        assertNotNull(ReflectionHelpers.getField(header, "codeBack"));
-        assertNotNull(ReflectionHelpers.getField(header, "cardNumber"));
-        assertNotNull(ReflectionHelpers.getField(header, "cardName"));
-        assertNotNull(ReflectionHelpers.getField(header, "cardDate"));
-        assertNotNull(ReflectionHelpers.getField(header, "cardAnimator"));
-        assertNotNull(ReflectionHelpers.getField(header, "source"));
-        assertNotNull(ReflectionHelpers.getField(header, "card"));
+    open fun init_loadsViews() {
+        Assert.assertNotNull(ReflectionHelpers.getField(cardDrawerView, "issuerLogoView"))
+        Assert.assertNotNull(ReflectionHelpers.getField(cardDrawerView, "cardLogoView"))
+        Assert.assertNotNull(ReflectionHelpers.getField(cardDrawerView, "codeFront"))
+        Assert.assertNotNull(ReflectionHelpers.getField(cardDrawerView, "codeBack"))
+        Assert.assertNotNull(ReflectionHelpers.getField(cardDrawerView, "cardNumber"))
+        Assert.assertNotNull(ReflectionHelpers.getField(cardDrawerView, "cardName"))
+        Assert.assertNotNull(ReflectionHelpers.getField(cardDrawerView, "cardDate"))
+        Assert.assertNotNull(ReflectionHelpers.getField(cardDrawerView, "cardAnimator"))
+        Assert.assertNotNull(ReflectionHelpers.getField(cardDrawerView, "source"))
+        Assert.assertNotNull(ReflectionHelpers.getField(cardDrawerView, "card"))
     }
 
     @Test
-    public void updateCardInformation_setsNumbersWithFormat() {
-        Card card = mock(Card.class);
-        when(card.getName()).thenReturn("Juan Perez");
-        when(card.getNumber()).thenReturn("12346666");
-        when(card.getExpiration()).thenReturn("10/19");
-        when(card.getSecCode()).thenReturn("555");
-        ReflectionHelpers.setField(header, "card", card);
-        header.updateCardInformation();
-        TextView cardNumber = ReflectionHelpers.getField(header, "cardNumber");
-        TextView cardName = ReflectionHelpers.getField(header, "cardName");
-        TextView cardDate = ReflectionHelpers.getField(header, "cardDate");
-        TextView codeFront = ReflectionHelpers.getField(header, "codeFront");
-        TextView codeBack = ReflectionHelpers.getField(header, "codeBack");
-
-        assertEquals("1234  6666  ****  ****", cardNumber.getText().toString());
-        assertEquals("Juan Perez", cardName.getText().toString());
-        assertEquals("10/19", cardDate.getText().toString());
-        assertEquals("555*", codeFront.getText().toString());
-        assertEquals("555*", codeBack.getText().toString());
+    open fun updateCardInformation_setsNumbersWithFormat() {
+        val card = mockk<Card>(relaxed = true)
+        every { card.name } returns "Juan Perez"
+        every { card.number } returns "12346666"
+        every { card.expiration } returns "10/19"
+        every { card.secCode } returns "555"
+        ReflectionHelpers.setField(cardDrawerView, "card", card)
+        cardDrawerView.updateCardInformation()
+        val cardNumber = ReflectionHelpers.getField<TextView>(cardDrawerView, "cardNumber")
+        val cardName = ReflectionHelpers.getField<TextView>(cardDrawerView, "cardName")
+        val cardDate = ReflectionHelpers.getField<TextView>(cardDrawerView, "cardDate")
+        val codeFront = ReflectionHelpers.getField<TextView>(cardDrawerView, "codeFront")
+        val codeBack = ReflectionHelpers.getField<TextView>(cardDrawerView, "codeBack")
+        Assert.assertEquals("1234  6666  ****  ****", cardNumber.text.toString())
+        Assert.assertEquals("Juan Perez", cardName.text.toString())
+        Assert.assertEquals("10/19", cardDate.text.toString())
+        Assert.assertEquals("555*", codeFront.text.toString())
+        Assert.assertEquals("555*", codeBack.text.toString())
     }
 
     @Test
-    public void updateCardInformation_cardWithoutValuesSetsDefaultValues() {
-        Card card = mock(Card.class);
-        when(card.getName()).thenReturn("");
-        when(card.getNumber()).thenReturn("");
-        when(card.getExpiration()).thenReturn("");
-        when(card.getSecCode()).thenReturn("");
-        ReflectionHelpers.setField(header, "card", card);
-        header.updateCardInformation();
-        TextView cardNumber = ReflectionHelpers.getField(header, "cardNumber");
-        TextView cardName = ReflectionHelpers.getField(header, "cardName");
-        TextView cardDate = ReflectionHelpers.getField(header, "cardDate");
-        TextView codeFront = ReflectionHelpers.getField(header, "codeFront");
-        TextView codeBack = ReflectionHelpers.getField(header, "codeBack");
-
-        assertEquals("****  ****  ****  ****", cardNumber.getText().toString());
-        assertEquals("Nombre y Apellido", cardName.getText().toString());
-        assertEquals("MM/AA", cardDate.getText().toString());
-        assertEquals("****", codeFront.getText().toString());
-        assertEquals("****", codeBack.getText().toString());
+    open fun updateCardInformation_cardWithoutValuesSetsDefaultValues() {
+        val card = mockk<Card>(relaxed = true)
+        every { card.name } returns ""
+        every { card.number } returns ""
+        every { card.expiration } returns ""
+        every { card.secCode } returns ""
+        ReflectionHelpers.setField(cardDrawerView, "card", card)
+        cardDrawerView.updateCardInformation()
+        val cardNumber = ReflectionHelpers.getField<TextView>(cardDrawerView, "cardNumber")
+        val cardName = ReflectionHelpers.getField<TextView>(cardDrawerView, "cardName")
+        val cardDate = ReflectionHelpers.getField<TextView>(cardDrawerView, "cardDate")
+        val codeFront = ReflectionHelpers.getField<TextView>(cardDrawerView, "codeFront")
+        val codeBack = ReflectionHelpers.getField<TextView>(cardDrawerView, "codeBack")
+        Assert.assertEquals("****  ****  ****  ****", cardNumber.text.toString())
+        Assert.assertEquals("Nombre y Apellido", cardName.text.toString())
+        Assert.assertEquals("MM/AA", cardDate.text.toString())
+        Assert.assertEquals("****", codeFront.text.toString())
+        Assert.assertEquals("****", codeBack.text.toString())
     }
 
     @Test
-    public void show_updatesInformationAndSetsColorsAndCallsAnimator() {
-        CardDrawerView spyHeader = spy(header);
-        CardUI cardUI = new DefaultCardConfiguration(getContext());
-        CardAnimator cardAnimatorMock = mock(CardAnimator.class);
-        doNothing().when(spyHeader).updateCardInformation();
-        ReflectionHelpers.setField(spyHeader, "cardAnimator", cardAnimatorMock);
-        spyHeader.show(cardUI);
-        verify(cardAnimatorMock).colorCard(anyInt(), anyString());
-        verify(spyHeader).updateCardInformation();
+    fun show_updatesInformationAndSetsColorsAndCallsAnimator() {
+        val spyCardDrawerView = spyk(cardDrawerView, recordPrivateCalls = true)
+        val cardUI: CardUI = DefaultCardConfiguration(context)
+        val cardAnimatorMock = mockk<CardAnimator>(relaxed = true)
+        every { spyCardDrawerView.updateCardInformation() } answers { nothing }
+        ReflectionHelpers.setField(spyCardDrawerView, "cardAnimator", cardAnimatorMock)
+        spyCardDrawerView.show(cardUI)
+        verify {
+            cardAnimatorMock.colorCard(any(), any())
+        }
+        verify {
+            spyCardDrawerView.updateCardInformation()
+        }
     }
 
     @Test
-    public void show_callsAnimator() {
-        CardDrawerView spyHeader = spy(header);
-        CardUI cardUI = new DefaultCardConfiguration(getContext());
-        CardAnimator cardAnimatorMock = mock(CardAnimator.class);
-        ReflectionHelpers.setField(spyHeader, "cardAnimator", cardAnimatorMock);
-        ReflectionHelpers.setField(spyHeader, "source", new PaymentCard(cardUI));
-        spyHeader.show();
-
-        verify(cardAnimatorMock).switchView(FieldPosition.POSITION_FRONT);
-        verify(spyHeader).hideSecCircle();
+    fun show_callsAnimator() {
+        val spuCardDrawerView = spyk(cardDrawerView, recordPrivateCalls = true)
+        val cardUI: CardUI = DefaultCardConfiguration(context)
+        val cardAnimatorMock = mockk<CardAnimator>(relaxed = true)
+        ReflectionHelpers.setField(spuCardDrawerView, "cardAnimator", cardAnimatorMock)
+        ReflectionHelpers.setField(spuCardDrawerView, "source", PaymentCard(cardUI))
+        spuCardDrawerView.show()
+        verify {
+            cardAnimatorMock.switchView(FieldPosition.POSITION_FRONT)
+        }
+        verify {
+            spuCardDrawerView.hideSecCircle()
+        }
     }
 
     @Test
-    public void showSecurityCode_withFrontLocation_showsSecCodeCircleAndCallsAnimator() {
-        final CardUI cardUI = mock(CardUI.class);
-        when(cardUI.getSecurityCodeLocation()).thenReturn(SecurityCodeLocation.FRONT);
-        when(cardUI.getAnimationType()).thenReturn(CardAnimationType.NONE);
-        final CardAnimator cardAnimatorMock = mock(CardAnimator.class);
-        final View codeFront = ReflectionHelpers.getField(header, "codeFront");
-        final View codeFrontRedCircle = ReflectionHelpers.getField(header, "codeFrontRedCircle");
-        ReflectionHelpers.setField(header, "cardAnimator", cardAnimatorMock);
-        ReflectionHelpers.setField(header, "source", new PaymentCard(cardUI));
-
-        header.showSecurityCode();
-
-        verify(cardAnimatorMock).switchView(FieldPosition.POSITION_FRONT);
-        verifyNoMoreInteractions(cardAnimatorMock);
-        assertEquals(View.VISIBLE, codeFront.getVisibility());
-        assertEquals(View.VISIBLE, codeFrontRedCircle.getVisibility());
+    fun showSecurityCode_withFrontLocation_showsSecCodeCircleAndCallsAnimator() {
+        val cardUI = mockk<CardUI>(relaxed = true)
+        every { cardUI.securityCodeLocation } returns SecurityCodeLocation.FRONT
+        every { cardUI.animationType } returns SecurityCodeLocation.NONE
+        val cardAnimatorMock = mockk<CardAnimator>(relaxed = true)
+        val codeFront = ReflectionHelpers.getField<View>(cardDrawerView, "codeFront")
+        val codeFrontRedCircle = ReflectionHelpers.getField<View>(cardDrawerView, "codeFrontRedCircle")
+        ReflectionHelpers.setField(cardDrawerView, "cardAnimator", cardAnimatorMock)
+        ReflectionHelpers.setField(cardDrawerView, "source", PaymentCard(cardUI))
+        cardDrawerView.showSecurityCode()
+        verify {
+            cardAnimatorMock.switchView(FieldPosition.POSITION_FRONT)
+        }
+        Assert.assertEquals(View.VISIBLE.toLong(), codeFront.visibility.toLong())
+        Assert.assertEquals(View.VISIBLE.toLong(), codeFrontRedCircle.visibility.toLong())
     }
 
     @Test
-    public void showSecurityCode_withBackLocation_showsSecCodeCircleAndCallsAnimator() {
-        final CardUI cardUI = mock(CardUI.class);
-        when(cardUI.getSecurityCodeLocation()).thenReturn(SecurityCodeLocation.BACK);
-        when(cardUI.getAnimationType()).thenReturn(CardAnimationType.NONE);
-        final CardAnimator cardAnimatorMock = mock(CardAnimator.class);
-        final View codeBack = ReflectionHelpers.getField(header, "codeBack");
-        ReflectionHelpers.setField(header, "cardAnimator", cardAnimatorMock);
-        ReflectionHelpers.setField(header, "source", new PaymentCard(cardUI));
-
-        header.showSecurityCode();
-
-        verify(cardAnimatorMock).switchView(FieldPosition.POSITION_BACK);
-        verifyNoMoreInteractions(cardAnimatorMock);
-        assertEquals(View.VISIBLE, codeBack.getVisibility());
+    fun showSecurityCode_withBackLocation_showsSecCodeCircleAndCallsAnimator() {
+        val cardUI = mockk<CardUI>(relaxed = true)
+        every { cardUI.securityCodeLocation } returns SecurityCodeLocation.BACK
+        every { cardUI.animationType } returns CardAnimationType.NONE
+        val cardAnimatorMock = mockk<CardAnimator>(relaxed = true)
+        val codeBack = ReflectionHelpers.getField<View>(cardDrawerView, "codeBack")
+        ReflectionHelpers.setField(cardDrawerView, "cardAnimator", cardAnimatorMock)
+        ReflectionHelpers.setField(cardDrawerView, "source", PaymentCard(cardUI))
+        cardDrawerView.showSecurityCode()
+        verify {
+            cardAnimatorMock.switchView(FieldPosition.POSITION_BACK)
+        }
+        Assert.assertEquals(View.VISIBLE.toLong(), codeBack.visibility.toLong())
     }
 
     @Test
-    public void showSecCode_withFrontPosition_callsSwitchViewWithFrontPosition() {
-        CardDrawerView spyHeader = spy(header);
-        GradientTextView codeFront = new GradientTextView(getContext());
-        codeFront.setVisibility(View.INVISIBLE);
-        TextView codeBack = new TextView((getContext()));
-        codeBack.setVisibility(View.INVISIBLE);
-        ReflectionHelpers.setField(spyHeader, "codeFront", codeFront);
-        ReflectionHelpers.setField(spyHeader, "codeBack", codeBack);
-        CardUI cardUI = mock(CardUI.class);
-        when(cardUI.getSecurityCodeLocation()).thenReturn(SecurityCodeLocation.FRONT);
-        when(cardUI.getCardLogoImageRes()).thenReturn(0);
-        when(cardUI.getBankImageRes()).thenReturn(0);
-        when(cardUI.getAnimationType()).thenReturn(CardAnimationType.NONE);
-        CardAnimator cardAnimatorMock = mock(CardAnimator.class);
-        ReflectionHelpers.setField(spyHeader, "cardAnimator", cardAnimatorMock);
-        doNothing().when(spyHeader).update(any(CardUI.class));
-
-        spyHeader.showSecurityCode(cardUI);
-
-        verify(cardAnimatorMock).switchViewWithoutAnimation(FieldPosition.POSITION_FRONT);
-        verify(spyHeader).update(any(CardUI.class));
-        verify(spyHeader).showSecCircle();
-        assertEquals(View.VISIBLE, codeFront.getVisibility());
+    fun showSecCode_withFrontPosition_callsSwitchViewWithFrontPosition() {
+        val spyCardDrawerView = spyk(cardDrawerView)
+        val codeFront = GradientTextView(context)
+        codeFront.visibility = View.INVISIBLE
+        val codeBack = TextView(context)
+        codeBack.visibility = View.INVISIBLE
+        ReflectionHelpers.setField(spyCardDrawerView, "codeFront", codeFront)
+        ReflectionHelpers.setField(spyCardDrawerView, "codeBack", codeBack)
+        val cardUI = mockk<CardUI>(relaxed = true)
+        every { cardUI.securityCodeLocation } returns SecurityCodeLocation.FRONT
+        every { cardUI.cardLogoImageRes } returns 0
+        every { cardUI.bankImageRes } returns 0
+        every { cardUI.animationType } returns CardAnimationType.NONE
+        val cardAnimatorMock = mockk<CardAnimator>(relaxed = true)
+        ReflectionHelpers.setField(spyCardDrawerView, "cardAnimator", cardAnimatorMock)
+        every { spyCardDrawerView.update(any()) } answers { nothing }
+        spyCardDrawerView.showSecurityCode(cardUI)
+        verify {
+            cardAnimatorMock.switchViewWithoutAnimation(FieldPosition.POSITION_FRONT)
+        }
+        verify {
+            spyCardDrawerView.update(any())
+        }
+        verify {
+            spyCardDrawerView.showSecCircle()
+        }
+        Assert.assertEquals(View.VISIBLE.toLong(), codeFront.visibility.toLong())
     }
 
     @Test
-    public void showSecCode_withBackPosition_callsSwitchViewWithBackPosition() {
-        final CardDrawerView spyHeader = spy(header);
-        final CardUI source = mock(CardUI.class);
-        when(source.getSecurityCodeLocation()).thenReturn(SecurityCodeLocation.BACK);
-        when(source.getAnimationType()).thenReturn(CardAnimationType.NONE);
-        doNothing().when(spyHeader).update(any(CardUI.class));
-        final CardAnimator cardAnimatorMock = mock(CardAnimator.class);
-        final View codeBack = ReflectionHelpers.getField(spyHeader, "codeBack");
-        ReflectionHelpers.setField(spyHeader, "cardAnimator", cardAnimatorMock);
-
-        spyHeader.showSecurityCode(source);
-
-        verify(cardAnimatorMock).switchViewWithoutAnimation(FieldPosition.POSITION_BACK);
-        verifyNoMoreInteractions(cardAnimatorMock);
-        assertEquals(View.VISIBLE, codeBack.getVisibility());
-    }
-
-
-    @Test
-    public void showBack_callsSwitchViewWithoutAnimationUsesBackPosition() {
-        CardDrawerView spyHeader = spy(header);
-        GradientTextView codeFront = new GradientTextView(getContext());
-        codeFront.setVisibility(View.INVISIBLE);
-        TextView codeBack = new TextView((getContext()));
-        codeBack.setVisibility(View.INVISIBLE);
-        ReflectionHelpers.setField(spyHeader, "codeFront", codeFront);
-        ReflectionHelpers.setField(spyHeader, "codeBack", codeBack);
-        CardAnimator cardAnimatorMock = mock(CardAnimator.class);
-        ReflectionHelpers.setField(spyHeader, "cardAnimator", cardAnimatorMock);
-
-        spyHeader.showBack();
-
-        verify(cardAnimatorMock).switchViewWithoutAnimation(FieldPosition.POSITION_BACK);
+    fun showSecCode_withBackPosition_callsSwitchViewWithBackPosition() {
+        val spyCardDrawerView = spyk(cardDrawerView)
+        val cardUI = mockk<CardUI>(relaxed = true)
+        every { cardUI.securityCodeLocation } returns SecurityCodeLocation.BACK
+        every { cardUI.animationType } returns CardAnimationType.NONE
+        every { spyCardDrawerView.update(any())} answers { nothing }
+        val cardAnimatorMock = mockk<CardAnimator>(relaxed = true)
+        val codeBack = ReflectionHelpers.getField<View>(spyCardDrawerView, "codeBack")
+        ReflectionHelpers.setField(spyCardDrawerView, "cardAnimator", cardAnimatorMock)
+        spyCardDrawerView.showSecurityCode(cardUI)
+        verify {
+            cardAnimatorMock.switchViewWithoutAnimation(FieldPosition.POSITION_BACK)
+        }
+        Assert.assertEquals(View.VISIBLE.toLong(), codeBack.visibility.toLong())
     }
 
     @Test
-    public void hideSecCircle_withFrontPosition_hidesSecCode() {
-        final CardUI cardUI = mock(CardUI.class);
-        when(cardUI.getSecurityCodeLocation()).thenReturn(SecurityCodeLocation.FRONT);
-        when(cardUI.getAnimationType()).thenReturn(CardAnimationType.NONE);
-        final View codeFront = ReflectionHelpers.getField(header, "codeFront");
-        final View codeFrontRedCircle = ReflectionHelpers.getField(header, "codeFrontRedCircle");
-        ReflectionHelpers.setField(header, "source", new PaymentCard(cardUI));
-
-        header.hideSecCircle();
-
-        assertEquals(View.VISIBLE, codeFront.getVisibility());
-        assertEquals(View.INVISIBLE, codeFrontRedCircle.getVisibility());
+    fun showBack_callsSwitchViewWithoutAnimationUsesBackPosition() {
+        val spyCardDrawerView = spyk(cardDrawerView)
+        val codeFront = GradientTextView(context)
+        codeFront.visibility = View.INVISIBLE
+        val codeBack = TextView(context)
+        codeBack.visibility = View.INVISIBLE
+        ReflectionHelpers.setField(spyCardDrawerView, "codeFront", codeFront)
+        ReflectionHelpers.setField(spyCardDrawerView, "codeBack", codeBack)
+        val cardAnimatorMock = mockk<CardAnimator>(relaxed = true)
+        ReflectionHelpers.setField(spyCardDrawerView, "cardAnimator", cardAnimatorMock)
+        spyCardDrawerView.showBack()
+        verify {
+            cardAnimatorMock.switchViewWithoutAnimation(FieldPosition.POSITION_BACK)
+        }
     }
 
     @Test
-    public void hideSecCircle_withBackPosition_hidesSecCode() {
-        CardDrawerView spyHeader = spy(header);
-        CardAnimator cardAnimatorMock = mock(CardAnimator.class);
-        GradientTextView codeFront = new GradientTextView(getContext());
-        codeFront.setVisibility(View.VISIBLE);
-        CardUI cardUI = mock(CardUI.class);
-        when(cardUI.getSecurityCodeLocation()).thenReturn(SecurityCodeLocation.BACK);
-        when(cardUI.getAnimationType()).thenReturn(CardAnimationType.NONE);
-
-        ReflectionHelpers.setField(spyHeader, "source", new PaymentCard(cardUI));
-        ReflectionHelpers.setField(spyHeader, "cardAnimator", cardAnimatorMock);
-        ReflectionHelpers.setField(spyHeader, "codeFront", codeFront);
-
-        spyHeader.hideSecCircle();
-
-        assertEquals(View.GONE, codeFront.getVisibility());
+    fun hideSecCircle_withFrontPosition_hidesSecCode() {
+        val cardUI = mockk<CardUI>(relaxed = true)
+        every { cardUI.securityCodeLocation } returns SecurityCodeLocation.FRONT
+        every { cardUI.animationType } returns CardAnimationType.NONE
+        val codeFront = ReflectionHelpers.getField<View>(cardDrawerView, "codeFront")
+        val codeFrontRedCircle = ReflectionHelpers.getField<View>(cardDrawerView, "codeFrontRedCircle")
+        ReflectionHelpers.setField(cardDrawerView, "source", PaymentCard(cardUI))
+        cardDrawerView.hideSecCircle()
+        Assert.assertEquals(View.VISIBLE.toLong(), codeFront.visibility.toLong())
+        Assert.assertEquals(View.INVISIBLE.toLong(), codeFrontRedCircle.visibility.toLong())
     }
 
     @Test
-    public void setCardTextColor_initViews() {
-        CardDrawerView spyHeader = spy(header);
-
-        GradientTextView cardNumber = mock(GradientTextView.class);
-        GradientTextView cardName = mock(GradientTextView.class);
-        GradientTextView cardDate = mock(GradientTextView.class);
-        GradientTextView codeFront = mock(GradientTextView.class);
-
-        ReflectionHelpers.setField(spyHeader, "cardNumber", cardNumber);
-        ReflectionHelpers.setField(spyHeader, "cardName", cardName);
-        ReflectionHelpers.setField(spyHeader, "cardDate", cardDate);
-        ReflectionHelpers.setField(spyHeader, "codeFront", codeFront);
-
-        CardUI cardUI = new DefaultCardConfiguration(getContext());
-
-        ReflectionHelpers.setField(spyHeader, "source", new PaymentCard(cardUI));
-
-        String fontType = FontType.LIGHT_TYPE;
-        int color = 2;
-
-        spyHeader.setCardTextColor(fontType, color);
-
-        verify(cardNumber).init(spyHeader.resolveFontType(fontType, true), "****  ****  ****  ****", color);
-        verify(cardName).init(spyHeader.resolveFontType(fontType, false), cardUI.getNamePlaceHolder(), color);
-        verify(cardDate).init(spyHeader.resolveFontType(fontType, false), cardUI.getExpirationPlaceHolder(), color);
-        verify(codeFront).init(spyHeader.resolveFontType(fontType, false), "****", color);
-    }
-
-
-    @Test
-    public void updateIssuerLogo_setsLogo() {
-        ImageSwitcher issuerLogoView = mock(ImageSwitcher.class);
-        ImageView bankImageView = mock(ImageView.class);
-        CardUI source = mock(CardUI.class);
-        when(source.getBankImageRes()).thenReturn(3);
-        when(issuerLogoView.getNextView()).thenReturn(bankImageView);
-        CardDrawerView spyHeader = spy(header);
-
-        spyHeader.updateIssuerLogo(issuerLogoView, source, false);
-
-        verify(bankImageView).setImageResource(3);
-        verify(source).setBankImage(bankImageView);
+    fun hideSecCircle_withBackPosition_hidesSecCode() {
+        val spyCardDrawerView = spyk(cardDrawerView)
+        val cardAnimatorMock = mockk<CardAnimator>(relaxed = true)
+        val codeFront = GradientTextView(context)
+        codeFront.visibility = View.VISIBLE
+        val cardUI = mockk<CardUI>(relaxed = true)
+        every { cardUI.securityCodeLocation } returns SecurityCodeLocation.BACK
+        every { cardUI.animationType } returns CardAnimationType.NONE
+        ReflectionHelpers.setField(spyCardDrawerView, "source", PaymentCard(cardUI))
+        ReflectionHelpers.setField(spyCardDrawerView, "cardAnimator", cardAnimatorMock)
+        ReflectionHelpers.setField(spyCardDrawerView, "codeFront", codeFront)
+        spyCardDrawerView.hideSecCircle()
+        Assert.assertEquals(View.GONE.toLong(), codeFront.visibility.toLong())
     }
 
     @Test
-    public void updateCardImage_setsLogo() {
-        ImageSwitcher cardImageSwitcher = mock(ImageSwitcher.class);
-        ImageView cardImageView = mock(ImageView.class);
-        CardUI source = mock(CardUI.class);
-        when(source.getCardLogoImageRes()).thenReturn(3);
-        when(cardImageSwitcher.getNextView()).thenReturn(cardImageView);
-        CardDrawerView spyHeader = spy(header);
-
-        spyHeader.updateCardLogo(cardImageSwitcher, source, false);
-
-        verify(cardImageView).setImageResource(3);
-        verify(source).setCardLogoImage(cardImageView);
+    open fun setCardTextColor_initViews() {
+        val spyCardDrawerView = spyk(cardDrawerView, recordPrivateCalls = true)
+        val cardNumber = mockk<GradientTextView>(relaxed = true)
+        val cardName = mockk<GradientTextView>(relaxed = true)
+        val cardDate = mockk<GradientTextView>(relaxed = true)
+        val codeFront = mockk<GradientTextView>(relaxed = true)
+        ReflectionHelpers.setField(spyCardDrawerView, "cardNumber", cardNumber)
+        ReflectionHelpers.setField(spyCardDrawerView, "cardName", cardName)
+        ReflectionHelpers.setField(spyCardDrawerView, "cardDate", cardDate)
+        ReflectionHelpers.setField(spyCardDrawerView, "codeFront", codeFront)
+        val cardUI: CardUI = DefaultCardConfiguration(context)
+        ReflectionHelpers.setField(spyCardDrawerView, "source", PaymentCard(cardUI))
+        val fontType = FontType.LIGHT_TYPE
+        val color = 2
+        spyCardDrawerView.setCardTextColor(fontType, color)
+        verify {
+            cardNumber.init(
+                any(),
+                "****  ****  ****  ****",
+                color
+            )
+        }
+        verify {
+            cardName.init(
+                any(),
+                cardUI.namePlaceHolder,
+                color
+            )
+        }
+        verify {
+            cardDate.init(
+                any(),
+                cardUI.expirationPlaceHolder,
+                color
+            )
+        }
+        verify {
+            codeFront.init(
+                any(),
+                "****",
+                color
+            )
+        }
     }
 
     @Test
-    public void updateOverlay() {
-        ImageView overlayImageView = mock(ImageView.class);
-        CardUI source = mock(CardUI.class);
-        CardDrawerView spyHeader = spy(header);
-
-        spyHeader.updateOverlay(overlayImageView, source);
-        verify(source).setOverlayImage(overlayImageView);
-        verifyNoMoreInteractions(source);
-        verifyNoMoreInteractions(overlayImageView);
+    fun updateIssuerLogo_setsLogo() {
+        val issuerLogoView = mockk<ImageSwitcher>(relaxed = true)
+        val bankImageView = mockk<ImageView>(relaxed = true)
+        val cardUI = mockk<CardUI>(relaxed = true)
+        every { cardUI.bankImageRes } returns 3
+        every { issuerLogoView.nextView } returns bankImageView
+        val spyCardDrawerView = spyk(cardDrawerView)
+        spyCardDrawerView.updateIssuerLogo(issuerLogoView, cardUI, false)
+        verify {
+            bankImageView.setImageResource(3)
+        }
+        verify {
+            cardUI.setBankImage(bankImageView)
+        }
     }
 
     @Test
-    public void showTagShouldNotShowTagWhenGenericPaymentMethodHasNoTag(){
-        final CardDrawerView spyHeader = spy(header);
-        final GenericPaymentMethod genericMethod = new GenericPaymentMethod(0,
-            new GenericPaymentMethod.Text("Test", Color.parseColor("#000000")),
-            null, null, null);
-        spyHeader.show(genericMethod);
-        assertEquals(View.GONE, spyHeader.genericFrontLayout.findViewById(R.id.card_tag_container).getVisibility());
+    fun updateCardImage_setsLogo() {
+        val cardImageSwitcher = mockk<ImageSwitcher>(relaxed = true)
+        val cardImageView = mockk<ImageView>(relaxed = true)
+        val cardUI = mockk<CardUI>(relaxed = true)
+        every { cardUI.cardLogoImageRes } returns 3
+        every { cardImageSwitcher.nextView } returns cardImageView
+        val spyHeader = spyk(cardDrawerView)
+        spyHeader.updateCardLogo(cardImageSwitcher, cardUI, false)
+        verify {
+            cardImageView.setImageResource(3)
+        }
+        verify {
+            cardUI.setCardLogoImage(cardImageView)
+        }
     }
 
     @Test
-    public void showTagShouldShowTagWhenGenericPaymentMethodHasTag() {
-        final CardDrawerSource.Tag tag = getTestTag();
-        final CardDrawerView spyHeader = spy(header);
-        final GenericPaymentMethod genericMethod = new GenericPaymentMethod(0,
-            new GenericPaymentMethod.Text("Test", Color.parseColor("#000000")),
+    fun updateOverlay() {
+        val overlayImageView = mockk<ImageView>(relaxed = true)
+        val source = mockk<CardUI>(relaxed = true)
+        val spyHeader = spyk(cardDrawerView)
+        spyHeader.updateOverlay(overlayImageView, source)
+        verify {
+            source.setOverlayImage(overlayImageView)
+        }
+        verify {
+            overlayImageView wasNot Called
+        }
+    }
+
+    @Test
+    fun showTagShouldNotShowTagWhenGenericPaymentMethodHasNoTag() {
+        val spyCardDrawerView = spyk(cardDrawerView)
+        val genericMethod = GenericPaymentMethod(
+            0,
+            GenericPaymentMethod.Text("Test", Color.parseColor("#000000")),
+            null, null, null
+        )
+        spyCardDrawerView.show(genericMethod)
+        Assert.assertEquals(
+            View.GONE.toLong(),
+            spyCardDrawerView.genericFrontLayout.findViewById<View>(R.id.card_tag_container).visibility.toLong()
+        )
+    }
+
+    @Test
+    fun showTagShouldShowTagWhenGenericPaymentMethodHasTag() {
+        val tag: CardDrawerSource.Tag = getTestTag()
+        val spyCardDrawerView = spyk(cardDrawerView)
+        val genericMethod = GenericPaymentMethod(
+            0,
+            GenericPaymentMethod.Text("Test", Color.parseColor("#000000")),
             null,
             null,
-            tag);
-        spyHeader.show(genericMethod);
-        assertEquals(View.VISIBLE, spyHeader.genericFrontLayout.findViewById(R.id.card_tag_container).getVisibility());
+            tag
+        )
+        spyCardDrawerView.show(genericMethod)
+        Assert.assertEquals(
+            View.VISIBLE.toLong(),
+            spyCardDrawerView.genericFrontLayout.findViewById<View>(R.id.card_tag_container).visibility.toLong()
+        )
     }
 
     @Test
-    public void showShouldShowTagWhenPaymentCardHasTag() {
-        final CardDrawerSource.Tag tag = getTestTag();
-        final CardDrawerView spyHeader = spy(header);
-        final CardUI cardUI = new DefaultCardConfiguration(getContext());
-        final PaymentCard paymentCard = new PaymentCard(cardUI ,tag);
-        spyHeader.show(paymentCard);
-        assertEquals(View.VISIBLE, spyHeader.cardFrontLayout.findViewById(R.id.card_tag_container).getVisibility());
+    fun showShouldShowTagWhenPaymentCardHasTag() {
+        val tag: CardDrawerSource.Tag = getTestTag()
+        val spyCardDrawerView = spyk(cardDrawerView)
+        val cardUI: CardUI = DefaultCardConfiguration(context)
+        val paymentCard = PaymentCard(cardUI, tag)
+        spyCardDrawerView.show(paymentCard)
+        Assert.assertEquals(
+            View.VISIBLE.toLong(),
+            spyCardDrawerView.cardFrontLayout.findViewById<View>(R.id.card_tag_container).visibility.toLong()
+        )
     }
 
     @Test
-    public void showShouldNotShowTagWhenPaymentCardHasNoTag() {
-        final CardDrawerView spyHeader = spy(header);
-        final CardUI cardUI = new DefaultCardConfiguration(getContext());
-        final PaymentCard paymentCard = new PaymentCard(cardUI);
-        spyHeader.show(paymentCard);
-        assertEquals(View.GONE, spyHeader.cardFrontLayout.findViewById(R.id.card_tag_container).getVisibility());
+    fun showShouldNotShowTagWhenPaymentCardHasNoTag() {
+        val spyCardDrawerView = spyk(cardDrawerView)
+        val cardUI: CardUI = DefaultCardConfiguration(context)
+        val paymentCard = PaymentCard(cardUI)
+        spyCardDrawerView.show(paymentCard)
+        Assert.assertEquals(
+            View.GONE.toLong(),
+            spyCardDrawerView.cardFrontLayout.findViewById<View>(R.id.card_tag_container).visibility.toLong()
+        )
     }
 
     @Test
-    public void showShouldSetTestAndColorsFromTagForGenericPaymentMethod() {
-        final CardDrawerSource.Tag tag = getTestTag();
-        final CardDrawerView spyHeader = spy(header);
-        final GenericPaymentMethod genericMethod = new GenericPaymentMethod(0,
-            new GenericPaymentMethod.Text("Test", Color.parseColor("#000000")),
+    fun showShouldSetTestAndColorsFromTagForGenericPaymentMethod() {
+        val tag: CardDrawerSource.Tag = getTestTag()
+        val spyCardDrawerView = spyk(cardDrawerView)
+        val genericMethod = GenericPaymentMethod(
+            0,
+            GenericPaymentMethod.Text("Test", Color.parseColor("#000000")),
             null,
             null,
-            tag);
-        spyHeader.show(genericMethod);
-        final AppCompatTextView textView = spyHeader.genericFrontLayout.findViewById(R.id.card_tag);
-        assertEquals(tag.getText(), textView.getText());
-        assertEquals(tag.getTextColor(), textView.getCurrentTextColor());
-        assertEquals(new PorterDuffColorFilter(tag.getBackgroundColor(), PorterDuff.Mode.SRC_ATOP),
-            textView.getBackground().getColorFilter());
+            tag
+        )
+        spyCardDrawerView.show(genericMethod)
+        val textView: AppCompatTextView = spyCardDrawerView.genericFrontLayout.findViewById(R.id.card_tag)
+        Assert.assertEquals(tag.text, textView.text)
+        Assert.assertEquals(tag.textColor.toLong(), textView.currentTextColor.toLong())
+        Assert.assertEquals(
+            PorterDuffColorFilter(tag.backgroundColor, PorterDuff.Mode.SRC_ATOP),
+            textView.background.colorFilter
+        )
     }
 
     @Test
-    public void showBottomLabel() {
-        final CardDrawerView spyHeader = spy(header);
-        final BottomLabel bottomLabel = ReflectionHelpers.getField(header, "bottomLabel");
-
-        spyHeader.showBottomLabel();
-
-        verify(spyHeader).showBottomLabel();
-        assertEquals(View.VISIBLE, bottomLabel.getVisibility());
+    fun showBottomLabel() {
+        val spyCardDrawerView = spyk(cardDrawerView)
+        val bottomLabel = ReflectionHelpers.getField<BottomLabel>(spyCardDrawerView, "bottomLabel")
+        spyCardDrawerView.showBottomLabel()
+        verify {
+            spyCardDrawerView.showBottomLabel()
+        }
+        Assert.assertEquals(View.VISIBLE.toLong(), bottomLabel.visibility.toLong())
     }
 
     @Test
-    public void hideBottomLabel() {
-        final CardDrawerView spyHeader = spy(header);
-        final BottomLabel bottomLabel = ReflectionHelpers.getField(header, "bottomLabel");
-
-        spyHeader.hideBottomLabel();
-
-        verify(spyHeader).hideBottomLabel();
-        assertEquals(View.INVISIBLE, bottomLabel.getVisibility());
+    fun hideBottomLabel() {
+        val spyCardDrawerView = spyk(cardDrawerView)
+        val bottomLabel = ReflectionHelpers.getField<BottomLabel>(spyCardDrawerView, "bottomLabel")
+        spyCardDrawerView.hideBottomLabel()
+        verify {
+            spyCardDrawerView.hideBottomLabel()
+        }
+        Assert.assertEquals(View.INVISIBLE.toLong(), bottomLabel.visibility.toLong())
     }
+
 }

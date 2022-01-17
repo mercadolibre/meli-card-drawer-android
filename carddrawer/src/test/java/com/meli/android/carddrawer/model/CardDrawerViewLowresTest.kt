@@ -1,129 +1,125 @@
-package com.meli.android.carddrawer.model;
+package com.meli.android.carddrawer.model
 
-import android.util.AttributeSet;
-import android.view.View;
+import android.widget.TextView
+import com.meli.android.carddrawer.R
+import com.meli.android.carddrawer.configuration.DefaultCardConfiguration
+import com.meli.android.carddrawer.configuration.FontType
+import io.mockk.every
+import io.mockk.mockk
+import io.mockk.spyk
+import io.mockk.verify
+import org.junit.Assert
+import org.junit.runner.RunWith
+import org.robolectric.Robolectric
+import org.robolectric.RobolectricTestRunner
+import org.robolectric.util.ReflectionHelpers
 
-import android.widget.TextView;
-import com.meli.android.carddrawer.R;
+@RunWith(RobolectricTestRunner::class)
+class CardDrawerViewLowresTest : CardDrawerViewUnitTest() {
 
-import com.meli.android.carddrawer.configuration.DefaultCardConfiguration;
-import com.meli.android.carddrawer.configuration.FontType;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-
-import org.robolectric.Robolectric;
-import org.robolectric.RobolectricTestRunner;
-import org.robolectric.util.ReflectionHelpers;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
-@RunWith(RobolectricTestRunner.class)
-public class CardDrawerViewLowresTest extends CardDrawerViewTest {
-
-    @Override
-    public void doBefore() {
-        header = new CardDrawerViewLowres(getContext());
+    override fun setUp() {
+        cardDrawerView = CardDrawerViewLowres(context)
     }
 
-    @Override
-    public void setCardTextColor_initViews() {
-        final CardDrawerView spyHeader = spy(header);
-
-        final GradientTextView cardNumber = mock(GradientTextView.class);
-        final GradientTextView cardName = mock(GradientTextView.class);
-        final GradientTextView cardDate = mock(GradientTextView.class);
-        final GradientTextView codeFront = mock(GradientTextView.class);
-
-        ReflectionHelpers.setField(spyHeader, "cardNumber", cardNumber);
-        ReflectionHelpers.setField(spyHeader, "cardName", cardName);
-        ReflectionHelpers.setField(spyHeader, "cardDate", cardDate);
-        ReflectionHelpers.setField(spyHeader, "codeFront", codeFront);
-
-        final CardUI cardUI = new DefaultCardConfiguration(getContext());
-
-        ReflectionHelpers.setField(spyHeader, "source", new PaymentCard(cardUI));
-
-        final String fontType = FontType.LIGHT_TYPE;
-        final int color = 2;
-
-        spyHeader.setCardTextColor(fontType, color);
-
-        verify(cardNumber).init(spyHeader.resolveFontType(fontType, true), "**** ****", color);
-        verify(cardName).init(spyHeader.resolveFontType(fontType, false), cardUI.getNamePlaceHolder(), color);
-        verify(cardDate).init(spyHeader.resolveFontType(fontType, false), cardUI.getExpirationPlaceHolder(), color);
-        verify(codeFront).init(spyHeader.resolveFontType(fontType, false), "****", color);
+    override fun setCardTextColor_initViews() {
+        val spyCardDrawerView = spyk(cardDrawerView)
+        val cardNumber = mockk<GradientTextView>(relaxed = true)
+        val cardName = mockk<GradientTextView>(relaxed = true)
+        val cardDate = mockk<GradientTextView>(relaxed = true)
+        val codeFront = mockk<GradientTextView>(relaxed = true)
+        ReflectionHelpers.setField(spyCardDrawerView, "cardNumber", cardNumber)
+        ReflectionHelpers.setField(spyCardDrawerView, "cardName", cardName)
+        ReflectionHelpers.setField(spyCardDrawerView, "cardDate", cardDate)
+        ReflectionHelpers.setField(spyCardDrawerView, "codeFront", codeFront)
+        val cardUI: CardUI = DefaultCardConfiguration(context)
+        ReflectionHelpers.setField(spyCardDrawerView, "source", PaymentCard(cardUI))
+        val fontType = FontType.LIGHT_TYPE
+        val color = 2
+        spyCardDrawerView.setCardTextColor(fontType, color)
+        verify {
+            cardNumber.init(
+                any(),
+                "**** ****",
+                color
+            )
+        }
+        verify {
+            cardName.init(
+                any(),
+                cardUI.namePlaceHolder,
+                color
+            )
+        }
+        verify {
+            cardDate.init(
+                any(),
+                cardUI.expirationPlaceHolder,
+                color
+            )
+        }
+        verify {
+            codeFront.init(
+                any(),
+                "****",
+                color
+            )
+        }
     }
 
-    @Override
-    public void updateCardInformation_cardWithoutValuesSetsDefaultValues() {
-        final Card card = mock(Card.class);
-        when(card.getName()).thenReturn("");
-        when(card.getNumber()).thenReturn("");
-        when(card.getExpiration()).thenReturn("");
-        when(card.getSecCode()).thenReturn("");
-        ReflectionHelpers.setField(header, "card", card);
-        header.updateCardInformation();
-        final TextView cardNumber = ReflectionHelpers.getField(header, "cardNumber");
-        final TextView cardName = ReflectionHelpers.getField(header, "cardName");
-        final TextView codeFront = ReflectionHelpers.getField(header, "codeFront");
-        final TextView codeBack = ReflectionHelpers.getField(header, "codeBack");
-
-        assertEquals("**** ****", cardNumber.getText().toString());
-        assertEquals("Nombre y Apellido", cardName.getText().toString());
-        assertEquals("****", codeFront.getText().toString());
-        assertEquals("****", codeBack.getText().toString());
+    override fun updateCardInformation_cardWithoutValuesSetsDefaultValues() {
+        val card = mockk<Card>(relaxed = true)
+        every { card.name } returns ""
+        every { card.number } returns ""
+        every { card.expiration } returns ""
+        every { card.secCode } returns ""
+        ReflectionHelpers.setField(cardDrawerView, "card", card)
+        cardDrawerView.updateCardInformation()
+        val cardNumber = ReflectionHelpers.getField<TextView>(cardDrawerView, "cardNumber")
+        val cardName = ReflectionHelpers.getField<TextView>(cardDrawerView, "cardName")
+        val codeFront = ReflectionHelpers.getField<TextView>(cardDrawerView, "codeFront")
+        val codeBack = ReflectionHelpers.getField<TextView>(cardDrawerView, "codeBack")
+        Assert.assertEquals("**** ****", cardNumber.text.toString())
+        Assert.assertEquals("Nombre y Apellido", cardName.text.toString())
+        Assert.assertEquals("****", codeFront.text.toString())
+        Assert.assertEquals("****", codeBack.text.toString())
     }
 
-    @Override
-    public void updateCardInformation_setsNumbersWithFormat() {
-        final Card card = mock(Card.class);
-        when(card.getName()).thenReturn("Juan Perez");
-        when(card.getNumber()).thenReturn("000012346666");
-        when(card.getSecCode()).thenReturn("555");
-        ReflectionHelpers.setField(header, "card", card);
-        header.updateCardInformation();
-        final TextView cardNumber = ReflectionHelpers.getField(header, "cardNumber");
-        final TextView cardName = ReflectionHelpers.getField(header, "cardName");
-        final TextView codeFront = ReflectionHelpers.getField(header, "codeFront");
-        final TextView codeBack = ReflectionHelpers.getField(header, "codeBack");
-
-        assertEquals("6666 ****", cardNumber.getText().toString());
-        assertEquals("Juan Perez", cardName.getText().toString());
-        assertEquals("555*", codeFront.getText().toString());
-        assertEquals("555*", codeBack.getText().toString());
+    override fun updateCardInformation_setsNumbersWithFormat() {
+        val card = mockk<Card>(relaxed = true)
+        every { card.name } returns "Juan Perez"
+        every { card.number } returns "000012346666"
+        every { card.secCode } returns "555"
+        ReflectionHelpers.setField(cardDrawerView, "card", card)
+        cardDrawerView.updateCardInformation()
+        val cardNumber = ReflectionHelpers.getField<TextView>(cardDrawerView, "cardNumber")
+        val cardName = ReflectionHelpers.getField<TextView>(cardDrawerView, "cardName")
+        val codeFront = ReflectionHelpers.getField<TextView>(cardDrawerView, "codeFront")
+        val codeBack = ReflectionHelpers.getField<TextView>(cardDrawerView, "codeBack")
+        Assert.assertEquals("6666 ****", cardNumber.text.toString())
+        Assert.assertEquals("Juan Perez", cardName.text.toString())
+        Assert.assertEquals("555*", codeFront.text.toString())
+        Assert.assertEquals("555*", codeBack.text.toString())
     }
 
-    @Override
-    public void init_setsPaddingFromAttributes() {
-        final int expectedPadding = 23;
-        final AttributeSet attr = Robolectric.buildAttributeSet()
+    override fun init_setsPaddingFromAttributes() {
+        val expectedPadding = 23
+        val attr = Robolectric.buildAttributeSet()
             .addAttribute(R.attr.card_header_internal_padding, "23dp")
-            .build();
-        header = new CardDrawerViewLowres(getContext(), attr);
-
-        assertEquals(expectedPadding, header.getPaddingTop());
-        assertEquals(expectedPadding, header.getPaddingBottom());
+            .build()
+        cardDrawerView = CardDrawerViewLowres(context, attr)
+        Assert.assertEquals(expectedPadding, cardDrawerView.paddingTop)
+        Assert.assertEquals(expectedPadding, cardDrawerView.paddingBottom)
     }
 
-    @Override
-    public void init_loadsViews() {
-        assertNotNull(ReflectionHelpers.getField(header, "cardLogoView"));
-        assertNotNull(ReflectionHelpers.getField(header, "codeFront"));
-        assertNotNull(ReflectionHelpers.getField(header, "codeBack"));
-        assertNotNull(ReflectionHelpers.getField(header, "cardNumber"));
-        assertNotNull(ReflectionHelpers.getField(header, "cardName"));
-        assertNotNull(ReflectionHelpers.getField(header, "cardAnimator"));
-        assertNotNull(ReflectionHelpers.getField(header, "source"));
-        assertNotNull(ReflectionHelpers.getField(header, "card"));
+    override fun init_loadsViews() {
+        Assert.assertNotNull(ReflectionHelpers.getField(cardDrawerView, "cardLogoView"))
+        Assert.assertNotNull(ReflectionHelpers.getField(cardDrawerView, "codeFront"))
+        Assert.assertNotNull(ReflectionHelpers.getField(cardDrawerView, "codeBack"))
+        Assert.assertNotNull(ReflectionHelpers.getField(cardDrawerView, "cardNumber"))
+        Assert.assertNotNull(ReflectionHelpers.getField(cardDrawerView, "cardName"))
+        Assert.assertNotNull(ReflectionHelpers.getField(cardDrawerView, "cardAnimator"))
+        Assert.assertNotNull(ReflectionHelpers.getField(cardDrawerView, "source"))
+        Assert.assertNotNull(ReflectionHelpers.getField(cardDrawerView, "card"))
     }
 
-    @Override
-    public void updateIssuerLogo_setsLogo() {
-        //No issuer logo on lowres
-    }
 }
