@@ -3,6 +3,7 @@ package com.meli.android.carddrawer.model.animation
 import android.view.View
 import android.view.animation.Animation
 import com.meli.android.carddrawer.BaseTest
+import com.meli.android.carddrawer.TestUtils.getDeclaredField
 import io.mockk.impl.annotations.MockK
 import io.mockk.spyk
 import org.junit.Assert
@@ -54,12 +55,5 @@ class InOutAnimationListenerTest: BaseTest() {
     }
 
     private fun methodIsCalled() { nextAnimation = true }
-
-    private fun InOutAnimationListener.getDeclaredField(name: String): Any {
-        return javaClass.getDeclaredField(name).let {
-            it.isAccessible = true
-            it.get(this) as Any
-        }
-    }
 
 }

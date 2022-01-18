@@ -57,4 +57,11 @@ object TestUtils {
         setFinalStatic(Build.VERSION::class.java.getField("SDK_INT"), value)
     }
 
+    fun <T: Any> T.getDeclaredField(name: String): Any {
+        return javaClass.getDeclaredField(name).let {
+            it.isAccessible = true
+            it.get(this) as Any
+        }
+    }
+
 }

@@ -20,6 +20,12 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    testOptions {
+        unitTests {
+            includeAndroidResources = true
+            returnDefaultValues = true
+        }
+    }
     compileOptions {
         sourceCompatibility = 1.8
         targetCompatibility = 1.8
@@ -31,10 +37,12 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "androidx.appcompat:appcompat:$appCompat"
     implementation "androidx.constraintlayout:constraintlayout:$constraintLayout"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin"
+    implementation "com.google.android.material:material:$material"
+
     testImplementation "junit:junit:$junit"
+    testImplementation "io.mockk:mockk:$mockk"
 
     androidTestImplementation "androidx.test.ext:junit:$testRunner"
     androidTestImplementation "androidx.test.espresso:espresso-core:$espresso"
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin"
-    implementation "com.google.android.material:material:$material"
 }

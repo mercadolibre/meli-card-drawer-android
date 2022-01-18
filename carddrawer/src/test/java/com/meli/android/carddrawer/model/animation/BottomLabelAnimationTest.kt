@@ -5,6 +5,7 @@ import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import com.meli.android.carddrawer.BaseTest
 import com.meli.android.carddrawer.R
+import com.meli.android.carddrawer.TestUtils.getDeclaredField
 import io.mockk.every
 import io.mockk.impl.annotations.MockK
 import io.mockk.mockkStatic
@@ -92,13 +93,6 @@ class BottomLabelAnimationTest: BaseTest() {
         bottomLabelAnimation = BottomLabelAnimation(viewMock)
         verify(inverse = true) {
             bottomLabelAnimationMock.slideUp()
-        }
-    }
-
-    private fun BottomLabelAnimation.getDeclaredField(name: String): Any {
-        return javaClass.getDeclaredField(name).let {
-            it.isAccessible = true
-            it.get(this) as Any
         }
     }
 
