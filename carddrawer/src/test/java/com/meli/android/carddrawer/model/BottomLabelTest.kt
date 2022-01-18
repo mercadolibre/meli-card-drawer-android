@@ -28,11 +28,8 @@ class BottomLabelTest : BasicRobolectricTest() {
         val spyHeader = spyk(bottomLabel)
         val bottomDescription = ReflectionHelpers.getField<AppCompatTextView>(bottomLabel, "bottomDescription")
         val label = mockk<Label>(relaxed = true)
-
         every { label.text } returns "Mensaje destacado"
-
         spyHeader.setLabel(label)
-
         assertEquals("Mensaje destacado", bottomDescription.text)
         assertEquals(-16734640, (spyHeader.background as ColorDrawable).color)
         assertEquals(-1, bottomDescription.currentTextColor)
@@ -43,14 +40,11 @@ class BottomLabelTest : BasicRobolectricTest() {
         val spyHeader = spyk(bottomLabel)
         val bottomDescription = ReflectionHelpers.getField<AppCompatTextView>(bottomLabel, "bottomDescription")
         val label = mockk<Label>(relaxed = true)
-
         every { label.text } returns "Sin recargo"
         every { label.backgroundColor } returns "#0E0A09"
         every { label.color } returns "#000000"
         every { label.weight } returns "BLACK"
-
         spyHeader.setLabel(label)
-
         assertEquals("Sin recargo", bottomDescription.text)
         assertEquals(-15857143, (spyHeader.background as ColorDrawable).color)
         assertEquals(-16777216, bottomDescription.currentTextColor)
