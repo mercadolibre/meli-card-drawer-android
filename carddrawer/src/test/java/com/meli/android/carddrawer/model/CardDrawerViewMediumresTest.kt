@@ -19,7 +19,7 @@ class CardDrawerViewMediumresTest : CardDrawerViewUnitTest() {
         cardDrawerView = CardDrawerViewMediumres(context)
     }
 
-    override fun `when set padding from attributes then shoud fill paddingTop and paddingBottom`() {
+    override fun `when set padding from attributes then should fill paddingTop and paddingBottom`() {
         val expectedPadding = 23
         val attr = Robolectric.buildAttributeSet()
                 .addAttribute(R.attr.card_header_internal_padding, "23dp")
