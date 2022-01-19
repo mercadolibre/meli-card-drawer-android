@@ -328,10 +328,16 @@ public class CardDrawerView extends FrameLayout implements Observer {
         if (text != null) {
             genericText.setText(text.getText());
             genericText.setTextColor(text.getColor());
-            genericText.setTypeface(genericText.getTypeface(), CardDrawerFont.from(text.getWeight()).getStyle());
+            setTypeface(genericText, text.getWeight());
             genericText.setVisibility(VISIBLE);
         } else {
             genericText.setVisibility(INVISIBLE);
+        }
+    }
+
+    private void setTypeface(@NotNull final AppCompatTextView genericText, @Nullable final String weight) {
+        if (weight != null) {
+            genericText.setTypeface(genericText.getTypeface(), CardDrawerFont.from(weight).getStyle());
         }
     }
 
