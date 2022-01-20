@@ -1,12 +1,12 @@
 package com.meli.android.carddrawer
 
-import org.robolectric.util.ReflectionHelpers
-import org.mockito.Mockito
 import android.graphics.Typeface
 import android.os.Build
-import android.os.Parcelable
 import android.os.Parcel
+import android.os.Parcelable
 import com.meli.android.carddrawer.format.TypefaceHelper
+import io.mockk.mockk
+import org.robolectric.util.ReflectionHelpers
 import java.lang.reflect.Field
 import java.lang.reflect.Modifier
 
@@ -19,9 +19,7 @@ object TestUtils {
         // Run the fonts fetching command in the current thread's looper. This way we avoid
         // async waitings and race conditions
         ReflectionHelpers.setStaticField(
-            TypefaceHelper::class.java, "robotoMono", Mockito.mock(
-                Typeface::class.java
-            )
+            TypefaceHelper::class.java, "robotoMono", mockk<Typeface>()
         )
     }
 
