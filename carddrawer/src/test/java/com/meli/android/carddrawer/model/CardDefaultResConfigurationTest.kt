@@ -1,5 +1,6 @@
 package com.meli.android.carddrawer.model
 
+import android.view.View
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
@@ -69,9 +70,30 @@ class CardDefaultResConfigurationTest: BaseTest() {
 
     @Test
     fun `when format value null with pattern equal 2 then return pattern with two positions`() {
-        every { cardDefaultResConfiguration.getFormattedNumber(null,2) } answers { callOriginal() }
         val format = cardDefaultResConfiguration.getFormattedNumber(null,2)
         Assert.assertEquals(format, "**")
+    }
+
+    @Test
+    fun `when call function canAnimate with view id then don't call block`() {
+        val view = mockk<View>(relaxed = true)
+        var callBock = false
+        every { view.id } returns R.id.cho_card_code_front_red_circle
+        cardDefaultResConfiguration.canAnimate(view) {
+            callBock = true
+        }
+        Assert.assertFalse(callBock)
+    }
+
+    @Test
+    fun `when call function canAnimate with view id then call block`() {
+        val view = mockk<View>(relaxed = true)
+        var callBock = false
+        every { view.id } returns R.id.cho_am_default_overlay
+        cardDefaultResConfiguration.canAnimate(view) {
+            callBock = true
+        }
+        Assert.assertTrue(callBock)
     }
 
 }
