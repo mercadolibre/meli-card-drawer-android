@@ -61,4 +61,5 @@ dependencies {
         force = true // Workaround until Robolectric issue is solved https://github.com/robolectric/robolectric/issues/5921
     }
     testImplementation "io.mockk:mockk:$mockk"
+    testImplementation 'androidx.test:core-ktx:1.4.0'
 }
