@@ -1,11 +1,10 @@
 package com.meli.android.carddrawer.model
 
-import android.graphics.Typeface
 import android.widget.ImageView
 import com.meli.android.carddrawer.BaseTest
-import com.meli.android.carddrawer.configuration.CardDrawerStyle
 import io.mockk.every
 import io.mockk.mockk
+import io.mockk.mockkClass
 import io.mockk.verify
 import org.junit.Assert
 import org.junit.Before
@@ -18,35 +17,34 @@ class CardUITest: BaseTest() {
     @Before
     override fun setUp() {
         super.setUp()
-        cardUI = mockk {
-            every { bankImageUrl } returns ""
-            every { cardLogoImageUrl } returns ""
-            every { bankImageRes } returns 0
-            every { cardLogoImageRes } returns 0
-            every { securityCodeLocation } returns ""
-            every { cardFontColor } returns 0
-            every { cardBackgroundColor } returns 0
-            every { cardGradientColors } returns mutableListOf()
-            every { securityCodePattern } returns 0
-            every { cardNumberPattern } returns intArrayOf()
-            every { namePlaceHolder } returns ""
-            every { expirationPlaceHolder } returns ""
-            every { fontType } returns ""
-            every { animationType } returns ""
-            every { customFont } returns mockk()
-            every { style } returns mockk()
-            every { disabledColor } returns 0
-        }
+        cardUI = mockkClass(CardUI::class)
+        every { cardUI.bankImageUrl } answers { callOriginal() }
+        every { cardUI.cardLogoImageUrl } answers { callOriginal() }
+        every { cardUI.bankImageRes } returns 0
+        every { cardUI.cardLogoImageRes } returns 0
+        every { cardUI.securityCodeLocation } returns ""
+        every { cardUI.cardFontColor } returns 0
+        every { cardUI.cardBackgroundColor } returns 0
+        every { cardUI.cardGradientColors } answers { callOriginal() }
+        every { cardUI.securityCodePattern } returns 0
+        every { cardUI.cardNumberPattern } returns intArrayOf()
+        every { cardUI.namePlaceHolder } returns ""
+        every { cardUI.expirationPlaceHolder } answers { callOriginal() }
+        every { cardUI.fontType } answers { callOriginal() }
+        every { cardUI.animationType } returns ""
+        every { cardUI.customFont } answers { callOriginal() }
+        every { cardUI.style } answers { callOriginal() }
+        every { cardUI.disabledColor } answers { callOriginal() }
     }
 
     @Test
-    fun `when getting bank image url then return empty string`() {
-        Assert.assertEquals(cardUI.bankImageUrl, "")
+    fun `when getting bank image url then return null`() {
+        Assert.assertNull(cardUI.bankImageUrl)
     }
 
     @Test
-    fun `when getting card logo image url then return empty string`() {
-        Assert.assertEquals(cardUI.cardLogoImageUrl, "")
+    fun `when getting card logo image url then return null`() {
+        Assert.assertNull(cardUI.cardLogoImageUrl)
     }
 
     @Test
@@ -64,7 +62,7 @@ class CardUITest: BaseTest() {
         val imageView = mockk<ImageView>()
         every { cardUI.setCardLogoImage(imageView) } answers { callOriginal() }
         cardUI.setCardLogoImage(imageView)
-        verify (exactly = 1) {
+        verify(exactly = 1) {
             cardUI.setCardLogoImage(imageView)
         }
     }
@@ -74,7 +72,7 @@ class CardUITest: BaseTest() {
         val imageView = mockk<ImageView>()
         every { cardUI.setBankImage(imageView) } answers { callOriginal() }
         cardUI.setBankImage(imageView)
-        verify (exactly = 1) {
+        verify(exactly = 1) {
             cardUI.setBankImage(imageView)
         }
     }
@@ -84,7 +82,7 @@ class CardUITest: BaseTest() {
         val imageView = mockk<ImageView>()
         every { cardUI.setOverlayImage(imageView) } answers { callOriginal() }
         cardUI.setOverlayImage(imageView)
-        verify (exactly = 1) {
+        verify(exactly = 1) {
             cardUI.setOverlayImage(imageView)
         }
     }
@@ -105,13 +103,13 @@ class CardUITest: BaseTest() {
     }
 
     @Test
-    fun `when getting card gradient colors then return size 0`() {
-        Assert.assertEquals(cardUI.cardGradientColors?.size, 0)
+    fun `when getting card gradient colors then return null 0`() {
+        Assert.assertNull(cardUI.cardGradientColors?.size)
     }
 
     @Test
-    fun `when getting card gradient colors then return type list`() {
-        assert(cardUI.cardGradientColors is List<*>)
+    fun `when getting card gradient colors then return null`() {
+        Assert.assertNull(cardUI.cardGradientColors)
     }
 
     @Test
@@ -135,13 +133,13 @@ class CardUITest: BaseTest() {
     }
 
     @Test
-    fun `when getting expiration date place holder then return empty string`() {
-        Assert.assertEquals(cardUI.expirationPlaceHolder, "")
+    fun `when getting expiration date place holder then return null`() {
+        Assert.assertNull(cardUI.expirationPlaceHolder)
     }
 
     @Test
-    fun `when getting font type then return empty string`() {
-        Assert.assertEquals(cardUI.fontType, "")
+    fun `when getting font type then return null`() {
+        Assert.assertNull(cardUI.fontType)
     }
 
     @Test
@@ -150,18 +148,18 @@ class CardUITest: BaseTest() {
     }
 
     @Test
-    fun `when getting custom font then return type Typeface`() {
-        assert(cardUI.customFont is Typeface)
+    fun `when getting custom font then return null`() {
+        Assert.assertNull(cardUI.customFont)
     }
 
     @Test
-    fun `when getting style then return type CardDrawerStyle`() {
-        assert(cardUI.style is CardDrawerStyle)
+    fun `when getting style then return null`() {
+        Assert.assertNull(cardUI.style)
     }
 
     @Test
-    fun `when getting disabledColor then return 0`() {
-        Assert.assertEquals(cardUI.disabledColor,0)
+    fun `when getting disabledColor then return null`() {
+        Assert.assertNull(cardUI.disabledColor)
     }
 
 }
