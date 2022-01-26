@@ -41,8 +41,8 @@ dependencies {
     implementation "com.google.android.material:material:$material"
 
     testImplementation "junit:junit:$junit"
-    testImplementation "io.mockk:mockk:$mockk"
+    testImplementation "io.mockk:mockk:$mockkVersion"
 
     androidTestImplementation "androidx.test.ext:junit:$testRunner"
-    androidTestImplementation "androidx.test.espresso:espresso-core:$espresso"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
 }

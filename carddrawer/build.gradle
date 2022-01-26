@@ -50,16 +50,16 @@ dependencies {
     implementation "com.mercadolibre.android.andesui:components:$andesVersion"
 
     androidTestImplementation "junit:junit:$junit"
-    androidTestImplementation "io.mockk:mockk-android:$mockk"
+    androidTestImplementation "io.mockk:mockk-android:$mockkVersion"
     androidTestImplementation "androidx.test:runner:$testRunner"
     androidTestImplementation "androidx.test.ext:junit:$testRunner"
-    androidTestImplementation "androidx.test.espresso:espresso-core:$espresso"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
 
     testImplementation "junit:junit:$junit"
     testImplementation "org.robolectric:robolectric:$robolectric"
     testImplementation ('org.bouncycastle:bcprov-jdk15on:1.64') {
         force = true // Workaround until Robolectric issue is solved https://github.com/robolectric/robolectric/issues/5921
     }
-    testImplementation "io.mockk:mockk:$mockk"
-    testImplementation 'androidx.test:core-ktx:1.4.0'
+    testImplementation "io.mockk:mockk:$mockkVersion"
+    testImplementation "androidx.test:core-ktx:$testCoreVersion"
 }
