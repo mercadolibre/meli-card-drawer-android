@@ -3,7 +3,6 @@ package com.meli.android.carddrawer.internal
 import com.meli.android.carddrawer.model.CardUI
 import com.meli.android.carddrawer.model.GenericPaymentMethod
 import com.meli.android.carddrawer.model.PaymentCard
-import io.mockk.called
 import io.mockk.mockkClass
 import org.junit.Assert
 import org.junit.Before
@@ -83,7 +82,6 @@ class BaseExtensionsTest {
         Assert.assertFalse(genericPaymentMethodIsCalled)
         Assert.assertFalse(paymentCardBlockIsCalled)
     }
-
 
     @Test
     fun `when call either then return first CardUI and second null`() {
