@@ -238,4 +238,5 @@ class CardAnimatorTest : BaseTest() {
         }
         TestUtils.changeSDKVersion(0)
     }
+
 }
