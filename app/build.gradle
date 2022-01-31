@@ -4,7 +4,7 @@ apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion androidTarget as int
-    buildToolsVersion androidBuildTools
+    buildToolsVersion androidBuildToolsVersion
 
     defaultConfig {
         applicationId "com.meli.android.carddrawer"
@@ -35,14 +35,14 @@ android {
 dependencies {
     implementation project(':carddrawer')
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "androidx.appcompat:appcompat:$appCompat"
-    implementation "androidx.constraintlayout:constraintlayout:$constraintLayout"
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin"
-    implementation "com.google.android.material:material:$material"
+    implementation "androidx.appcompat:appcompat:$appCompatVersion"
+    implementation "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+    implementation "com.google.android.material:material:$materialVersion"
 
-    testImplementation "junit:junit:$junit"
+    testImplementation "junit:junit:$junitVersion"
     testImplementation "io.mockk:mockk:$mockkVersion"
 
-    androidTestImplementation "androidx.test.ext:junit:$testRunner"
+    androidTestImplementation "androidx.test.ext:junit:$testRunnerVersion"
     androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
 }
