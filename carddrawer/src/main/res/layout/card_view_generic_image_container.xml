@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.meli.android.carddrawer.model.ConstraintLayoutWithDisabledSupport xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="@layout/card_drawer_generic_front">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_view_generic_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:cardCornerRadius="50dp" >
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/generic_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </androidx.cardview.widget.CardView>
+
+</com.meli.android.carddrawer.model.ConstraintLayoutWithDisabledSupport>
