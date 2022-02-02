@@ -71,16 +71,15 @@
         app:layout_constraintTop_toBottomOf="@+id/generic_subtitle"
         tools:text="CBU: ***1234" />
 
-    <include
-        android:id="@+id/card_view_generic_image_container"
-        layout="@layout/card_view_generic_image_container"
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/generic_image"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="@id/generic_ring"
         app:layout_constraintDimensionRatio="H,1:1"
-        app:layout_constraintEnd_toEndOf="@id/image_left_guideline"
         app:layout_constraintStart_toStartOf="@id/image_right_guideline"
-        app:layout_constraintTop_toTopOf="@id/generic_ring" />
+        app:layout_constraintEnd_toEndOf="@id/image_left_guideline"
+        app:layout_constraintTop_toTopOf="@id/generic_ring"
+        app:layout_constraintBottom_toBottomOf="@id/generic_ring" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/top_image_horizontal_guideline"
