@@ -31,6 +31,7 @@ import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import com.meli.android.carddrawer.CircleTransform;
 import com.meli.android.carddrawer.R;
 import com.meli.android.carddrawer.ViewHelper;
 import com.meli.android.carddrawer.configuration.AccountMoneyDefaultConfiguration;
@@ -295,7 +296,11 @@ public class CardDrawerView extends FrameLayout implements Observer {
         final AppCompatImageView backBackground = genericBackLayout.findViewById(R.id.generic_back_background);
 
         if (!TextUtils.isEmpty(genericPaymentMethod.getImageUrl())) {
-            PicassoDiskLoader.get(getContext()).load(genericPaymentMethod.getImageUrl()).into(paymentMethodImage);
+            PicassoDiskLoader
+                .get(getContext())
+                .load(genericPaymentMethod.getImageUrl())
+                .transform(new CircleTransform())
+                .into(paymentMethodImage);
         }
 
         showTag(genericPaymentMethod, genericTagText, genericFrontLayout);
