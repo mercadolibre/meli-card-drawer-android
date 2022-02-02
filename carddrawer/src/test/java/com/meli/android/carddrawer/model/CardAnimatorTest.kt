@@ -1,8 +1,12 @@
 package com.meli.android.carddrawer.model
 
+import android.graphics.PorterDuff
 import android.os.Bundle
 import android.view.View
+import android.widget.ImageView
 import com.meli.android.carddrawer.BaseTest
+import com.meli.android.carddrawer.R
+import com.meli.android.carddrawer.TestUtils
 import com.meli.android.carddrawer.TestUtils.getDeclaredField
 import com.meli.android.carddrawer.configuration.FieldPosition
 import io.mockk.every
@@ -164,6 +168,75 @@ class CardAnimatorTest : BaseTest() {
         verify(inverse = true) {
             cardAnimator.doColorCard(0, "")
         }
+    }
+
+    @Test
+    fun `when set color front filters then set color filter in background and reveal`() {
+        initialize()
+        val mockFrontBackground = mockk<ImageView>(relaxed = true)
+        val mockFrontReveal = mockk<ImageView>(relaxed = true)
+        cardAnimator.setColorFrontFilters(0, mockFrontBackground, mockFrontReveal)
+        verify {
+            mockFrontBackground.setColorFilter(0, PorterDuff.Mode.SRC_ATOP)
+        }
+        verify {
+            mockFrontBackground.setColorFilter(0, PorterDuff.Mode.SRC_ATOP)
+        }
+    }
+
+    @Test
+    fun `when call function restoreState with state per parameter then call switchViewWithoutAnimation`() {
+        initialize()
+
+        every { cardFrontLayoutMock.findViewById<ImageView>(R.id.cho_card_image_front) } returns mockk(relaxed = true)
+        every { cardFrontLayoutMock.findViewById<ImageView>(R.id.cho_card_image_front_reveal) } returns mockk(relaxed = true)
+        every { cardBackLayoutMock.findViewById<ImageView>(R.id.cho_card_image_back) } returns mockk(relaxed = true)
+        every { cardBackLayoutMock.findViewById<ImageView>(R.id.cho_card_image_back_reveal) } returns mockk(relaxed = true)
+
+        cardAnimator.restoreState(mockk(relaxed = true))
+        verify {
+            cardAnimator.switchViewWithoutAnimation(1)
+        }
+    }
+
+    @Test
+    fun `when call function animationColorChangeForPosition then set color front filters`() {
+        initialize()
+        val image = mockk<ImageView>(relaxed = true)
+        cardAnimator.switchView(3)
+        cardAnimator.animateColorChangeForPosition(image,
+                                                    image,
+                                                    image,
+                                                    image,
+                                                    0,
+                                                    CardAnimationType.NONE)
+        verify {
+            cardAnimator.setColorFrontFilters(0, image, image)
+        }
+    }
+
+    @Test
+    fun `when call function animateColorChange with AnimationType NONE per parameter then shouldn't call set color filter`() {
+        initialize()
+        val image = mockk<ImageView>(relaxed = true)
+        TestUtils.changeSDKVersion(29)
+        cardAnimator.animateColorChange(image, image, 0, CardAnimationType.NONE)
+        verify(inverse = true) {
+            image.setColorFilter(0, PorterDuff.Mode.SRC_ATOP)
+        }
+        TestUtils.changeSDKVersion(0)
+    }
+
+    @Test
+    fun `when call function animateColorChange with AnimationType RIGHT_BOTTOM per parameter then shouldn't call set color filter`() {
+        initialize()
+        val image = mockk<ImageView>(relaxed = true)
+        TestUtils.changeSDKVersion(21)
+        cardAnimator.animateColorChange(image, image, 0, CardAnimationType.RIGHT_BOTTOM)
+        verify(inverse = true) {
+            image.setColorFilter(0, PorterDuff.Mode.SRC_ATOP)
+        }
+        TestUtils.changeSDKVersion(0)
     }
 
 }

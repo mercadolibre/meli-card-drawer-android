@@ -18,23 +18,42 @@ class CardDrawerSourceTest: BaseTest() {
     @MockK
     private lateinit var cardDrawerSource: CardDrawerSource
 
-    @MockK
-    private lateinit var mockText: GenericPaymentMethod.Text
+    private lateinit var text: GenericPaymentMethod.Text
 
-    @MockK
-    private lateinit var mockTag: CardDrawerSource.Tag
+    private lateinit var tag: CardDrawerSource.Tag
 
     private val backgroundColor by lazy { 0 }
-    private val title by lazy { mockText }
+    private val title by lazy { text }
     private val imageUrl by lazy { "url test" }
-    private val subtitle by lazy { mockText }
-    private val tag by lazy { mockTag }
+    private val subtitle by lazy { text }
     private val cardUI by lazy { mockk<CardUI>(relaxed = true) }
+
+    private val textValue by lazy { "Text" }
+    private val color by lazy { 0 }
+    private val weight by lazy { "24dp" }
 
     @Before
     override fun setUp() {
         super.setUp()
+        text = returnText()
+        tag = returnTag()
         genericPaymentMethod = returnGenericPaymentMethod()
+    }
+
+    private fun returnText(): GenericPaymentMethod.Text {
+        return GenericPaymentMethod.Text(
+            text = textValue,
+            color = color
+        )
+    }
+
+    private fun returnTag(): CardDrawerSource.Tag {
+        return CardDrawerSource.Tag(
+            text = textValue,
+            backgroundColor = backgroundColor,
+            textColor = color,
+            weight = weight
+        )
     }
 
     private fun returnGenericPaymentMethod(): GenericPaymentMethod {
@@ -73,23 +92,33 @@ class CardDrawerSourceTest: BaseTest() {
     }
 
     @Test
+    fun `when getting text by GenericPaymentMethod Text then return value that was set`() {
+        Assert.assertEquals(text.text, textValue)
+    }
+
+    @Test
+    fun `when getting color by GenericPaymentMethod Text then return value that was set`() {
+        Assert.assertEquals(text.color, color)
+    }
+
+    @Test
     fun `when getting animationType of PaymentCard with CardUI and tag in constructor then return animationType of CardUI`() {
         val cardUI = mockk<CardUI>(relaxed = true)
-        paymentCard = PaymentCard(cardUI, mockTag)
+        paymentCard = PaymentCard(cardUI, tag)
         Assert.assertEquals(paymentCard.animationType, cardUI.animationType)
     }
 
     @Test
     fun `when getting disabledBackgroundColor of PaymentCard with CardUI and tag in constructor then return disabledColor of CardUI`() {
         val cardUI = mockk<CardUI>(relaxed = true)
-        paymentCard = PaymentCard(cardUI, mockTag)
+        paymentCard = PaymentCard(cardUI, tag)
         Assert.assertEquals(paymentCard.disabledBackgroundColor, cardUI.disabledColor)
     }
 
 
     @Test
     fun `when getting backgroundColor of PaymentCard with CardUI and tag in constructor then return cardBackgroundColor of CardUI`() {
-        paymentCard = PaymentCard(cardUI, mockTag)
+        paymentCard = PaymentCard(cardUI, tag)
         Assert.assertEquals(paymentCard.backgroundColor, cardUI.cardBackgroundColor)
     }
 
@@ -142,6 +171,5 @@ class CardDrawerSourceTest: BaseTest() {
             cardDrawerSource.setPaymentMethodImage(imageView)
         }
     }
-
 
 }

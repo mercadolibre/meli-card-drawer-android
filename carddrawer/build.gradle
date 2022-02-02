@@ -6,7 +6,7 @@ apply from: rootProject.file('gradle/jacoco.gradle')
 
 android {
     compileSdkVersion androidTarget as int
-    buildToolsVersion androidBuildTools
+    buildToolsVersion androidBuildToolsVersion
     
     defaultConfig {
         minSdkVersion androidMinSdk as int
@@ -43,22 +43,23 @@ apply from:"$rootDir/gradle/deploy_carddrawer.gradle"
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation "com.mercadolibre.android:picasso-disk-cache:$picassoDiskCache"
-    implementation "androidx.appcompat:appcompat:$appCompat"
-    implementation "androidx.constraintlayout:constraintlayout:$constraintLayout"
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin"
+    implementation "com.mercadolibre.android:picasso-disk-cache:$picassoDiskCacheVersion"
+    implementation "androidx.appcompat:appcompat:$appCompatVersion"
+    implementation "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
     implementation "com.mercadolibre.android.andesui:components:$andesVersion"
 
-    androidTestImplementation "junit:junit:$junit"
-    androidTestImplementation "io.mockk:mockk-android:$mockk"
-    androidTestImplementation "androidx.test:runner:$testRunner"
-    androidTestImplementation "androidx.test.ext:junit:$testRunner"
-    androidTestImplementation "androidx.test.espresso:espresso-core:$espresso"
+    androidTestImplementation "junit:junit:$junitVersion"
+    androidTestImplementation "io.mockk:mockk-android:$mockkVersion"
+    androidTestImplementation "androidx.test:runner:$testRunnerVersion"
+    androidTestImplementation "androidx.test.ext:junit:$testRunnerVersion"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
 
-    testImplementation "junit:junit:$junit"
-    testImplementation "org.robolectric:robolectric:$robolectric"
-    testImplementation ('org.bouncycastle:bcprov-jdk15on:1.64') {
+    testImplementation "junit:junit:$junitVersion"
+    testImplementation "org.robolectric:robolectric:$robolectricVersion"
+    testImplementation ("org.bouncycastle:bcprov-jdk15on:$bouncycastleVersion") {
         force = true // Workaround until Robolectric issue is solved https://github.com/robolectric/robolectric/issues/5921
     }
-    testImplementation "io.mockk:mockk:$mockk"
+    testImplementation "io.mockk:mockk:$mockkVersion"
+    testImplementation "androidx.test:core-ktx:$testCoreVersion"
 }
