@@ -47,7 +47,6 @@ import com.meli.android.carddrawer.internal.BaseExtensionsKt;
 import com.meli.android.carddrawer.internal.TagDimensions;
 import com.meli.android.carddrawer.model.customview.CustomViewConfiguration;
 import com.mercadolibre.android.picassodiskcache.PicassoDiskLoader;
-import org.jetbrains.annotations.NotNull;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.List;
@@ -313,7 +312,7 @@ public class CardDrawerView extends FrameLayout implements Observer {
         applyBackground(backBackground, genericPaymentMethod);
     }
 
-    private void applyBackground(@NotNull final AppCompatImageView appCompatImageView, @NotNull final GenericPaymentMethod genericPaymentMethod) {
+    private void applyBackground(@NonNull final AppCompatImageView appCompatImageView, @NonNull final GenericPaymentMethod genericPaymentMethod) {
         final List<String> gradientColors = genericPaymentMethod.getGradientColor();
         if (gradientColors != null) {
             final GradientDrawable gradientDrawable = ViewHelper.getGradientDrawable(getContext(), gradientColors);
@@ -323,13 +322,13 @@ public class CardDrawerView extends FrameLayout implements Observer {
         }
     }
 
-    protected void showGenericText(@NotNull final GenericPaymentMethod genericPaymentMethod) {
+    protected void showGenericText(@NonNull final GenericPaymentMethod genericPaymentMethod) {
         setGenericText(genericTitle, genericPaymentMethod.getTitle());
         setGenericText(genericDescription, genericPaymentMethod.getDescription());
         setGenericText(genericSubtitle, genericPaymentMethod.getSubtitle());
     }
 
-    protected void setGenericText(@NotNull final AppCompatTextView genericText, @Nullable final GenericPaymentMethod.Text text) {
+    protected void setGenericText(@NonNull final AppCompatTextView genericText, @Nullable final GenericPaymentMethod.Text text) {
         if (text != null) {
             genericText.setText(text.getText());
             genericText.setTextColor(text.getColor());
@@ -340,7 +339,7 @@ public class CardDrawerView extends FrameLayout implements Observer {
         }
     }
 
-    private void setTypeface(@NotNull final AppCompatTextView genericText, @Nullable final String weight) {
+    private void setTypeface(@NonNull final AppCompatTextView genericText, @Nullable final String weight) {
         if (weight != null) {
             genericText.setTypeface(genericText.getTypeface(), CardDrawerFont.from(weight).getStyle());
         }
