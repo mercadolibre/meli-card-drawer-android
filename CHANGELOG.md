@@ -1,3 +1,8 @@
+## Release 3.1.0
+* Added debin support
+* Remove mockito and start using mockk lib.
+* Unit and instrumental tests are added and improved.
+
 ## Release 3.0.0
 * Migrates to min api 21 and target 30.
 
