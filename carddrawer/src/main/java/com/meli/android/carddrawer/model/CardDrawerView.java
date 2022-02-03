@@ -31,6 +31,7 @@ import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import com.meli.android.carddrawer.CircleTransform;
 import com.meli.android.carddrawer.R;
 import com.meli.android.carddrawer.ViewHelper;
 import com.meli.android.carddrawer.configuration.AccountMoneyDefaultConfiguration;
@@ -81,8 +82,9 @@ public class CardDrawerView extends FrameLayout implements Observer {
     protected ViewGroup cardBackLayout;
     protected ViewGroup genericFrontLayout;
     private ViewGroup genericBackLayout;
-    private AppCompatTextView genericTitle;
+    protected AppCompatTextView genericTitle;
     private AppCompatTextView genericSubtitle;
+    private AppCompatTextView genericDescription;
     protected AppCompatTextView genericTagText;
     protected AppCompatTextView cardTagText;
     protected ImageView cardFrontGradient;
@@ -201,6 +203,7 @@ public class CardDrawerView extends FrameLayout implements Observer {
 
         genericTitle = genericFrontLayout.findViewById(R.id.generic_title);
         genericSubtitle = genericFrontLayout.findViewById(R.id.generic_subtitle);
+        genericDescription = genericFrontLayout.findViewById(R.id.generic_description);
         genericTagText = genericFrontLayout.findViewById(R.id.card_tag);
         cardTagText = cardFrontLayout.findViewById(R.id.card_tag);
 
@@ -292,26 +295,53 @@ public class CardDrawerView extends FrameLayout implements Observer {
         final AppCompatImageView backBackground = genericBackLayout.findViewById(R.id.generic_back_background);
 
         if (!TextUtils.isEmpty(genericPaymentMethod.getImageUrl())) {
-            PicassoDiskLoader.get(getContext()).load(genericPaymentMethod.getImageUrl()).into(paymentMethodImage);
+            PicassoDiskLoader
+                .get(getContext())
+                .load(genericPaymentMethod.getImageUrl())
+                .transform(new CircleTransform())
+                .into(paymentMethodImage);
         }
 
         showTag(genericPaymentMethod, genericTagText, genericFrontLayout);
 
         genericPaymentMethod.setPaymentMethodImage(paymentMethodImage);
-        genericTitle.setText(genericPaymentMethod.getTitle().getText());
-        genericTitle.setTextColor(genericPaymentMethod.getTitle().getColor());
-        showGenericPaymentSubtitle(genericPaymentMethod.getSubtitle());
-        frontBackground.setColorFilter(genericPaymentMethod.getBackgroundColor(), PorterDuff.Mode.SRC_ATOP);
-        backBackground.setColorFilter(genericPaymentMethod.getBackgroundColor(), PorterDuff.Mode.SRC_ATOP);
+
+        showGenericText(genericPaymentMethod);
+
+        applyBackground(frontBackground, genericPaymentMethod);
+        applyBackground(backBackground, genericPaymentMethod);
     }
 
-    protected void showGenericPaymentSubtitle(@Nullable final GenericPaymentMethod.Text subtitle) {
-        if (subtitle != null) {
-            genericSubtitle.setText(subtitle.getText());
-            genericSubtitle.setTextColor(subtitle.getColor());
-            genericSubtitle.setVisibility(VISIBLE);
+    private void applyBackground(@NonNull final AppCompatImageView appCompatImageView, @NonNull final GenericPaymentMethod genericPaymentMethod) {
+        final List<String> gradientColors = genericPaymentMethod.getGradientColor();
+        if (gradientColors != null) {
+            final GradientDrawable gradientDrawable = ViewHelper.getGradientDrawable(getContext(), gradientColors);
+            appCompatImageView.setImageDrawable(gradientDrawable);
         } else {
-            genericSubtitle.setVisibility(GONE);
+            appCompatImageView.getBackground().setColorFilter(genericPaymentMethod.getBackgroundColor(), PorterDuff.Mode.SRC_ATOP);
+        }
+    }
+
+    protected void showGenericText(@NonNull final GenericPaymentMethod genericPaymentMethod) {
+        setGenericText(genericTitle, genericPaymentMethod.getTitle());
+        setGenericText(genericDescription, genericPaymentMethod.getDescription());
+        setGenericText(genericSubtitle, genericPaymentMethod.getSubtitle());
+    }
+
+    protected void setGenericText(@NonNull final AppCompatTextView genericText, @Nullable final GenericPaymentMethod.Text text) {
+        if (text != null) {
+            genericText.setText(text.getText());
+            genericText.setTextColor(text.getColor());
+            setTypeface(genericText, text.getWeight());
+            genericText.setVisibility(VISIBLE);
+        } else {
+            genericText.setVisibility(INVISIBLE);
+        }
+    }
+
+    private void setTypeface(@NonNull final AppCompatTextView genericText, @Nullable final String weight) {
+        if (weight != null) {
+            genericText.setTypeface(genericText.getTypeface(), CardDrawerFont.from(weight).getStyle());
         }
     }
 
@@ -765,6 +795,9 @@ public class CardDrawerView extends FrameLayout implements Observer {
         }
         if (codeFront != null) {
             setTextPixelSize(codeFront, newTextSize);
+        }
+        if (genericDescription != null) {
+            setTextPixelSize(genericDescription, resources.getDimension(R.dimen.card_drawer_font_generic_description) * cardSizeMultiplier);
         }
     }
 
