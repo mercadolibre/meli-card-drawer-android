@@ -10,7 +10,7 @@ import junit.framework.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.Mockito.spy
+import io.mockk.spyk
 
 /**
  * Test for the card header.. many visual and animations changes can't be tested with just junit :(
@@ -27,7 +27,7 @@ class CardDrawerViewMediumTest : BasicRobolectricTest() {
 
     @Test
     fun givenGenericPaymentMethodWhenSetTitleAndGenericTextThenCheckValues() {
-        val spyHeader = spy<CardDrawerViewMedium>(header)
+        val spyHeader = spyk(header)
         val genericPaymentMethod = GenericPaymentMethod(
             Color.BLUE,
             GenericPaymentMethod.Text("Banco BBVA", Color.parseColor("#FFFFFF"), "semi_bold"),
@@ -56,7 +56,7 @@ class CardDrawerViewMediumTest : BasicRobolectricTest() {
 
     @Test
     fun givenGenericPaymentMethodWhenSetTitleAndGenericTextThenShowViews() {
-        val spyHeader = spy<CardDrawerViewMedium>(header)
+        val spyHeader = spyk(header)
         val genericPaymentMethod = GenericPaymentMethod(
             Color.BLUE,
             GenericPaymentMethod.Text("Banco BBVA", Color.parseColor("#FFFFFF"), "semi_bold"),
