@@ -1,3 +1,6 @@
+## Release 3.2.0
+* JVMOverloads added in class Text.
+
 ## Release 3.1.0
 * Added debin support
 * Remove mockito and start using mockk lib.
