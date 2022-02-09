@@ -27,7 +27,7 @@ open class GenericPaymentMethod @JvmOverloads constructor(
 ) : CardDrawerSource(), Parcelable {
 
     @Parcelize
-    data class Text(val text: String, val color: Int, val weight: String? = null): Parcelable
+    data class Text @JvmOverloads constructor(val text: String, val color: Int, val weight: String? = null): Parcelable
 }
 
 class PaymentCard(val cardUI: CardUI, override val tag: Tag? = null) : CardDrawerSource() {
