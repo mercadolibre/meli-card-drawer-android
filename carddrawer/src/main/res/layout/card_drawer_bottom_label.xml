@@ -17,7 +17,7 @@
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/card_drawer_bottom_description"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="match_parent"
         android:layout_marginStart="@dimen/card_drawer_s_alternative_1_margin"
         android:layout_marginEnd="@dimen/card_drawer_s_alternative_1_margin"
         android:gravity="center"
@@ -27,7 +27,7 @@
         android:textSize="@dimen/card_drawer_xxxs_text"
         android:ellipsize="end"
         android:maxLines="1"
-        android:layout_weight="18"
+        android:layout_weight="16"
         tools:text="Ahorro con tu banco" />
 
 </merge>

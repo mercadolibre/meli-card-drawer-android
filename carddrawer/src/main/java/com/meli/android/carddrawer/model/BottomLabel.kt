@@ -91,5 +91,5 @@ internal class BottomLabel @JvmOverloads constructor(
         bottomDescription.post { bottomDescription.setTextSize(TypedValue.COMPLEX_UNIT_PX, getTextPixelSize(multiplier)) }
     }
 
-    private fun getTextPixelSize(multiplier: Float) = resources.getDimension(R.dimen.card_drawer_font_size) * multiplier
+    private fun getTextPixelSize(multiplier: Float) = resources.getDimension(R.dimen.card_drawer_font_size_small) * multiplier
 }
