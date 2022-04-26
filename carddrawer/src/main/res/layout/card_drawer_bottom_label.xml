@@ -12,7 +12,6 @@
         android:id="@+id/card_drawer_bottom_description_shadow"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-
         android:background="@drawable/shadow_top" />
 
     <androidx.appcompat.widget.AppCompatTextView

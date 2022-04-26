@@ -27,7 +27,6 @@ internal class BottomLabel @JvmOverloads constructor(
 
     init {
         inflate(context, R.layout.card_drawer_bottom_label, this)
-        //orientation = VERTICAL
         bottomDescription = findViewById(R.id.card_drawer_bottom_description)
     }
 
@@ -79,13 +78,8 @@ internal class BottomLabel @JvmOverloads constructor(
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
         super.onSizeChanged(w, h, oldw, oldh)
         val cardSizeMultiplier = measuredWidth / defaultBottomLabelWidth
-        val bottomLabelHeightMultiplier = (if (oldh > 0) ((h * 100f) / oldh) / 100f else cardSizeMultiplier)
 
         setUpBottomDescriptionTextSize(cardSizeMultiplier)
-        /*val containerBottomLabelParams = layoutParams
-        val height = (containerBottomLabelParams.height * bottomLabelHeightMultiplier).roundToInt()
-        containerBottomLabelParams.height = height
-        layoutParams = containerBottomLabelParams*/
     }
 
     private fun setUpBottomDescriptionTextSize(multiplier: Float) {
