@@ -6,6 +6,7 @@ import android.util.AttributeSet
 import android.util.TypedValue
 import android.widget.LinearLayout
 import androidx.appcompat.widget.AppCompatTextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import com.meli.android.carddrawer.ColorUtils.safeParcelColor
 import com.meli.android.carddrawer.R
 import com.meli.android.carddrawer.format.CardDrawerFont
@@ -17,7 +18,7 @@ internal class BottomLabel @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
-) : LinearLayout(context, attrs, defStyleAttr) {
+) : ConstraintLayout(context, attrs, defStyleAttr) {
 
     private var bottomDescription: AppCompatTextView
     private var animation: BottomLabelAnimation? = null
@@ -26,7 +27,7 @@ internal class BottomLabel @JvmOverloads constructor(
 
     init {
         inflate(context, R.layout.card_drawer_bottom_label, this)
-        orientation = VERTICAL
+        //orientation = VERTICAL
         bottomDescription = findViewById(R.id.card_drawer_bottom_description)
     }
 
@@ -81,10 +82,10 @@ internal class BottomLabel @JvmOverloads constructor(
         val bottomLabelHeightMultiplier = (if (oldh > 0) ((h * 100f) / oldh) / 100f else cardSizeMultiplier)
 
         setUpBottomDescriptionTextSize(cardSizeMultiplier)
-        val containerBottomLabelParams = layoutParams
+        /*val containerBottomLabelParams = layoutParams
         val height = (containerBottomLabelParams.height * bottomLabelHeightMultiplier).roundToInt()
         containerBottomLabelParams.height = height
-        layoutParams = containerBottomLabelParams
+        layoutParams = containerBottomLabelParams*/
     }
 
     private fun setUpBottomDescriptionTextSize(multiplier: Float) {

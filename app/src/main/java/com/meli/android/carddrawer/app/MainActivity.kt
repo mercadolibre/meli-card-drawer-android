@@ -88,7 +88,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showBottomLabel() {
-        val label = Label("Sin comisión")
+        val label = Label("A E I O U SIN COMISION")
         cardViews.forEach {
             it.view.setBottomLabel(label)
             it.view.showBottomLabel()
