@@ -1,6 +1,6 @@
 ## Unreleased
 _XX_04_2022
-* Enhancement bottomDescription and shadow of BottomLabel.
+* ENHANCEMENT - bottomDescription and shadow of BottomLabel.
 
 ## Release 3.2.0
 * JVMOverloads added in class Text.
