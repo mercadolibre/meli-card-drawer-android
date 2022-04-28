@@ -1,5 +1,5 @@
-## Unreleased
-_XX_04_2022
+## Release 3.3.0
+_28_04_2022_
 * ENHANCEMENT - bottomDescription and shadow of BottomLabel.
 
 ## Release 3.2.0
