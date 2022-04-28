@@ -33,7 +33,7 @@ class PixConfigurationTest: BaseTest() {
 
     @Test
     fun `when getting imageUrl then return mercadolibre link`() {
-        val result: Boolean = pixConfiguration.imageUrl?.contains("https://mobile.mercadolibre.com") ?: false
+        val result: Boolean = pixConfiguration.imageUrl?.contains("https://http2.mlstatic.com/") ?: false
         Assert.assertTrue(result)
     }
 

@@ -6,6 +6,7 @@ import android.util.AttributeSet
 import android.util.TypedValue
 import android.widget.LinearLayout
 import androidx.appcompat.widget.AppCompatTextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import com.meli.android.carddrawer.ColorUtils.safeParcelColor
 import com.meli.android.carddrawer.R
 import com.meli.android.carddrawer.format.CardDrawerFont
@@ -17,7 +18,7 @@ internal class BottomLabel @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
-) : LinearLayout(context, attrs, defStyleAttr) {
+) : ConstraintLayout(context, attrs, defStyleAttr) {
 
     private var bottomDescription: AppCompatTextView
     private var animation: BottomLabelAnimation? = null
@@ -26,7 +27,6 @@ internal class BottomLabel @JvmOverloads constructor(
 
     init {
         inflate(context, R.layout.card_drawer_bottom_label, this)
-        orientation = VERTICAL
         bottomDescription = findViewById(R.id.card_drawer_bottom_description)
     }
 
@@ -78,18 +78,13 @@ internal class BottomLabel @JvmOverloads constructor(
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
         super.onSizeChanged(w, h, oldw, oldh)
         val cardSizeMultiplier = measuredWidth / defaultBottomLabelWidth
-        val bottomLabelHeightMultiplier = (if (oldh > 0) ((h * 100f) / oldh) / 100f else cardSizeMultiplier)
 
         setUpBottomDescriptionTextSize(cardSizeMultiplier)
-        val containerBottomLabelParams = layoutParams
-        val height = (containerBottomLabelParams.height * bottomLabelHeightMultiplier).roundToInt()
-        containerBottomLabelParams.height = height
-        layoutParams = containerBottomLabelParams
     }
 
     private fun setUpBottomDescriptionTextSize(multiplier: Float) {
         bottomDescription.post { bottomDescription.setTextSize(TypedValue.COMPLEX_UNIT_PX, getTextPixelSize(multiplier)) }
     }
 
-    private fun getTextPixelSize(multiplier: Float) = resources.getDimension(R.dimen.card_drawer_font_size) * multiplier
+    private fun getTextPixelSize(multiplier: Float) = resources.getDimension(R.dimen.card_drawer_font_size_small) * multiplier
 }

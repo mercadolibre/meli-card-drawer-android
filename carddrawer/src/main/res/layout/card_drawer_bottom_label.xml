@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <merge xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    tools:parentTag="android.widget.LinearLayout"
-    android:layout_height="0dp"
+    tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
     tools:background="@color/card_drawer_color_bottom_label">
 
@@ -11,7 +12,6 @@
         android:id="@+id/card_drawer_bottom_description_shadow"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
         android:background="@drawable/shadow_top" />
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -24,10 +24,13 @@
         android:visibility="invisible"
         tools:visibility="visible"
         android:textColor="@color/card_drawer_ui_white"
-        android:textSize="@dimen/card_drawer_xxxs_text"
+        android:includeFontPadding="false"
         android:ellipsize="end"
         android:maxLines="1"
-        android:layout_weight="18"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         tools:text="Ahorro con tu banco" />
 
 </merge>
